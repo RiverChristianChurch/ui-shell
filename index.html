@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCC Website Rebuild — UI Shell Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',-apple-system,sans-serif;background:#09090b;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;-webkit-font-smoothing:antialiased}
+    .logo{height:48px;margin-bottom:2rem}
+    h1{font-size:1.75rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:0.5rem;text-align:center}
+    p{color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:3rem;text-align:center}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.75rem;width:100%;max-width:900px}
+    .card{background:#16171a;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.5rem;text-decoration:none;color:#fff;transition:border-color 0.2s,transform 0.2s}
+    .card:hover{border-color:#095879;transform:translateY(-2px)}
+    .card .num{font-size:2rem;font-weight:800;color:rgba(9,88,121,0.3);line-height:1;margin-bottom:0.75rem}
+    .card h2{font-size:1rem;font-weight:700;margin-bottom:0.35rem}
+    .card p{color:rgba(255,255,255,0.45);font-size:0.8rem;margin-bottom:0;text-align:left}
+  </style>
+</head>
+<body>
+  <img class="logo" src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC">
+  <h1>Website Rebuild — UI Shell Options</h1>
+  <p>Click an option to view the full-page mockup.</p>
+  <div class="grid">
+    <a class="card" href="options/option-1-dark-cinematic.html">
+      <div class="num">01</div>
+      <h2>Dark Cinematic</h2>
+      <p>Full-screen worship hero, dark base, teal accent, wave dividers. CCV-inspired.</p>
+    </a>
+    <a class="card" href="options/option-2-clean-minimal.html">
+      <div class="num">02</div>
+      <h2>Clean Minimal</h2>
+      <p>Light, extreme restraint (white/black/teal), editorial grid, generous whitespace. Southeast-inspired.</p>
+    </a>
+    <a class="card" href="options/option-3-wave-forward.html">
+      <div class="num">03</div>
+      <h2>Wave-Forward</h2>
+      <p>Teal gradient hero, wave motifs everywhere, brand-forward. Seacoast meets RCC brand.</p>
+    </a>
+    <a class="card" href="options/option-4-split-hero.html">
+      <div class="num">04</div>
+      <h2>Split Hero</h2>
+      <p>50/50 text+image hero, accent line, ministry rows with thumbnails. Traders Point editorial.</p>
+    </a>
+    <a class="card" href="options/option-5-dark-wave.html">
+      <div class="num">05</div>
+      <h2>Dark Wave</h2>
+      <p>Full dark mode, gradient glow, wave watermarks, centered hero. Tech-polished feel.</p>
+    </a>
+  </div>
+</body>
+</html>
