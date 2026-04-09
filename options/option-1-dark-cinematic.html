@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCC — Option 1: Dark Cinematic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       OPTION 1: DARK CINEMATIC
+       Ref: CCV.church + Traders Point
+       Dark base, #095879 teal accent, wave dividers,
+       video hero, restrained palette, editorial type
+       ═══════════════════════════════════════════════════════ */
+    :root {
+      --brand: #095879;
+      --brand-light: #0b7aab;
+      --brand-dark: #063d54;
+      --white: #ffffff;
+      --off-white: #f4f5f7;
+      --gray-100: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #6b7280;
+      --dark: #0c0c0e;
+      --dark-card: #16171a;
+      --dark-border: rgba(255,255,255,0.06);
+      --text-on-dark: rgba(255,255,255,0.85);
+      --text-muted-dark: rgba(255,255,255,0.45);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--text-on-dark);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:50;
+      backdrop-filter: blur(24px);
+      background: rgba(12,12,14,0.7);
+      border-bottom: 1px solid var(--dark-border);
+    }
+    .nav-inner {
+      max-width:1280px; margin:0 auto; padding:0 2rem;
+      display:flex; align-items:center; justify-content:space-between;
+      height:68px;
+    }
+    .nav-logo img { height:36px; display:block; }
+    .nav-links { display:flex; align-items:center; gap:2rem; }
+    .nav-links a {
+      color: var(--text-muted-dark); text-decoration:none;
+      font-size:0.825rem; font-weight:500; letter-spacing:0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color:var(--white); }
+    .nav-btn {
+      background: var(--brand); color:var(--white);
+      padding:9px 22px; border-radius:6px; font-weight:600;
+      font-size:0.825rem; letter-spacing:0.01em;
+      transition: background 0.2s;
+    }
+    .nav-btn:hover { background:var(--brand-light); color:var(--white); }
+    .nav-btn-ghost {
+      background:transparent; border:1px solid rgba(255,255,255,0.15);
+      color:var(--white); padding:8px 20px; border-radius:6px;
+      font-weight:500; font-size:0.825rem;
+    }
+    .nav-btn-ghost:hover { border-color:var(--brand); color:var(--brand); }
+
+    /* ─── HERO ─── */
+    .hero {
+      margin-top:68px; min-height:92vh; display:flex;
+      align-items:center; position:relative; overflow:hidden;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background: url('https://images.unsplash.com/photo-1510384742052-1abcb6282645?w=1800&q=80') center/cover no-repeat;
+    }
+    .hero-overlay {
+      position:absolute; inset:0;
+      background: linear-gradient(180deg,
+        rgba(12,12,14,0.5) 0%,
+        rgba(12,12,14,0.3) 40%,
+        rgba(12,12,14,0.85) 85%,
+        rgba(12,12,14,1) 100%
+      );
+    }
+    .hero-content {
+      position:relative; z-index:2; max-width:1280px;
+      margin:0 auto; padding:0 2rem; width:100%;
+    }
+    .hero h1 {
+      font-size:clamp(2.5rem, 5.5vw, 4.25rem);
+      font-weight:800; letter-spacing:-0.03em;
+      line-height:1.05; max-width:700px;
+      margin-bottom:1.25rem;
+    }
+    .hero h1 span { color:var(--brand-light); }
+    .hero-sub {
+      font-size:1.05rem; color:var(--text-muted-dark);
+      max-width:520px; line-height:1.65; margin-bottom:2.5rem;
+      font-weight:400;
+    }
+    .hero-actions { display:flex; gap:0.75rem; flex-wrap:wrap; }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:13px 28px; border-radius:6px; font-weight:600;
+      font-size:0.875rem; text-decoration:none;
+      transition: all 0.25s ease; border:none; cursor:pointer;
+    }
+    .btn-brand { background:var(--brand); color:var(--white); }
+    .btn-brand:hover { background:var(--brand-light); transform:translateY(-1px); }
+    .btn-outline {
+      background:transparent; color:var(--white);
+      border:1px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { border-color:var(--white); }
+    .hero-meta {
+      position:absolute; bottom:3rem; left:2rem; right:2rem;
+      max-width:1280px; margin:0 auto;
+      display:flex; gap:3rem; z-index:2;
+    }
+    .hero-meta-item {
+      font-size:0.75rem; letter-spacing:0.08em;
+      text-transform:uppercase; color:var(--text-muted-dark);
+    }
+    .hero-meta-item strong {
+      display:block; color:var(--white); font-size:0.85rem;
+      letter-spacing:0; text-transform:none; margin-top:2px;
+    }
+
+    /* ─── WAVE DIVIDER ─── */
+    .wave-divider {
+      width:100%; overflow:hidden; line-height:0;
+      background: var(--dark);
+    }
+    .wave-divider svg { display:block; width:100%; height:80px; }
+    .wave-divider-flip { transform:scaleY(-1); }
+    .wave-dark svg path { fill: var(--dark-card); }
+    .wave-light svg path { fill: var(--off-white); }
+    .wave-brand svg path { fill: var(--brand); }
+
+    /* ─── SECTIONS ─── */
+    .s-dark { background:var(--dark); }
+    .s-card { background:var(--dark-card); }
+    .s-light { background:var(--off-white); color:#1a1a1a; }
+    .s-brand { background:var(--brand); }
+    section { padding:5rem 2rem; }
+    .container { max-width:1280px; margin:0 auto; }
+    .section-label {
+      font-size:0.7rem; font-weight:600; letter-spacing:0.12em;
+      text-transform:uppercase; color:var(--brand-light);
+      margin-bottom:0.75rem;
+    }
+    .s-light .section-label { color:var(--brand); }
+    .section-title {
+      font-size:clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight:800; letter-spacing:-0.025em;
+      line-height:1.1; margin-bottom:1rem;
+    }
+    .section-desc {
+      font-size:0.95rem; color:var(--text-muted-dark);
+      max-width:500px; line-height:1.65;
+    }
+    .s-light .section-desc { color:#6b7280; }
+
+    /* ─── MESSAGE ─── */
+    .message-grid {
+      display:grid; grid-template-columns:1.5fr 1fr;
+      gap:3rem; align-items:center; margin-top:2.5rem;
+    }
+    .message-video {
+      aspect-ratio:16/9; border-radius:10px; overflow:hidden;
+      background: url('https://images.unsplash.com/photo-1541190349433-a490ea73206a?w=1200&q=80') center/cover no-repeat;
+      position:relative; cursor:pointer;
+    }
+    .message-video::after {
+      content:''; position:absolute; inset:0;
+      background:rgba(0,0,0,0.3);
+    }
+    .play {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%); z-index:2;
+      width:64px; height:64px; border-radius:50%;
+      background:rgba(255,255,255,0.95); display:flex;
+      align-items:center; justify-content:center;
+      transition:transform 0.3s;
+    }
+    .play:hover { transform:translate(-50%,-50%) scale(1.08); }
+    .play::after {
+      content:''; width:0; height:0;
+      border-top:10px solid transparent;
+      border-bottom:10px solid transparent;
+      border-left:16px solid var(--brand);
+      margin-left:3px;
+    }
+    .message-info { display:flex; flex-direction:column; gap:1rem; }
+    .message-series {
+      font-size:0.7rem; font-weight:600; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--brand-light);
+    }
+    .message-title {
+      font-size:2rem; font-weight:800; letter-spacing:-0.02em; line-height:1.1;
+    }
+    .message-speaker { color:var(--text-muted-dark); font-size:0.875rem; }
+    .message-desc { color:var(--text-muted-dark); font-size:0.9rem; line-height:1.65; }
+
+    /* ─── GRID CARDS ─── */
+    .card-grid {
+      display:grid; grid-template-columns:repeat(3, 1fr);
+      gap:1px; margin-top:2.5rem;
+    }
+    .card {
+      background:var(--dark-card); padding:0; overflow:hidden;
+      transition:transform 0.3s; cursor:pointer;
+    }
+    .s-light .card { background:var(--white); }
+    .card:hover { transform:translateY(-2px); }
+    .card-img {
+      width:100%; aspect-ratio:16/10; object-fit:cover;
+      display:block; filter:brightness(0.85);
+      transition:filter 0.3s;
+    }
+    .card:hover .card-img { filter:brightness(1); }
+    .card-body { padding:1.5rem; }
+    .card-body h3 {
+      font-size:1.1rem; font-weight:700; letter-spacing:-0.01em;
+      margin-bottom:0.35rem;
+    }
+    .card-body p {
+      font-size:0.825rem; color:var(--text-muted-dark); line-height:1.5;
+    }
+    .s-light .card-body p { color:#6b7280; }
+    .card-link {
+      display:inline-flex; align-items:center; gap:4px;
+      color:var(--brand-light); font-size:0.8rem; font-weight:600;
+      margin-top:0.75rem; text-decoration:none;
+      transition:gap 0.2s;
+    }
+    .card-link:hover { gap:8px; }
+
+    /* ─── NEXT STEPS ─── */
+    .steps {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:0; margin-top:2.5rem;
+    }
+    .step {
+      padding:2rem 1.5rem;
+      border-right:1px solid var(--dark-border);
+      position:relative;
+    }
+    .step:last-child { border-right:none; }
+    .step-num {
+      font-size:3rem; font-weight:800;
+      color:rgba(9,88,121,0.15); line-height:1;
+      margin-bottom:1rem; letter-spacing:-0.03em;
+    }
+    .step h3 { font-size:1rem; font-weight:700; margin-bottom:0.5rem; }
+    .step p { font-size:0.825rem; color:var(--text-muted-dark); line-height:1.5; }
+
+    /* ─── EVENTS ─── */
+    .event-list { margin-top:2.5rem; }
+    .event-row {
+      display:flex; align-items:center; gap:2rem;
+      padding:1.25rem 0; border-bottom:1px solid var(--dark-border);
+      transition: padding-left 0.25s;
+    }
+    .event-row:hover { padding-left:0.75rem; }
+    .event-date {
+      min-width:56px; text-align:center;
+    }
+    .event-date .month {
+      font-size:0.65rem; font-weight:600; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--brand-light);
+    }
+    .event-date .day {
+      font-size:1.75rem; font-weight:800; line-height:1;
+      letter-spacing:-0.02em;
+    }
+    .event-detail h4 { font-size:0.95rem; font-weight:600; }
+    .event-detail p {
+      font-size:0.8rem; color:var(--text-muted-dark); margin-top:2px;
+    }
+    .event-arrow {
+      margin-left:auto; color:var(--text-muted-dark);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .event-row:hover .event-arrow {
+      color:var(--brand-light); transform:translateX(3px);
+    }
+
+    /* ─── PORTAL ─── */
+    .portal-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:3rem; align-items:center; margin-top:2.5rem;
+    }
+    .portal-features { display:flex; flex-direction:column; gap:0.75rem; }
+    .portal-feat {
+      display:flex; align-items:flex-start; gap:1rem;
+      padding:1rem 1.25rem; background:var(--dark-card);
+      border:1px solid var(--dark-border); border-radius:8px;
+      transition:border-color 0.2s;
+    }
+    .portal-feat:hover { border-color:var(--brand); }
+    .portal-feat-icon {
+      width:40px; height:40px; border-radius:8px;
+      background:rgba(9,88,121,0.12); display:flex;
+      align-items:center; justify-content:center;
+      font-size:18px; flex-shrink:0;
+    }
+    .portal-feat h4 { font-size:0.875rem; font-weight:600; }
+    .portal-feat p {
+      font-size:0.75rem; color:var(--text-muted-dark);
+      margin-top:2px; line-height:1.4;
+    }
+
+    /* ─── CTA BAND ─── */
+    .cta-band {
+      text-align:center; padding:5rem 2rem;
+      background:var(--brand);
+    }
+    .cta-band h2 {
+      font-size:clamp(2rem, 4vw, 3rem); font-weight:800;
+      letter-spacing:-0.025em; margin-bottom:1rem;
+    }
+    .cta-band p {
+      font-size:1rem; opacity:0.75; max-width:480px;
+      margin:0 auto 2rem;
+    }
+    .btn-white { background:var(--white); color:var(--brand); }
+    .btn-white:hover { opacity:0.9; transform:translateY(-1px); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background:var(--dark); border-top:1px solid var(--dark-border);
+      padding:4rem 2rem 2rem;
+    }
+    .footer-grid {
+      max-width:1280px; margin:0 auto;
+      display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:3rem; margin-bottom:3rem;
+    }
+    .footer-logo img { height:32px; margin-bottom:1rem; filter:invert(1); }
+    .footer-address {
+      font-size:0.825rem; color:var(--text-muted-dark); line-height:1.6;
+    }
+    footer h4 {
+      font-size:0.7rem; font-weight:600; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--gray-400);
+      margin-bottom:1rem;
+    }
+    footer a {
+      display:block; color:var(--text-muted-dark); text-decoration:none;
+      font-size:0.825rem; padding:0.2rem 0; transition:color 0.2s;
+    }
+    footer a:hover { color:var(--white); }
+    .footer-bottom {
+      max-width:1280px; margin:0 auto; padding-top:2rem;
+      border-top:1px solid var(--dark-border);
+      display:flex; justify-content:space-between;
+      font-size:0.75rem; color:var(--text-muted-dark);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:1024px) {
+      .message-grid { grid-template-columns:1fr; }
+      .card-grid { grid-template-columns:repeat(2,1fr); }
+      .steps { grid-template-columns:repeat(2,1fr); }
+      .step { border-bottom:1px solid var(--dark-border); }
+      .portal-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media(max-width:768px) {
+      .nav-links { display:none; }
+      .card-grid { grid-template-columns:1fr; }
+      .steps { grid-template-columns:1fr; }
+      .step { border-right:none; }
+      .hero-meta { display:none; }
+      .footer-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="../../rcc/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC">
+      </a>
+      <div class="nav-links">
+        <a href="#">About</a>
+        <a href="#">Visit</a>
+        <a href="#">Watch</a>
+        <a href="#">Groups</a>
+        <a href="#">Events</a>
+        <a href="#">Give</a>
+        <a href="#" class="nav-btn-ghost">Sign In</a>
+        <a href="#" class="nav-btn">Plan a Visit</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Win People. <span>Train Believers.</span> Unleash Disciples.</h1>
+      <p class="hero-sub">Join us this Sunday in Fleming Island and be part of a community that's changing lives through the love of Jesus.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn-brand">Plan Your Visit</a>
+        <a href="#" class="btn btn-outline">Watch Latest Message</a>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Sundays<strong>8:30, 10:00 & 11:30 AM</strong></div>
+      <div class="hero-meta-item">Thursdays<strong>7:00 PM</strong></div>
+      <div class="hero-meta-item">Location<strong>5900 US-17, Fleming Island</strong></div>
+    </div>
+  </section>
+
+  <!-- WAVE → card bg -->
+  <div class="wave-divider wave-dark">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/>
+    </svg>
+  </div>
+
+  <!-- LATEST MESSAGE -->
+  <section class="s-card">
+    <div class="container">
+      <div class="section-label">Latest Message</div>
+      <div class="message-grid">
+        <div class="message-video">
+          <div class="play"></div>
+        </div>
+        <div class="message-info">
+          <span class="message-series">Current Series</span>
+          <h2 class="message-title">Series Title Here</h2>
+          <p class="message-speaker">Pastor Nathan Freeman &middot; April 6, 2026</p>
+          <p class="message-desc">A brief description of this week's message and the truth that will challenge and encourage you.</p>
+          <a href="#" class="btn btn-brand" style="align-self:flex-start;margin-top:0.5rem;">Watch Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE → dark -->
+  <div class="wave-divider wave-dark" style="background:var(--dark-card);">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="transform:scaleX(-1)">
+      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="var(--dark)"/>
+    </svg>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <section class="s-dark">
+    <div class="container">
+      <div class="section-label">Your Next Step</div>
+      <div class="section-title">Everyone Has a Next Step</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Visit</h3>
+          <p>Experience a Sunday service and see what RCC is about.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Connect</h3>
+          <p>Fill out a connect card and let us get to know you.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Grow</h3>
+          <p>Join a LifeGroup and start the Growth Track.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Serve</h3>
+          <p>Discover your gifts and make a difference on a team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE → light -->
+  <div class="wave-divider wave-light" style="background:var(--dark);">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/>
+    </svg>
+  </div>
+
+  <!-- MINISTRIES (light) -->
+  <section class="s-light">
+    <div class="container">
+      <div class="section-label">Ministries</div>
+      <div class="section-title" style="color:#1a1a1a;">Find Your Place</div>
+      <div class="card-grid">
+        <div class="card">
+          <img class="card-img" src="https://images.unsplash.com/photo-1600288480699-0b0d8a456dd8?w=600&q=80" alt="Kids">
+          <div class="card-body">
+            <h3>River Kids</h3>
+            <p>Safe, engaging environments for birth through 5th grade every Sunday.</p>
+            <a href="#" class="card-link">Learn More &rarr;</a>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Students">
+          <div class="card-body">
+            <h3>Students</h3>
+            <p>Middle and high school students building faith and friendships together.</p>
+            <a href="#" class="card-link">Learn More &rarr;</a>
+          </div>
+        </div>
+        <div class="card">
+          <img class="card-img" src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80" alt="LifeGroups">
+          <div class="card-body">
+            <h3>LifeGroups</h3>
+            <p>Real community happens in circles, not rows. Find a group near you.</p>
+            <a href="#" class="card-link">Find a Group &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE → dark -->
+  <div class="wave-divider" style="background:var(--off-white);">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="transform:scaleX(-1)">
+      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="var(--dark)"/>
+    </svg>
+  </div>
+
+  <!-- EVENTS -->
+  <section class="s-dark">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0;">
+        <div>
+          <div class="section-label">Upcoming</div>
+          <div class="section-title">What's Happening</div>
+        </div>
+        <a href="#" class="btn btn-outline" style="margin-bottom:0.5rem;">All Events</a>
+      </div>
+      <div class="event-list">
+        <div class="event-row">
+          <div class="event-date"><div class="month">Apr</div><div class="day">13</div></div>
+          <div class="event-detail"><h4>Easter at RCC</h4><p>Special services at 8:30, 10:00 &amp; 11:30 AM</p></div>
+          <span class="event-arrow">&rarr;</span>
+        </div>
+        <div class="event-row">
+          <div class="event-date"><div class="month">Apr</div><div class="day">20</div></div>
+          <div class="event-detail"><h4>Growth Track &mdash; Session 1</h4><p>Discover your purpose &middot; After second service</p></div>
+          <span class="event-arrow">&rarr;</span>
+        </div>
+        <div class="event-row">
+          <div class="event-date"><div class="month">May</div><div class="day">04</div></div>
+          <div class="event-detail"><h4>LifeGroup Fair</h4><p>Browse open groups &middot; Meet leaders &middot; Sign up</p></div>
+          <span class="event-arrow">&rarr;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAL -->
+  <section class="s-card" style="padding:5rem 2rem;">
+    <div class="container">
+      <div class="portal-grid">
+        <div>
+          <div class="section-label">Member Portal</div>
+          <div class="section-title">Your RCC Dashboard</div>
+          <div class="section-desc">Sign in with Planning Center to access your personalized church experience — giving, groups, volunteer schedule, and more.</div>
+          <a href="#" class="btn btn-brand" style="margin-top:1.5rem;">Sign In</a>
+        </div>
+        <div class="portal-features">
+          <div class="portal-feat">
+            <div class="portal-feat-icon">💰</div>
+            <div><h4>Giving &amp; Statements</h4><p>View history, manage recurring gifts, download tax receipts</p></div>
+          </div>
+          <div class="portal-feat">
+            <div class="portal-feat-icon">📅</div>
+            <div><h4>Serve Schedule</h4><p>See when you're up, swap shifts, confirm availability</p></div>
+          </div>
+          <div class="portal-feat">
+            <div class="portal-feat-icon">👥</div>
+            <div><h4>My LifeGroup</h4><p>Message your group, share prayer requests, coordinate</p></div>
+          </div>
+          <div class="portal-feat">
+            <div class="portal-feat-icon">🙏</div>
+            <div><h4>Prayer Requests</h4><p>Submit prayer needs and pray for your community</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <h2>You're Welcome Here</h2>
+    <p>No matter your story, your doubts, or where you've been — you have a place at RCC.</p>
+    <a href="#" class="btn btn-white">Plan Your Visit</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="../../rcc/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC" style="filter:invert(1);height:36px;">
+        <p class="footer-address">Win People &middot; Train Believers &middot; Unleash Disciples<br><br>5900 US-17<br>Fleming Island, FL 32003<br>(904) 458-4809</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <a href="#">What to Expect</a><a href="#">Service Times</a>
+        <a href="#">Our Team</a><a href="#">Beliefs</a><a href="#">Contact</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#">LifeGroups</a><a href="#">Serve</a>
+        <a href="#">Events</a><a href="#">Baptism</a><a href="#">Give</a>
+      </div>
+      <div>
+        <h4>Watch</h4>
+        <a href="#">Latest Message</a><a href="#">Livestream</a>
+        <a href="#">Podcast</a><a href="#">My Account</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 River Christian Church</span>
+      <span>Facebook &middot; Instagram &middot; YouTube</span>
+    </div>
+  </footer>
+
+  <!-- OPTION SWITCHER -->
+  <style>
+    .switcher{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;font-family:'Inter',sans-serif}
+    .switcher-toggle{width:44px;height:44px;border-radius:50%;background:#095879;color:#fff;border:none;cursor:pointer;font-size:1rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;margin-left:auto;transition:transform 0.2s}
+    .switcher-toggle:hover{transform:scale(1.08)}
+    .switcher-menu{display:none;background:#18181b;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.5rem;margin-bottom:0.5rem;box-shadow:0 8px 30px rgba(0,0,0,0.4);min-width:220px}
+    .switcher.open .switcher-menu{display:block}
+    .switcher-menu a{display:block;padding:0.5rem 0.75rem;color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.8rem;font-weight:500;border-radius:6px;transition:all 0.15s}
+    .switcher-menu a:hover{background:rgba(255,255,255,0.08);color:#fff}
+    .switcher-menu a.active{background:#095879;color:#fff;font-weight:600}
+    .switcher-menu a .num{display:inline-block;width:20px;color:rgba(255,255,255,0.35);font-weight:700;font-size:0.7rem}
+    .switcher-menu a.active .num{color:rgba(255,255,255,0.6)}
+  </style>
+  <div class="switcher" id="switcher">
+    <div class="switcher-menu">
+      <a href="option-1-dark-cinematic.html" class="active"><span class="num">1</span> Dark Cinematic</a>
+      <a href="option-2-clean-minimal.html"><span class="num">2</span> Clean Minimal</a>
+      <a href="option-3-wave-forward.html"><span class="num">3</span> Wave-Forward</a>
+      <a href="option-4-split-hero.html"><span class="num">4</span> Split Hero</a>
+      <a href="option-5-dark-wave.html"><span class="num">5</span> Dark Wave</a>
+    </div>
+    <button class="switcher-toggle" onclick="document.getElementById('switcher').classList.toggle('open')">⇄</button>
+  </div>
+
+</body>
+</html>

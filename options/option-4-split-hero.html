@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCC — Option 4: Split Hero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       OPTION 4: SPLIT HERO
+       Ref: Traders Point editorial style
+       50/50 split hero (text | image), light base,
+       teal accent thread, structured grid, professional.
+       Restrained, intentional, zero fluff.
+       ═══════════════════════════════════════════════════════ */
+    :root{--brand:#095879;--brand-light:#0b7aab;--black:#0f0f0f;--white:#fff;--off:#f8f9fa;--g100:#f1f3f5;--g200:#e9ecef;--g400:#adb5bd;--g600:#6c757d;--border:#e5e7eb}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,sans-serif;background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased;line-height:1.5}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    .ni{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nl img{height:32px;display:block}
+    .nr{display:flex;align-items:center;gap:2rem}
+    .nr a{color:var(--g600);text-decoration:none;font-size:0.825rem;font-weight:500;transition:color 0.2s}
+    .nr a:hover{color:var(--black)}
+    .nb{background:var(--brand);color:#fff;padding:8px 20px;border-radius:6px;font-weight:600;font-size:0.825rem}
+    .nb:hover{background:var(--brand-light);color:#fff}
+    .ng{border:1px solid var(--border);color:var(--black);padding:7px 18px;border-radius:6px;font-weight:500;font-size:0.825rem}
+    .ng:hover{border-color:var(--brand);color:var(--brand)}
+
+    /* HERO: 50/50 SPLIT */
+    .hero{margin-top:64px;display:grid;grid-template-columns:1fr 1fr;min-height:85vh}
+    .hero-text{display:flex;flex-direction:column;justify-content:center;padding:4rem 4rem 4rem 2rem;max-width:640px;margin-left:auto}
+    .hero-text h1{font-size:clamp(2.25rem,4.5vw,3.5rem);font-weight:800;letter-spacing:-0.035em;line-height:1.05;margin-bottom:1.25rem}
+    .hero-text h1 span{color:var(--brand)}
+    .hero-text p{font-size:1rem;color:var(--g600);line-height:1.7;margin-bottom:2rem;max-width:420px}
+    .ha{display:flex;gap:0.75rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:6px;font-weight:600;font-size:0.875rem;text-decoration:none;transition:all 0.2s;border:none;cursor:pointer}
+    .btn-brand{background:var(--brand);color:#fff}
+    .btn-brand:hover{background:var(--brand-light);transform:translateY(-1px)}
+    .btn-ghost{background:transparent;color:var(--black);border:1px solid var(--border)}
+    .btn-ghost:hover{border-color:var(--black)}
+    .btn-white{background:#fff;color:var(--brand)}
+    .btn-white:hover{opacity:0.9;transform:translateY(-1px)}
+    .hero-meta{display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+    .hm-item dt{font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--g400)}
+    .hm-item dd{font-size:0.825rem;font-weight:500;margin-top:2px}
+    .hero-image{background:url('https://images.unsplash.com/photo-1510384742052-1abcb6282645?w=1000&q=80') center/cover no-repeat;position:relative}
+    .hero-image::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0.05),transparent)}
+
+    /* ACCENT LINE */
+    .accent-line{height:4px;background:linear-gradient(90deg,var(--brand),var(--brand-light))}
+
+    section{padding:5rem 2rem}
+    .c{max-width:1280px;margin:0 auto}
+    .so{background:var(--off)}
+    .lb{font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--brand);margin-bottom:0.5rem}
+    .tt{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.025em;line-height:1.1;margin-bottom:0.75rem}
+    .ds{font-size:0.9rem;color:var(--g600);max-width:480px;line-height:1.65}
+
+    .wave{overflow:hidden;line-height:0}
+    .wave svg{display:block;width:100%;height:60px}
+
+    /* MESSAGE */
+    .mg{display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:center;margin-top:2rem}
+    .mv{aspect-ratio:16/9;border-radius:8px;overflow:hidden;position:relative;background:url('https://images.unsplash.com/photo-1541190349433-a490ea73206a?w=1200&q=80') center/cover}
+    .mv::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.2)}
+    .pl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:56px;height:56px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+    .pl::after{content:'';border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:14px solid var(--brand);margin-left:2px}
+
+    /* MINISTRY ROW */
+    .min-row{border-top:1px solid var(--border);margin-top:2rem}
+    .min-item{display:flex;align-items:center;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding-left 0.2s}
+    .min-item:hover{padding-left:0.75rem}
+    .min-item img{width:80px;height:56px;object-fit:cover;border-radius:6px;flex-shrink:0}
+    .min-item h3{font-size:1rem;font-weight:700;flex:1}
+    .min-item p{font-size:0.825rem;color:var(--g600);max-width:360px}
+    .min-item .arr{color:var(--g400);transition:color 0.2s,transform 0.2s}
+    .min-item:hover .arr{color:var(--brand);transform:translateX(3px)}
+
+    /* EVENTS */
+    .ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2rem}
+    .ev-cell{background:var(--white);padding:1.75rem;transition:background 0.2s;cursor:pointer}
+    .ev-cell:hover{background:var(--off)}
+    .ev-cell-d{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--g400);margin-bottom:0.75rem}
+    .ev-cell h4{font-size:1rem;font-weight:700;margin-bottom:0.25rem}
+    .ev-cell p{font-size:0.8rem;color:var(--g600)}
+
+    /* PORTAL */
+    .ptl{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2rem}
+    .ptl-h{padding:2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    .ptl-h h2{font-size:1.5rem;font-weight:800;letter-spacing:-0.02em}
+    .ptl-h p{color:var(--g600);font-size:0.85rem;max-width:340px}
+    .ptl-g{display:grid;grid-template-columns:repeat(3,1fr)}
+    .ptl-c{padding:1.5rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background 0.2s}
+    .ptl-c:nth-child(3n){border-right:none}
+    .ptl-c:nth-child(n+4){border-bottom:none}
+    .ptl-c:hover{background:var(--off)}
+    .ptl-c h4{font-size:0.825rem;font-weight:600;margin-bottom:0.2rem}
+    .ptl-c p{font-size:0.75rem;color:var(--g600);line-height:1.5}
+
+    .cta{background:var(--brand);color:#fff;text-align:center;padding:5rem 2rem}
+    .cta h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:1rem}
+    .cta p{opacity:0.75;max-width:420px;margin:0 auto 2rem;font-size:0.95rem}
+
+    footer{border-top:1px solid var(--border);padding:4rem 2rem 2rem}
+    .fg{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+    .fl img{height:32px;margin-bottom:1rem}
+    .fa{font-size:0.825rem;color:var(--g600);line-height:1.6}
+    footer h4{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--g400);margin-bottom:0.75rem}
+    footer a{display:block;color:var(--g600);text-decoration:none;font-size:0.825rem;padding:0.2rem 0;transition:color 0.2s}
+    footer a:hover{color:var(--black)}
+    .fb{max-width:1280px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:0.7rem;color:var(--g400)}
+
+    @media(max-width:1024px){
+      .hero{grid-template-columns:1fr;min-height:auto}
+      .hero-text{padding:3rem 2rem;max-width:none}
+      .hero-image{min-height:50vh}
+      .mg{grid-template-columns:1fr}
+      .ptl-h{flex-direction:column;gap:1rem;align-items:flex-start}
+      .ptl-g{grid-template-columns:repeat(2,1fr)}
+      .fg{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:768px){
+      .nr{display:none}
+      .ev-grid{grid-template-columns:1fr}
+      .ptl-g{grid-template-columns:1fr}
+      .ptl-c{border-right:none!important}
+      .hero-meta{flex-direction:column;gap:1rem}
+      .fg{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <nav><div class="ni"><a href="#" class="nl"><img src="../../rcc/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC"></a><div class="nr"><a href="#">About</a><a href="#">Visit</a><a href="#">Watch</a><a href="#">Groups</a><a href="#">Events</a><a href="#">Give</a><a href="#" class="ng">Sign In</a><a href="#" class="nb">Plan a Visit</a></div></div></nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Win People.<br><span>Train Believers.</span><br>Unleash Disciples.</h1>
+      <p>A Christ-centered community in Fleming Island where everyone can belong, grow, and make a lasting difference.</p>
+      <div class="ha">
+        <a href="#" class="btn btn-brand">Plan Your Visit</a>
+        <a href="#" class="btn btn-ghost">Watch Latest</a>
+      </div>
+      <dl class="hero-meta">
+        <div class="hm-item"><dt>Sundays</dt><dd>8:30, 10:00 &amp; 11:30 AM</dd></div>
+        <div class="hm-item"><dt>Thursdays</dt><dd>7:00 PM</dd></div>
+        <div class="hm-item"><dt>Location</dt><dd>5900 US-17, Fleming Island</dd></div>
+      </dl>
+    </div>
+    <div class="hero-image"></div>
+  </section>
+
+  <div class="accent-line"></div>
+
+  <section>
+    <div class="c">
+      <div class="lb">Latest Message</div>
+      <div class="mg">
+        <div class="mv"><div class="pl"></div></div>
+        <div>
+          <div class="lb">Current Series</div>
+          <h2 style="font-size:1.875rem;font-weight:800;letter-spacing:-0.02em;line-height:1.1;">Series Title Here</h2>
+          <p style="color:var(--g600);font-size:0.85rem;margin-top:0.5rem;">Pastor Nathan Freeman &middot; April 6, 2026</p>
+          <p style="color:var(--g600);font-size:0.875rem;margin-top:0.75rem;line-height:1.65;">A brief description of this week's message and the key truth that will challenge and encourage you.</p>
+          <a href="#" class="btn btn-brand" style="margin-top:1.25rem;">Watch Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="var(--off)"/></svg></div>
+
+  <section class="so">
+    <div class="c">
+      <div class="lb">Ministries</div>
+      <div class="tt">Find Your Place</div>
+      <div class="min-row">
+        <div class="min-item"><img src="https://images.unsplash.com/photo-1600288480699-0b0d8a456dd8?w=200&q=80" alt="Kids"><h3>River Kids</h3><p>Safe, engaging environments for birth through 5th grade.</p><span class="arr">&rarr;</span></div>
+        <div class="min-item"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=200&q=80" alt="Students"><h3>Students</h3><p>Middle and high school students building faith together.</p><span class="arr">&rarr;</span></div>
+        <div class="min-item"><img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=200&q=80" alt="Groups"><h3>LifeGroups</h3><p>Real community happens in circles, not rows.</p><span class="arr">&rarr;</span></div>
+        <div class="min-item"><img src="https://images.unsplash.com/photo-1685608625845-184d982f3f69?w=200&q=80" alt="Women"><h3>Women</h3><p>Bible studies, retreats, and authentic connection.</p><span class="arr">&rarr;</span></div>
+        <div class="min-item"><img src="https://images.unsplash.com/photo-1703876616429-4c8610a7c702?w=200&q=80" alt="Men"><h3>Men</h3><p>Iron sharpens iron — events, groups, accountability.</p><span class="arr">&rarr;</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="c">
+      <div class="lb">Upcoming Events</div>
+      <div class="ev-grid">
+        <div class="ev-cell"><div class="ev-cell-d">April 13, 2026</div><h4>Easter at RCC</h4><p>Services at 8:30, 10:00 &amp; 11:30 AM.</p></div>
+        <div class="ev-cell"><div class="ev-cell-d">April 20, 2026</div><h4>Growth Track</h4><p>Session 1 — discover your purpose.</p></div>
+        <div class="ev-cell"><div class="ev-cell-d">May 4, 2026</div><h4>LifeGroup Fair</h4><p>Browse groups, meet leaders, sign up.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="so">
+    <div class="c">
+      <div class="lb">Member Portal</div>
+      <div class="ptl">
+        <div class="ptl-h"><h2>Your RCC Dashboard</h2><p>Sign in with Planning Center for your personalized experience.</p></div>
+        <div class="ptl-g">
+          <div class="ptl-c"><h4>Giving &amp; Statements</h4><p>History, recurring gifts, tax receipts.</p></div>
+          <div class="ptl-c"><h4>Serve Schedule</h4><p>See shifts, swap, confirm availability.</p></div>
+          <div class="ptl-c"><h4>My LifeGroup</h4><p>Message group, prayer requests, meetups.</p></div>
+          <div class="ptl-c"><h4>Prayer Requests</h4><p>Submit needs and pray for community.</p></div>
+          <div class="ptl-c"><h4>Growth Track</h4><p>4-step discipleship journey progress.</p></div>
+          <div class="ptl-c"><h4>Event Registration</h4><p>Sign up and manage family RSVPs.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="var(--brand)"/></svg></div>
+  <section class="cta"><h2>You're Welcome Here</h2><p>No matter your story — you have a place at RCC.</p><a href="#" class="btn btn-white">Plan Your Visit</a></section>
+
+  <footer>
+    <div class="fg">
+      <div><div class="fl"><img src="../../rcc/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC"></div><p class="fa">Win People &middot; Train Believers &middot; Unleash Disciples<br><br>5900 US-17<br>Fleming Island, FL 32003<br>(904) 458-4809</p></div>
+      <div><h4>Visit</h4><a href="#">What to Expect</a><a href="#">Service Times</a><a href="#">Our Team</a><a href="#">Beliefs</a><a href="#">Contact</a></div>
+      <div><h4>Connect</h4><a href="#">LifeGroups</a><a href="#">Serve</a><a href="#">Events</a><a href="#">Baptism</a><a href="#">Give</a></div>
+      <div><h4>Watch</h4><a href="#">Latest Message</a><a href="#">Livestream</a><a href="#">Podcast</a><a href="#">My Account</a></div>
+    </div>
+    <div class="fb"><span>&copy; 2026 River Christian Church</span><span>Facebook &middot; Instagram &middot; YouTube</span></div>
+  </footer>
+  <!-- OPTION SWITCHER -->
+  <style>
+    .switcher{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;font-family:'Inter',sans-serif}
+    .switcher-toggle{width:44px;height:44px;border-radius:50%;background:#095879;color:#fff;border:none;cursor:pointer;font-size:1rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;margin-left:auto;transition:transform 0.2s}
+    .switcher-toggle:hover{transform:scale(1.08)}
+    .switcher-menu{display:none;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:0.5rem;margin-bottom:0.5rem;box-shadow:0 8px 30px rgba(0,0,0,0.12);min-width:220px}
+    .switcher.open .switcher-menu{display:block}
+    .switcher-menu a{display:block;padding:0.5rem 0.75rem;color:#6b7280;text-decoration:none;font-size:0.8rem;font-weight:500;border-radius:6px;transition:all 0.15s}
+    .switcher-menu a:hover{background:#f3f4f6;color:#111}
+    .switcher-menu a.active{background:#095879;color:#fff;font-weight:600}
+    .switcher-menu a .num{display:inline-block;width:20px;font-weight:700;font-size:0.7rem;opacity:0.5}
+    .switcher-menu a.active .num{opacity:0.7}
+  </style>
+  <div class="switcher" id="switcher">
+    <div class="switcher-menu">
+      <a href="option-1-dark-cinematic.html"><span class="num">1</span> Dark Cinematic</a>
+      <a href="option-2-clean-minimal.html"><span class="num">2</span> Clean Minimal</a>
+      <a href="option-3-wave-forward.html"><span class="num">3</span> Wave-Forward</a>
+      <a href="option-4-split-hero.html" class="active"><span class="num">4</span> Split Hero</a>
+      <a href="option-5-dark-wave.html"><span class="num">5</span> Dark Wave</a>
+    </div>
+    <button class="switcher-toggle" onclick="document.getElementById('switcher').classList.toggle('open')">⇄</button>
+  </div>
+
+</body>
+</html>

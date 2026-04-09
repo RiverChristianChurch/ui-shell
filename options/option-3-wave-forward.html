@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCC — Option 3: Wave-Forward</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       OPTION 3: WAVE-FORWARD
+       Leans hardest into the RCC wave brand motif.
+       Wave shapes as section dividers AND as decorative
+       background elements. Dark hero → light body.
+       Teal gradient hero with wave overlay.
+       ═══════════════════════════════════════════════════════ */
+    :root {
+      --brand: #095879;
+      --brand-light: #0b7aab;
+      --brand-dark: #063d54;
+      --brand-subtle: #e8f4f8;
+      --white: #ffffff;
+      --off-white: #f7f9fb;
+      --gray-100: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #6b7280;
+      --black: #111111;
+      --border: #e2e8f0;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,sans-serif;background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased;line-height:1.5}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(9,88,121,0.92);backdrop-filter:blur(20px)}
+    .nav-inner{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav-logo img{height:30px;display:block;filter:brightness(0) invert(1)}
+    .nav-links{display:flex;align-items:center;gap:2rem}
+    .nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.825rem;font-weight:500;transition:color 0.2s}
+    .nav-links a:hover{color:#fff}
+    .nav-btn{background:#fff;color:var(--brand);padding:8px 20px;border-radius:6px;font-weight:600;font-size:0.825rem}
+    .nav-btn:hover{opacity:0.9;color:var(--brand)}
+    .nav-ghost{border:1px solid rgba(255,255,255,0.25);color:#fff;padding:7px 18px;border-radius:6px;font-weight:500;font-size:0.825rem}
+    .nav-ghost:hover{border-color:#fff;color:#fff}
+
+    /* HERO */
+    .hero{margin-top:64px;min-height:88vh;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--brand-dark) 0%,var(--brand) 50%,var(--brand-light) 100%);color:#fff}
+    .hero-wave-bg{position:absolute;bottom:0;left:0;right:0;opacity:0.08}
+    .hero-wave-bg svg{display:block;width:100%;height:300px}
+    .hero-content{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 2rem;width:100%;display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center}
+    .hero h1{font-size:clamp(2.5rem,5vw,3.75rem);font-weight:800;letter-spacing:-0.035em;line-height:1.05;margin-bottom:1.25rem}
+    .hero-sub{font-size:1rem;opacity:0.75;max-width:480px;line-height:1.7;margin-bottom:2rem}
+    .hero-actions{display:flex;gap:0.75rem}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:6px;font-weight:600;font-size:0.875rem;text-decoration:none;transition:all 0.2s;border:none;cursor:pointer}
+    .btn-white{background:#fff;color:var(--brand)}
+    .btn-white:hover{opacity:0.9;transform:translateY(-1px)}
+    .btn-glass{background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px)}
+    .btn-glass:hover{background:rgba(255,255,255,0.2)}
+    .btn-brand{background:var(--brand);color:#fff}
+    .btn-brand:hover{background:var(--brand-light);transform:translateY(-1px)}
+    .btn-dark{background:var(--black);color:#fff}
+    .btn-dark:hover{opacity:0.85;transform:translateY(-1px)}
+    .hero-img-container{position:relative}
+    .hero-img{width:100%;aspect-ratio:4/3;border-radius:12px;object-fit:cover;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+    .hero-badge{position:absolute;bottom:-16px;left:-16px;background:#fff;color:var(--black);padding:1rem 1.5rem;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.12);display:flex;align-items:center;gap:12px}
+    .hero-badge-dot{width:10px;height:10px;background:var(--brand);border-radius:50%}
+    .hero-badge strong{font-size:0.85rem}
+    .hero-badge span{font-size:0.75rem;color:var(--gray-600)}
+
+    /* WAVE DIVIDERS */
+    .wave{overflow:hidden;line-height:0}
+    .wave svg{display:block;width:100%;height:70px}
+    .wave-hero{background:linear-gradient(135deg,var(--brand-dark),var(--brand),var(--brand-light))}
+
+    /* SECTIONS */
+    section{padding:5rem 2rem}
+    .container{max-width:1280px;margin:0 auto}
+    .s-off{background:var(--off-white)}
+    .s-brand{background:var(--brand);color:#fff}
+    .label{font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--brand);margin-bottom:0.5rem}
+    .title{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.025em;line-height:1.1;margin-bottom:0.75rem}
+    .desc{font-size:0.9rem;color:var(--gray-600);max-width:480px;line-height:1.65}
+
+    /* SERVICE INFO */
+    .service-bar{background:var(--white);border-bottom:1px solid var(--border);padding:1.25rem 2rem}
+    .service-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+    .service-item{display:flex;align-items:center;gap:8px;font-size:0.85rem}
+    .service-item strong{font-weight:600;color:var(--black)}
+    .service-item span{color:var(--gray-600)}
+
+    /* MESSAGE */
+    .msg-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:center;margin-top:2rem}
+    .msg-video{aspect-ratio:16/9;border-radius:10px;overflow:hidden;position:relative;background:url('https://images.unsplash.com/photo-1541190349433-a490ea73206a?w=1200&q=80') center/cover}
+    .msg-video::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.25)}
+    .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+    .play::after{content:'';border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid var(--brand);margin-left:3px}
+    .msg-meta .label{margin-bottom:0.5rem}
+    .msg-title{font-size:1.875rem;font-weight:800;letter-spacing:-0.02em;line-height:1.1}
+    .msg-speaker{color:var(--gray-600);font-size:0.85rem;margin-top:0.5rem}
+    .msg-desc{color:var(--gray-600);font-size:0.875rem;margin-top:0.75rem;line-height:1.65}
+
+    /* CARDS */
+    .card-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+    .card-sm{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.5rem;transition:border-color 0.2s,transform 0.2s;cursor:pointer}
+    .card-sm:hover{border-color:var(--brand);transform:translateY(-2px)}
+    .card-sm h3{font-size:0.95rem;font-weight:700;margin-bottom:0.35rem}
+    .card-sm p{font-size:0.8rem;color:var(--gray-600);line-height:1.5}
+
+    /* MINISTRY CARDS */
+    .min-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+    .min-card{border-radius:10px;overflow:hidden;position:relative;aspect-ratio:4/3;cursor:pointer}
+    .min-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+    .min-card:hover img{transform:scale(1.03)}
+    .min-card-overlay{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,0.7));z-index:1}
+    .min-card-text{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;z-index:2;color:#fff}
+    .min-card-text h3{font-size:1.1rem;font-weight:700}
+    .min-card-text p{font-size:0.8rem;opacity:0.8;margin-top:0.25rem}
+
+    /* EVENTS */
+    .ev-list{margin-top:2rem}
+    .ev-row{display:flex;align-items:center;gap:2rem;padding:1.25rem 0;border-bottom:1px solid var(--border);transition:padding-left 0.2s}
+    .ev-row:hover{padding-left:0.5rem}
+    .ev-date{min-width:50px;text-align:center}
+    .ev-date .m{font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--brand)}
+    .ev-date .d{font-size:1.5rem;font-weight:800;line-height:1;letter-spacing:-0.02em}
+    .ev-info h4{font-size:0.9rem;font-weight:600}
+    .ev-info p{font-size:0.8rem;color:var(--gray-600);margin-top:2px}
+    .ev-arrow{margin-left:auto;color:var(--gray-400);transition:color 0.2s,transform 0.2s}
+    .ev-row:hover .ev-arrow{color:var(--brand);transform:translateX(3px)}
+
+    /* PORTAL */
+    .portal-wrap{background:var(--brand-subtle);border-radius:12px;padding:3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:2rem}
+    .portal-wrap h2{font-size:2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.75rem}
+    .portal-wrap>div:first-child p{color:var(--gray-600);font-size:0.9rem;line-height:1.65;margin-bottom:1.5rem}
+    .pf{display:flex;align-items:flex-start;gap:1rem;padding:0.875rem 1rem;background:var(--white);border-radius:8px;border:1px solid var(--border);transition:border-color 0.2s}
+    .pf:hover{border-color:var(--brand)}
+    .pf+.pf{margin-top:0.5rem}
+    .pf h4{font-size:0.85rem;font-weight:600}
+    .pf p{font-size:0.75rem;color:var(--gray-600);margin-top:2px}
+
+    /* CTA */
+    .cta{text-align:center;padding:5rem 2rem;background:var(--brand);color:#fff}
+    .cta h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:1rem}
+    .cta p{opacity:0.75;max-width:420px;margin:0 auto 2rem;font-size:0.95rem}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);padding:4rem 2rem 2rem}
+    .ft-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+    .ft-logo img{height:32px;margin-bottom:1rem}
+    .ft-addr{font-size:0.825rem;color:var(--gray-600);line-height:1.6}
+    footer h4{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.75rem}
+    footer a{display:block;color:var(--gray-600);text-decoration:none;font-size:0.825rem;padding:0.2rem 0;transition:color 0.2s}
+    footer a:hover{color:var(--black)}
+    .ft-bottom{max-width:1280px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:0.7rem;color:var(--gray-400)}
+
+    @media(max-width:1024px){
+      .hero-content{grid-template-columns:1fr}
+      .hero-img-container{max-width:500px}
+      .msg-grid{grid-template-columns:1fr}
+      .card-row{grid-template-columns:repeat(2,1fr)}
+      .min-grid{grid-template-columns:repeat(2,1fr)}
+      .portal-wrap{grid-template-columns:1fr;padding:2rem}
+      .ft-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .card-row{grid-template-columns:1fr}
+      .min-grid{grid-template-columns:1fr}
+      .service-inner{flex-direction:column;gap:0.5rem;align-items:center}
+      .ft-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><img src="../../rcc/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC"></a>
+      <div class="nav-links">
+        <a href="#">About</a><a href="#">Visit</a><a href="#">Watch</a>
+        <a href="#">Groups</a><a href="#">Events</a><a href="#">Give</a>
+        <a href="#" class="nav-ghost">Sign In</a>
+        <a href="#" class="nav-btn">Plan a Visit</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-wave-bg">
+      <svg viewBox="0 0 1440 300" preserveAspectRatio="none">
+        <path d="M0,150 C180,250 360,50 540,150 C720,250 900,50 1080,150 C1260,250 1440,50 1440,150 L1440,300 L0,300 Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <div>
+        <h1>Win People. Train Believers. Unleash Disciples.</h1>
+        <p class="hero-sub">Join us this Sunday in Fleming Island and be part of a community changing lives through Jesus.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-white">Plan Your Visit</a>
+          <a href="#" class="btn btn-glass">Watch Latest</a>
+        </div>
+      </div>
+      <div class="hero-img-container">
+        <img class="hero-img" src="https://images.unsplash.com/photo-1510384742052-1abcb6282645?w=800&q=80" alt="Worship">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <div><strong>Sundays</strong><br><span>8:30, 10:00 &amp; 11:30 AM</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave wave-hero">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none">
+      <path d="M0,35 C240,70 480,0 720,35 C960,70 1200,0 1440,35 L1440,70 L0,70 Z" fill="var(--white)"/>
+    </svg>
+  </div>
+
+  <div class="service-bar">
+    <div class="service-inner">
+      <div class="service-item"><strong>Sundays</strong><span>8:30, 10:00 &amp; 11:30 AM</span></div>
+      <div class="service-item"><strong>Thursdays</strong><span>7:00 PM</span></div>
+      <div class="service-item"><strong>Location</strong><span>5900 US-17, Fleming Island, FL</span></div>
+      <div class="service-item"><strong>Online</strong><span>Live at 10:00 &amp; 11:30 AM</span></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="label">Latest Message</div>
+      <div class="msg-grid">
+        <div class="msg-video"><div class="play"></div></div>
+        <div class="msg-meta">
+          <div class="label">Current Series</div>
+          <h2 class="msg-title">Series Title Here</h2>
+          <p class="msg-speaker">Pastor Nathan Freeman &middot; April 6, 2026</p>
+          <p class="msg-desc">A brief description of this week's message and the truth that will challenge and encourage you.</p>
+          <a href="#" class="btn btn-brand" style="margin-top:1rem;align-self:flex-start;">Watch Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,35 C240,70 480,0 720,35 C960,70 1200,0 1440,35 L1440,70 L0,70 Z" fill="var(--off-white)"/></svg></div>
+
+  <section class="s-off">
+    <div class="container">
+      <div class="label">Your Next Step</div>
+      <div class="title">Get Connected</div>
+      <div class="card-row">
+        <div class="card-sm"><h3>Plan a Visit</h3><p>What to expect, where to park, kids check-in.</p></div>
+        <div class="card-sm"><h3>LifeGroups</h3><p>Real community in circles, not rows.</p></div>
+        <div class="card-sm"><h3>Serve</h3><p>Find your team and make a difference weekly.</p></div>
+        <div class="card-sm"><h3>Growth Track</h3><p>4 sessions to discover your purpose at RCC.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave" style="background:var(--off-white)"><svg viewBox="0 0 1440 70" preserveAspectRatio="none" style="transform:scaleX(-1)"><path d="M0,35 C240,70 480,0 720,35 C960,70 1200,0 1440,35 L1440,70 L0,70 Z" fill="var(--white)"/></svg></div>
+
+  <section>
+    <div class="container">
+      <div class="label">Ministries</div>
+      <div class="title">Find Your Place</div>
+      <div class="min-grid">
+        <div class="min-card">
+          <img src="https://images.unsplash.com/photo-1600288480699-0b0d8a456dd8?w=600&q=80" alt="Kids">
+          <div class="min-card-overlay"></div>
+          <div class="min-card-text"><h3>River Kids</h3><p>Birth through 5th grade</p></div>
+        </div>
+        <div class="min-card">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Students">
+          <div class="min-card-overlay"></div>
+          <div class="min-card-text"><h3>Students</h3><p>Middle &amp; high school</p></div>
+        </div>
+        <div class="min-card">
+          <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&q=80" alt="Groups">
+          <div class="min-card-overlay"></div>
+          <div class="min-card-text"><h3>LifeGroups</h3><p>Small group community</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s-off">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="label">Upcoming</div><div class="title">Events</div></div><a href="#" class="btn btn-brand" style="margin-bottom:0.5rem">All Events</a></div>
+      <div class="ev-list">
+        <div class="ev-row"><div class="ev-date"><div class="m">Apr</div><div class="d">13</div></div><div class="ev-info"><h4>Easter at RCC</h4><p>Special services at 8:30, 10:00 &amp; 11:30 AM</p></div><span class="ev-arrow">&rarr;</span></div>
+        <div class="ev-row"><div class="ev-date"><div class="m">Apr</div><div class="d">20</div></div><div class="ev-info"><h4>Growth Track — Session 1</h4><p>Discover your purpose &middot; After second service</p></div><span class="ev-arrow">&rarr;</span></div>
+        <div class="ev-row"><div class="ev-date"><div class="m">May</div><div class="d">04</div></div><div class="ev-info"><h4>LifeGroup Fair</h4><p>Browse open groups &middot; Meet leaders &middot; Sign up</p></div><span class="ev-arrow">&rarr;</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="label">Member Portal</div>
+      <div class="portal-wrap">
+        <div>
+          <h2>Your RCC Dashboard</h2>
+          <p>Sign in with Planning Center to manage giving, groups, volunteer schedule, and more.</p>
+          <a href="#" class="btn btn-brand">Sign In</a>
+        </div>
+        <div>
+          <div class="pf"><div><h4>Giving &amp; Statements</h4><p>View history, recurring gifts, tax receipts</p></div></div>
+          <div class="pf"><div><h4>Serve Schedule</h4><p>See shifts, swap, confirm availability</p></div></div>
+          <div class="pf"><div><h4>My LifeGroup</h4><p>Message group, prayer requests, meetups</p></div></div>
+          <div class="pf"><div><h4>Prayer Requests</h4><p>Submit needs and pray for your community</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,35 C240,70 480,0 720,35 C960,70 1200,0 1440,35 L1440,70 L0,70 Z" fill="var(--brand)"/></svg></div>
+  <section class="cta"><h2>You're Welcome Here</h2><p>No matter your story — you have a place at RCC.</p><a href="#" class="btn btn-white">Plan Your Visit</a></section>
+
+  <footer>
+    <div class="ft-grid">
+      <div><div class="ft-logo"><img src="../../rcc/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC"></div><p class="ft-addr">Win People &middot; Train Believers &middot; Unleash Disciples<br><br>5900 US-17<br>Fleming Island, FL 32003<br>(904) 458-4809</p></div>
+      <div><h4>Visit</h4><a href="#">What to Expect</a><a href="#">Service Times</a><a href="#">Our Team</a><a href="#">Beliefs</a><a href="#">Contact</a></div>
+      <div><h4>Connect</h4><a href="#">LifeGroups</a><a href="#">Serve</a><a href="#">Events</a><a href="#">Baptism</a><a href="#">Give</a></div>
+      <div><h4>Watch</h4><a href="#">Latest Message</a><a href="#">Livestream</a><a href="#">Podcast</a><a href="#">My Account</a></div>
+    </div>
+    <div class="ft-bottom"><span>&copy; 2026 River Christian Church</span><span>Facebook &middot; Instagram &middot; YouTube</span></div>
+  </footer>
+  <!-- OPTION SWITCHER -->
+  <style>
+    .switcher{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;font-family:'Inter',sans-serif}
+    .switcher-toggle{width:44px;height:44px;border-radius:50%;background:#fff;color:#095879;border:none;cursor:pointer;font-size:1rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;margin-left:auto;transition:transform 0.2s}
+    .switcher-toggle:hover{transform:scale(1.08)}
+    .switcher-menu{display:none;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:0.5rem;margin-bottom:0.5rem;box-shadow:0 8px 30px rgba(0,0,0,0.12);min-width:220px}
+    .switcher.open .switcher-menu{display:block}
+    .switcher-menu a{display:block;padding:0.5rem 0.75rem;color:#6b7280;text-decoration:none;font-size:0.8rem;font-weight:500;border-radius:6px;transition:all 0.15s}
+    .switcher-menu a:hover{background:#f3f4f6;color:#111}
+    .switcher-menu a.active{background:#095879;color:#fff;font-weight:600}
+    .switcher-menu a .num{display:inline-block;width:20px;font-weight:700;font-size:0.7rem;opacity:0.5}
+    .switcher-menu a.active .num{opacity:0.7}
+  </style>
+  <div class="switcher" id="switcher">
+    <div class="switcher-menu">
+      <a href="option-1-dark-cinematic.html"><span class="num">1</span> Dark Cinematic</a>
+      <a href="option-2-clean-minimal.html"><span class="num">2</span> Clean Minimal</a>
+      <a href="option-3-wave-forward.html" class="active"><span class="num">3</span> Wave-Forward</a>
+      <a href="option-4-split-hero.html"><span class="num">4</span> Split Hero</a>
+      <a href="option-5-dark-wave.html"><span class="num">5</span> Dark Wave</a>
+    </div>
+    <button class="switcher-toggle" onclick="document.getElementById('switcher').classList.toggle('open')">⇄</button>
+  </div>
+
+</body>
+</html>
