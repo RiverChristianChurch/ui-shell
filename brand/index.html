@@ -63,7 +63,7 @@
   <nav class="rcc-nav">
     <div class="rcc-nav-inner">
       <a href="../index.html" class="rcc-nav-logo">
-        <img src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC">
+        <img src="../assets/rcc-logo-short-light.png" alt="RCC">
       </a>
       <div class="rcc-nav-links">
         <a href="#voice">Voice</a>
@@ -120,23 +120,59 @@
       </table>
       <div class="g-two">
         <div>
-          <div class="g-logo-box"><img src="https://riverchristian.church/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC short lockup on light" style="max-height:84px;max-width:100%;"></div>
-          <p class="g-cap">Tier 2 short lockup on light (waves + RCC)</p>
+          <div class="g-logo-box on-dark"><img src="../assets/rcc-logo-full-light.png" alt="RCC full logo on dark" style="max-height:96px;max-width:100%;"></div>
+          <p class="g-cap">Tier 1 — full logo on dark</p>
         </div>
         <div>
-          <div class="g-logo-box on-dark"><img src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC logo on dark" style="max-height:84px;max-width:100%;"></div>
-          <p class="g-cap">Web light logo on dark</p>
+          <div class="g-logo-box"><img src="../assets/rcc-logo-full-dark.png" alt="RCC full logo on light" style="max-height:96px;max-width:100%;"></div>
+          <p class="g-cap">Tier 1 — full logo on light</p>
+        </div>
+        <div>
+          <div class="g-logo-box on-dark"><img src="../assets/rcc-logo-short-light.png" alt="RCC short lockup on dark" style="max-height:72px;max-width:100%;"></div>
+          <p class="g-cap">Tier 2 — short lockup on dark</p>
+        </div>
+        <div>
+          <div class="g-logo-box"><img src="../assets/rcc-logo-short-dark.png" alt="RCC short lockup on light" style="max-height:72px;max-width:100%;"></div>
+          <p class="g-cap">Tier 2 — short lockup on light</p>
         </div>
       </div>
-      <div class="g-note" style="border-left-color:var(--rcc-warn);">
-        <strong>⚠ Asset gap:</strong> the dark-on-light file the website hosts is the tier-2 short lockup, not the full logo — this guide can't currently show a true tier-1 full lockup for light backgrounds. Export the full lockup (light + dark, PNG + SVG) from the source AI files in <code>Dropbox/graphics/_BRAND</code> into this repo's <code>assets/</code> so the guide and the new site use versioned brand assets instead of hotlinking WordPress uploads.
-      </div>
+      <p class="g-cap" style="text-align:left;margin-top:0.75rem;">Source assets: <span style="font-family:monospace">assets/rcc-logo-{full,short}-{light,dark}.png</span> + <span style="font-family:monospace">rcc-icon-waves-{light,dark}.png</span> in this repo. Master AI files: <span style="font-family:monospace">Dropbox/graphics/_logos/rcc</span>.</p>
       <div class="g-note">
         <strong>Our name in words:</strong> first mention in external-facing copy is <strong>River Christian Church</strong>; after that, <strong>RCC</strong>. "River" — spoken and social captions only; never in lockups, headers, or print titles.
       </div>
       <div class="g-note">
         <strong>Logo fonts are logo-only.</strong> "RCC" is set in DIN Condensed Bold and the wordmark in Avenir. Neither is ever used for headlines or copy. Clear space: one wave-height on all sides; never stretch, recolor outside the palette, or set the logo on a busy photo area.
       </div>
+
+      <h3 style="font-size:0.85rem;font-weight:700;margin-top:3rem;">Ministry &amp; team marks · DECISION NEEDED</h3>
+      <p class="g-prose">Today 35+ ministries and teams carry independently designed logos. This system replaces them with <strong>two uniform lockup templates</strong> (master files: <span style="font-family:monospace">_MINISTRY_LOGO_EXTERNAL_TEMP.ai</span> / <span style="font-family:monospace">_MINISTRY_LOGO_INTERNAL_TEMP.ai</span> in <span style="font-family:monospace">_logos</span>). Model orgs run the same play: Life.Church consolidated its ministry and event brands in-line with the master brand; Elevation and Eleven22 use parent-anchored naming (eKidz, Eleven22 Students). The counter-model — North Point's fully distinct environment brands — requires a design staff we don't have.</p>
+
+      <div class="g-two" style="max-width:100%;">
+        <div>
+          <div class="g-logo-box on-dark" style="flex-direction:column;gap:0.75rem;">
+            <img src="../assets/rcc-icon-waves-light.png" alt="waves" style="height:34px;">
+            <div class="t-mont" style="font-weight:800;font-size:1.6rem;letter-spacing:0.14em;color:#fff;">MEN</div>
+          </div>
+          <p class="g-cap">External ministry mark — waves + ministry name (Montserrat ExtraBold)</p>
+        </div>
+        <div>
+          <div class="g-logo-box on-dark" style="gap:0.9rem;">
+            <img src="../assets/rcc-icon-waves-light.png" alt="waves" style="height:24px;">
+            <div class="t-mont" style="font-weight:700;font-size:1rem;letter-spacing:0.12em;color:#fff;">PRODUCTION <span style="color:var(--rcc-brand-soft);">TEAM</span></div>
+          </div>
+          <p class="g-cap">Internal team mark — compact lockup for serve teams</p>
+        </div>
+      </div>
+
+      <table class="g-table">
+        <tr><th>Rule</th><th>Standard</th></tr>
+        <tr><td>Who gets which</td><td>Public-facing ministries (Men, Women, Kids, Students, MOMs…) → external mark. Serve teams (Parking, Café, Production, KidCheck…) → internal mark.</td></tr>
+        <tr><td>Type &amp; color</td><td>Ministry name set in Montserrat from the template — never a custom typeface. Marks are monochrome (light/dark) within the core palette; no per-ministry colors or icons.</td></tr>
+        <tr><td>Names</td><td>Mark text comes from the controlled ministry taxonomy (web #1) — one spelling everywhere.</td></tr>
+        <tr><td>Licensed programs</td><td>Celebrate Recovery and GriefShare keep their required licensed marks.</td></tr>
+        <tr><td>Distinct marks</td><td>Named annual events (per the two-tier graphics rule) and — pending decision — student/kids environments (REACH, Five6, River Preschool). Everything else migrates to a template lockup.</td></tr>
+        <tr><td>Rollout</td><td>Legacy logos retire as each ministry's template ships; retired files move to <span style="font-family:monospace">_logos/archive</span>.</td></tr>
+      </table>
     </div>
   </section>
 
