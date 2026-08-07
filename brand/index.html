@@ -56,6 +56,7 @@
     .a-demo-body { background:var(--rcc-dark-card); padding:2rem; display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
     .a-stat { font-size:2.25rem; font-weight:800; letter-spacing:-0.03em; color:var(--rcc-accent); line-height:1; }
     .a-stat-label { font-size:0.72rem; color:var(--rcc-text-muted-dark); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+    .a-demo-white { background:#ffffff; color:#0f2437; padding:2rem; border-top:1px solid rgba(0,0,0,0.08); }
     @media(max-width:768px){ .g-two,.a-demo-body{grid-template-columns:1fr;} }
   </style>
 </head>
@@ -73,6 +74,7 @@
         <a href="#accent">Accent</a>
         <a href="#type">Type</a>
         <a href="#graphics">Graphics</a>
+        <a href="#seasonal">Seasonal</a>
         <a href="../beta/index.html" class="rcc-nav-btn-ghost">Site Mockups</a>
       </div>
     </div>
@@ -110,21 +112,33 @@
   <!-- LOGO -->
   <section id="logo" class="rcc-section rcc-s-dark g-section">
     <div class="rcc-container">
-      <p class="g-kicker">02 — Logo</p>
+      <p class="g-kicker">02 — Logo &amp; Name</p>
       <h2 class="g-title">Stable and unchanging</h2>
-      <p class="g-prose">The logo only represents RCC well when used <strong>consistently and correctly</strong>. Default to the <strong>full logo</strong> (waves + RCC + wordmark). The wave icon alone is allowed only <strong>inside our campus</strong> (wall art, ProPresenter) or in close proximity to the full logo on the same piece.</p>
+      <p class="g-prose">The logo only represents RCC well when used <strong>consistently and correctly</strong>. Three tiers, chosen by <strong>how much brand context the audience already has</strong> — not by convenience:</p>
+      <table class="g-table">
+        <tr><th>Tier</th><th>Lockup</th><th>Use when</th></tr>
+        <tr><td>1 — Full logo</td><td>Waves + RCC + RIVER CHRISTIAN CHURCH</td><td><strong>First-touch and external surfaces</strong>: invites, mailers, signage, sponsorships, press, letterhead, anything a person might see with zero prior context. The wordmark does the introducing.</td></tr>
+        <tr><td>2 — Short lockup</td><td>Waves + RCC</td><td><strong>Context-established surfaces</strong>: internal comms, campus screens and wall art, social posts on our own accounts, merch, website interior. The community knows us as "RCC" — this tier carries most day-to-day volume.</td></tr>
+        <tr><td>3 — Icon</td><td>Waves only</td><td>Favicons, avatars, watermarks, and campus decoration — only where tier 1 or 2 appears nearby or the platform shows our name (e.g. a social profile).</td></tr>
+      </table>
       <div class="g-two">
         <div>
-          <div class="g-logo-box"><img src="https://riverchristian.church/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC full logo" style="max-height:84px;max-width:100%;"></div>
-          <p class="g-cap">Full logo on light</p>
+          <div class="g-logo-box"><img src="https://riverchristian.church/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC short lockup on light" style="max-height:84px;max-width:100%;"></div>
+          <p class="g-cap">Tier 2 short lockup on light (waves + RCC)</p>
         </div>
         <div>
           <div class="g-logo-box on-dark"><img src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC logo on dark" style="max-height:84px;max-width:100%;"></div>
-          <p class="g-cap">Full logo on dark</p>
+          <p class="g-cap">Web light logo on dark</p>
         </div>
       </div>
+      <div class="g-note" style="border-left-color:var(--rcc-warn);">
+        <strong>⚠ Asset gap:</strong> the dark-on-light file the website hosts is the tier-2 short lockup, not the full logo — this guide can't currently show a true tier-1 full lockup for light backgrounds. Export the full lockup (light + dark, PNG + SVG) from the source AI files in <code>Dropbox/graphics/_BRAND</code> into this repo's <code>assets/</code> so the guide and the new site use versioned brand assets instead of hotlinking WordPress uploads.
+      </div>
       <div class="g-note">
-        <strong>Logo fonts are logo-only.</strong> "RCC" is set in DIN Condensed Bold and the wordmark in Avenir. Neither is ever used for headlines or copy — brand typography is the next section. Clear space: keep one wave-height of padding on all sides; never stretch, recolor outside the palette, or set the logo on a busy photo area.
+        <strong>Our name in words</strong> (we're known as "RCC" ~75% / "River" ~25% in the community): first mention in external-facing copy is <strong>River Christian Church</strong>; after that, <strong>RCC</strong>. "River" is community vernacular — fine spoken and in social captions, never in lockups, headers, or print titles. Internally, RCC is the default.
+      </div>
+      <div class="g-note">
+        <strong>Logo fonts are logo-only.</strong> "RCC" is set in DIN Condensed Bold and the wordmark in Avenir. Neither is ever used for headlines or copy. Clear space: one wave-height on all sides; never stretch, recolor outside the palette, or set the logo on a busy photo area.
       </div>
     </div>
   </section>
@@ -160,6 +174,7 @@
         <tr><td><span class="g-dot" style="background:#f2eee4"></span>Walls</td><td>#f2eee4</td><td>4 4 10 0</td><td>SW 7566</td><td>Facility paint</td></tr>
       </table>
       <div class="g-note"><strong>Why paint codes live in a brand guide:</strong> the room people sit in every week is a brand surface. Screens, print, and walls should agree.</div>
+      <div class="g-note"><strong>Color modes — the website is dark-first, deliberately, with no light-mode toggle.</strong> Dark cinematic <em>is</em> the brand expression online; light relief comes from light <em>sections</em> inside pages (the ministries band), not from a second theme. A toggle would double design + QA on every component for a marketing site nobody uses eight hours a day. Print inverts the world: white/gray grounds, navy <span style="font-family:monospace">#0f2437</span> text, teal for headings and fills. The portal launches dark; revisit only if real Sunday-morning usage complains.</div>
     </div>
   </section>
 
@@ -172,10 +187,10 @@
       <p class="g-prose" style="margin-top:0.75rem;">Tap a candidate — everything below repaints live:</p>
 
       <div class="a-picker" id="picker">
-        <button class="a-chip active" data-accent="#f0763b" data-tint="rgba(240,118,59,0.12)"><span class="a-dot" style="background:#f0763b"></span><span>Ember <small>#f0763b — recommended</small></span></button>
-        <button class="a-chip" data-accent="#eed35c" data-tint="rgba(238,211,92,0.12)"><span class="a-dot" style="background:#eed35c"></span><span>River Gold <small>#eed35c — current worship palette</small></span></button>
-        <button class="a-chip" data-accent="#f2695c" data-tint="rgba(242,105,92,0.12)"><span class="a-dot" style="background:#f2695c"></span><span>Coral <small>#f2695c — warm &amp; relational</small></span></button>
-        <button class="a-chip" data-accent="#c4f751" data-tint="rgba(196,247,81,0.12)"><span class="a-dot" style="background:#c4f751"></span><span>Electric Lime <small>#c4f751 — young &amp; edgy</small></span></button>
+        <button class="a-chip active" data-accent="#f0763b" data-ink="#a34c15" data-tint="rgba(240,118,59,0.12)"><span class="a-dot" style="background:#f0763b"></span><span>Ember <small>#f0763b — recommended</small></span></button>
+        <button class="a-chip" data-accent="#eed35c" data-ink="#7a6410" data-tint="rgba(238,211,92,0.12)"><span class="a-dot" style="background:#eed35c"></span><span>River Gold <small>#eed35c — current worship palette</small></span></button>
+        <button class="a-chip" data-accent="#f2695c" data-ink="#ab2f24" data-tint="rgba(242,105,92,0.12)"><span class="a-dot" style="background:#f2695c"></span><span>Coral <small>#f2695c — warm &amp; relational</small></span></button>
+        <button class="a-chip" data-accent="#c4f751" data-ink="#55700f" data-tint="rgba(196,247,81,0.12)"><span class="a-dot" style="background:#c4f751"></span><span>Electric Lime <small>#c4f751 — young &amp; edgy</small></span></button>
       </div>
 
       <div class="a-demo">
@@ -204,7 +219,17 @@
             </div>
           </div>
         </div>
+        <div class="a-demo-white">
+          <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#7b7b7e;margin:0 0 1rem;">Print / white background — same accent, ink rules</p>
+          <div style="display:flex;gap:2rem;flex-wrap:wrap;align-items:center;">
+            <div style="background:var(--rcc-accent);color:#0f2437;font-weight:800;padding:0.9rem 1.4rem;border-radius:8px;font-size:1.1rem;letter-spacing:-0.01em;">Fill + navy text ✓</div>
+            <div><div style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;color:var(--rcc-accent-ink);line-height:1;">Oct 17</div><div style="font-size:0.7rem;color:#7b7b7e;text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">Accent text = ink variant ✓</div></div>
+            <div><div style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;color:var(--rcc-accent);line-height:1;">Oct 17</div><div style="font-size:0.7rem;color:#7b7b7e;text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">Raw accent text ✗ fails contrast</div></div>
+          </div>
+        </div>
       </div>
+
+      <p class="g-prose" style="margin-top:1.5rem;"><strong>On white (print, light sections):</strong> full-strength accent is for <strong>fills, shapes, and rules only</strong> — with navy or white text on top. Accent-colored <em>text</em> on white must use the darker <strong>ink variant</strong> (AA ≥ 4.5:1): Ember ink <span style="font-family:monospace">#a34c15</span> (5.8:1) · Gold ink <span style="font-family:monospace">#7a6410</span> (5.8:1 — note it reads <em>olive</em>, gold's print weakness) · Coral ink <span style="font-family:monospace">#ab2f24</span> (6.6:1) · Lime ink <span style="font-family:monospace">#55700f</span> (5.7:1). Body text never takes accent — navy always.</p>
 
       <table class="g-table">
         <tr><th>Candidate</th><th>The case for</th><th>The case against</th></tr>
@@ -213,7 +238,7 @@
         <tr><td><span class="g-dot" style="background:#f2695c"></span>Coral</td><td>Warm and people-centered; strong on dark.</td><td>Sits close to red — competes with alert/error meaning in the portal UI.</td></tr>
         <tr><td><span class="g-dot" style="background:#c4f751"></span>Electric Lime</td><td>Most distinctive; youngest feel.</td><td>Fights the teal family; hardest to use in print; trend-cycle risk.</td></tr>
       </table>
-      <div class="g-note"><strong>Recommendation: Ember.</strong> It gives the "orange on black" energy inside the teal system, keeps River Gold available in print for continuity during transition, and leaves red clean for portal status colors. Decide with Heather + Ty at the graphics vision-cast, then it gets locked into the tokens and tagged.</div>
+      <div class="g-note"><strong>Recommendation: Ember.</strong> It gives the "orange on black" energy inside the teal system, leaves red clean for portal status colors, and — decisive for print — <strong>darkens gracefully on white</strong> (its ink variant is still recognizably orange, where gold's ink turns olive). River Gold stays available in print during transition. Decide with Heather + Ty at the graphics vision-cast, then it gets locked into the tokens and tagged.</div>
     </div>
   </section>
 
@@ -271,10 +296,37 @@
     </div>
   </section>
 
+  <!-- SEASONAL LAYER -->
+  <section id="seasonal" class="rcc-section rcc-s-dark g-section">
+    <div class="rcc-container">
+      <p class="g-kicker">07 — Seasonal layer</p>
+      <h2 class="g-title">Stable core, seasonal skin</h2>
+      <p class="g-prose">Sermon series and annual slide sets get room to breathe — the Elevation model: a <strong>stable core identity</strong> (logo, teal, Montserrat, voice) with <strong>seasonal expressions layered on top</strong> that expire when the season ends. A seasonal set may bring its own palette and one display font, but it <strong>never</strong> changes the logo rules, never drops below contrast standards, and never leaks into evergreen surfaces (ministry templates, website chrome, print identity).</p>
+
+      <h3 style="font-size:0.85rem;font-weight:700;margin-top:2rem;">Worked example: the 2025 slide templates</h3>
+      <p class="g-prose">The 2025 slide set (spruce <span style="font-family:monospace">#183420</span>, slate <span style="font-family:monospace">#3d5f6d</span> / <span style="font-family:monospace">#607c87</span>, sage <span style="font-family:monospace">#90a99c</span> / <span style="font-family:monospace">#dae0c9</span>; Thunder display + Montserrat) is a good seasonal layer — muted, editorial, distinct. It is <strong>not brand core</strong>: the sage/spruce family doesn't intersect the teal ramp, and folding it into the core palette would dissolve the one-teal identity this guide just re-established.</p>
+      <div class="g-grid" style="max-width:760px;">
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#183420"></div><div class="g-swatch-info"><strong>Spruce</strong><span>#183420</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#3d5f6d"></div><div class="g-swatch-info"><strong>Slate</strong><span>#3d5f6d</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#607c87"></div><div class="g-swatch-info"><strong>Slate Light</strong><span>#607c87</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#90a99c"></div><div class="g-swatch-info"><strong>Sage</strong><span>#90a99c</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#dae0c9"></div><div class="g-swatch-info"><strong>Pale Sage</strong><span>#dae0c9</span></div></div>
+      </div>
+      <div class="g-note" style="border-left-color:var(--rcc-warn);">
+        <strong>⚠ Conflicts to resolve from the 2025 sheet:</strong> (1) Bank Gothic as all-caps body text violates the standing "never all caps for copy" rule — caps belong only in short letterspaced labels; body stays mixed-case Montserrat/Inter. (2) <strong>Bank Gothic is a commercial font</strong> — license status unverified; seasonal display fonts must be license-cleared before use (Thunder's free-tier terms too). (3) The white swatch on the sheet is labeled <span style="font-family:monospace">#DAE0C9</span> — a copy/paste typo, and a good argument for this page being the single source of truth instead of hand-maintained PSDs. (4) Confirm spruce <span style="font-family:monospace">#183420</span> is intentional — it's a dark <em>green</em> (fits the sage family) though it reads navy at a glance.
+      </div>
+      <table class="g-table">
+        <tr><th>Seasonal sets may</th><th>Seasonal sets may not</th></tr>
+        <tr><td>Bring their own palette + one licensed display font; restyle slide backgrounds, series art, sermon-notes headers for the season</td><td>Alter the logo, replace core type for body copy, drop below AA contrast, use all-caps body, or appear on evergreen surfaces (ministry templates, website chrome, stationery)</td></tr>
+        <tr><td>Live in a dated folder/template set with a defined end date</td><td>Outlive the season — expired sets get archived, not reused ad hoc</td></tr>
+      </table>
+    </div>
+  </section>
+
   <!-- REFERENCES -->
   <section class="rcc-section rcc-s-dark">
     <div class="rcc-container">
-      <p class="g-kicker">07 — Modeled on</p>
+      <p class="g-kicker">08 — Modeled on</p>
       <table class="g-table">
         <tr><th>Reference</th><th>What we took</th></tr>
         <tr><td><a href="https://brand.life.church" style="color:var(--rcc-brand-soft)">brand.life.church</a></td><td>Brand guide as a living website; positioning → structure → visual sections</td></tr>
@@ -312,6 +364,7 @@
         chip.classList.add('active');
         document.documentElement.style.setProperty('--rcc-accent', chip.dataset.accent);
         document.documentElement.style.setProperty('--rcc-accent-tint', chip.dataset.tint);
+        document.documentElement.style.setProperty('--rcc-accent-ink', chip.dataset.ink);
       });
     });
   </script>

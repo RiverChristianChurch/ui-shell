@@ -38,6 +38,12 @@
      Never replaces teal for primary CTAs. */
   --rcc-accent: #f0763b;
   --rcc-accent-tint: rgba(240, 118, 59, 0.12);
+  /* Accent INK — the on-light/print counterpart. Accent-colored text on
+     white MUST use the ink value (AA ≥ 4.5:1); full accent on white is
+     fills/shapes only. Candidate inks: ember #a34c15 (5.8:1) ·
+     river-gold #7a6410 (5.8:1, reads olive — gold's print weakness) ·
+     coral #ab2f24 (6.6:1) · lime #55700f (5.7:1). */
+  --rcc-accent-ink: #a34c15;
 
   /* Status (portal) */
   --rcc-ok: #34d399;
