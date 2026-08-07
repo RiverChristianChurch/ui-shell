@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCC Beta — Member Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/css/rcc-tokens.css">
+  <link rel="stylesheet" href="../src/css/rcc-components.css">
+  <link rel="stylesheet" href="beta-nav.css">
+</head>
+<body class="rcc-body">
+
+  <!-- NAV — signed-in state, same shell -->
+  <nav class="rcc-nav">
+    <div class="rcc-nav-inner">
+      <a href="index.html" class="rcc-nav-logo">
+        <img src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC">
+      </a>
+      <div class="rcc-nav-links">
+        <a href="#" class="is-active">Dashboard</a>
+        <a href="#">Serve</a>
+        <a href="#">Giving</a>
+        <a href="#">My Group</a>
+        <a href="#">Events</a>
+        <a href="index.html">&larr; Public Site</a>
+        <span class="rcc-nav-user"><span class="rcc-avatar">JD</span><span>Jason</span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEAD -->
+  <header class="rcc-page-head">
+    <div class="rcc-container">
+      <h1>Welcome back, Jason</h1>
+      <p>
+        <span class="rcc-pill rcc-pill--brand">Volunteer &middot; Tech Team</span>
+        &nbsp;<span class="rcc-pill rcc-pill--brand">LifeGroup Leader</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- DASHBOARD -->
+  <section class="rcc-section rcc-s-dark" style="padding-top:1rem;">
+    <div class="rcc-container">
+      <div class="rcc-dash-grid">
+
+        <div class="rcc-dash-card">
+          <h3>Serve Schedule</h3>
+          <div class="rcc-dash-big">Sun, Aug 17 &middot; Tech Team</div>
+          <p>Camera 2 &middot; 10:00 AM service &middot; Arrive 9:15</p>
+          <span class="rcc-pill rcc-pill--warn">Awaiting confirmation</span>
+          <div class="rcc-dash-actions">
+            <a href="#" class="rcc-btn rcc-btn--brand rcc-btn--sm">Confirm</a>
+            <a href="#" class="rcc-btn rcc-btn--outline rcc-btn--sm">Decline</a>
+          </div>
+        </div>
+
+        <div class="rcc-dash-card">
+          <h3>Volunteer Onboarding</h3>
+          <div class="rcc-dash-big">3 of 5 complete</div>
+          <div class="rcc-progress"><span style="width:60%"></span></div>
+          <ul class="rcc-checklist">
+            <li class="is-done"><span class="rcc-check">✓</span> Declaration Form</li>
+            <li class="is-done"><span class="rcc-check">✓</span> Background Check</li>
+            <li class="is-done"><span class="rcc-check">✓</span> Child Safety Training</li>
+            <li><span class="rcc-check"></span> Covenant &amp; References</li>
+            <li><span class="rcc-check"></span> Welcome to RCC Class</li>
+          </ul>
+        </div>
+
+        <div class="rcc-dash-card">
+          <h3>Giving</h3>
+          <div class="rcc-dash-big">$250 &middot; Aug 1</div>
+          <p>Recurring monthly gift &middot; General Fund</p>
+          <span class="rcc-pill rcc-pill--ok">Active</span>
+          <div class="rcc-dash-actions">
+            <a href="#" class="rcc-btn rcc-btn--outline rcc-btn--sm">History</a>
+            <a href="#" class="rcc-btn rcc-btn--outline rcc-btn--sm">Statements</a>
+          </div>
+        </div>
+
+        <div class="rcc-dash-card">
+          <h3>My LifeGroup</h3>
+          <div class="rcc-dash-big">Doss LifeGroup</div>
+          <p>Next meeting: Thu, Aug 14 &middot; 7:00 PM &middot; Doss home</p>
+          <div class="rcc-dash-actions">
+            <a href="#" class="rcc-btn rcc-btn--brand rcc-btn--sm">Message Group</a>
+          </div>
+        </div>
+
+        <div class="rcc-dash-card">
+          <h3>My Registrations</h3>
+          <div class="rcc-dash-big">Uncommon 2026</div>
+          <p>Men's conference &middot; Registered Jul 12 &middot; Paid</p>
+          <span class="rcc-pill rcc-pill--ok">Confirmed</span>
+          <div class="rcc-dash-actions">
+            <a href="#" class="rcc-btn rcc-btn--outline rcc-btn--sm">All Events</a>
+          </div>
+        </div>
+
+        <div class="rcc-dash-card">
+          <h3>Prayer</h3>
+          <p>Submit a prayer request — it goes straight to the prayer team.</p>
+          <div class="rcc-field">
+            <textarea class="rcc-textarea" placeholder="How can we pray for you?"></textarea>
+          </div>
+          <div class="rcc-dash-actions">
+            <a href="#" class="rcc-btn rcc-btn--brand rcc-btn--sm">Submit</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Leader strip -->
+      <div style="margin-top:2.5rem;">
+        <div class="rcc-section-label">Leader Tools</div>
+        <div class="rcc-portal-features" style="margin-top:1rem;">
+          <div class="rcc-portal-feat">
+            <div class="rcc-portal-feat-icon">📋</div>
+            <div><h4>Team Roster — Tech Team</h4><p>8 volunteers &middot; 2 pending onboarding &middot; view requirements matrix</p></div>
+          </div>
+          <div class="rcc-portal-feat">
+            <div class="rcc-portal-feat-icon">🧭</div>
+            <div><h4>LifeGroup Roster</h4><p>12 members &middot; attendance &middot; prayer requests shared with you</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (slim) -->
+  <footer class="rcc-footer" style="padding-top:2rem;">
+    <div class="rcc-footer-bottom" style="border-top:none;">
+      <span>&copy; 2026 River Christian Church</span>
+      <span>Signed in with Planning Center</span>
+    </div>
+  </footer>
+
+  <!-- BETA SWITCHER -->
+  <div class="beta-switcher" id="switcher">
+    <div class="beta-menu">
+      <a href="index.html">Home (public)</a>
+      <a href="portal.html" class="active">Portal (signed in)</a>
+      <a href="components.html">Components</a>
+      <a href="../index.html">&larr; All options</a>
+    </div>
+    <button class="beta-toggle" onclick="document.getElementById('switcher').classList.toggle('open')">β</button>
+  </div>
+
+</body>
+</html>

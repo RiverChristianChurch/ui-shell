@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCC Beta — Components</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/css/rcc-tokens.css">
+  <link rel="stylesheet" href="../src/css/rcc-components.css">
+  <link rel="stylesheet" href="beta-nav.css">
+  <style>
+    .demo-section { border-bottom: 1px solid var(--rcc-dark-border); }
+    .demo-h { font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rcc-brand-light); margin:0 0 1.25rem; }
+    .demo-row { display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem; }
+    .demo-code { font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:0.7rem; color:var(--rcc-text-muted-dark); background:rgba(255,255,255,0.04); padding:2px 8px; border-radius:4px; }
+    .swatches { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:0.75rem; }
+    .swatch { border-radius:8px; overflow:hidden; border:1px solid var(--rcc-dark-border); }
+    .swatch-color { height:64px; }
+    .swatch-info { padding:0.6rem 0.75rem; background:var(--rcc-dark-card); font-size:0.7rem; }
+    .swatch-info strong { display:block; font-size:0.72rem; }
+    .swatch-info span { color:var(--rcc-text-muted-dark); font-family:ui-monospace,Menlo,monospace; font-size:0.65rem; }
+  </style>
+</head>
+<body class="rcc-body">
+
+  <header class="rcc-page-head">
+    <div class="rcc-container">
+      <h1>RCC UI Shell — Components</h1>
+      <p>Beta 0.1 &middot; Option 1 "Dark Cinematic" + teal revision &middot; one shell for public + portal views</p>
+    </div>
+  </header>
+
+  <!-- TOKENS -->
+  <section class="rcc-section rcc-s-dark demo-section" style="padding-top:2rem;">
+    <div class="rcc-container">
+      <h2 class="demo-h">Color Tokens</h2>
+      <div class="swatches">
+        <div class="swatch"><div class="swatch-color" style="background:#095879"></div><div class="swatch-info"><strong>Brand</strong><span>--rcc-brand #095879</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#0b7aab"></div><div class="swatch-info"><strong>Brand Light</strong><span>--rcc-brand-light</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#063d54"></div><div class="swatch-info"><strong>Brand Dark</strong><span>--rcc-brand-dark</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#052e40"></div><div class="swatch-info"><strong>Brand Deep</strong><span>--rcc-brand-deep</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#6cc4ea"></div><div class="swatch-info"><strong>Brand Soft</strong><span>--rcc-brand-soft</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#0c0c0e"></div><div class="swatch-info"><strong>Dark</strong><span>--rcc-dark</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#16171a"></div><div class="swatch-info"><strong>Dark Card</strong><span>--rcc-dark-card</span></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#f4f5f7"></div><div class="swatch-info"><strong>Off White</strong><span>--rcc-off-white</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section class="rcc-section rcc-s-dark demo-section">
+    <div class="rcc-container">
+      <h2 class="demo-h">Typography — Inter only</h2>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div style="font-size:clamp(2.5rem,5.5vw,4.25rem);font-weight:800;letter-spacing:-0.03em;line-height:1.05;">Hero Headline <span style="color:var(--rcc-brand-light)">Accent</span></div>
+        <div class="rcc-section-title" style="margin:0;">Section Title</div>
+        <div class="rcc-section-label" style="margin:0;">Section Label / Eyebrow</div>
+        <p class="rcc-section-desc">Body copy — muted, 0.95rem, relaxed line height for readability on dark backgrounds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS + PILLS -->
+  <section class="rcc-section rcc-s-dark demo-section">
+    <div class="rcc-container">
+      <h2 class="demo-h">Buttons</h2>
+      <div class="demo-row">
+        <a href="#" class="rcc-btn rcc-btn--brand">Brand</a>
+        <a href="#" class="rcc-btn rcc-btn--outline">Outline</a>
+        <a href="#" class="rcc-btn rcc-btn--white">White</a>
+        <a href="#" class="rcc-btn rcc-btn--brand rcc-btn--sm">Small</a>
+        <a href="#" class="rcc-nav-btn-ghost" style="text-decoration:none;">Nav Ghost</a>
+      </div>
+      <div class="demo-row"><span class="demo-code">.rcc-btn .rcc-btn--brand|--outline|--white|--sm</span></div>
+      <h2 class="demo-h" style="margin-top:2rem;">Status Pills</h2>
+      <div class="demo-row">
+        <span class="rcc-pill">Default</span>
+        <span class="rcc-pill rcc-pill--ok">Confirmed</span>
+        <span class="rcc-pill rcc-pill--warn">Awaiting</span>
+        <span class="rcc-pill rcc-pill--pending">Pending</span>
+        <span class="rcc-pill rcc-pill--brand">Volunteer &middot; Tech Team</span>
+      </div>
+      <div class="demo-row"><span class="demo-code">.rcc-pill .rcc-pill--ok|--warn|--pending|--brand</span></div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section class="rcc-section rcc-s-dark demo-section">
+    <div class="rcc-container">
+      <h2 class="demo-h">Dashboard Card (portal)</h2>
+      <div class="rcc-dash-grid" style="margin-top:0;">
+        <div class="rcc-dash-card">
+          <h3>Serve Schedule</h3>
+          <div class="rcc-dash-big">Sun, Aug 17 &middot; Tech Team</div>
+          <p>Camera 2 &middot; 10:00 AM service</p>
+          <span class="rcc-pill rcc-pill--warn">Awaiting confirmation</span>
+          <div class="rcc-dash-actions">
+            <a href="#" class="rcc-btn rcc-btn--brand rcc-btn--sm">Confirm</a>
+            <a href="#" class="rcc-btn rcc-btn--outline rcc-btn--sm">Decline</a>
+          </div>
+        </div>
+        <div class="rcc-dash-card">
+          <h3>Progress + Checklist</h3>
+          <div class="rcc-progress"><span style="width:60%"></span></div>
+          <ul class="rcc-checklist">
+            <li class="is-done"><span class="rcc-check">✓</span> Completed step</li>
+            <li><span class="rcc-check"></span> Remaining step</li>
+          </ul>
+        </div>
+        <div class="rcc-dash-card">
+          <h3>Feature Row</h3>
+          <div class="rcc-portal-feat" style="background:transparent;padding:0.5rem 0;border:none;">
+            <div class="rcc-portal-feat-icon">📅</div>
+            <div><h4>Portal Feature</h4><p>Icon + title + supporting line</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="demo-row" style="margin-top:1rem;"><span class="demo-code">.rcc-dash-grid .rcc-dash-card .rcc-progress .rcc-checklist .rcc-portal-feat</span></div>
+    </div>
+  </section>
+
+  <!-- EVENT ROWS + FORMS -->
+  <section class="rcc-section rcc-s-dark demo-section">
+    <div class="rcc-container">
+      <h2 class="demo-h">Event Row</h2>
+      <div class="rcc-event-list" style="margin-top:0;max-width:640px;">
+        <div class="rcc-event-row">
+          <div class="rcc-event-date"><div class="rcc-month">Aug</div><div class="rcc-day">23</div></div>
+          <div class="rcc-event-detail"><h4>Worship Night</h4><p>An evening of worship and prayer &middot; 6:30 PM</p></div>
+          <span class="rcc-event-arrow">&rarr;</span>
+        </div>
+      </div>
+      <h2 class="demo-h" style="margin-top:2.5rem;">Form Fields</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:760px;">
+        <div class="rcc-field"><label>Text Input</label><input class="rcc-input" placeholder="Your name"></div>
+        <div class="rcc-field"><label>Select</label><select class="rcc-select"><option>Men's Ministry</option><option>Women's Ministry</option></select></div>
+        <div class="rcc-field"><label>Textarea</label><textarea class="rcc-textarea" placeholder="How can we pray for you?"></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVES -->
+  <section class="rcc-section rcc-s-dark" style="padding-bottom:0;">
+    <div class="rcc-container"><h2 class="demo-h">Wave Dividers — teal revision fills</h2></div>
+  </section>
+  <div class="rcc-wave rcc-wave-fill-teal" style="background:var(--rcc-dark);">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/></svg>
+  </div>
+  <section class="rcc-section rcc-s-teal" style="padding:2.5rem 2rem;">
+    <div class="rcc-container">
+      <div class="rcc-section-label">Deep Teal Section</div>
+      <p class="rcc-section-desc">The 2026-04-10 office feedback: teal carried into the lower page via wave fills (<span class="demo-code">.rcc-wave-fill-teal</span>) and the <span class="demo-code">.rcc-s-teal</span> section gradient.</p>
+    </div>
+  </section>
+  <div class="rcc-wave rcc-wave--flip rcc-wave-fill-dark" style="background:var(--rcc-brand-deep);">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/></svg>
+  </div>
+
+  <footer class="rcc-footer" style="padding-top:2rem;">
+    <div class="rcc-footer-bottom" style="border-top:none;">
+      <span>&copy; 2026 River Christian Church — UI Shell Beta</span>
+      <span><a href="../index.html" style="display:inline;">All options</a></span>
+    </div>
+  </footer>
+
+  <!-- BETA SWITCHER -->
+  <div class="beta-switcher" id="switcher">
+    <div class="beta-menu">
+      <a href="index.html">Home (public)</a>
+      <a href="portal.html">Portal (signed in)</a>
+      <a href="components.html" class="active">Components</a>
+      <a href="../index.html">&larr; All options</a>
+    </div>
+    <button class="beta-toggle" onclick="document.getElementById('switcher').classList.toggle('open')">β</button>
+  </div>
+
+</body>
+</html>

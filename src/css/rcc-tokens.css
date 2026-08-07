@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════════════════════════
+   RCC UI SHELL — DESIGN TOKENS
+   Source of truth for color, type, shape across all RCC web
+   properties. Direction: Option 1 "Dark Cinematic" + the
+   2026-04-10 office feedback (more teal in the lower page).
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  /* Brand — RCC teal ramp */
+  --rcc-brand: #095879;
+  --rcc-brand-light: #0b7aab;
+  --rcc-brand-dark: #063d54;
+  --rcc-brand-deep: #052e40;              /* deep-teal section bg (teal revision) */
+  --rcc-brand-soft: #6cc4ea;              /* labels/accents on teal backgrounds */
+  --rcc-brand-tint: rgba(9, 88, 121, 0.12);
+  --rcc-brand-glow: rgba(11, 122, 171, 0.22);
+
+  /* Neutrals */
+  --rcc-white: #ffffff;
+  --rcc-off-white: #f4f5f7;
+  --rcc-gray-100: #e5e7eb;
+  --rcc-gray-400: #9ca3af;
+  --rcc-gray-600: #6b7280;
+  --rcc-ink: #1a1a1a;
+  --rcc-dark: #0c0c0e;
+  --rcc-dark-card: #16171a;
+  --rcc-dark-border: rgba(255, 255, 255, 0.06);
+
+  /* Text */
+  --rcc-text-on-dark: rgba(255, 255, 255, 0.85);
+  --rcc-text-muted-dark: rgba(255, 255, 255, 0.45);
+  --rcc-text-muted-light: #6b7280;
+
+  /* Status (portal) */
+  --rcc-ok: #34d399;
+  --rcc-warn: #fbbf24;
+  --rcc-pending: #9ca3af;
+
+  /* Type — single family */
+  --rcc-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Shape & motion */
+  --rcc-radius: 6px;
+  --rcc-radius-lg: 10px;
+  --rcc-ease: 0.25s ease;
+
+  /* Layout */
+  --rcc-container: 1280px;
+  --rcc-nav-h: 68px;
+}

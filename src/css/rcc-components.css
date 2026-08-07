@@ -1,0 +1,373 @@
+/* ═══════════════════════════════════════════════════════════
+   RCC UI SHELL — COMPONENT CSS  (requires rcc-tokens.css)
+   One shell for the whole site: public pages AND auth'd
+   portal views share these components. Classes are prefixed
+   `rcc-` so they coexist with Tailwind utilities in apps.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Base ─── */
+.rcc-body {
+  font-family: var(--rcc-font);
+  background: var(--rcc-dark);
+  color: var(--rcc-text-on-dark);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  margin: 0;
+}
+.rcc-container { max-width: var(--rcc-container); margin: 0 auto; }
+
+/* ─── Nav shell ─── */
+.rcc-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  backdrop-filter: blur(24px);
+  background: rgba(12, 12, 14, 0.7);
+  border-bottom: 1px solid var(--rcc-dark-border);
+}
+.rcc-nav-inner {
+  max-width: var(--rcc-container); margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--rcc-nav-h);
+}
+.rcc-nav-logo img { height: 36px; display: block; }
+.rcc-nav-links { display: flex; align-items: center; gap: 2rem; }
+.rcc-nav-links a {
+  color: var(--rcc-text-muted-dark); text-decoration: none;
+  font-size: 0.825rem; font-weight: 500; letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.rcc-nav-links a:hover { color: var(--rcc-white); }
+.rcc-nav-links a.is-active { color: var(--rcc-white); }
+.rcc-nav-btn {
+  background: var(--rcc-brand); color: var(--rcc-white);
+  padding: 9px 22px; border-radius: var(--rcc-radius); font-weight: 600;
+  font-size: 0.825rem; letter-spacing: 0.01em; transition: background 0.2s;
+}
+.rcc-nav-btn:hover { background: var(--rcc-brand-light); color: var(--rcc-white); }
+.rcc-nav-btn-ghost {
+  background: transparent; border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--rcc-white); padding: 8px 20px; border-radius: var(--rcc-radius);
+  font-weight: 500; font-size: 0.825rem;
+}
+.rcc-nav-btn-ghost:hover { border-color: var(--rcc-brand-light); color: var(--rcc-brand-soft); }
+
+/* Signed-in nav identity */
+.rcc-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--rcc-brand); color: var(--rcc-white);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em;
+}
+.rcc-nav-user { display: flex; align-items: center; gap: 0.6rem; color: var(--rcc-text-on-dark); }
+.rcc-nav-user span { font-size: 0.825rem; font-weight: 600; }
+
+/* ─── Buttons ─── */
+.rcc-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: var(--rcc-radius); font-weight: 600;
+  font-size: 0.875rem; text-decoration: none;
+  transition: all var(--rcc-ease); border: none; cursor: pointer;
+  font-family: var(--rcc-font);
+}
+.rcc-btn--brand { background: var(--rcc-brand); color: var(--rcc-white); }
+.rcc-btn--brand:hover { background: var(--rcc-brand-light); transform: translateY(-1px); }
+.rcc-btn--outline { background: transparent; color: var(--rcc-white); border: 1px solid rgba(255, 255, 255, 0.2); }
+.rcc-btn--outline:hover { border-color: var(--rcc-white); }
+.rcc-btn--white { background: var(--rcc-white); color: var(--rcc-brand); }
+.rcc-btn--white:hover { opacity: 0.9; transform: translateY(-1px); }
+.rcc-btn--sm { padding: 8px 18px; font-size: 0.8rem; }
+
+/* ─── Hero ─── */
+.rcc-hero {
+  margin-top: var(--rcc-nav-h); min-height: 92vh; display: flex;
+  align-items: center; position: relative; overflow: hidden;
+}
+.rcc-hero-bg { position: absolute; inset: 0; background-position: center; background-size: cover; }
+.rcc-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(12, 12, 14, 0.5) 0%, rgba(12, 12, 14, 0.3) 40%,
+    rgba(12, 12, 14, 0.85) 85%, rgba(12, 12, 14, 1) 100%);
+}
+.rcc-hero-content {
+  position: relative; z-index: 2; max-width: var(--rcc-container);
+  margin: 0 auto; padding: 0 2rem; width: 100%;
+}
+.rcc-hero h1 {
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1.05; max-width: 700px;
+  margin: 0 0 1.25rem;
+}
+.rcc-hero h1 span { color: var(--rcc-brand-light); }
+.rcc-hero-sub {
+  font-size: 1.05rem; color: var(--rcc-text-muted-dark); max-width: 520px;
+  line-height: 1.65; margin: 0 0 2.5rem; font-weight: 400;
+}
+.rcc-hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.rcc-hero-meta {
+  position: absolute; bottom: 3rem; left: 2rem; right: 2rem;
+  max-width: var(--rcc-container); margin: 0 auto; display: flex; gap: 3rem; z-index: 2;
+}
+.rcc-hero-meta-item {
+  font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--rcc-text-muted-dark);
+}
+.rcc-hero-meta-item strong {
+  display: block; color: var(--rcc-white); font-size: 0.85rem;
+  letter-spacing: 0; text-transform: none; margin-top: 2px;
+}
+
+/* ─── Wave dividers ─── */
+.rcc-wave { width: 100%; overflow: hidden; line-height: 0; }
+.rcc-wave svg { display: block; width: 100%; height: 80px; }
+.rcc-wave--flip svg { transform: scaleX(-1); }
+.rcc-wave-fill-dark path { fill: var(--rcc-dark); }
+.rcc-wave-fill-card path { fill: var(--rcc-dark-card); }
+.rcc-wave-fill-light path { fill: var(--rcc-off-white); }
+.rcc-wave-fill-brand path { fill: var(--rcc-brand); }
+.rcc-wave-fill-teal path { fill: var(--rcc-brand-dark); }   /* teal revision */
+
+/* ─── Sections ─── */
+.rcc-section { padding: 5rem 2rem; }
+.rcc-s-dark { background: var(--rcc-dark); }
+.rcc-s-card { background: var(--rcc-dark-card); }
+.rcc-s-light { background: var(--rcc-off-white); color: var(--rcc-ink); }
+.rcc-s-brand { background: var(--rcc-brand); }
+/* Teal revision: deep-teal band for lower-page sections */
+.rcc-s-teal { background: linear-gradient(180deg, var(--rcc-brand-dark) 0%, var(--rcc-brand-deep) 100%); }
+/* Teal-glow variant for the portal band */
+.rcc-s-card--glow {
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 20%, var(--rcc-brand-glow), transparent 70%),
+    var(--rcc-dark-card);
+}
+
+.rcc-section-label {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--rcc-brand-light); margin-bottom: 0.75rem;
+}
+.rcc-s-light .rcc-section-label { color: var(--rcc-brand); }
+.rcc-s-teal .rcc-section-label, .rcc-s-brand .rcc-section-label { color: var(--rcc-brand-soft); }
+.rcc-section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 800;
+  letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 1rem;
+}
+.rcc-section-desc {
+  font-size: 0.95rem; color: var(--rcc-text-muted-dark); max-width: 500px; line-height: 1.65;
+}
+.rcc-s-light .rcc-section-desc { color: var(--rcc-text-muted-light); }
+.rcc-s-teal .rcc-section-desc { color: rgba(255, 255, 255, 0.6); }
+
+/* ─── Message / video feature ─── */
+.rcc-message-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem;
+  align-items: center; margin-top: 2.5rem;
+}
+.rcc-message-video {
+  aspect-ratio: 16/9; border-radius: var(--rcc-radius-lg); overflow: hidden;
+  background-position: center; background-size: cover; position: relative; cursor: pointer;
+}
+.rcc-message-video::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.3); }
+.rcc-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;
+  width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.95);
+  display: flex; align-items: center; justify-content: center; transition: transform 0.3s;
+}
+.rcc-play:hover { transform: translate(-50%, -50%) scale(1.08); }
+.rcc-play::after {
+  content: ''; width: 0; height: 0;
+  border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+  border-left: 16px solid var(--rcc-brand); margin-left: 3px;
+}
+.rcc-message-series {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--rcc-brand-light);
+}
+.rcc-message-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+.rcc-message-speaker { color: var(--rcc-text-muted-dark); font-size: 0.875rem; }
+.rcc-message-desc { color: var(--rcc-text-muted-dark); font-size: 0.9rem; line-height: 1.65; }
+
+/* ─── Cards ─── */
+.rcc-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 2.5rem; }
+.rcc-card {
+  background: var(--rcc-dark-card); padding: 0; overflow: hidden;
+  transition: transform 0.3s; cursor: pointer;
+}
+.rcc-s-light .rcc-card { background: var(--rcc-white); }
+.rcc-card:hover { transform: translateY(-2px); }
+.rcc-card-img {
+  width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
+  filter: brightness(0.85); transition: filter 0.3s;
+}
+.rcc-card:hover .rcc-card-img { filter: brightness(1); }
+.rcc-card-body { padding: 1.5rem; }
+.rcc-card-body h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 0.35rem; }
+.rcc-card-body p { font-size: 0.825rem; color: var(--rcc-text-muted-dark); line-height: 1.5; margin: 0; }
+.rcc-s-light .rcc-card-body p { color: var(--rcc-text-muted-light); }
+.rcc-card-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  color: var(--rcc-brand-light); font-size: 0.8rem; font-weight: 600;
+  margin-top: 0.75rem; text-decoration: none; transition: gap 0.2s;
+}
+.rcc-card-link:hover { gap: 8px; }
+.rcc-s-light .rcc-card-link { color: var(--rcc-brand); }
+
+/* ─── Pathway steps ─── */
+.rcc-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 2.5rem; }
+.rcc-step { padding: 2rem 1.5rem; border-right: 1px solid var(--rcc-dark-border); position: relative; }
+.rcc-step:last-child { border-right: none; }
+.rcc-step-num {
+  font-size: 3rem; font-weight: 800; color: var(--rcc-brand-tint);
+  line-height: 1; margin-bottom: 1rem; letter-spacing: -0.03em;
+}
+.rcc-step h3 { font-size: 1rem; font-weight: 700; margin: 0 0 0.5rem; }
+.rcc-step p { font-size: 0.825rem; color: var(--rcc-text-muted-dark); line-height: 1.5; margin: 0; }
+
+/* ─── Event rows ─── */
+.rcc-event-list { margin-top: 2.5rem; }
+.rcc-event-row {
+  display: flex; align-items: center; gap: 2rem; padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rcc-dark-border); transition: padding-left 0.25s;
+}
+.rcc-s-teal .rcc-event-row { border-bottom-color: rgba(255, 255, 255, 0.12); }
+.rcc-event-row:hover { padding-left: 0.75rem; }
+.rcc-event-date { min-width: 56px; text-align: center; }
+.rcc-event-date .rcc-month {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--rcc-brand-light);
+}
+.rcc-s-teal .rcc-event-date .rcc-month { color: var(--rcc-brand-soft); }
+.rcc-event-date .rcc-day { font-size: 1.75rem; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+.rcc-event-detail h4 { font-size: 0.95rem; font-weight: 600; margin: 0; }
+.rcc-event-detail p { font-size: 0.8rem; color: var(--rcc-text-muted-dark); margin: 2px 0 0; }
+.rcc-s-teal .rcc-event-detail p { color: rgba(255, 255, 255, 0.55); }
+.rcc-event-arrow { margin-left: auto; color: var(--rcc-text-muted-dark); transition: color 0.2s, transform 0.2s; }
+.rcc-event-row:hover .rcc-event-arrow { color: var(--rcc-brand-soft); transform: translateX(3px); }
+
+/* ─── Portal marketing band ─── */
+.rcc-portal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 2.5rem; }
+.rcc-portal-features { display: flex; flex-direction: column; gap: 0.75rem; }
+.rcc-portal-feat {
+  display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem;
+  background: var(--rcc-dark-card); border: 1px solid var(--rcc-dark-border);
+  border-radius: var(--rcc-radius-lg); transition: border-color 0.2s;
+}
+.rcc-portal-feat:hover { border-color: var(--rcc-brand); }
+.rcc-portal-feat-icon {
+  width: 40px; height: 40px; border-radius: var(--rcc-radius-lg);
+  background: var(--rcc-brand-tint); display: flex; align-items: center;
+  justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.rcc-portal-feat h4 { font-size: 0.875rem; font-weight: 600; margin: 0; }
+.rcc-portal-feat p { font-size: 0.75rem; color: var(--rcc-text-muted-dark); margin: 2px 0 0; line-height: 1.4; }
+
+/* ─── Auth'd portal components ─── */
+.rcc-page-head { padding: calc(var(--rcc-nav-h) + 3rem) 2rem 1.5rem; }
+.rcc-page-head h1 { font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.4rem; }
+.rcc-page-head p { color: var(--rcc-text-muted-dark); font-size: 0.9rem; margin: 0; }
+
+.rcc-dash-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  margin-top: 2rem;
+}
+.rcc-dash-card {
+  background: var(--rcc-dark-card); border: 1px solid var(--rcc-dark-border);
+  border-radius: var(--rcc-radius-lg); padding: 1.5rem;
+  transition: border-color 0.2s; display: flex; flex-direction: column; gap: 0.75rem;
+}
+.rcc-dash-card:hover { border-color: var(--rcc-brand); }
+.rcc-dash-card h3 {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--rcc-brand-light); margin: 0;
+}
+.rcc-dash-card .rcc-dash-big { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.rcc-dash-card p { font-size: 0.825rem; color: var(--rcc-text-muted-dark); line-height: 1.5; margin: 0; }
+.rcc-dash-actions { display: flex; gap: 0.5rem; margin-top: auto; padding-top: 0.5rem; }
+
+.rcc-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.03em; background: rgba(255, 255, 255, 0.06);
+  color: var(--rcc-text-muted-dark);
+}
+.rcc-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.rcc-pill--ok { color: var(--rcc-ok); background: rgba(52, 211, 153, 0.1); }
+.rcc-pill--warn { color: var(--rcc-warn); background: rgba(251, 191, 36, 0.1); }
+.rcc-pill--pending { color: var(--rcc-pending); background: rgba(156, 163, 175, 0.1); }
+.rcc-pill--brand { color: var(--rcc-brand-soft); background: var(--rcc-brand-tint); }
+
+.rcc-progress { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.rcc-progress span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--rcc-brand), var(--rcc-brand-light)); }
+
+.rcc-checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.rcc-checklist li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--rcc-text-muted-dark); }
+.rcc-checklist li.is-done { color: var(--rcc-text-on-dark); }
+.rcc-check {
+  width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.2); display: inline-flex;
+  align-items: center; justify-content: center; font-size: 9px;
+}
+.is-done .rcc-check { background: var(--rcc-ok); border-color: var(--rcc-ok); color: #0c0c0e; }
+
+/* ─── Forms ─── */
+.rcc-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.rcc-field label {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--rcc-text-muted-dark);
+}
+.rcc-input, .rcc-select, .rcc-textarea {
+  font-family: var(--rcc-font); font-size: 0.875rem;
+  background: rgba(255, 255, 255, 0.04); color: var(--rcc-text-on-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--rcc-radius);
+  padding: 11px 14px; outline: none; transition: border-color 0.2s;
+}
+.rcc-input:focus, .rcc-select:focus, .rcc-textarea:focus { border-color: var(--rcc-brand-light); }
+.rcc-textarea { min-height: 96px; resize: vertical; }
+
+/* ─── CTA band ─── */
+.rcc-cta-band { text-align: center; padding: 5rem 2rem; background: var(--rcc-brand); }
+.rcc-cta-band h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.025em; margin: 0 0 1rem; }
+.rcc-cta-band p { font-size: 1rem; opacity: 0.75; max-width: 480px; margin: 0 auto 2rem; }
+
+/* ─── Footer ─── */
+.rcc-footer {
+  background: var(--rcc-dark); border-top: 2px solid var(--rcc-brand-dark);
+  padding: 4rem 2rem 2rem;
+}
+.rcc-footer-grid {
+  max-width: var(--rcc-container); margin: 0 auto 3rem;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+}
+.rcc-footer-logo img { height: 36px; margin-bottom: 1rem; }
+.rcc-footer-address { font-size: 0.825rem; color: var(--rcc-text-muted-dark); line-height: 1.6; }
+.rcc-footer h4 {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--rcc-gray-400); margin: 0 0 1rem;
+}
+.rcc-footer a {
+  display: block; color: var(--rcc-text-muted-dark); text-decoration: none;
+  font-size: 0.825rem; padding: 0.2rem 0; transition: color 0.2s;
+}
+.rcc-footer a:hover { color: var(--rcc-white); }
+.rcc-footer-bottom {
+  max-width: var(--rcc-container); margin: 0 auto; padding-top: 2rem;
+  border-top: 1px solid var(--rcc-dark-border);
+  display: flex; justify-content: space-between;
+  font-size: 0.75rem; color: var(--rcc-text-muted-dark);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .rcc-message-grid, .rcc-portal-grid { grid-template-columns: 1fr; }
+  .rcc-card-grid { grid-template-columns: repeat(2, 1fr); }
+  .rcc-dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .rcc-steps { grid-template-columns: repeat(2, 1fr); }
+  .rcc-step { border-bottom: 1px solid var(--rcc-dark-border); }
+  .rcc-footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .rcc-nav-links { display: none; }
+  .rcc-card-grid, .rcc-dash-grid, .rcc-steps { grid-template-columns: 1fr; }
+  .rcc-step { border-right: none; }
+  .rcc-hero-meta { display: none; }
+  .rcc-footer-grid { grid-template-columns: 1fr; }
+}

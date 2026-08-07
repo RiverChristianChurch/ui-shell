@@ -1,0 +1,19 @@
+{
+  "name": "@riverchristianchurch/ui-shell",
+  "version": "0.1.0-beta.1",
+  "description": "RCC design system — tokens + component CSS for riverchristian.church web properties",
+  "license": "UNLICENSED",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RiverChristianChurch/ui-shell.git"
+  },
+  "exports": {
+    "./tokens": "./src/css/rcc-tokens.css",
+    "./components": "./src/css/rcc-components.css"
+  },
+  "files": [
+    "src/css",
+    "README.md"
+  ]
+}

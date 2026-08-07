@@ -3,52 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RCC Website Rebuild — UI Shell Options</title>
+  <title>RCC UI Shell — Beta</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',-apple-system,sans-serif;background:#09090b;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;-webkit-font-smoothing:antialiased}
     .logo{height:48px;margin-bottom:2rem}
     h1{font-size:1.75rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:0.5rem;text-align:center}
-    p{color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:3rem;text-align:center}
+    .sub{color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:2.5rem;text-align:center;max-width:560px}
+    .badge{display:inline-block;background:#095879;color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-left:8px;vertical-align:middle}
+    h2{font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:2.5rem 0 1rem;width:100%;max-width:900px}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.75rem;width:100%;max-width:900px}
     .card{background:#16171a;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1.5rem;text-decoration:none;color:#fff;transition:border-color 0.2s,transform 0.2s}
     .card:hover{border-color:#095879;transform:translateY(-2px)}
-    .card .num{font-size:2rem;font-weight:800;color:rgba(9,88,121,0.3);line-height:1;margin-bottom:0.75rem}
-    .card h2{font-size:1rem;font-weight:700;margin-bottom:0.35rem}
-    .card p{color:rgba(255,255,255,0.45);font-size:0.8rem;margin-bottom:0;text-align:left}
+    .card.beta{border-color:rgba(11,122,171,0.5);background:linear-gradient(180deg,rgba(9,88,121,0.15),#16171a)}
+    .card h3{font-size:1rem;font-weight:700;margin-bottom:0.35rem}
+    .card p{color:rgba(255,255,255,0.45);font-size:0.8rem}
+    .archive .card{opacity:0.65}
+    .archive .card:hover{opacity:1}
+    .card .num{font-size:1.4rem;font-weight:800;color:rgba(9,88,121,0.4);line-height:1;margin-bottom:0.6rem}
   </style>
 </head>
 <body>
   <img class="logo" src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC">
-  <h1>Website Rebuild — UI Shell Options</h1>
-  <p>Click an option to view the full-page mockup.</p>
+  <h1>RCC UI Shell<span class="badge">Beta</span></h1>
+  <p class="sub">Selected direction: <strong>Option 1 — Dark Cinematic</strong> with the office-requested teal revision (more teal in the lower page, teal wave dividers). One shell for the public site and the signed-in member portal.</p>
+
+  <h2>Beta — selected direction</h2>
   <div class="grid">
-    <a class="card" href="options/option-1-dark-cinematic.html">
-      <div class="num">01</div>
-      <h2>Dark Cinematic</h2>
-      <p>Full-screen worship hero, dark base, teal accent, wave dividers. CCV-inspired.</p>
+    <a class="card beta" href="beta/index.html">
+      <h3>Home — public</h3>
+      <p>Full homepage: hero, latest message, next steps, ministries, deep-teal events band, portal promo, CTA.</p>
     </a>
-    <a class="card" href="options/option-2-clean-minimal.html">
-      <div class="num">02</div>
-      <h2>Clean Minimal</h2>
-      <p>Light, extreme restraint (white/black/teal), editorial grid, generous whitespace. Southeast-inspired.</p>
+    <a class="card beta" href="beta/portal.html">
+      <h3>Portal — signed in</h3>
+      <p>Member dashboard: serve schedule, onboarding progress, giving, LifeGroup, registrations, leader tools.</p>
     </a>
-    <a class="card" href="options/option-3-wave-forward.html">
-      <div class="num">03</div>
-      <h2>Wave-Forward</h2>
-      <p>Teal gradient hero, wave motifs everywhere, brand-forward. Seacoast meets RCC brand.</p>
+    <a class="card beta" href="beta/components.html">
+      <h3>Components</h3>
+      <p>Tokens, typography, buttons, pills, cards, event rows, forms, wave dividers — the reference sheet.</p>
     </a>
-    <a class="card" href="options/option-4-split-hero.html">
-      <div class="num">04</div>
-      <h2>Split Hero</h2>
-      <p>50/50 text+image hero, accent line, ministry rows with thumbnails. Traders Point editorial.</p>
-    </a>
-    <a class="card" href="options/option-5-dark-wave.html">
-      <div class="num">05</div>
-      <h2>Dark Wave</h2>
-      <p>Full dark mode, gradient glow, wave watermarks, centered hero. Tech-polished feel.</p>
-    </a>
+  </div>
+
+  <h2>Archive — original five options (Apr 2026)</h2>
+  <div class="grid archive">
+    <a class="card" href="options/option-1-dark-cinematic.html"><div class="num">01</div><h3>Dark Cinematic ✓</h3><p>Selected. Full-screen worship hero, dark base, teal accent, wave dividers.</p></a>
+    <a class="card" href="options/option-2-clean-minimal.html"><div class="num">02</div><h3>Clean Minimal</h3><p>White/black/teal, editorial grid, generous whitespace.</p></a>
+    <a class="card" href="options/option-3-wave-forward.html"><div class="num">03</div><h3>Wave-Forward</h3><p>Teal gradient hero, wave motifs everywhere, brand-forward.</p></a>
+    <a class="card" href="options/option-4-split-hero.html"><div class="num">04</div><h3>Split Hero</h3><p>50/50 text+image hero, ministry rows with thumbnails.</p></a>
+    <a class="card" href="options/option-5-dark-wave.html"><div class="num">05</div><h3>Dark Wave</h3><p>Full dark mode, gradient glow, wave watermarks, centered hero.</p></a>
   </div>
 </body>
 </html>
