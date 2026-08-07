@@ -74,6 +74,10 @@
 .rcc-btn--outline:hover { border-color: var(--rcc-white); }
 .rcc-btn--white { background: var(--rcc-white); color: var(--rcc-brand); }
 .rcc-btn--white:hover { opacity: 0.9; transform: translateY(-1px); }
+/* Accent variants use --rcc-accent (candidate stage — see brand guide).
+   Dark text on accent fills; never white (fails contrast on all candidates). */
+.rcc-btn--accent { background: var(--rcc-accent); color: var(--rcc-dark); }
+.rcc-btn--accent:hover { opacity: 0.88; transform: translateY(-1px); }
 .rcc-btn--sm { padding: 8px 18px; font-size: 0.8rem; }
 
 /* ─── Hero ─── */
@@ -294,6 +298,7 @@
 .rcc-pill--warn { color: var(--rcc-warn); background: rgba(251, 191, 36, 0.1); }
 .rcc-pill--pending { color: var(--rcc-pending); background: rgba(156, 163, 175, 0.1); }
 .rcc-pill--brand { color: var(--rcc-brand-soft); background: var(--rcc-brand-tint); }
+.rcc-pill--accent { color: var(--rcc-accent); background: var(--rcc-accent-tint); }
 
 .rcc-progress { height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
 .rcc-progress span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--rcc-brand), var(--rcc-brand-light)); }
