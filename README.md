@@ -12,6 +12,7 @@ Design system for all RCC web properties. Single source of truth for visual dire
 
 | Preview | What it shows |
 |---|---|
+| [`brand/index.html`](brand/index.html) | **Brand Guide v2.0 draft** — logo, voice, unified palette (digital + print CMYK + SW paint), typography, graphics rules, live accent-color picker |
 | [`beta/index.html`](beta/index.html) | Public homepage with the teal revision |
 | [`beta/portal.html`](beta/portal.html) | Signed-in member dashboard — same shell, auth'd components |
 | [`beta/components.html`](beta/components.html) | Token + component reference sheet |

@@ -30,6 +30,15 @@
   --rcc-text-muted-dark: rgba(255, 255, 255, 0.45);
   --rcc-text-muted-light: #6b7280;
 
+  /* Accent — PROPOSED, not locked (see brand guide "Accent" section).
+     Candidates: ember #f0763b · river-gold #eed35c (current worship
+     palette) · coral #f2695c · electric-lime #c4f751.
+     Recommended default: Ember. Usage: emphasis moments only (~10% of a
+     composition) — featured pills, key stats, series art highlights.
+     Never replaces teal for primary CTAs. */
+  --rcc-accent: #f0763b;
+  --rcc-accent-tint: rgba(240, 118, 59, 0.12);
+
   /* Status (portal) */
   --rcc-ok: #34d399;
   --rcc-warn: #fbbf24;

@@ -17,3 +17,4 @@ Design system for RCC web properties: tokens + component CSS + live HTML mockups
 - Version bumps: package.json + git tag `v<version>` + GitHub release. Consuming apps pin the tag.
 - Task tracking: **GitHub Issues on this repo** (RCC convention — no Linear).
 - Mockup-only styling (like the beta switcher) goes in `beta/beta-nav.css`, never in `src/css/`.
+- `brand/index.html` is the **living brand guide** (supersedes the 2020 v1.1 PDF in Dropbox/graphics/_BRAND). Two open decisions live there: accent color (`--rcc-accent` is PROPOSED-Ember, candidates in tokens comment) and typography (Montserrat display + Inter body proposed). When either locks: update tokens, the guide page, and cut a new tag.

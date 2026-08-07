@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RCC Brand Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../src/css/rcc-tokens.css">
+  <link rel="stylesheet" href="../src/css/rcc-components.css">
+  <link rel="stylesheet" href="../beta/beta-nav.css">
+  <style>
+    .g-section { border-bottom: 1px solid var(--rcc-dark-border); }
+    .g-kicker { font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--rcc-brand-light); margin:0 0 0.5rem; }
+    .g-title { font-size:clamp(1.5rem,3vw,2.25rem); font-weight:800; letter-spacing:-0.02em; margin:0 0 1rem; }
+    .g-prose { max-width:680px; font-size:0.925rem; line-height:1.7; color:var(--rcc-text-muted-dark); }
+    .g-prose strong { color:var(--rcc-text-on-dark); }
+    .g-prose a { color:var(--rcc-brand-soft); }
+    .g-note { border-left:3px solid var(--rcc-brand); background:rgba(9,88,121,0.08); padding:0.9rem 1.1rem; border-radius:0 8px 8px 0; font-size:0.85rem; color:var(--rcc-text-muted-dark); max-width:680px; margin-top:1.25rem; }
+    .g-note strong { color:var(--rcc-text-on-dark); }
+    .g-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:0.75rem; margin-top:1.5rem; }
+    .g-swatch { border-radius:10px; overflow:hidden; border:1px solid var(--rcc-dark-border); }
+    .g-swatch-color { height:72px; }
+    .g-swatch-info { padding:0.7rem 0.85rem; background:var(--rcc-dark-card); font-size:0.72rem; line-height:1.5; }
+    .g-swatch-info strong { display:block; }
+    .g-swatch-info span { color:var(--rcc-text-muted-dark); font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:0.66rem; display:block; }
+    table.g-table { border-collapse:collapse; width:100%; max-width:760px; margin-top:1.25rem; font-size:0.8rem; }
+    .g-table th { text-align:left; font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--rcc-text-muted-dark); font-weight:600; padding:0.5rem 0.9rem 0.5rem 0; border-bottom:1px solid var(--rcc-dark-border); }
+    .g-table td { padding:0.55rem 0.9rem 0.55rem 0; border-bottom:1px solid var(--rcc-dark-border); color:var(--rcc-text-muted-dark); vertical-align:top; }
+    .g-table td:first-child { color:var(--rcc-text-on-dark); font-weight:600; white-space:nowrap; }
+    .g-dot { display:inline-block; width:14px; height:14px; border-radius:50%; margin-right:8px; vertical-align:-2px; border:1px solid rgba(255,255,255,0.15); }
+    .g-logo-box { background:var(--rcc-white); border-radius:10px; padding:2.5rem; display:flex; align-items:center; justify-content:center; }
+    .g-logo-box.on-dark { background:var(--rcc-dark-card); border:1px solid var(--rcc-dark-border); }
+    .g-two { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem; max-width:760px; }
+    .g-cap { font-size:0.7rem; color:var(--rcc-text-muted-dark); margin-top:0.5rem; text-align:center; }
+    .g-dont li { margin-bottom:0.4rem; }
+    /* type specimens */
+    .t-mont { font-family:'Montserrat',sans-serif; }
+    .t-spec { border:1px solid var(--rcc-dark-border); border-radius:10px; padding:1.5rem; background:var(--rcc-dark-card); }
+    /* accent picker */
+    .a-picker { display:flex; gap:0.6rem; flex-wrap:wrap; margin:1.5rem 0; }
+    .a-chip { display:flex; align-items:center; gap:10px; background:var(--rcc-dark-card); border:1px solid var(--rcc-dark-border); border-radius:999px; padding:8px 18px 8px 10px; cursor:pointer; font-family:var(--rcc-font); font-size:0.8rem; font-weight:600; color:var(--rcc-text-muted-dark); transition:all 0.2s; }
+    .a-chip .a-dot { width:22px; height:22px; border-radius:50%; }
+    .a-chip:hover { border-color:rgba(255,255,255,0.25); color:var(--rcc-white); }
+    .a-chip.active { border-color:var(--rcc-accent); color:var(--rcc-white); background:var(--rcc-accent-tint); }
+    .a-chip small { display:block; font-weight:400; font-size:0.65rem; color:var(--rcc-text-muted-dark); }
+    /* accent demo band */
+    .a-demo { border:1px solid var(--rcc-dark-border); border-radius:12px; overflow:hidden; margin-top:1rem; }
+    .a-demo-hero { background:linear-gradient(180deg,#0c0c0e, #101014); padding:3rem 2rem; }
+    .a-demo-hero .eyebrow { font-size:0.65rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--rcc-accent); margin-bottom:0.6rem; }
+    .a-demo-hero h3 { font-size:clamp(1.8rem,4vw,3rem); font-weight:800; letter-spacing:-0.03em; line-height:1.05; margin:0 0 1.25rem; }
+    .a-demo-hero h3 em { font-style:normal; color:var(--rcc-accent); }
+    .a-pill-accent { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:999px; font-size:0.7rem; font-weight:700; letter-spacing:0.04em; background:var(--rcc-accent-tint); color:var(--rcc-accent); text-transform:uppercase; }
+    .a-btn-accent { display:inline-flex; padding:12px 26px; border-radius:6px; font-weight:700; font-size:0.85rem; text-decoration:none; background:var(--rcc-accent); color:#0c0c0e; transition:opacity 0.2s; }
+    .a-btn-accent:hover { opacity:0.88; }
+    .a-demo-body { background:var(--rcc-dark-card); padding:2rem; display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    .a-stat { font-size:2.25rem; font-weight:800; letter-spacing:-0.03em; color:var(--rcc-accent); line-height:1; }
+    .a-stat-label { font-size:0.72rem; color:var(--rcc-text-muted-dark); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+    @media(max-width:768px){ .g-two,.a-demo-body{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body class="rcc-body">
+
+  <nav class="rcc-nav">
+    <div class="rcc-nav-inner">
+      <a href="../index.html" class="rcc-nav-logo">
+        <img src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC">
+      </a>
+      <div class="rcc-nav-links">
+        <a href="#voice">Voice</a>
+        <a href="#logo">Logo</a>
+        <a href="#color">Color</a>
+        <a href="#accent">Accent</a>
+        <a href="#type">Type</a>
+        <a href="#graphics">Graphics</a>
+        <a href="../beta/index.html" class="rcc-nav-btn-ghost">Site Mockups</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="rcc-page-head" style="padding-bottom:2.5rem;">
+    <div class="rcc-container">
+      <p class="g-kicker">Version 2.0 draft &middot; August 2026 &middot; supersedes the 2020 v1.1 PDF</p>
+      <h1 style="font-size:clamp(2rem,4.5vw,3.25rem);">RCC Brand Guide</h1>
+      <p class="g-prose" style="margin-top:0.75rem;">A brand is <strong>words, images, and experiences</strong>. As River Christian Church grows, our art, media, and communication must create impressions that draw people in — never a distraction from leading people to a relationship with Jesus Christ. This guide is the single standard for staff, volunteers, and contractors across <strong>web, worship center, print, social, and facility</strong>.</p>
+      <p class="g-prose" style="margin-top:0.75rem;">Format modeled on <a href="https://brand.life.church">brand.life.church</a> — a living web page, not a PDF that goes stale in a folder.</p>
+    </div>
+  </header>
+
+  <!-- VOICE -->
+  <section id="voice" class="rcc-section rcc-s-dark g-section" style="padding-top:3rem;">
+    <div class="rcc-container">
+      <p class="g-kicker">01 — Mission &amp; Voice</p>
+      <h2 class="g-title">Win People &middot; Train Believers &middot; Unleash Disciples</h2>
+      <p class="g-prose">Our voice is <strong>warm, direct, and invitational</strong> — we write like we're talking to one person, not announcing to a crowd.</p>
+      <table class="g-table">
+        <tr><th>Standard</th><th>Rule (carried from v1.1)</th></tr>
+        <tr><td>Caps</td><td>Never use all caps in headlines, titles, or copy — it implies YELLING. (Display type in the design system uses weight, not caps, for emphasis.)</td></tr>
+        <tr><td>Punctuation</td><td>One exclamation mark max. Oxford comma always. Punctuation inside quotation marks.</td></tr>
+        <tr><td>Times</td><td>8:00am &middot; 6:00-8:00pm &middot; 8:00am-5:00pm</td></tr>
+        <tr><td>Dates</td><td>Tuesday, April 28 &middot; February 23 &middot; May 31-June 1</td></tr>
+        <tr><td>Numbers</td><td>One through nine spelled out; 10+ as numerals. Six-week series, 5-year-old.</td></tr>
+        <tr><td>Message titles</td><td><em>Italicized</em> — <em>Get Out Of The Boat</em></td></tr>
+        <tr><td>Scripture</td><td>Italic quote, attribution as "-1 Corinthians 3:13 NLT". Capitalize pronouns for God: He, Him, His.</td></tr>
+        <tr><td>Email</td><td>firstnamelastinitial@riverchristian.church — never camel case</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section id="logo" class="rcc-section rcc-s-dark g-section">
+    <div class="rcc-container">
+      <p class="g-kicker">02 — Logo</p>
+      <h2 class="g-title">Stable and unchanging</h2>
+      <p class="g-prose">The logo only represents RCC well when used <strong>consistently and correctly</strong>. Default to the <strong>full logo</strong> (waves + RCC + wordmark). The wave icon alone is allowed only <strong>inside our campus</strong> (wall art, ProPresenter) or in close proximity to the full logo on the same piece.</p>
+      <div class="g-two">
+        <div>
+          <div class="g-logo-box"><img src="https://riverchristian.church/wp-content/uploads/2025/10/rcc_logo_dark.png" alt="RCC full logo" style="max-height:84px;max-width:100%;"></div>
+          <p class="g-cap">Full logo on light</p>
+        </div>
+        <div>
+          <div class="g-logo-box on-dark"><img src="https://riverchristian.church/wp-content/uploads/2021/02/rcc_logo_web_light.png" alt="RCC logo on dark" style="max-height:84px;max-width:100%;"></div>
+          <p class="g-cap">Full logo on dark</p>
+        </div>
+      </div>
+      <div class="g-note">
+        <strong>Logo fonts are logo-only.</strong> "RCC" is set in DIN Condensed Bold and the wordmark in Avenir. Neither is ever used for headlines or copy — brand typography is the next section. Clear space: keep one wave-height of padding on all sides; never stretch, recolor outside the palette, or set the logo on a busy photo area.
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section id="color" class="rcc-section rcc-s-dark g-section">
+    <div class="rcc-container">
+      <p class="g-kicker">03 — Color</p>
+      <h2 class="g-title">One teal, everywhere</h2>
+      <p class="g-prose">The 2020 guide's primary was <span style="font-family:monospace">#4179a6</span>. Since then the worship-center graphics and the website both deepened it — and independently landed on the same value: <strong>RCC Teal #095879</strong>. Version 2.0 makes that convergence official. Digital and print share one palette; the web ramp extends it for dark-mode depth.</p>
+
+      <h3 style="font-size:0.85rem;font-weight:700;margin-top:2rem;">Digital core (ui-shell tokens)</h3>
+      <div class="g-grid">
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#095879"></div><div class="g-swatch-info"><strong>RCC Teal</strong><span>#095879 · --rcc-brand</span><span>CMYK 100/61/33/13 · SW 6503</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#0b7aab"></div><div class="g-swatch-info"><strong>Teal Light</strong><span>#0b7aab · --rcc-brand-light</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#063d54"></div><div class="g-swatch-info"><strong>Teal Dark</strong><span>#063d54 · --rcc-brand-dark</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#052e40"></div><div class="g-swatch-info"><strong>Teal Deep</strong><span>#052e40 · --rcc-brand-deep</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#6cc4ea"></div><div class="g-swatch-info"><strong>Teal Soft</strong><span>#6cc4ea · --rcc-brand-soft</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#0c0c0e"></div><div class="g-swatch-info"><strong>Dark</strong><span>#0c0c0e · --rcc-dark</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#16171a"></div><div class="g-swatch-info"><strong>Dark Card</strong><span>#16171a · --rcc-dark-card</span></div></div>
+        <div class="g-swatch"><div class="g-swatch-color" style="background:#f4f5f7"></div><div class="g-swatch-info"><strong>Off White</strong><span>#f4f5f7 · --rcc-off-white</span></div></div>
+      </div>
+
+      <h3 style="font-size:0.85rem;font-weight:700;margin-top:2.5rem;">Print &amp; facility (from the worship-center palette)</h3>
+      <table class="g-table">
+        <tr><th>Color</th><th>Web</th><th>CMYK</th><th>Sherwin-Williams</th><th>Use</th></tr>
+        <tr><td><span class="g-dot" style="background:#095879"></span>Primary</td><td>#095879</td><td>100 61 33 13</td><td>SW 6503</td><td>Everything — the brand color</td></tr>
+        <tr><td><span class="g-dot" style="background:#0f2437"></span>Navy (text/accent)</td><td>#0f2437</td><td>95 77 50 57</td><td>—</td><td>Print text, dark grounds in print</td></tr>
+        <tr><td><span class="g-dot" style="background:#6295a6"></span>Light accent</td><td>#6295a6</td><td>69 28 29 1</td><td>SW 6494</td><td>Secondary fills, waves in print</td></tr>
+        <tr><td><span class="g-dot" style="background:#7b7b7e"></span>Dark gray</td><td>#7b7b7e</td><td>54 45 42 9</td><td>—</td><td>Support text</td></tr>
+        <tr><td><span class="g-dot" style="background:#eed35c"></span>Yellow accent</td><td>#eed35c</td><td>6 13 87 0</td><td>—</td><td>Current worship-graphics accent — see Accent decision below</td></tr>
+        <tr><td><span class="g-dot" style="background:#e7e7e6"></span>Gray</td><td>#e7e7e6</td><td>8 6 7 0</td><td>—</td><td>Light backgrounds (print)</td></tr>
+        <tr><td><span class="g-dot" style="background:#f2eee4"></span>Walls</td><td>#f2eee4</td><td>4 4 10 0</td><td>SW 7566</td><td>Facility paint</td></tr>
+      </table>
+      <div class="g-note"><strong>Why paint codes live in a brand guide:</strong> the room people sit in every week is a brand surface. Screens, print, and walls should agree.</div>
+    </div>
+  </section>
+
+  <!-- ACCENT -->
+  <section id="accent" class="rcc-section rcc-s-dark g-section">
+    <div class="rcc-container">
+      <p class="g-kicker">04 — Accent color · DECISION NEEDED</p>
+      <h2 class="g-title">One warm signal color</h2>
+      <p class="g-prose">Teal + dark carries the brand, but every composition needs one <strong>signal color</strong> for the moment that matters — the featured event, the key stat, the word in the series title. Rules regardless of which we pick: accent is <strong>~10% of a composition maximum</strong>, it never replaces teal on primary CTAs, and it always sits on dark or white — never on teal.</p>
+      <p class="g-prose" style="margin-top:0.75rem;">Tap a candidate — everything below repaints live:</p>
+
+      <div class="a-picker" id="picker">
+        <button class="a-chip active" data-accent="#f0763b" data-tint="rgba(240,118,59,0.12)"><span class="a-dot" style="background:#f0763b"></span><span>Ember <small>#f0763b — recommended</small></span></button>
+        <button class="a-chip" data-accent="#eed35c" data-tint="rgba(238,211,92,0.12)"><span class="a-dot" style="background:#eed35c"></span><span>River Gold <small>#eed35c — current worship palette</small></span></button>
+        <button class="a-chip" data-accent="#f2695c" data-tint="rgba(242,105,92,0.12)"><span class="a-dot" style="background:#f2695c"></span><span>Coral <small>#f2695c — warm &amp; relational</small></span></button>
+        <button class="a-chip" data-accent="#c4f751" data-tint="rgba(196,247,81,0.12)"><span class="a-dot" style="background:#c4f751"></span><span>Electric Lime <small>#c4f751 — young &amp; edgy</small></span></button>
+      </div>
+
+      <div class="a-demo">
+        <div class="a-demo-hero">
+          <div class="eyebrow">Men's Conference &middot; October 2026</div>
+          <h3>UNCOMMON is for <em>every</em> man.</h3>
+          <span class="a-pill-accent">Featured Event</span>&nbsp;&nbsp;
+          <a href="#" class="a-btn-accent" onclick="return false">Register Now</a>&nbsp;&nbsp;
+          <a href="#" class="rcc-btn rcc-btn--outline" onclick="return false">Learn More</a>
+        </div>
+        <div class="a-demo-body">
+          <div>
+            <div class="a-stat">4</div><div class="a-stat-label">Weekend services</div>
+            <div style="margin-top:1.5rem;"><div class="a-stat">52</div><div class="a-stat-label">LifeGroups meeting weekly</div></div>
+          </div>
+          <div class="rcc-event-list" style="margin-top:0;">
+            <div class="rcc-event-row">
+              <div class="rcc-event-date"><div class="rcc-month" style="color:var(--rcc-accent)">Oct</div><div class="rcc-day">17</div></div>
+              <div class="rcc-event-detail"><h4>Uncommon 2026 <span class="a-pill-accent" style="font-size:0.6rem;padding:2px 8px;">New</span></h4><p>Men's conference &middot; Registration open</p></div>
+              <span class="rcc-event-arrow">&rarr;</span>
+            </div>
+            <div class="rcc-event-row">
+              <div class="rcc-event-date"><div class="rcc-month">Oct</div><div class="rcc-day">24</div></div>
+              <div class="rcc-event-detail"><h4>Worship Night</h4><p>Regular event — no accent, teal carries it</p></div>
+              <span class="rcc-event-arrow">&rarr;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="g-table">
+        <tr><th>Candidate</th><th>The case for</th><th>The case against</th></tr>
+        <tr><td><span class="g-dot" style="background:#f0763b"></span>Ember</td><td>Teal + orange is the classic complementary pair — cinematic on dark, high energy, ages well. "Orange on black" done in a way that still feels like RCC because teal stays dominant.</td><td>New color — worship graphics and print would adopt it over a season.</td></tr>
+        <tr><td><span class="g-dot" style="background:#eed35c"></span>River Gold</td><td>Zero transition — it's already the worship-center accent. Warm, hopeful.</td><td>Lower contrast punch; yellow text on dark needs care at small sizes; reads "softer" than the dark-cinematic direction.</td></tr>
+        <tr><td><span class="g-dot" style="background:#f2695c"></span>Coral</td><td>Warm and people-centered; strong on dark.</td><td>Sits close to red — competes with alert/error meaning in the portal UI.</td></tr>
+        <tr><td><span class="g-dot" style="background:#c4f751"></span>Electric Lime</td><td>Most distinctive; youngest feel.</td><td>Fights the teal family; hardest to use in print; trend-cycle risk.</td></tr>
+      </table>
+      <div class="g-note"><strong>Recommendation: Ember.</strong> It gives the "orange on black" energy inside the teal system, keeps River Gold available in print for continuity during transition, and leaves red clean for portal status colors. Decide with Heather + Ty at the graphics vision-cast, then it gets locked into the tokens and tagged.</div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section id="type" class="rcc-section rcc-s-dark g-section">
+    <div class="rcc-container">
+      <p class="g-kicker">05 — Typography · DECISION NEEDED</p>
+      <h2 class="g-title">Montserrat meets Inter</h2>
+      <p class="g-prose">The 2020 guide names <strong>Montserrat</strong> as the primary typeface, and it's in every print piece and slide since. The web shell currently runs <strong>Inter</strong> everywhere. Both are free Google Fonts. Proposed unification: <strong>Montserrat for display &amp; headlines</strong> (brand continuity across print, slides, and web), <strong>Inter for body and UI text</strong> (better small-size screen readability, tabular numerals for the portal). Alternative: Montserrat-only, accepting slightly weaker body/UI legibility.</p>
+      <div class="g-two" style="max-width:100%;">
+        <div class="t-spec">
+          <p class="g-kicker" style="margin-bottom:1rem;">Display — Montserrat</p>
+          <div class="t-mont" style="font-size:2rem;font-weight:800;letter-spacing:-0.02em;line-height:1.1;">Win People.<br>Train Believers.<br>Unleash Disciples.</div>
+          <p class="t-mont" style="font-size:0.8rem;font-weight:700;margin-top:1rem;color:var(--rcc-text-muted-dark);">Bold 700 — headlines &middot; ExtraBold 800 — display &middot; Medium 500 — sub-heads</p>
+        </div>
+        <div class="t-spec">
+          <p class="g-kicker" style="margin-bottom:1rem;">Body &amp; UI — Inter</p>
+          <p style="font-size:0.925rem;line-height:1.7;">Real community happens in circles, not rows. Join us this weekend in Fleming Island and be part of a community that's changing lives through the love of Jesus.</p>
+          <p style="font-size:0.8rem;margin-top:1rem;color:var(--rcc-text-muted-dark);">Regular 400 — body &middot; Medium 500 — nav &middot; SemiBold 600 — buttons, labels</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRAPHICS SYSTEM -->
+  <section id="graphics" class="rcc-section rcc-s-dark g-section">
+    <div class="rcc-container">
+      <p class="g-kicker">06 — Graphics system</p>
+      <h2 class="g-title">Templates, not one-offs</h2>
+      <p class="g-prose">The full system lives in the Graphics Template System plan; the brand rules it enforces:</p>
+      <table class="g-table">
+        <tr><th>Rule</th><th>Standard</th></tr>
+        <tr><td>Two tiers</td><td>Named annual events (Uncommon, Refresh, Live Nativity, Worship Night) get custom art. Everything else uses its ministry template. Sermon series is its own custom set.</td></tr>
+        <tr><td>Text-first</td><td>Never bake title/date/location into web or app images — Church Center and the website render real text. Every template exports a composed slide <em>and</em> a text-free background.</td></tr>
+        <tr><td>Resize-safe</td><td>Center-anchored, single column, full-bleed backgrounds, no asymmetric composition — so one design fans out to every ratio.</td></tr>
+        <tr><td>Character caps</td><td>Enforced at request intake — most quality failures start as too much text.</td></tr>
+        <tr><td>Wave motif</td><td>The wave is the brand's signature shape: section dividers on the web, accents in print. Use the standard wave path — don't draw new waves.</td></tr>
+        <tr><td>Refresh cadence</td><td>Creative input happens at the quarterly template refresh, not per graphic.</td></tr>
+      </table>
+
+      <h3 style="font-size:0.85rem;font-weight:700;margin-top:2.5rem;">Formats &amp; sizes (carried from v1.1)</h3>
+      <table class="g-table">
+        <tr><th>Surface</th><th>Spec</th></tr>
+        <tr><td>Slides / CG / website events</td><td>1920 × 1080 PNG</td></tr>
+        <tr><td>LED street sign</td><td>300 × 150 PNG</td></tr>
+        <tr><td>Facebook / YouTube thumbnail</td><td>1920 × 1080 PNG (8-bit), &lt; 2 MB</td></tr>
+        <tr><td>Instagram feed</td><td>1080 × 1080 PNG (8-bit)</td></tr>
+        <tr><td>Stories / Reels / vertical</td><td>1080 × 1920 JPG/PNG</td></tr>
+      </table>
+      <div class="g-note"><strong>Never resize without constraining proportions.</strong> A graphic needed in multiple sizes gets reconfigured per size with elements scaled proportionally — or better, generated from the resize-safe template.</div>
+
+      <h3 style="font-size:0.85rem;font-weight:700;margin-top:2.5rem;">Ministry names (2020 list — pending taxonomy decision)</h3>
+      <p class="g-prose" style="font-size:0.8rem;">Baptism Team · Café Team · Care Team · Celebrate Recovery · RCC Kids · Communion Team · Connect Team · Finance Team · GriefShare · Life Groups · Maintenance Team · Men · MOMs · Outreach/Missions · Parking Team · Prayer Team · Production Team · Students/REACH · Women · Worship</p>
+      <div class="g-note">This list becomes the <strong>single controlled taxonomy</strong> (web issue #1) used identically by Church Center categories, website filters, Canva template selection, and the NFC connect page. Names may change in that decision — this is the v1.1 baseline.</div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section class="rcc-section rcc-s-dark">
+    <div class="rcc-container">
+      <p class="g-kicker">07 — Modeled on</p>
+      <table class="g-table">
+        <tr><th>Reference</th><th>What we took</th></tr>
+        <tr><td><a href="https://brand.life.church" style="color:var(--rcc-brand-soft)">brand.life.church</a></td><td>Brand guide as a living website; positioning → structure → visual sections</td></tr>
+        <tr><td><a href="https://lctv-site.s3.amazonaws.com/brand/LC_Pocket_Guidelines_Web.pdf" style="color:var(--rcc-brand-soft)">Life.Church pocket guide</a></td><td>Compressed logo/type/color rules a volunteer can absorb in five minutes</td></tr>
+        <tr><td>Elevation Church seasonal brand guides</td><td>Seasonal/series art as a system layered on stable core identity</td></tr>
+        <tr><td><a href="https://styleguide.mailchimp.com" style="color:var(--rcc-brand-soft)">Mailchimp content style guide</a></td><td>Voice &amp; formatting standards as first-class brand rules (our section 01)</td></tr>
+        <tr><td>RCC brand guidelines v1.1 (2020)</td><td>Logo rules, Montserrat, copy standards, sizes — the baseline this supersedes</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer class="rcc-footer" style="padding-top:2rem;">
+    <div class="rcc-footer-bottom" style="border-top:none;">
+      <span>&copy; 2026 River Christian Church — Brand Guide v2.0 draft</span>
+      <span><a href="../index.html" style="display:inline;">UI Shell home</a></span>
+    </div>
+  </footer>
+
+  <!-- BETA SWITCHER -->
+  <div class="beta-switcher" id="switcher">
+    <div class="beta-menu">
+      <a href="../beta/index.html">Home (public)</a>
+      <a href="../beta/portal.html">Portal (signed in)</a>
+      <a href="../beta/components.html">Components</a>
+      <a href="index.html" class="active">Brand Guide</a>
+      <a href="../index.html">&larr; All options</a>
+    </div>
+    <button class="beta-toggle" onclick="document.getElementById('switcher').classList.toggle('open')">β</button>
+  </div>
+
+  <script>
+    document.querySelectorAll('#picker .a-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        document.querySelectorAll('#picker .a-chip').forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        document.documentElement.style.setProperty('--rcc-accent', chip.dataset.accent);
+        document.documentElement.style.setProperty('--rcc-accent-tint', chip.dataset.tint);
+      });
+    });
+  </script>
+
+</body>
+</html>
