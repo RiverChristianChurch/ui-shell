@@ -443,14 +443,6 @@
 }
 .rcc-s-light .rcc-faq p { color: var(--rcc-text-muted-light); }
 
-/* ─── Plan-a-visit form panel (mockup) ─── */
-.rcc-form-panel {
-  background: var(--rcc-dark-card); border: 1px solid var(--rcc-dark-border);
-  border-radius: var(--rcc-radius-lg); padding: 2rem;
-}
-.rcc-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
-.rcc-form-grid .rcc-field--full { grid-column: 1 / -1; }
-
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
   .rcc-message-grid, .rcc-portal-grid { grid-template-columns: 1fr; }
@@ -468,6 +460,5 @@
   .rcc-step { border-right: none; }
   .rcc-hero-meta { display: none; }
   .rcc-footer-grid { grid-template-columns: 1fr; }
-  .rcc-form-grid { grid-template-columns: 1fr; }
   .rcc-supra-inner { justify-content: center; gap: 1.25rem; padding: 0 1rem; }
 }

@@ -15,7 +15,7 @@ iterate autonomously, ship, report, stop.
 
 ## Section queue (check off when done)
 
-- [ ] 1. Visit — what to expect, service times/directions, visitor FAQ, kids preview
+- [x] 1. Visit — what to expect, service times/directions, visitor FAQ, kids preview
 - [ ] 2. Next Steps — Growth Track, Baptism, LifeGroups (finder concept), Serve, Prayer
 - [ ] 3. Watch — live, messages archive (series/speaker/date mock), sermon detail page
 - [ ] 4. Events — text-first filterable list + event detail page (E91/Eleven22 pattern)

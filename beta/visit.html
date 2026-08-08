@@ -14,12 +14,11 @@
      Media shoot is in progress (Aug 2026) and swaps in later. No text baked into imagery. -->
 <body class="rcc-body rcc-has-supra">
 
-  <!-- SUPRA UTILITY BAR — carries Preschool + This Week (+ Give, never highlighted) -->
+  <!-- SUPRA UTILITY BAR — carries Preschool + This Week (Give stays a plain main-nav item) -->
   <div class="rcc-supra">
     <div class="rcc-supra-inner">
       <a href="#">River Preschool</a>
       <a href="#">This Week</a>
-      <a href="#">Give</a>
     </div>
   </div>
 
@@ -37,7 +36,7 @@
         <a href="#">Events</a>
         <a href="#">Give</a>
         <a href="portal.html" class="rcc-nav-btn-ghost">Sign In</a>
-        <a href="#plan" class="rcc-nav-btn">Plan a Visit</a>
+        <a href="#next" class="rcc-nav-btn">Plan a Visit</a>
       </div>
     </div>
   </nav>
@@ -50,7 +49,7 @@
       <h1>You Are <span>Welcome Here</span></h1>
       <p class="rcc-hero-sub">It doesn't matter what you look like, where you're from, or where you are on your spiritual journey. You can belong before you believe — so come as you are.</p>
       <div class="rcc-hero-actions">
-        <a href="#plan" class="rcc-btn rcc-btn--brand">Plan Your Visit</a>
+        <a href="#next" class="rcc-btn rcc-btn--brand">Plan Your Visit</a>
         <a href="#times" class="rcc-btn rcc-btn--outline">Service Times &amp; Directions</a>
       </div>
     </div>
@@ -230,69 +229,24 @@
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/></svg>
   </div>
 
-  <!-- PLAN A VISIT -->
-  <section class="rcc-section rcc-s-teal" id="plan">
+  <!-- YOUR NEXT STEP — decided IA cuts the custom plan-a-visit form:
+       What-to-Expect + FAQ is the funnel, and the Connect Card (→ PCO) is the next step. -->
+  <section class="rcc-section rcc-s-teal" id="next">
     <div class="rcc-container">
       <div class="rcc-portal-grid">
         <div>
-          <div class="rcc-section-label">Plan Your Visit</div>
+          <div class="rcc-section-label">Before You Come</div>
           <div class="rcc-section-title">Let Us Know You're Coming</div>
           <div class="rcc-section-desc">
-            <span class="rcc-draft">Tell us you're coming and we'll have someone ready to meet you, walk you in, and help your family feel at home from the moment you arrive.</span>
+            Fill out a Connect Card and we'll be watching for you — and we'll follow up to answer any questions before the weekend.
           </div>
-          <p class="rcc-section-desc" style="margin-top:1.5rem;">
-            Prefer to just show up? That works too — say hi at the Welcome Desk and we'll take great care of you.
+          <p class="rcc-section-desc" style="margin-top:1.25rem;">
+            Prefer to just show up? That works too. Head to the Welcome Desk when you arrive and we'll take it from there.
           </p>
         </div>
-        <div class="rcc-form-panel">
-          <form onsubmit="return false;">
-            <div class="rcc-form-grid">
-              <div class="rcc-field">
-                <label for="fn">First name</label>
-                <input class="rcc-input" id="fn" type="text" placeholder="Jane">
-              </div>
-              <div class="rcc-field">
-                <label for="ln">Last name</label>
-                <input class="rcc-input" id="ln" type="text" placeholder="Doe">
-              </div>
-              <div class="rcc-field">
-                <label for="em">Email</label>
-                <input class="rcc-input" id="em" type="email" placeholder="jane@email.com">
-              </div>
-              <div class="rcc-field">
-                <label for="ph">Phone</label>
-                <input class="rcc-input" id="ph" type="tel" placeholder="(904) 555-0000">
-              </div>
-              <div class="rcc-field">
-                <label for="sv">Which service?</label>
-                <select class="rcc-select" id="sv">
-                  <option>Saturday — 5:00 PM</option>
-                  <option>Sunday — 8:30 AM</option>
-                  <option>Sunday — 10:00 AM</option>
-                  <option>Sunday — 11:30 AM</option>
-                </select>
-              </div>
-              <div class="rcc-field">
-                <label for="pt">How many coming?</label>
-                <select class="rcc-select" id="pt">
-                  <option>Just me</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5 or more</option>
-                </select>
-              </div>
-              <div class="rcc-field rcc-field--full">
-                <label for="kd">Bringing kids? Let us know their ages</label>
-                <input class="rcc-input" id="kd" type="text" placeholder="e.g. 4 and 7">
-              </div>
-              <div class="rcc-field rcc-field--full">
-                <label for="nt">Anything we should know?</label>
-                <textarea class="rcc-textarea" id="nt" placeholder="Questions, accessibility needs, or just say hi."></textarea>
-              </div>
-            </div>
-            <a href="#" class="rcc-btn rcc-btn--brand" style="margin-top:1.5rem;">Plan My Visit</a>
-          </form>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-start;justify-content:center;">
+          <a href="#" class="rcc-btn rcc-btn--brand">Fill Out a Connect Card</a>
+          <a href="#times" class="rcc-btn rcc-btn--outline">See Service Times</a>
         </div>
       </div>
     </div>
@@ -302,7 +256,7 @@
   <section class="rcc-cta-band">
     <h2>You're Welcome Here</h2>
     <p>No matter your story, your doubts, or where you've been — there's a place for you at RCC.</p>
-    <a href="#plan" class="rcc-btn rcc-btn--white">Plan Your Visit</a>
+    <a href="#next" class="rcc-btn rcc-btn--white">Plan Your Visit</a>
   </section>
 
   <!-- FOOTER — tier 1 full logo -->
