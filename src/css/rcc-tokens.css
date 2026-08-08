@@ -61,4 +61,5 @@
   /* Layout */
   --rcc-container: 1280px;
   --rcc-nav-h: 68px;
+  --rcc-supra-h: 38px;                     /* supra utility bar (Preschool · This Week · Give) */
 }

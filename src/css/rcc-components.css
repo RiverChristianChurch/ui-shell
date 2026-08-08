@@ -360,6 +360,97 @@
   font-size: 0.75rem; color: var(--rcc-text-muted-dark);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   VISIT / SITEWIDE ADDITIONS (night 1 — Visit section)
+   All token-driven, rcc- prefixed, reusable across pages.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── DRAFT flag — invented copy awaiting Jason's review ───
+   Block wrapper (dashed amber outline + corner chip) and an inline chip. */
+.rcc-draft {
+  position: relative; outline: 2px dashed var(--rcc-warn); outline-offset: 5px;
+  border-radius: var(--rcc-radius);
+}
+.rcc-draft::before {
+  content: 'DRAFT — needs review'; position: absolute; top: -0.7rem; left: 0.75rem;
+  background: var(--rcc-warn); color: var(--rcc-dark);
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 9px; border-radius: 999px; z-index: 3; white-space: nowrap;
+}
+.rcc-draft-chip {
+  display: inline-block; vertical-align: middle; margin-left: 0.5rem;
+  background: var(--rcc-warn); color: var(--rcc-dark);
+  font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px;
+}
+
+/* ─── Supra utility bar (above the main nav) ───
+   Carries Preschool + This Week + Give. Give is a plain link — never highlighted. */
+.rcc-supra {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 51; height: var(--rcc-supra-h);
+  background: var(--rcc-dark); border-bottom: 1px solid var(--rcc-dark-border);
+}
+.rcc-supra-inner {
+  max-width: var(--rcc-container); margin: 0 auto; height: 100%; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: flex-end; gap: 1.75rem;
+}
+.rcc-supra a {
+  color: var(--rcc-text-muted-dark); text-decoration: none;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.rcc-supra a:hover { color: var(--rcc-white); }
+/* Opt-in offset so the fixed nav + hero clear the supra bar. */
+.rcc-has-supra .rcc-nav { top: var(--rcc-supra-h); }
+.rcc-has-supra .rcc-hero { margin-top: calc(var(--rcc-nav-h) + var(--rcc-supra-h)); }
+
+/* ─── Service-times grid ─── */
+.rcc-times {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--rcc-dark-border); border: 1px solid var(--rcc-dark-border);
+  border-radius: var(--rcc-radius-lg); overflow: hidden; margin-top: 2.5rem;
+}
+.rcc-time-cell { background: var(--rcc-dark-card); padding: 1.75rem 1.5rem; }
+.rcc-s-light .rcc-time-cell { background: var(--rcc-white); }
+.rcc-time-cell h4 {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--rcc-brand-light); margin: 0 0 0.75rem;
+}
+.rcc-s-light .rcc-time-cell h4 { color: var(--rcc-brand); }
+.rcc-time-cell .rcc-time-row { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.35; }
+.rcc-time-cell .rcc-time-note { font-size: 0.8rem; color: var(--rcc-text-muted-dark); margin-top: 0.5rem; }
+.rcc-s-light .rcc-time-cell .rcc-time-note { color: var(--rcc-text-muted-light); }
+
+/* ─── FAQ accordion (native <details>/<summary>, no JS) ─── */
+.rcc-faq { margin-top: 2.5rem; max-width: 780px; }
+.rcc-faq details { border-bottom: 1px solid var(--rcc-dark-border); }
+.rcc-s-light .rcc-faq details { border-bottom-color: var(--rcc-gray-100); }
+.rcc-faq summary {
+  cursor: pointer; list-style: none; padding: 1.15rem 0;
+  font-weight: 600; font-size: 0.95rem; color: inherit;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+.rcc-faq summary::-webkit-details-marker { display: none; }
+.rcc-faq summary::after {
+  content: '+'; color: var(--rcc-brand-light); font-weight: 700; font-size: 1.35rem;
+  line-height: 1; flex-shrink: 0; transition: transform 0.2s;
+}
+.rcc-s-light .rcc-faq summary::after { color: var(--rcc-brand); }
+.rcc-faq details[open] summary::after { content: '\2212'; }
+.rcc-faq p {
+  padding: 0 0 1.25rem; margin: 0; max-width: 68ch;
+  font-size: 0.9rem; line-height: 1.65; color: var(--rcc-text-muted-dark);
+}
+.rcc-s-light .rcc-faq p { color: var(--rcc-text-muted-light); }
+
+/* ─── Plan-a-visit form panel (mockup) ─── */
+.rcc-form-panel {
+  background: var(--rcc-dark-card); border: 1px solid var(--rcc-dark-border);
+  border-radius: var(--rcc-radius-lg); padding: 2rem;
+}
+.rcc-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.rcc-form-grid .rcc-field--full { grid-column: 1 / -1; }
+
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
   .rcc-message-grid, .rcc-portal-grid { grid-template-columns: 1fr; }
@@ -368,6 +459,8 @@
   .rcc-steps { grid-template-columns: repeat(2, 1fr); }
   .rcc-step { border-bottom: 1px solid var(--rcc-dark-border); }
   .rcc-footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .rcc-times { grid-template-columns: 1fr; }
+  .rcc-time-cell { border-bottom: 1px solid var(--rcc-dark-border); }
 }
 @media (max-width: 768px) {
   .rcc-nav-links { display: none; }
@@ -375,4 +468,6 @@
   .rcc-step { border-right: none; }
   .rcc-hero-meta { display: none; }
   .rcc-footer-grid { grid-template-columns: 1fr; }
+  .rcc-form-grid { grid-template-columns: 1fr; }
+  .rcc-supra-inner { justify-content: center; gap: 1.25rem; padding: 0 1rem; }
 }
