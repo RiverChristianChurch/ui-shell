@@ -220,9 +220,10 @@
 .rcc-step { padding: 2rem 1.5rem; border-right: 1px solid var(--rcc-dark-border); position: relative; }
 .rcc-step:last-child { border-right: none; }
 .rcc-step-num {
-  font-size: 3rem; font-weight: 800; color: var(--rcc-brand-tint);
+  font-size: 3rem; font-weight: 800; color: var(--rcc-brand-soft);
   line-height: 1; margin-bottom: 1rem; letter-spacing: -0.03em;
 }
+.rcc-s-light .rcc-step-num { color: var(--rcc-brand); }
 .rcc-step h3 { font-size: 1rem; font-weight: 700; margin: 0 0 0.5rem; }
 .rcc-step p { font-size: 0.825rem; color: var(--rcc-text-muted-dark); line-height: 1.5; margin: 0; }
 
@@ -442,6 +443,13 @@
   font-size: 0.9rem; line-height: 1.65; color: var(--rcc-text-muted-dark);
 }
 .rcc-s-light .rcc-faq p { color: var(--rcc-text-muted-light); }
+
+/* ─── Embedded map ─── */
+.rcc-map {
+  border: 1px solid var(--rcc-dark-border); border-radius: var(--rcc-radius-lg);
+  overflow: hidden; min-height: 240px; background: var(--rcc-dark-card);
+}
+.rcc-map iframe { display: block; width: 100%; height: 100%; min-height: 240px; border: 0; }
 
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
