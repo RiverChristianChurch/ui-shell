@@ -9,13 +9,15 @@
 # artifact's status dot, writes the report, and can push-notify / answer Jason in-thread.
 #
 # The loop state lives in ui-shell/docs/NIGHTLY-LOOP.md (the queue self-selects the next
-# section every night). Work happens in ~/dev/rcc/ui-shell; research audits are read from
-# ~/dev/rcc/web/docs/research/.
+# section every night). Sections BUILD as real Nuxt pages in ~/dev/rcc/web (pages/*.vue);
+# ~/dev/rcc/ui-shell holds the loop docs + the shared tokens/components (bump its tag when
+# a section needs new ones). Research audits are read from ~/dev/rcc/web/docs/research/.
 set -uo pipefail
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 SESSION="rcc-web"
-REPO="$HOME/dev/rcc/ui-shell"
+REPO="$HOME/dev/rcc/ui-shell"   # loop state (NIGHTLY-LOOP.md) + design system
+WEB="$HOME/dev/rcc/web"         # build target — real Nuxt pages ship here
 LOG="$HOME/Library/Logs/rcc-web-nightly.log"
 
 exec >>"$LOG" 2>&1
@@ -40,17 +42,19 @@ if [ "$snap1" != "$snap2" ]; then
   exit 0
 fi
 
-# 3. Clean tree on main in the ui-shell repo (that's what the loop commits), or bail.
-cd "$REPO" || { echo "FATAL: cannot cd $REPO"; exit 1; }
-git checkout main >/dev/null 2>&1
-git pull --ff-only >/dev/null 2>&1 || echo "WARN: main not fast-forward; continuing."
-if [ -n "$(git status --porcelain)" ]; then
-  echo "SKIP: ui-shell working tree dirty — leaving it for Jason."
-  exit 0
-fi
+# 3. Both repos must be clean on main (loop commits to ui-shell; pages ship to web), or bail.
+for r in "$REPO" "$WEB"; do
+  cd "$r" || { echo "FATAL: cannot cd $r"; exit 1; }
+  git checkout main >/dev/null 2>&1
+  git pull --ff-only >/dev/null 2>&1 || echo "WARN: $(basename "$r") main not fast-forward; continuing."
+  if [ -n "$(git status --porcelain)" ]; then
+    echo "SKIP: $(basename "$r") working tree dirty — leaving it for Jason."
+    exit 0
+  fi
+done
 
 # 4. Inject the one-line nightly prompt and submit it robustly.
-PROMPT='NIGHTLY RCC WEBSITE ITERATION. cd ~/dev/rcc/ui-shell && git pull, then follow docs/NIGHTLY-LOOP.md EXACTLY. Take the FIRST unchecked section from the queue in that file. Research the model churches for THAT section only (single-site cohort first — E91, Venture, Real Life Sac, Motivation, Fusion, Brooklake — via the raw audits at ~/dev/rcc/web/docs/research/church-site-audits-2026-08.json plus live fetches; note 2-3 concrete borrowings in the report). Pull real RCC copy from https://riverchristian.church. HARD RULES: RCC content takes precedence — edit only for grammar and flow; any copy you invent gets an inline .rcc-draft badge ("DRAFT — needs review") until Jason reviews. Tokens and rcc- prefixed components only, no hardcoded colors/fonts; follow brand/index.html. Give is never visually highlighted; the supra-menu carries Preschool + This Week; taxonomy is undecided so use current ministry names verbatim. Never touch options/ or brand-guide decisions (accent/type/logo tiers/seasonal) — propose those via issue. Build beta/<section>.html pages using existing tokens/components; link every new page from the beta switcher + beta/index.html. VALIDATE: links resolve on Pages paths, responsive at 768/1024, both logo tiers correct, no console errors, no hardcoded colors. SHIP: small commits to main, push (Pages auto-publishes). Then check the section box in docs/NIGHTLY-LOOP.md (commit it), and update that section status dot in the sitemap artifact (pass its URL https://claude.ai/code/artifact/8f944e6e-eb71-4f83-9e4a-61e3445562c0 to the Artifact tool) from open to partial/done. REPORT: append to docs/NIGHTLY-REPORTS.md — date, section, what shipped (URLs), borrowings, list of DRAFT-flagged copy, decisions needed. Anything needing Jason = a GitHub issue on RiverChristianChurch/ui-shell labeled needs-jason. Then call PushNotification ONCE with a phone-readable summary (what shipped + any decisions). ONE section per night — STOP after the report. Never commit secrets. Begin now.'
+PROMPT='NIGHTLY RCC WEBSITE ITERATION. cd ~/dev/rcc/ui-shell && git pull, then read docs/NIGHTLY-LOOP.md and follow it EXACTLY. BUILD TARGET IS THE web REPO (~/dev/rcc/web) — real Nuxt pages, NOT static mockups. cd ~/dev/rcc/web && git checkout main && git pull. Take the FIRST unchecked section from the queue. Research the model churches for THAT section only (single-site cohort first — E91, Venture, Real Life Sac, Motivation, Fusion, Brooklake — via the raw audits at ~/dev/rcc/web/docs/research/church-site-audits-2026-08.json plus live fetches). EACH section must earn >=2 concrete model borrowings — name them in the report; do not invent sections the cohort does not justify. Pull real RCC copy from https://riverchristian.church; cross-check the sitemap artifact for decided IA (it can CUT things). RCC content takes precedence — edit only for grammar/flow; any copy you invent gets a .rcc-draft/.rcc-draft-chip DRAFT badge until Jason reviews. Build web/pages/<section>.vue (+ web/components/* as needed) with useHead for title/description; nav/footer/supra live in web/layouts/default.vue (pages supply content only). Use ui-shell classes; NO hardcoded colors/fonts. If you need a NEW shared token/component, add it to ui-shell/src/css FIRST, bump ui-shell version+tag (git tag vX; push), then npm i @riverchristianchurch/ui-shell@github:RiverChristianChurch/ui-shell#vX in web and use it. Give never highlighted; supra carries Preschool + This Week; taxonomy undecided -> current ministry names. Never touch ui-shell/options/ or brand-guide decisions (accent/type/logo tiers/seasonal) — propose via issue. VALIDATE: cd ~/dev/rcc/web && npm run build must pass; boot node .output/server/index.mjs and curl the route to confirm SSR renders real content; internal links/anchors resolve; responsive 768/1024; no hardcoded colors. SHIP: small commits to web main + push (Vercel deploys); if ui-shell changed, push it + its new tag first. Then check the section box in ui-shell docs/NIGHTLY-LOOP.md (commit to ui-shell), and update that section status dot in the sitemap artifact (pass URL https://claude.ai/code/artifact/8f944e6e-eb71-4f83-9e4a-61e3445562c0 to the Artifact tool) from open to partial/done. REPORT: append to ui-shell docs/NIGHTLY-REPORTS.md — date, section, route shipped, the >=2 borrowings, DRAFT-flagged list, decisions needed. Anything needing Jason = a GitHub issue labeled needs-jason (repo you touched; default RiverChristianChurch/web). Then call PushNotification ONCE with a phone-readable summary. ONE section per night — STOP after the report. Never commit secrets. Begin now.'
 
 tmux send-keys -t "$SESSION" -l "$PROMPT"
 sleep 2
