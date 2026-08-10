@@ -4,6 +4,54 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-10 · Section 2 — Next Steps
+
+**Status:** shipped to `web` main · queue box checked · sitemap Next-Steps dots → ◐ in-beta
+
+### What shipped
+New real Nuxt route **`web/pages/next-steps.vue`** (SSR + `useHead` SEO) — the discipleship
+funnel, built from real RCC copy.
+- Route: `/next-steps` (added to sitewide nav in `layouts/default.vue`). Vercel deploys from `main`.
+- Sections: hero (real framing line "…that's the starting point, not the goal") → **Growth
+  Track** 4-step ladder (Welcome to RCC → Baptism → LifeGroups → Serve, + Give as step 5) →
+  **Welcome to RCC** (real: monthly, Room 204, 2nd service; next date DRAFT) → **Baptism**
+  (real definition/immersion copy, Schedule + Age-7 Kids Packet + *Adventure of a Lifetime*)
+  → **LifeGroups** (real one-liner + 16-topic study library; finder = DRAFT) → **Serve**
+  (DRAFT, Here/Near/Far tiers — real teams migrate from the volunteer app, ADR-002) →
+  **Prayer** (real: Galatians 6:2, prayer-team copy, weekly 11:00–11:45 Worship Center, 3
+  in-person pathways, Request Prayer CTA) → CTA band.
+- Built entirely on existing ui-shell primitives (`rcc-steps`, `rcc-card-grid`, `rcc-pill`,
+  `rcc-portal-feat`, `rcc-faq`, waves, section bands) — no new components needed for the page.
+
+### ≥2 model borrowings
+1. **Motivation Church** — linear "one card, one action, in order" next-steps funnel → the
+   Growth Track 4-step ladder (each rung a single CTA to its section).
+2. **E91 (East 91st St)** — (a) group **finder** ("help me find a group") → the DRAFT
+   LifeGroups finder concept (filter by day/location/audience/study); (b) **Serve Here /
+   Near / Far** tiered IA → the three Serve cards; (c) surfacing the newcomer-event **date +
+   RSVP** on the tile → Welcome-to-RCC "Save My Spot".
+
+### DRAFT-flagged (needs review)
+- Welcome-to-RCC **next session date** (wires to PCO events feed).
+- **LifeGroups group finder** (placeholder layout; groups come live from PCO).
+- **Serve** teams/descriptions (source of truth = migrating volunteer app / PCO team list).
+
+### Also this session (not part of the nightly section)
+- **Header redesign** — retired the flat grey supra/nav for a **branded deep-teal header**
+  (deep-teal brand rail supra + deep-teal glass nav w/ brand-soft hairline + shadow). New
+  header-surface tokens (`--rcc-supra-bg`, `--rcc-nav-bg`, `--rcc-nav-border`,
+  `--rcc-nav-shadow`). Shipped as **ui-shell v0.1.0-beta.3**, consumed by `web`.
+- **Dev-port fix** — 1720 is a browser-blocked port (`ERR_UNSAFE_PORT`); dev server moved
+  to **1721** in `web` and documented in DEV_PORTS.md.
+
+### Decisions needed from Jason
+- LifeGroups finder + Serve teams need the PCO data wiring plan (which comes first — this
+  page's finder, or the volunteer-app migration that owns the serve teams?).
+- Baptism/Welcome/Serve CTAs currently point to `/connect`; confirm whether each should be a
+  dedicated PCO Church Center form instead.
+
+---
+
 ## 2026-08-08 · Section 1 — Visit
 
 **Status:** shipped to beta · queue box checked · sitemap dots (Visit ×4) → ◐ in-beta

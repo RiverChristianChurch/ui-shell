@@ -25,7 +25,7 @@ autonomously, ship, report, stop.
 ## Section queue (check off when done)
 
 - [x] 1. Visit — what to expect, service times/directions, visitor FAQ, kids preview
-- [ ] 2. Next Steps — Growth Track, Baptism, LifeGroups (finder concept), Serve, Prayer
+- [x] 2. Next Steps — Growth Track, Baptism, LifeGroups (finder concept), Serve, Prayer
 - [ ] 3. Watch — live, messages archive (series/speaker/date mock), sermon detail page
 - [ ] 4. Events — text-first filterable list + event detail page (E91/Eleven22 pattern)
 - [ ] 5. Ministries hub + Kids (incl. check-in/safety/pre-reg content)
