@@ -19,9 +19,11 @@
 /* ─── Nav shell ─── */
 .rcc-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  backdrop-filter: blur(24px);
-  background: rgba(12, 12, 14, 0.7);
-  border-bottom: 1px solid var(--rcc-dark-border);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  background: var(--rcc-nav-bg);
+  border-bottom: 1px solid var(--rcc-nav-border);
+  box-shadow: var(--rcc-nav-shadow);
 }
 .rcc-nav-inner {
   max-width: var(--rcc-container); margin: 0 auto; padding: 0 2rem;
@@ -31,7 +33,7 @@
 .rcc-nav-logo img { height: 36px; display: block; }
 .rcc-nav-links { display: flex; align-items: center; gap: 2rem; }
 .rcc-nav-links a {
-  color: var(--rcc-text-muted-dark); text-decoration: none;
+  color: rgba(255, 255, 255, 0.62); text-decoration: none;
   font-size: 0.825rem; font-weight: 500; letter-spacing: 0.02em;
   transition: color 0.2s;
 }
@@ -389,18 +391,19 @@
    Carries Preschool + This Week + Give. Give is a plain link — never highlighted. */
 .rcc-supra {
   position: fixed; top: 0; left: 0; right: 0; z-index: 51; height: var(--rcc-supra-h);
-  background: var(--rcc-dark); border-bottom: 1px solid var(--rcc-dark-border);
+  background: var(--rcc-supra-bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .rcc-supra-inner {
   max-width: var(--rcc-container); margin: 0 auto; height: 100%; padding: 0 2rem;
   display: flex; align-items: center; justify-content: flex-end; gap: 1.75rem;
 }
 .rcc-supra a {
-  color: var(--rcc-text-muted-dark); text-decoration: none;
-  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
-  transition: color 0.2s;
+  color: var(--rcc-brand-soft); text-decoration: none;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+  transition: color 0.2s, opacity 0.2s; opacity: 0.9;
 }
-.rcc-supra a:hover { color: var(--rcc-white); }
+.rcc-supra a:hover { color: var(--rcc-white); opacity: 1; }
 /* Opt-in offset so the fixed nav + hero clear the supra bar. */
 .rcc-has-supra .rcc-nav { top: var(--rcc-supra-h); }
 .rcc-has-supra .rcc-hero { margin-top: calc(var(--rcc-nav-h) + var(--rcc-supra-h)); }

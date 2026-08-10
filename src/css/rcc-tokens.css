@@ -62,4 +62,11 @@
   --rcc-container: 1280px;
   --rcc-nav-h: 68px;
   --rcc-supra-h: 38px;                     /* supra utility bar (Preschool · This Week · Give) */
+
+  /* Header surfaces — branded deep-teal, NOT flat grey.
+     The supra bar is a slim brand rail; the nav is deep-teal glass. */
+  --rcc-supra-bg: linear-gradient(90deg, #05303f 0%, #063d54 100%); /* brand-deep → brand-dark rail */
+  --rcc-nav-bg: rgba(7, 26, 35, 0.72);     /* deep teal-black glass (reads teal, not grey) */
+  --rcc-nav-border: rgba(108, 196, 234, 0.12);  /* brand-soft hairline */
+  --rcc-nav-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
 }
