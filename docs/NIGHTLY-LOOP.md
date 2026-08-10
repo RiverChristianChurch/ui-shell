@@ -22,6 +22,23 @@ autonomously, ship, report, stop.
 - Model-site raw audits: `~/dev/rcc/web/docs/research/church-site-audits-2026-08.json`
 - Current-site content source: https://riverchristian.church
 
+## Rework queue (PRIORITY — clear before taking a new section)
+
+Streamline/condense passes take precedence over new sections. In step 1, take the
+FIRST unchecked **rework item** here; only if this list is empty do you take the
+first unchecked Section below. One item per night, same ship/report discipline.
+
+- [ ] **Visit** (`web/pages/visit.vue`) — too many sections / too much fluff.
+      Condense: merge or cut low-value bands, tighten copy, aim for a denser page
+      that still covers what-to-expect + service times/directions + FAQ + next step.
+      Jason (2026-08-10): *"I don't like a ton of fluff, I like more condensed
+      pages. The overall UI and look/feel is great — streamline the content."*
+      Keep the look/feel; cut length, not polish. Currently 6 bands (hero, what-to-
+      expect, times, FAQ, kids preview, next-step, CTA) — target ~4.
+- [ ] **Next Steps** (`web/pages/next-steps.vue`) — audit against the same bar right
+      after (it shipped section-heavy: 7 bands). Consolidate where it reads long
+      (e.g. fold Welcome-to-RCC detail into the Growth Track step; merge Serve tiers).
+
 ## Section queue (check off when done)
 
 - [x] 1. Visit — what to expect, service times/directions, visitor FAQ, kids preview
@@ -40,7 +57,8 @@ autonomously, ship, report, stop.
 
 1. `cd ~/dev/rcc/ui-shell && git pull` (loop state + design system), then
    `cd ~/dev/rcc/web && git checkout main && git pull` (build target). Take the
-   FIRST unchecked section. Both trees must be clean.
+   FIRST unchecked **Rework-queue** item if any exist; otherwise the FIRST unchecked
+   Section. Both trees must be clean.
 2. **Research**: for THIS section only, revisit the model sites (6 single-site
    cohort first — E91, Venture, Real Life Sac, Motivation, Fusion, Brooklake —
    then multis) via the raw audits + live fetches. **Each section earns ≥2
@@ -77,6 +95,11 @@ autonomously, ship, report, stop.
 
 ## Hard rules
 
+- **Condensed over comprehensive (Jason, 2026-08-10).** Jason prefers tight, dense
+  pages — no fluff. Prefer fewer, higher-value sections; tighten copy; when in doubt
+  cut a band rather than add one. A new page should not exceed ~4–5 content bands
+  without a reason. The look/feel is already where he wants it — spend the effort on
+  brevity, not more sections.
 - RCC content precedence; generated copy is DRAFT-flagged inline until reviewed.
 - Build in `web` (real Nuxt). `ui-shell` only for shared tokens/components, and
   only via a tag bump — never point `web` at an un-tagged ui-shell ref.
