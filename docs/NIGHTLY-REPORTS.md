@@ -4,6 +4,46 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-11 (2) · Visit — content-fidelity + header fix (interactive)
+
+**Status:** shipped to `web` main. Triggered by Jason review, not the scheduler.
+
+### What shipped
+- **Content fidelity (fixed a HARD-RULE violation).** The condensed Visit page had
+  paraphrased the church's real copy (e.g. the parking blurb) and invented a
+  "Questions First-Timers Ask" FAQ that isn't on the live site. Re-fetched
+  `/about-us/what-to-expect/`, `/about-us/new/`, and the home page (raw HTML) and
+  rebuilt `web/pages/visit.vue` with **verbatim** RCC copy:
+  - What to Expect = the site's own sections verbatim (Services, Worship Music,
+    What to Wear, Where to Park, Communion, Kids).
+  - Close = `/about-us/new/` verbatim ("…you can belong before you believe", Connect Card).
+  - Removed the invented FAQ + the reworded parking copy entirely.
+  - Only deviation: **kids age** — site says "birth through grade five" (kept
+    verbatim); a DRAFT chip's hover note flags the open 6th-grade question (source + why).
+  - Verified: `Our parking team is top-notch…` present verbatim; paraphrase gone; FAQ gone.
+- **Header (the "grey bar" fix).** Shipped **ui-shell v0.1.0-beta.4**: nav + supra
+  are now **transparent over the hero** and gain the glass/teal only on scroll
+  (`.is-scrolled`). The hero fills to the very top (padding-top clears the header);
+  removed the `margin-top` that had left a solid bar above it. Layout adds a scroll
+  listener toggling `.is-scrolled`.
+- **DRAFT chip is now source-aware** (ui-shell beta.4): `[data-note]` hover tooltip
+  shows source + what changed + why — so every deviation from live copy is traceable.
+
+### New standing rule (all future nights)
+Added a hard rule: **verbatim RCC copy; any reword/reformat/invention gets a
+source-noted DRAFT chip.** Verify by fetching the live page and diffing each line.
+
+### Owed next (rework queue)
+- **Next Steps** now needs a content-fidelity audit vs the live site (its copy was
+  paraphrased before this rule), then a condense pass. Queued.
+
+### Decisions needed from Jason
+- **Kids age:** live site says "birth through grade five" — confirm whether to keep
+  that or change to "through 6th grade" (you'd asked for 6th earlier). See the DRAFT
+  chip on the Visit page's Kids block.
+
+---
+
 ## 2026-08-11 · Rework — Visit (condense)
 
 **Status:** shipped to `web` main · rework-queue box checked · sitemap Visit dots stay ● (refined, not new)

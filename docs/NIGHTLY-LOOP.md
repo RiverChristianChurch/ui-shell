@@ -32,9 +32,12 @@ first unchecked Section below. One item per night, same ship/report discipline.
       (hero + What to Expect + Times & Directions + FAQ + one merged Connect-Card
       CTA). Cut standalone Kids-preview band, merged dual closing CTAs, trimmed FAQ
       to 6 real Qs, tightened copy. Look/feel unchanged.
-- [ ] **Next Steps** (`web/pages/next-steps.vue`) — audit against the same bar right
-      after (it shipped section-heavy: 7 bands). Consolidate where it reads long
-      (e.g. fold Welcome-to-RCC detail into the Growth Track step; merge Serve tiers).
+- [ ] **Next Steps** (`web/pages/next-steps.vue`) — TWO passes owed: (a) **content
+      fidelity audit** against the live site per the new hard rule — every line vs
+      riverchristian.church/next-steps/* and /ministries/prayer/, restore verbatim
+      RCC copy, DRAFT-chip (with source + what-changed + why) anything reworded or
+      invented; (b) condense if it still reads long after that. It shipped
+      section-heavy (7 bands) and its copy was paraphrased before this rule existed.
 
 ## Section queue (check off when done)
 
@@ -92,6 +95,17 @@ first unchecked Section below. One item per night, same ship/report discipline.
 
 ## Hard rules
 
+- **Verbatim RCC copy + source-traceable changes (Jason, 2026-08-11).** OUR CONTENT
+  FIRST: pull the church's exact words from the live site and use them **verbatim**.
+  If you change the wording of ANYTHING that exists on the current site — reword,
+  condense, reformat (e.g. prose → FAQ), or invent net-new copy — it gets a
+  `.rcc-draft-chip` (or `.rcc-draft` block) whose `data-note` states **the source
+  URL, what changed, and why**. No paraphrasing real copy without a chip; no
+  inventing sections/answers the site doesn't have (the invented "Questions
+  First-Timers Ask" FAQ + reworded parking blurb was the violation that set this
+  rule). Verifying = fetch the live page (`curl` raw HTML → strip tags), diff each
+  line. Pure omission (dropping a whole section for scope) is editorial, not a
+  reword — note it in the report, no chip needed.
 - **Condensed over comprehensive (Jason, 2026-08-10).** Jason prefers tight, dense
   pages — no fluff. Prefer fewer, higher-value sections; tighten copy; when in doubt
   cut a band rather than add one. A new page should not exceed ~4–5 content bands
