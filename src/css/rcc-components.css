@@ -19,10 +19,18 @@
 /* ─── Nav shell ─── */
 .rcc-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  /* Default: transparent, sitting OVER the hero. The glass only appears on
+     scroll (.is-scrolled, toggled by the layout). No grey bar at the top. */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.rcc-nav.is-scrolled {
   backdrop-filter: blur(24px) saturate(140%);
   -webkit-backdrop-filter: blur(24px) saturate(140%);
   background: var(--rcc-nav-bg);
-  border-bottom: 1px solid var(--rcc-nav-border);
+  border-bottom-color: var(--rcc-nav-border);
   box-shadow: var(--rcc-nav-shadow);
 }
 .rcc-nav-inner {
@@ -84,7 +92,10 @@
 
 /* ─── Hero ─── */
 .rcc-hero {
-  margin-top: var(--rcc-nav-h); min-height: 92vh; display: flex;
+  /* Fill from the very top so the transparent nav/supra sit OVER the image.
+     Content is padded down so it clears the header. */
+  margin-top: 0; padding-top: calc(var(--rcc-nav-h) + var(--rcc-supra-h));
+  min-height: 100vh; display: flex;
   align-items: center; position: relative; overflow: hidden;
 }
 .rcc-hero-bg { position: absolute; inset: 0; background-position: center; background-size: cover; }
@@ -381,18 +392,40 @@
   padding: 2px 9px; border-radius: 999px; z-index: 3; white-space: nowrap;
 }
 .rcc-draft-chip {
-  display: inline-block; vertical-align: middle; margin-left: 0.5rem;
+  position: relative; display: inline-block; vertical-align: middle; margin-left: 0.5rem;
   background: var(--rcc-warn); color: var(--rcc-dark);
   font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 999px;
+  padding: 2px 8px; border-radius: 999px; cursor: help;
 }
+/* Source-aware note: on hover, show where the copy came from + what changed + why.
+   Put chips in NON-overflow-hidden containers (e.g. .rcc-step, section text) so
+   this tooltip isn't clipped — .rcc-card uses overflow:hidden and will clip it. */
+.rcc-draft-chip[data-note]::after {
+  content: attr(data-note);
+  position: absolute; left: 0; bottom: calc(100% + 8px);
+  width: max-content; max-width: 300px;
+  background: var(--rcc-ink); color: var(--rcc-white);
+  text-align: left; text-transform: none; letter-spacing: 0; font-weight: 400;
+  font-size: 0.72rem; line-height: 1.45;
+  padding: 0.6rem 0.7rem; border-radius: var(--rcc-radius);
+  box-shadow: var(--rcc-nav-shadow);
+  opacity: 0; transform: translateY(4px); pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease; z-index: 70;
+}
+.rcc-draft-chip[data-note]:hover::after { opacity: 1; transform: translateY(0); }
 
 /* ─── Supra utility bar (above the main nav) ───
    Carries Preschool + This Week + Give. Give is a plain link — never highlighted. */
 .rcc-supra {
   position: fixed; top: 0; left: 0; right: 0; z-index: 51; height: var(--rcc-supra-h);
+  /* Transparent over the hero at the top; branded teal rail once scrolled. */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.rcc-supra.is-scrolled {
   background: var(--rcc-supra-bg);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 .rcc-supra-inner {
   max-width: var(--rcc-container); margin: 0 auto; height: 100%; padding: 0 2rem;
@@ -404,9 +437,11 @@
   transition: color 0.2s, opacity 0.2s; opacity: 0.9;
 }
 .rcc-supra a:hover { color: var(--rcc-white); opacity: 1; }
-/* Opt-in offset so the fixed nav + hero clear the supra bar. */
+/* Nav sits just under the supra rail. The hero fills to the very top (its own
+   padding-top clears nav+supra), so NO margin offset here — that's what used to
+   leave a solid bar above the hero. Non-hero pages get their top clearance from
+   .rcc-page-head (padding), not a hero. */
 .rcc-has-supra .rcc-nav { top: var(--rcc-supra-h); }
-.rcc-has-supra .rcc-hero { margin-top: calc(var(--rcc-nav-h) + var(--rcc-supra-h)); }
 
 /* ─── Service-times grid ─── */
 .rcc-times {
