@@ -28,13 +28,10 @@ Streamline/condense passes take precedence over new sections. In step 1, take th
 FIRST unchecked **rework item** here; only if this list is empty do you take the
 first unchecked Section below. One item per night, same ship/report discipline.
 
-- [ ] **Visit** (`web/pages/visit.vue`) — too many sections / too much fluff.
-      Condense: merge or cut low-value bands, tighten copy, aim for a denser page
-      that still covers what-to-expect + service times/directions + FAQ + next step.
-      Jason (2026-08-10): *"I don't like a ton of fluff, I like more condensed
-      pages. The overall UI and look/feel is great — streamline the content."*
-      Keep the look/feel; cut length, not polish. Currently 6 bands (hero, what-to-
-      expect, times, FAQ, kids preview, next-step, CTA) — target ~4.
+- [x] **Visit** (`web/pages/visit.vue`) — DONE 2026-08-11. Condensed 7 bands → 5
+      (hero + What to Expect + Times & Directions + FAQ + one merged Connect-Card
+      CTA). Cut standalone Kids-preview band, merged dual closing CTAs, trimmed FAQ
+      to 6 real Qs, tightened copy. Look/feel unchanged.
 - [ ] **Next Steps** (`web/pages/next-steps.vue`) — audit against the same bar right
       after (it shipped section-heavy: 7 bands). Consolidate where it reads long
       (e.g. fold Welcome-to-RCC detail into the Growth Track step; merge Serve tiers).

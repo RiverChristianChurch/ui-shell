@@ -4,6 +4,42 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-11 · Rework — Visit (condense)
+
+**Status:** shipped to `web` main · rework-queue box checked · sitemap Visit dots stay ● (refined, not new)
+
+Rework-queue item took priority over a new section (per the loop's condense-first rule).
+
+### What shipped
+Streamlined **`web/pages/visit.vue`** — same route `/visit`, same look/feel, less length.
+- **7 content bands → 5:** hero → What to Expect (4 beats) → Times & Directions (grid +
+  map) → Visitor FAQ → one merged Connect-Card CTA (teal).
+- **Cut** the standalone **Kids-preview band** (3 cards) — it duplicated the "Your Kids Are
+  Covered" step and the kids FAQ answer; Kids gets its own page in Section 5.
+- **Merged** the two competing closing CTAs (teal "Your Next Step" + brand CTA band) into a
+  single Connect-Card next-step — one primary action, no dead-end second band.
+- **Trimmed FAQ** from 8 → 6 (dropped the two DRAFT answers: "do I have to give" and "when
+  should I arrive"). Tightened copy across the hero sub + What-to-Expect beats.
+- Build passes; SSR curl confirms real content + `#times`/`#next` anchors resolve.
+
+### ≥2 model borrowings (condense-justifying)
+1. **Fusion "New Here"** — a single tight page = short what-to-expect + a visitor FAQ that
+   answers the real anxieties verbatim (dress, giving, kids, coffee) + one Plan-a-Visit CTA.
+   Justifies folding kids into the FAQ and cutting the separate kids band.
+2. **Venture Christian** — service times live in the hero (and sitewide footer) with a single
+   repeated primary CTA and "no dead-end pages." Justifies collapsing the dual closing CTAs
+   into one Connect-Card next-step rather than a second, competing band.
+
+### DRAFT-flagged (unchanged from before)
+- Kids FAQ answer: "Stop by the Kids Ministry check-in when you arrive…" still carries a
+  DRAFT chip pending confirmation of the actual check-in flow.
+
+### Decisions needed from Jason
+- Is 5 bands the right density, or go further (e.g. fold Times & Directions' address block
+  into the footer and drop to 4)? Next rework item (Next Steps, 7 bands) waits on this cue.
+
+---
+
 ## 2026-08-10 · Section 2 — Next Steps
 
 **Status:** shipped to `web` main · queue box checked · sitemap Next-Steps dots → ◐ in-beta
