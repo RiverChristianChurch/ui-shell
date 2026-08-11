@@ -4,6 +4,48 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-11 (3) · Section 3 — Watch (+ header/home fixes, interactive)
+
+**Status:** shipped to `web` main · Section 3 box checked. Interactive session.
+
+### What shipped — Watch (`web/pages/watch/index.vue` + `[slug].vue`)
+RCC does **not** self-host sermons (livestream = Church Online Platform
+`riverchristian.online.church`; on-demand = a JS-only Subsplash embed, invisible to
+search). So real copy is thin and the archive/detail are net-new + DRAFT-flagged.
+- **Live band** — REAL: verbatim "Join us online on Sunday mornings at 10:00 or
+  11:30 AM" + Church Online CTA + "Live · Sundays 10:00 & 11:30 AM" pill.
+- **Latest message** — `rcc-message-*` card; placeholder sermon (Nathan Freeman =
+  real lead pastor; series/title sample). DRAFT chip w/ source note.
+- **Message archive** — on-site filterable grid, functional **series** filter over
+  sample data (speaker/date next). Net-new — RCC has no filterable archive. DRAFT.
+- **Also On** — Church Online + Facebook (`facebook.com/rivercc`) real; **YouTube
+  @RiverCC flagged UNVERIFIED**.
+- **`/watch/[slug]`** — per-sermon detail concept: video + Message Notes (PDF) +
+  response CTAs (Get Baptized / Connect Card / Give). DRAFT.
+- 4 bands + detail page. Build passes; SSR verified for `/watch` and a detail slug.
+
+### ≥2 model borrowings
+1. **Real Life Sac** — on-site archive with a Series/Speaker/Date filter (browse on
+   our domain, video hosted elsewhere) → the archive grid + series filter.
+2. **E91** — per-sermon detail URL + downloadable message guide → the detail page.
+3. **Motivation** — detail page = video + notes + response CTAs → the next-step block.
+
+### Also this session (Jason review fixes)
+- **Header pinned to always-glass** (ui-shell **beta.5**): removed the
+  transparent-at-top state + scroll listener; same deep-teal glass at rest and on scroll.
+- **Home hero video**: pulled the current site's home mp4 (`rcc-web-2025`) as an
+  autoplay/muted/loop background; moved the photo Jason likes to the **Visit hero**
+  (also the home video's poster). Added `.rcc-hero-video` to ui-shell.
+
+### DRAFT / decisions needed from Jason
+- **YouTube channel** — is it `@RiverCC`? Unverified; several decoys. Confirm before linking.
+- **Archive data source** — where do real sermons come from (keep Subsplash, move to
+  YouTube, or Planning Center)? The archive + detail are placeholders until this is decided.
+- **Live player** — keep Church Online Platform embed, or host the live player on YouTube?
+- Still owed (rework queue): **Next Steps** content-fidelity audit vs the live site.
+
+---
+
 ## 2026-08-11 (2) · Visit — content-fidelity + header fix (interactive)
 
 **Status:** shipped to `web` main. Triggered by Jason review, not the scheduler.
