@@ -4,6 +4,42 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-11 (4) · Section 4 — Events (+ ADR-003 sermon hosting)
+
+**Status:** shipped to `web` main · Section 4 box checked. Interactive session.
+
+### What shipped — Events (`web/pages/events/index.vue` + `[slug].vue`)
+RCC's current `/events/` is a JS-only Subsplash embed (invisible); registration
+hands off to Planning Center Church Center (`riverchristianchurch.churchcenter.com/
+registrations/events/<id>`). So header copy is real; the list is net-new + DRAFT.
+- **Header** — REAL/verbatim: "Church Calendar" + "Listed below are all the upcoming
+  church-wide events at RCC."
+- **List** — E91 text-first rows (date · title · time/blurb · arrow) + functional
+  category filter over sample data. Real event names (Mercy Comedy, Women's Bible
+  Study, MOMs Fall); dates/blurbs placeholder. DRAFT chip w/ source note.
+- **CTA** — ministry quick-links (Kids/Students/Men/Women, real) + Connect Card.
+- **`/events/[slug]`** — Fusion detail: description + Register (real Church Center
+  handoff for Women's Bible Study, reg 3757530) + Add-to-Calendar (Google) + Share.
+- 3 bands + detail page. Build passes; SSR verified for `/events` + a detail slug.
+
+### ≥2 model borrowings
+1. **E91** — text-first filterable event list (linked title + date + blurb + more),
+   category filter with Apply/Reset → the list + category pills.
+2. **Fusion** — event detail page with register + add-to-calendar + share → `[slug]`.
+
+### Also this session — ADR-003 (sermon media hosting)
+Wrote `docs/architecture/decisions/ADR-003-sermon-media-hosting.md` (Proposed).
+Recommends migrating **off Subsplash**: **video on YouTube** (or Cloudflare Stream
+if RCC wants to own the player) + **sermon metadata as a git content collection**,
+synced via the **YouTube Data API** — SEO-visible on our domain, automatable by
+Claude + the nightly loop, cheap, no lock-in. Blocked on confirming the channel (web#10).
+
+### DRAFT / owed
+- Events list + detail wire to PCO Church Center at cutover (category taxonomy = PCO teams).
+- Still owed (rework queue): **Next Steps** content-fidelity audit vs the live site.
+
+---
+
 ## 2026-08-11 (3) · Section 3 — Watch (+ header/home fixes, interactive)
 
 **Status:** shipped to `web` main · Section 3 box checked. Interactive session.
