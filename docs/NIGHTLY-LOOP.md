@@ -112,6 +112,11 @@ first unchecked Section below. One item per night, same ship/report discipline.
   without a reason. The look/feel is already where he wants it — spend the effort on
   brevity, not more sections.
 - RCC content precedence; generated copy is DRAFT-flagged inline until reviewed.
+- **Proposals/recommendations for Jason → Artifact (Jason, 2026-08-11).** Any
+  recommendation or decision write-up gets published as a claude.ai Artifact
+  (load `artifact-design`, ground it in the RCC teal system) so he can review it
+  from any device — keep the repo ADR/record too, but link the Artifact from the
+  report + needs-jason issue. A committed doc alone isn't the deliverable for a proposal.
 - Build in `web` (real Nuxt). `ui-shell` only for shared tokens/components, and
   only via a tag bump — never point `web` at an un-tagged ui-shell ref.
 - Never touch `ui-shell/options/` (archive) or brand-guide decisions (accent,
