@@ -91,6 +91,13 @@ first unchecked Section below. One item per night, same ship/report discipline.
    what shipped (route + Vercel/preview URL), the ≥2 borrowings, DRAFT-flagged
    list, decisions needed. Anything needing Jason = GitHub issue labeled
    `needs-jason` (repo: whichever the work touched; default `web`).
+9. **Update the morning handoff Artifact.** Edit `ui-shell/docs/handoff.html` to
+   reflect what shipped (move the built section from "tonight" into "pages shipped",
+   set the next queue item as tonight's plan, refresh the to-dos), commit it to
+   ui-shell, then redeploy the SAME Artifact URL so Jason wakes to a current handoff:
+   `https://claude.ai/code/artifact/0d660315-7ffc-4718-9d78-7e8256658eec`
+   (Artifact tool, `url:` = that link, favicon 📋). Proposals still get their own
+   Artifact per the hard rule; this is the standing project handoff.
    End with a short summary message. Then STOP — one section per night.
 
 ## Hard rules
