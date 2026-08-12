@@ -410,6 +410,34 @@
 }
 .rcc-draft-chip[data-note]:hover::after { opacity: 1; transform: translateY(0); }
 
+/* ─── Stub / "coming soon" link — a link to a page on the plan that isn't built
+   yet. Rendered by <RccLink> when the target route isn't ready: non-clickable,
+   muted, with a small "soon" tag and a hover note. The nightly link-validation
+   pass flips these to real links once the target page ships. ───────────────── */
+.rcc-link-soon {
+  position: relative; cursor: not-allowed; opacity: 0.55;
+  text-decoration: none; pointer-events: auto; /* keep hover for the note */
+}
+.rcc-soon-tag {
+  display: inline-block; vertical-align: super; margin-left: 0.3rem;
+  background: var(--rcc-warn); color: var(--rcc-dark);
+  font-size: 0.5rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  line-height: 1; padding: 2px 5px; border-radius: 999px;
+}
+.rcc-link-soon[data-soon]::after {
+  content: attr(data-soon);
+  position: absolute; left: 0; bottom: calc(100% + 8px);
+  width: max-content; max-width: 280px;
+  background: var(--rcc-ink); color: var(--rcc-white);
+  text-align: left; text-transform: none; letter-spacing: 0; font-weight: 400;
+  font-size: 0.72rem; line-height: 1.45;
+  padding: 0.6rem 0.7rem; border-radius: var(--rcc-radius);
+  box-shadow: var(--rcc-nav-shadow);
+  opacity: 0; transform: translateY(4px); pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease; z-index: 70;
+}
+.rcc-link-soon[data-soon]:hover::after { opacity: 1; transform: translateY(0); }
+
 /* ─── Supra utility bar (above the main nav) ───
    Carries Preschool + This Week + Give. Give is a plain link — never highlighted. */
 .rcc-supra {
