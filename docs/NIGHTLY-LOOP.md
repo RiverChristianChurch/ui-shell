@@ -32,12 +32,13 @@ first unchecked Section below. One item per night, same ship/report discipline.
       (hero + What to Expect + Times & Directions + FAQ + one merged Connect-Card
       CTA). Cut standalone Kids-preview band, merged dual closing CTAs, trimmed FAQ
       to 6 real Qs, tightened copy. Look/feel unchanged.
-- [ ] **Next Steps** (`web/pages/next-steps.vue`) — TWO passes owed: (a) **content
-      fidelity audit** against the live site per the new hard rule — every line vs
-      riverchristian.church/next-steps/* and /ministries/prayer/, restore verbatim
-      RCC copy, DRAFT-chip (with source + what-changed + why) anything reworded or
-      invented; (b) condense if it still reads long after that. It shipped
-      section-heavy (7 bands) and its copy was paraphrased before this rule existed.
+- [x] **Next Steps** (`web/pages/next-steps.vue`) — DONE 2026-08-12. (a) Content
+      fidelity audit: every prose block restored VERBATIM (diffed line-by-line vs
+      /next-steps/growth-track/, /baptism/, /lifegroups/, /ministries/prayer/).
+      De-invented the Serve Here/Near/Far tiers, the LifeGroups finder concept, and
+      the paraphrased Prayer-team paragraph (omission, not reword — no chip). One
+      DRAFT remains: native prayer-request form (routes to Connect Card). (b) Condensed
+      8 bands → 4 (single Growth Track funnel section). Build + SSR verified.
 
 ## Section queue (check off when done)
 

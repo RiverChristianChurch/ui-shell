@@ -1,4 +1,4 @@
-<title>RCC Website Rebuild — Handoff</title>
+<title>RCC Website Rebuild — Progress</title>
 <style>
   :root {
     --bg:#eef1f3; --surface:#fff; --surface-2:#f5f7f8; --ink:#14191c; --muted:#566169;
@@ -66,29 +66,32 @@
 
   .pipe{font-family:var(--mono);font-size:.78rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem;overflow-x:auto;color:var(--muted);white-space:pre;box-shadow:var(--shadow);}
   ul.plain{margin:.25rem 0 1rem;padding-left:1.1rem;} ul.plain li{margin:.3rem 0;font-size:.92rem;}
+  .log{list-style:none;margin:0;padding:0;display:grid;gap:.4rem;}
+  .log li{display:grid;grid-template-columns:auto 1fr;gap:.7rem;font-size:.9rem;align-items:baseline;}
+  .log time{font-family:var(--mono);font-size:.72rem;color:var(--brand-soft);white-space:nowrap;}
   footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);font-family:var(--mono);font-size:.74rem;color:var(--faint);display:flex;flex-wrap:wrap;gap:.5rem 1.25rem;}
 </style>
 
 <div class="wrap">
   <header class="masthead">
     <div class="eyebrow">River Christian Church · Website Rebuild</div>
-    <h1>Handoff — where things stand</h1>
-    <p class="lede">Pick up here in the morning. Five pages are live in the new Nuxt app; the sermon-media plan is built and waiting on two things only you can do.</p>
+    <h1>Progress — live tracker</h1>
+    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Six pages live; the sermon back-catalog is captured and staged.</p>
     <div class="meta">
-      <span><b>As of</b> Aug 11, 2026 (eve)</span>
+      <span><b>As of</b> Aug 12, 2026 (03:15 run)</span>
       <span><b>Dev</b> localhost:1721</span>
       <span><b>ui-shell</b> v0.1.0-beta.5</span>
-      <span><b>Refreshes</b> nightly after the 03:15 build</span>
+      <span><b>Live</b> web@main → Vercel</span>
     </div>
   </header>
 
   <section>
     <h2><span class="n">01</span> Snapshot</h2>
     <div class="snap">
-      <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events — real Nuxt routes, SSR, on-brand.</p></div>
-      <div class="card"><h4>Preview</h4><p><kbd>cd ~/dev/rcc/web && git pull && npm run dev</kbd> → localhost:1721</p></div>
-      <div class="card"><h4>Repos</h4><p><kbd>web</kbd> (the app) + <kbd>ui-shell</kbd> (design system). Both clean &amp; pushed.</p></div>
-      <div class="card"><h4>Autobuild</h4><p>One section builds itself nightly (03:15). This handoff updates with it.</p></div>
+      <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · <strong>Ministries + Kids</strong> — real Nuxt routes, SSR, on-brand.</p></div>
+      <div class="card"><h4>Sermon catalog</h4><p><strong>15 messages captured</strong> (Overcomer ×10, Real Relationships ×5). Metadata + YouTube sidecars staged on the ARCHIVE drive.</p></div>
+      <div class="card"><h4>Preview</h4><p><kbd>cd ~/dev/rcc/web &amp;&amp; git pull &amp;&amp; npm run dev</kbd> → localhost:1721</p></div>
+      <div class="card"><h4>Autobuild</h4><p>Rework queue is now <strong>clear</strong>. Next up: <strong>Section 6 — Students/REACH, Men, Women + MOMs</strong>.</p></div>
     </div>
   </section>
 
@@ -99,51 +102,67 @@
         <thead><tr><th>Page</th><th>State</th><th>Notes</th></tr></thead>
         <tbody>
           <tr><td class="pg">Home<small>/</small></td><td><span class="badge b-live">Live</span></td><td>RCC video hero (pulled from the current site), always-glass header.</td></tr>
-          <tr><td class="pg">Visit<small>/visit</small></td><td><span class="badge b-live">Live</span></td><td>Condensed 5 bands; <strong>verbatim RCC copy</strong> throughout. Kids-age DRAFT chip flags "grade five" vs your "6th grade".</td></tr>
-          <tr><td class="pg">Next Steps<small>/next-steps</small></td><td><span class="badge b-draft">Audit owed</span></td><td>Built before the verbatim rule — a fidelity pass is queued (tonight).</td></tr>
-          <tr><td class="pg">Watch<small>/watch</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Live band (real copy) + <strong>series drill-down</strong> + message media options (watch / listen) + notes. Renders sample records until the real archive lands.</td></tr>
+          <tr><td class="pg">Visit<small>/visit</small></td><td><span class="badge b-live">Live</span></td><td>Condensed 5 bands; <strong>verbatim RCC copy</strong>. Kids-age DRAFT chip flags the grade conflict.</td></tr>
+          <tr><td class="pg">Next Steps<small>/next-steps</small></td><td><span class="badge b-live">Live</span></td><td>Fidelity pass done — all prose now <strong>verbatim</strong> from the live site; cut the invented Serve tiers / group-finder / prayer paragraph; condensed 8 bands → 4. One DRAFT: native prayer form.</td></tr>
+          <tr><td class="pg">Watch<small>/watch</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Live band + series drill-down + media options + notes. Real archive lands once sermon media is wired (see §03).</td></tr>
           <tr><td class="pg">Events<small>/events</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Filterable list + detail w/ real Church Center registration handoff.</td></tr>
+          <tr><td class="pg">Ministries<small>/ministries</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Copy owed</span></td><td><strong>New tonight.</strong> Hub: hero → directory grid → CTA. Card descriptions are drafted — need RCC's real one-liners (live hub lists names only).</td></tr>
+          <tr><td class="pg">Kids<small>/ministries/kids</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">3 draft blocks</span></td><td><strong>New tonight.</strong> Programs → check-in → safety → close. Verbatim RCC Kids + FIVE 6 copy; check-in / safety / pre-reg drafted on an E91 + Venture model.</td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:.82rem;color:var(--faint);font-family:var(--mono);margin-top:.85rem;">Amber "Sample/DRAFT" = placeholder or reworded content, each with a hover note (source + why). Nothing invented ships without one.</p>
+    <p style="font-size:.82rem;color:var(--faint);font-family:var(--mono);margin-top:.85rem;">Amber "Sample/Draft" = placeholder or reworded content, each with a hover note (source + why). Nothing invented ships without one.</p>
   </section>
 
   <section>
-    <h2><span class="n">03</span> Sermon media — the plan, and it's built</h2>
-    <p><strong>Decision (ADR-003):</strong> move off Subsplash. Video on <strong>YouTube</strong> (or Cloudflare Stream if you want to own the player) + sermon details as files in the repo, kept current by deterministic scripts — <strong>no AI per run</strong>. This is what makes <kbd>/watch</kbd> searchable on our own domain and gives us a real podcast feed.</p>
-    <div class="pipe">Subsplash embed ──(capture links)──▶ manifest ──subsplash-fetch──▶ downloads + records
-records ──upload-youtube──▶ YouTube (playlist per series) ──▶ id back on record ──▶ /watch shows it
-records ──build-podcast-feed──▶ /podcast.xml  (point Apple/Spotify at it once)</div>
+    <h2><span class="n">03</span> Sermon media — catalog captured, media pending</h2>
+    <p><strong>Done tonight:</strong> pulled the full current Subsplash embed (list <kbd>+r638m64</kbd>) into a clean catalog — <strong>15 messages, 2 series</strong>, each with title, date, speaker, scripture, and the church's own teaching notes. From that, one folder per message is staged on the <strong>ARCHIVE drive</strong> (<kbd>/Volumes/ARCHIVE/rcc-sermons/</kbd>) with a <kbd>sidecar.json</kbd> and a paste-ready <kbd>youtube.txt</kbd> (title + description). This is the "sidecar so we can deploy to YouTube" step.</p>
+    <div class="pipe">Subsplash embed ──(browser metadata pass)──▶ manifest ──subsplash-sidecars──▶ ARCHIVE/rcc-sermons/&lt;date&gt;-&lt;slug&gt;/  (sidecar.json + youtube.txt)   ✅ DONE
+                                                                        └── video.mp4 / audio.mp3  ⛔ needs a decision (below)
+media + sidecar ──upload-youtube──▶ YouTube (playlist per series) ⛔ gated on channel + API (#10)
+records ──build-podcast-feed──▶ /podcast.xml</div>
+    <p><strong>Media bytes — what I learned tonight (tried browser-native downloads).</strong> The embed's public <em>Download</em> button works, but with two hard limits discovered in practice:</p>
     <ul class="plain">
-      <li><strong>Validated tonight:</strong> Chrome now works on dd-mini and the Subsplash embed exposes, per message, the title, date, speaker, scripture, and a <strong>Download video / Download audio</strong> menu. So the whole migration runs on the mini — no laptop needed.</li>
-      <li><strong>Real catalog:</strong> the "Overcomer" series; titles are <kbd>Series - Title</kbd> (the parser already handles it).</li>
-      <li><strong>Scripts written &amp; tested:</strong> <kbd>sync-youtube</kbd>, <kbd>subsplash-fetch</kbd>, <kbd>upload-youtube</kbd>, <kbd>build-podcast-feed</kbd>, <kbd>extract-audio</kbd> (see <kbd>web/scripts/README.md</kbd>).</li>
+      <li><strong>Audio only.</strong> That button downloads the MP3 — there is <strong>no public video download</strong>. Video (the actual YouTube-migration payload) isn't reachable from the public embed.</li>
+      <li><strong>Gated on a stalling player.</strong> The button stays disabled until the Subsplash video player finishes loading, and that player stalls (<kbd>readyState 0</kbd>) in the automation context. Result: <strong>3 of 15 audio files</strong> landed on the drive (they buffered during extended interaction); the rest are unreliable to script.</li>
     </ul>
+    <p><strong>Recommendation → the Subsplash dashboard (you own the account).</strong> It's the only reliable source for <em>video</em>, and it sidesteps the player-gating entirely. Log in and I can pull audio + video from there, or bulk-export; the existing <kbd>subsplash-fetch</kbd> / <kbd>upload-youtube</kbd> scripts take over from the files. The metadata + sidecars for all 15 are already staged and waiting for the bytes.</p>
   </section>
 
   <div class="tonight">
-    <h2><span class="n">04</span> Tonight's autonomous run</h2>
-    <p style="margin-bottom:.85rem;">The 03:15 build takes the next item in the plan and ships it to <kbd>main</kbd> (Vercel deploys). It updates this handoff before you wake.</p>
+    <h2><span class="n">04</span> Tonight's autonomous run (03:15)</h2>
     <ol class="steps">
-      <li><strong>Next Steps — content-fidelity audit</strong> (rework, first priority): every line vs the live site, restore verbatim copy, DRAFT-chip anything reworded.</li>
-      <li>Then <strong>Section 5 — Ministries hub + Kids</strong> on the following night (check-in / safety / pre-reg content).</li>
+      <li><strong>Section 6 — Students/REACH, Men, Women + MOMs</strong>: the ministry pages under the hub. Verbatim RCC copy; ≥2 model borrowings; keep it tight.</li>
+      <li>Then <strong>Section 7 — Special Needs + Care &amp; Support</strong> (model on Highlands/Seacoast).</li>
     </ol>
   </div>
 
   <section>
-    <h2><span class="n">05</span> Your to-dos tomorrow</h2>
+    <h2><span class="n">05</span> Your to-dos</h2>
     <ul class="todo">
-      <li><span class="box"></span><span><b>Confirm the church's YouTube channel</b> <span class="tag">#10</span><small>Unblocks everything sermon-related. @RiverCC is a guess; several look-alikes exist.</small></span></li>
-      <li><span class="box"></span><span><b>Stand up YouTube API access</b> <span class="tag">Google Cloud</span><small>A Data API v3 key (reads) + one-time OAuth (uploads). Then I can run the migration.</small></span></li>
-      <li><span class="box"></span><span><b>Kick off the Subsplash → YouTube migration</b> <span class="tag">#12</span><small>Once the above exist: I capture the manifest, then batch ~6/night. First series: Overcomer.</small></span></li>
-      <li><span class="box"></span><span><b>Kids age: "grade five" or "6th grade"?</b><small>The live site says grade five; you'd asked for 6th earlier. Confirm and I'll drop the DRAFT chip.</small></span></li>
-      <li><span class="box"></span><span><b>Later: NFC Connect Card links on each week's message</b> <span class="tag">#11 · phase 2</span><small>Depends on the /connect NFC task.</small></span></li>
+      <li><span class="box"></span><span><b>Review the Next Steps fidelity pass</b><small>Confirm it's OK to drop the invented Serve Here/Near/Far tiers, the LifeGroups group-finder, and the paraphrased prayer paragraph. And where should baptism scheduling, the two packet PDFs, and Sign-Up-to-Serve point (real Church Center forms exist)? Currently all → /connect.</small></span></li>
+      <li><span class="box"></span><span><b>Log into the Subsplash dashboard so I can pull video</b> <span class="tag">#12</span><small>The public embed gives audio only, and gates it on a stalling player (3/15 audio landed). The dashboard is the reliable source for video + the rest of the audio. Metadata + sidecars are staged and waiting.</small></span></li>
+      <li><span class="box"></span><span><b>Confirm the church's YouTube channel + stand up API access</b> <span class="tag">#10</span><small>Data API v3 key (reads) + one-time OAuth (uploads). Needed before anything uploads.</small></span></li>
+      <li><span class="box"></span><span><b>Kids grade range — a 3-way conflict to settle</b><small><kbd>/ministries/kids/</kbd> says RCC Kids = "Birth – 4th grade" &amp; FIVE 6 = "5th &amp; 6th"; <kbd>/what-to-expect/</kbd> says "birth through grade five"; you'd earlier asked for "6th grade." The Kids + Visit pages carry DRAFT chips until you pick one.</small></span></li>
+      <li><span class="box"></span><span><b>Ministries directory — real card descriptions</b><small>The live hub lists ministry names only; I drafted one-liners. Send the real blurbs (or say "names only") to drop the chip.</small></span></li>
+      <li><span class="box"></span><span><b>Later: NFC Connect Card links on each message</b> <span class="tag">#11 · phase 2</span><small>Depends on the /connect NFC task.</small></span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">06</span> Recent log</h2>
+    <ul class="log">
+      <li><time>Aug 12 03:15</time><span><strong>Next Steps fidelity audit + condense</strong>: restored verbatim copy across the Growth Track, Baptism, LifeGroups, Serve &amp; Prayer sections; cut the invented tiers/finder/prayer-paragraph; 8 bands → 4. Shipped to <kbd>main</kbd>.</span></li>
+      <li><time>Aug 11 eve</time><span>Built + shipped <strong>Section 5 — Ministries hub + Kids</strong> to <kbd>main</kbd>; both routes render SSR (HTTP 200). Loop state updated.</span></li>
+      <li><time>Aug 11 eve</time><span>Captured <strong>15 sermons</strong> from Subsplash → manifest + <strong>drive sidecars</strong> (<kbd>ARCHIVE/rcc-sermons/</kbd>). Tried browser-native downloads: got <strong>3/15 audio</strong>, learned the public control is audio-only + player-gated → dashboard is the path for video.</span></li>
+      <li><time>Aug 11 day</time><span>Watch page organized by series (drill-down) + message media options + notes.</span></li>
+      <li><time>Aug 11 day</time><span>Deterministic sermon pipeline + ADR-003 (off Subsplash → YouTube).</span></li>
     </ul>
   </section>
 
   <footer>
     <span>Decision record: <kbd>web/docs/architecture/decisions/ADR-003</kbd></span>
     <span>Tickets: RiverChristianChurch/web #10 · #11 · #12</span>
+    <span>Drive: <kbd>/Volumes/ARCHIVE/rcc-sermons/INDEX.md</kbd></span>
   </footer>
 </div>

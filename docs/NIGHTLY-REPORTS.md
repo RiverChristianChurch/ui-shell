@@ -4,7 +4,48 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
-## 2026-08-11 (4) · Section 4 — Events (+ ADR-003 sermon hosting)
+## 2026-08-12 · Rework — Next Steps content-fidelity audit + condense
+
+**Status:** shipped to `web` main (`5a4cde5`) · rework-queue box checked. Autonomous run.
+Took the first unchecked **rework** item (priority over new sections per the loop).
+
+### What shipped — `web/pages/next-steps.vue` (route `/next-steps`)
+A fidelity + condense pass on an existing page (it shipped section-heavy with
+paraphrased copy before the verbatim rule). Diffed every line against the live site
+(`curl` raw HTML → strip tags) and restored RCC's exact words.
+- **Restored verbatim** from `/next-steps/growth-track/`, `/baptism/`, `/lifegroups/`,
+  `/ministries/prayer/`: the Growth Track intro + Acts 2:42; Welcome to RCC ("room 204
+  during 2nd service… great FIRST STEP"); the baptism statement + Kid Baptism (age 7+)
+  + both packets (Kids Baptism, Adventure of a Lifetime); LifeGroups ("makes a big
+  church seem small… crazy uncle Tim") + Study Material blurb + the 16-study library;
+  the Serve blurb; the Give paragraph; and Prayer (Galatians 6:2, "11:00AM – 11:45AM
+  in the Worship Center", the two request methods).
+- **De-invented** (RCC's own pages carry no such copy — omission, not reword, so no
+  chip per the rule; flagged here): the E91-style **Serve Here/Near/Far** tiers, the
+  **LifeGroups group-finder** concept, and the paraphrased **"Holy Spirit-led prayer"**
+  team paragraph. This reverts prior invented borrows in favor of fidelity.
+- **Condensed 8 content bands → 4**: Hero → one Growth Track funnel section (all four
+  steps + Give) → Prayer → CTA.
+- **One DRAFT chip** remains: the native prayer-request form (Name / "would you like a
+  pastor to follow up?" / request) isn't built — routes to the Connect Card for now.
+- Build passes; SSR verified (`200`; 8 verbatim strings render; all 4 inventions gone;
+  `/connect /events /give /portal` links resolve; no hardcoded colors).
+
+### ≥2 model borrowings (structure that survived the fidelity pass)
+1. **Motivation Church** — its `/next-steps` is "a clean linear discipleship funnel:
+   Salvation → Baptism → Small Group → Dream Team." RCC's Growth Track is the same
+   numbered, take-them-in-order funnel (Welcome → Baptism → LifeGroups → Serve → Give).
+2. **Venture Christian** — surfaces its **Connection Point newcomer class with dates +
+   room** as step one, and pairs Next Steps with a Prayer block. Mirrored by leading
+   with "Welcome to RCC" (room 204, 2nd service, monthly) and keeping Prayer in the funnel.
+
+### Decisions needed (Jason) — see needs-jason issue
+- Confirm the three de-inventions are correct to drop (vs. keep any as a planned DRAFT).
+- Real destinations for the placeholder `/connect` CTAs: baptism scheduling + the two
+  packet PDFs, and Sign-Up-to-Serve (real Church Center forms exist on the live site).
+- Native prayer-request form vs. routing to Connect Card.
+
+
 
 **Status:** shipped to `web` main · Section 4 box checked. Interactive session.
 
