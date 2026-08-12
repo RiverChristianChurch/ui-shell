@@ -24,8 +24,12 @@ autonomously, ship, report, stop.
 - **Forms pattern (confirmed 2026-08-12):** the current site uses **PCO Church Center
   hosted forms** (e.g. serve = `churchcenter.com/people/forms/937439`) and **Subsplash**
   for giving. So a form here = embed/link the Church Center form OR build a branded
-  Nuxt form → Nitro server route → PCO People API (ADR pending). Kids grade: RCC Kids =
-  Birth–4th; FIVE 6 = 5th–6th "tween" (separate). Both settled 2026-08-12.
+  Nuxt form → Nitro server route → PCO People API. **Decided: custom branded forms →
+  PCO (ADR-004).** First build = Connect Card + prayer request; needs the PCO workflow
+  IDs from Jason. Kids grade: RCC Kids = Birth–4th; FIVE 6 = 5th–6th "tween" (separate).
+- **LifeGroups finder is ported** (`/groups`) from the volunteer app — PCO Groups via
+  `web/server/api/groups.get.ts` + a Leaflet finder. Goes live once `NUXT_PCO_APP_ID/SECRET`
+  are set. Same PCO-Groups pattern the live site embeds. All settled 2026-08-12.
 - Brand guide: `brand/index.html` (live at /ui-shell/brand/) — tokens, type, logo tiers, accent (pending lock: use `--rcc-accent`)
 - Model-site raw audits: `~/dev/rcc/web/docs/research/church-site-audits-2026-08.json`
 - Current-site content source: https://riverchristian.church
@@ -173,10 +177,10 @@ first unchecked Section below. One item per night, same ship/report discipline.
   type, logo tiers, seasonal policy) — propose changes via issue instead.
 - Taxonomy (web #1) is undecided — use current ministry names verbatim.
 - **No emojis as UI (Jason, 2026-08-12).** Never use emoji for icons/bullets/accents.
-  Use `<RccIcon name="…">` (inline-SVG, open-license Lucide paths in `web/components/`)
-  or text/typographic treatment. Emoji purged from next-steps/ministries/outreach on
-  2026-08-12. (FA Pro can replace RccIcon later — it needs the FontAwesome npm token in
-  `.npmrc`; until then RccIcon is the icon source.)
+  Use `<RccIcon name="…">` or text/typographic treatment. RccIcon is now backed by
+  **FontAwesome Free** (`web/plugins/fontawesome.ts`; free-solid set, no token, OFL/MIT).
+  To add an icon: import it in the plugin, add to `library.add(...)`, map a friendly key
+  in `RccIcon.vue`. (Jason has no FA Pro — Free only.)
 - **Recurring times/locations live in `web/utils/siteConfig.ts` (`SITE`) — ONE source
   of truth (Jason, 2026-08-12).** Service times, office hours, the weekly prayer time,
   address, and the Subsplash giving URL are there; pages read from it so a time/day
