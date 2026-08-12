@@ -95,7 +95,7 @@
       <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Outreach &amp; Missions · <strong>LifeGroups · Give</strong> — real Nuxt routes, SSR, on-brand.</p></div>
       <div class="card"><h4>Stub-link system</h4><p>Every internal link is an <kbd>&lt;RccLink&gt;</kbd> reading a route registry — real link when the page exists, disabled <strong>"soon"</strong> stub when it doesn't. No 404-bait.</p></div>
       <div class="card"><h4>Give is live</h4><p><strong>New.</strong> <kbd>/give</kbd> embeds the church's <strong>real Subsplash giving form</strong>. Recurring times/URLs now come from one config (<kbd>siteConfig.ts</kbd>).</p></div>
-      <div class="card"><h4>Autobuild</h4><p><strong>Tonight (multi-session):</strong> more sermons · Sections 6–8 · Serve join-flow (#17) · code audit · pre-commit gate. See §04.</p></div>
+      <div class="card"><h4>Autobuild</h4><p><strong>Tonight (multi-session):</strong> more sermons · Sections 6–8 · Serve join-flow · auth strategy (ADR-006) · ticket tool · code audit · pre-commit gate. See §04.</p></div>
     </div>
   </section>
 
@@ -144,6 +144,8 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
       <li><strong>Scrape more sermon series</strong> — pull the rest of the back-catalog + the <strong>series artwork</strong> from the Subsplash embed → records + <kbd>public/sermon-art/</kbd>. <span class="tag">#12</span></li>
       <li><strong>Build Sections 6–8</strong> — Students/REACH · Men · Women + MOMs, then Special Needs + Care, then About.</li>
       <li><strong>Serve “join” custom form</strong> — session-aware; prefill + submit on behalf if signed in, name + phone-last-4 verify if not. Replaces the Church Center redirect. <span class="tag">#17</span></li>
+      <li><strong>Auth strategy (ADR-006)</strong> — min PCO permission for member sign-in vs. our own auth + PCO link. Foundational; gates the items below. <span class="tag">#19</span></li>
+      <li><strong>Website ticket system</strong> — admin-gated portal tool: submit tickets + see status/outcome. <span class="tag">#18</span></li>
       <li><strong>Full code audit</strong> — ESLint + Prettier + typecheck to industry standard; fix findings.</li>
       <li><strong>Pre-commit gate</strong> — lint + typecheck + build must pass before any commit lands.</li>
     </ol>
@@ -167,6 +169,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">06</span> Recent log</h2>
     <ul class="log">
+      <li><time>Aug 12 late</time><span><strong>Two more tonight tasks</strong>: <strong>website ticket tool</strong> (admin-gated — submit + status/outcome, #18) and <strong>auth strategy (ADR-006)</strong> — min PCO permission for member sign-in vs. our own auth + PCO link (#19, foundational). Both queued in §04. Fixed the Tonight card's scrambled list (grid → hanging-number).</span></li>
       <li><time>Aug 12 late</time><span><strong>Cards + Serve-flow task</strong>: cards now <strong>stand out</strong> (border + radius + spacing + brand-lift hover, sitewide). Filed the <strong>Serve custom-join flow</strong> (#17 — session-aware, prefill+submit-on-behalf if signed in, name+phone-last-4 verify if not; no Church Center redirect) for tonight. Reworked the "Tonight" card here.</span></li>
       <li><time>Aug 12 late</time><span><strong>Group finder LIVE + DO move</strong>: wired the PCO PAT locally → the LifeGroups finder now shows <strong>62 real groups + 58 map pins</strong> (fixed the Leaflet map — dynamic import). Answered the workflow-card question (card carries a Person + we attach a <strong>Note</strong> with the submitted details, so PCO users see them). Moved hosting to <strong>DigitalOcean App Platform</strong>, off Vercel (ADR-005 + <kbd>.do/app.yaml</kbd>).</span></li>
       <li><time>Aug 12 PM</time><span><strong>PCO forms map + Serve port</strong>: queried live PCO → wrote the <strong>forms↔workflows mapping</strong> (found the Forms API can't accept submissions → forms create Person + Workflow card). <strong>Ported the Serve page</strong> (<kbd>/serve</kbd>) from the volunteer app (sunsetting it); public browse stays public, onboarding → auth'd portal (ADR-002). Queued <strong>tonight's batch</strong>: more sermons, Sections 6–8, a full code audit + a pre-commit lint/typecheck gate.</span></li>

@@ -63,6 +63,15 @@ ship + report each piece; `/clear` between them. Order:
    633475); not signed-in → PCO sign-in if they can auth, else name + phone-last-4 confirm (port the
    volunteer app's River Crossers `search`/`verify`, ~`volunteer/api/index.js` 5936–6128). Per ADR-004;
    depends on PCO OAuth (#3). This is a build, not just a page — scope it to a full session.
+6. **Auth strategy — research + ADR-006 (#19).** FOUNDATIONAL, do EARLY (it gates #17/#18 and forms).
+   Determine the **minimum PCO permission** for a member to authenticate via PCO OAuth (can a
+   Church-Center-only person with no People-app permission authorize our app + return a usable
+   identity?). Test it against real PCO + read the OAuth docs. Decide: PCO-OAuth-primary vs. our own
+   accounts + PCO link vs. hybrid (PCO when available, else own account + name/phone-last-4 match).
+   Write **ADR-006 (auth strategy)**. Relates to #3.
+7. **Website ticket system (#18).** Admin-gated (account admins only, for now) portal tool: submit a
+   website ticket + a listing showing status (new → in progress → resolved) + outcome. Our own store
+   (Redis/table — app data, not PCO). Behind portal auth (#3); keep separate from PCO's support form.
 
 Report each in `NIGHTLY-REPORTS.md`; anything needing Jason → a `needs-jason` issue.
 
