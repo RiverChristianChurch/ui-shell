@@ -81,7 +81,7 @@
       <span><b>As of</b> Aug 12, 2026 (review pass)</span>
       <span><b>Dev</b> localhost:1721</span>
       <span><b>ui-shell</b> v0.1.0-beta.6</span>
-      <span><b>Live</b> web@main → Vercel</span>
+      <span><b>Live</b> web@main → DigitalOcean (ADR-005)</span>
     </div>
   </header>
 
@@ -106,7 +106,7 @@
           <tr><td class="pg">Next Steps<small>/next-steps</small></td><td><span class="badge b-live">Live</span></td><td>Verbatim prose at a readable measure. Now 5 numbered steps (<strong>Give = 05</strong>); LifeGroup material moved to <kbd>/groups</kbd>. Prayer icons (no emoji), time from config. Redundant CTA band removed.</td></tr>
           <tr><td class="pg">Outreach &amp; Missions<small>/ministries/outreach-missions</small></td><td><span class="badge b-live">Live</span></td><td>Here·Near·Far on RCC's <strong>Acts 1:8</strong> framing — verbatim hero + all 16 partners. Emojis → icons; wave fixed. One DRAFT chip: the Here·Near·Far overlay.</td></tr>
           <tr><td class="pg">Give<small>/give</small></td><td><span class="badge b-live">Live</span></td><td><strong>New.</strong> Embeds the church's <strong>real Subsplash giving form</strong> + ways to give (mail address verbatim; other descriptions DRAFT-chipped).</td></tr>
-          <tr><td class="pg">LifeGroups<small>/groups</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Needs PCO creds</span></td><td><strong>Finder ported</strong> from the volunteer app — PCO Groups + Leaflet map + day/area/childcare filters. Shows a friendly "connect PCO" state until <kbd>NUXT_PCO_*</kbd> is set.</td></tr>
+          <tr><td class="pg">LifeGroups<small>/groups</small></td><td><span class="badge b-live">Live</span></td><td><strong>Finder ported + working</strong> — PCO Groups + Leaflet map + filters. Verified live: <strong>62 real groups, 58 map pins</strong> (PCO PAT wired in local <kbd>.env</kbd>; prod needs the same in DO). Map fixed (dynamic Leaflet import).</td></tr>
           <tr><td class="pg">Serve<small>/serve</small></td><td><span class="badge b-live">Live</span></td><td><strong>Ported</strong> from the volunteer app (sunsetting it). Serve teams by category, verbatim RCC copy; "Join" → the real Church Center serving form.</td></tr>
           <tr><td class="pg">Ministries<small>/ministries</small></td><td><span class="badge b-live">Live</span></td><td>Rebuilt <strong>text-only cards</strong> (no emoji) with a brand accent + "Soon" badge on unbuilt sub-pages; fixed the wave hard-cut. Card blurbs still DRAFT (live hub lists names only).</td></tr>
           <tr><td class="pg">Watch<small>/watch</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Live band + series drill-down + media options + notes. Real archive lands once sermon media is wired (see §03).</td></tr>
@@ -159,6 +159,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">06</span> Recent log</h2>
     <ul class="log">
+      <li><time>Aug 12 late</time><span><strong>Group finder LIVE + DO move</strong>: wired the PCO PAT locally → the LifeGroups finder now shows <strong>62 real groups + 58 map pins</strong> (fixed the Leaflet map — dynamic import). Answered the workflow-card question (card carries a Person + we attach a <strong>Note</strong> with the submitted details, so PCO users see them). Moved hosting to <strong>DigitalOcean App Platform</strong>, off Vercel (ADR-005 + <kbd>.do/app.yaml</kbd>).</span></li>
       <li><time>Aug 12 PM</time><span><strong>PCO forms map + Serve port</strong>: queried live PCO → wrote the <strong>forms↔workflows mapping</strong> (found the Forms API can't accept submissions → forms create Person + Workflow card). <strong>Ported the Serve page</strong> (<kbd>/serve</kbd>) from the volunteer app (sunsetting it); public browse stays public, onboarding → auth'd portal (ADR-002). Queued <strong>tonight's batch</strong>: more sermons, Sections 6–8, a full code audit + a pre-commit lint/typecheck gate.</span></li>
       <li><time>Aug 12 PM</time><span><strong>FA Free + LifeGroups finder + forms decision</strong>: icons now <strong>FontAwesome Free</strong> (RccIcon backed by FA, no token). <strong>Ported the LifeGroups group-finder</strong> from the volunteer app to <kbd>/groups</kbd> — PCO Groups endpoint + Leaflet map + day/neighborhood/childcare filters (live once PCO creds are set). Forms: <strong>ADR-004</strong> accepted — custom branded forms → PCO People API, hardened (validation, honeypot, rate-limit, never-lose-a-submission); Connect Card + prayer form are next.</span></li>
       <li><time>Aug 12 midday</time><span><strong>Follow-ups</strong>: prayer = <strong>Wednesday</strong>; Kids grade settled (Birth–4th; FIVE 6 = 5th–6th tween); ministry blurbs pulled from RCC's real <strong>serve-team write-ups</strong> (volunteer app) + a FIVE 6 card. Filed the Weekly Message notes form (#15) and PCO Groups embed (#16); corrected the Subsplash record (#12 — downloads are on the embed).</span></li>

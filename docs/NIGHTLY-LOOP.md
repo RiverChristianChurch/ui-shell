@@ -50,7 +50,7 @@ ship + report each piece; `/clear` between them. Order:
    real write-ups), ≥2 model borrowings, DRAFT-chip invented copy, tight bands, no emojis
    (`<RccIcon>`), stub links via `<RccLink>` + registry, waves per the source/dest rule.
 3. **Full code audit + organize to industry standard.** The imported volunteer code (`utils/
-   serveTeams.ts`, `utils/groups.ts`, `server/api/groups.get.ts`, `components/LifeGroupsMap.client.vue`,
+   serveTeams.ts`, `utils/groups.ts`, `server/api/groups.get.ts`, `components/LifeGroupsMap.vue`,
    `plugins/fontawesome.ts`) + everything built this week: verify structure, naming, and that it
    passes lint/typecheck. Add/enable **ESLint + Prettier + `vue-tsc` typecheck** if not present
    (`@nuxt/eslint`), fix findings, add `npm run lint` / `npm run typecheck` scripts.
@@ -156,13 +156,13 @@ first unchecked Section below. One item per night, same ship/report discipline.
      (`curl` each page; grep for `href="/<unbuilt>"` → must be empty) and **no
      `<RccLink>` references a route missing from the registry** (missing = treated as
      not-ready). Fix drift before shipping.
-6. **Ship**: small commits to `web` `main`, push (Vercel deploys). If ui-shell
+6. **Ship**: small commits to `web` `main`, push (DigitalOcean App Platform deploys, ADR-005). If ui-shell
    changed, commit + push it + the new tag first.
 7. **Update state**: check the section box above (commit this file to ui-shell);
    update the section's status dot in the sitemap artifact (pass its URL to the
    Artifact tool) from ○ to ◐/●.
 8. **Report**: append to `docs/NIGHTLY-REPORTS.md` (in ui-shell) — date, section,
-   what shipped (route + Vercel/preview URL), the ≥2 borrowings, DRAFT-flagged
+   what shipped (route + DO/preview URL), the ≥2 borrowings, DRAFT-flagged
    list, decisions needed. Anything needing Jason = GitHub issue labeled
    `needs-jason` (repo: whichever the work touched; default `web`).
 9. **Update the morning handoff Artifact.** Edit `ui-shell/docs/handoff.html` to
