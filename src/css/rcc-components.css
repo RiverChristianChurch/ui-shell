@@ -200,13 +200,20 @@
 .rcc-message-desc { color: var(--rcc-text-muted-dark); font-size: 0.9rem; line-height: 1.65; }
 
 /* ─── Cards ─── */
-.rcc-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 2.5rem; }
+.rcc-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
 .rcc-card {
   background: var(--rcc-dark-card); padding: 0; overflow: hidden;
-  transition: transform 0.3s; cursor: pointer;
+  border: 1px solid var(--rcc-dark-border); border-radius: var(--rcc-radius-lg);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
 }
-.rcc-s-light .rcc-card { background: var(--rcc-white); }
-.rcc-card:hover { transform: translateY(-2px); }
+.rcc-s-light .rcc-card { background: var(--rcc-white); border-color: var(--rcc-gray-100); }
+.rcc-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rcc-brand);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
+}
+.rcc-s-light .rcc-card:hover { box-shadow: 0 14px 32px rgba(9, 40, 55, 0.12); }
 .rcc-card-img {
   width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
   filter: brightness(0.85); transition: filter 0.3s;

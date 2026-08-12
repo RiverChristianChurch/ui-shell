@@ -134,10 +134,14 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   </section>
 
   <div class="tonight">
-    <h2><span class="n">04</span> Tonight's autonomous run (03:15)</h2>
+    <h2><span class="n">04</span> Tonight — autonomous batch</h2>
+    <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Multiple sessions authorized. Ship + report each; full detail in <kbd>NIGHTLY-LOOP.md</kbd>.</p>
     <ol class="steps">
-      <li><strong>Section 6 — Students/REACH, Men, Women + MOMs</strong>: the ministry pages under the hub. Verbatim RCC copy; ≥2 model borrowings; keep it tight.</li>
-      <li>Then <strong>Section 7 — Special Needs + Care &amp; Support</strong> (model on Highlands/Seacoast).</li>
+      <li><strong>Scrape more sermon series</strong> — pull the rest of the back-catalog + the <strong>series artwork</strong> from the Subsplash embed → records + <kbd>public/sermon-art/</kbd>. <span class="tag">#12</span></li>
+      <li><strong>Build Sections 6–8</strong> — Students/REACH · Men · Women + MOMs, then Special Needs + Care, then About.</li>
+      <li><strong>Serve “join” custom form</strong> — session-aware; prefill + submit on behalf if signed in, name + phone-last-4 verify if not. Replaces the Church Center redirect. <span class="tag">#17</span></li>
+      <li><strong>Full code audit</strong> — ESLint + Prettier + typecheck to industry standard; fix findings.</li>
+      <li><strong>Pre-commit gate</strong> — lint + typecheck + build must pass before any commit lands.</li>
     </ol>
   </div>
 

@@ -58,6 +58,11 @@ ship + report each piece; `/clear` between them. Order:
    a `.git/hooks/pre-commit`) that runs lint + typecheck (+ `npm run build` or fast tests) before a
    commit lands. Document it in CLAUDE.md. This is the durable "validate before commit" workflow —
    after tonight, **every session runs lint + typecheck before committing** (add to step 5 below).
+5. **Serve "join" custom form (#17).** Replace the `/serve` → Church Center redirect with our own
+   session-aware form: signed-in → prefill + submit the join on their behalf (→ Serve @ RCC workflow
+   633475); not signed-in → PCO sign-in if they can auth, else name + phone-last-4 confirm (port the
+   volunteer app's River Crossers `search`/`verify`, ~`volunteer/api/index.js` 5936–6128). Per ADR-004;
+   depends on PCO OAuth (#3). This is a build, not just a page — scope it to a full session.
 
 Report each in `NIGHTLY-REPORTS.md`; anything needing Jason → a `needs-jason` issue.
 
