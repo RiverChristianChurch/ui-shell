@@ -80,6 +80,25 @@ ship + report each piece; `/clear` between them. Order:
 
 Report each in `NIGHTLY-REPORTS.md`; anything needing Jason → a `needs-jason` issue.
 
+## Queued next — PWA (Jason, 2026-08-12 — **NOT tonight**; eligible from the next nightly run)
+
+Priority queued item — run this on an upcoming night **before** finishing the
+remaining lower-priority ministry sections (6–11). **Do NOT run it tonight** — tonight's
+authorized batch above stands.
+
+- [ ] **PWA — installable web app.** Add **`@vite-pwa/nuxt`**: web manifest (name, RCC
+      icons, theme color, `display: standalone`) + a service worker (install + offline-cache
+      the shell so it loads on weak worship-center signal). Result: the site installs to the
+      home screen (iOS Share → Add to Home Screen / Android install prompt) and launches
+      fullscreen with the RCC icon — **no app store, no native wrapper.** This is the whole
+      mobile strategy: PWA is "the app." Source icons/splash from the brand guide
+      (`brand/index.html` logo tiers); tokens only. Validate by building and **installing it on
+      a real phone** (screenshot the home-screen icon + standalone launch); confirm the manifest
+      + service worker register (Chrome DevTools → Application). Update `.env.example` if any new
+      config is introduced. Ship to `web` `main`; report + refresh the tracker.
+      Related: the **Groups leader roster/attendance module** is a *separate* post-launch build —
+      GitHub issue `RiverChristianChurch/web#21` (phase-2), not part of this task.
+
 ## Rework queue (PRIORITY — clear before taking a new section)
 
 Streamline/condense passes take precedence over new sections. In step 1, take the
