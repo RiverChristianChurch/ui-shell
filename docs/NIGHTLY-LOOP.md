@@ -45,7 +45,11 @@ first unchecked Section below. One item per night, same ship/report discipline.
 - [x] 2. Next Steps — Growth Track, Baptism, LifeGroups (finder concept), Serve, Prayer
 - [x] 3. Watch — live, messages archive (series/speaker/date mock), sermon detail page
 - [x] 4. Events — text-first filterable list + event detail page (E91/Eleven22 pattern)
-- [ ] 5. Ministries hub + Kids (incl. check-in/safety/pre-reg content)
+- [x] 5. Ministries hub + Kids — DONE 2026-08-11 (built ahead of the nightly run).
+      `/ministries` (hub: hero → directory grid → CTA) + `/ministries/kids`
+      (RCC Kids: programs → first-time/check-in → safety → close). Verbatim RCC
+      copy; check-in/safety/pre-reg drafted (E91 + Venture model) with DRAFT chips.
+      OPEN: grade-range conflict (see below) + directory-card descriptions need real copy.
 - [ ] 6. Ministries: Students/REACH, Men, Women + MOMs
 - [ ] 7. Special Needs (full page — model on Highlands/Seacoast examples) + Care & Support
 - [ ] 8. About — story, beliefs, staff, contact, This Week (email archive concept)
