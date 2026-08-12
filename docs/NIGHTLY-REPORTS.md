@@ -4,6 +4,48 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-12 · Review pass — Jason's 7 fixes (text width · icons · /give · /groups · ministries · waves · sermon art)
+
+**Status:** shipped to `web` main. Ran on Jason's review of the morning's work — 7 items.
+
+1. **Readable text measure** — Next Steps funnel step text stretched the full 1280px
+   container (160-char lines). Scoped `:deep(.rcc-step) p { max-width: 68ch }` — now
+   matches the tighter Give block. His example was STEP THREE.
+2. **Emojis → icons + central times.** Prayer section 🙏/📝 replaced with `<RccIcon>`
+   (new component: inline-SVG, open-license Lucide paths — FA Pro swaps in later via the
+   npm token). Recurring times now come from **`utils/siteConfig.ts`** (one source of
+   truth). His question — "where did 11:00–11:45 come from?": it's **verbatim** from the
+   live `/ministries/prayer/` ("Join us each week … 11:00AM–11:45AM in the Worship
+   Center"). The live page names **no weekday**, so `SITE.prayer.day` is left blank and
+   flagged — confirm if it's the Wednesday time.
+3. **Removed the redundant CTA band** ("Take the Next Step" → scrolled to the same page).
+4. **Nav de-duplicated** — dropped the "Visit" nav link; kept "Plan a Visit" as the one
+   visit entry point.
+5. **Sermon series graphic.** The scraper now captures `artworkUrl` (the series graphic)
+   → `public/sermon-art/` → record `thumb`. `thumbFor`/`thumbOf` no longer fabricate a
+   YouTube thumb from a PLACEHOLDER id (that WAS the gray 3-dot box); `/watch` shows a
+   branded gradient with the series name until real art lands. Samples de-placeholdered.
+6. **Give = step 05** on Next Steps. **LifeGroups** leader/study material split to a new
+   **`/groups`** page (verbatim blurb + the 16-study library). New **`/give`** page embeds
+   the church's **real Subsplash giving form** (`secure.subsplash.com/ui/access/8MDG8H`,
+   centralized as `SITE.givingUrl`) + ways-to-give. Both routes flipped to ready.
+7. **Ministries "way better."** Emojis gone → clean **text-only cards** (brand accent bar,
+   corner "Soon" badge for unbuilt sub-pages, "Coming soon" CTA). Fixed the **wave hard
+   cut** — the divider's black background against the grey section above; div bg now
+   matches the section above (same fix applied on outreach + next-steps waves).
+
+**Also:** `<RccLink>` gained `hide-tag` so full-card links don't sprout a floating "soon"
+sup. Build + SSR verified on every route (incl. new /groups, /give); browser-screenshot
+confirmed each fix; link-validation sweep shows no live href to an unbuilt route.
+
+### Needs Jason
+- **Prayer weekday** — is 11:00–11:45 AM the Wednesday prayer time? Set `SITE.prayer.day`.
+- **FA Pro** — want real FontAwesome? Drop the FA npm token in `.npmrc` and I'll swap
+  RccIcon's rendering (call sites don't change).
+- Still open from before: real URLs for baptism form / packet PDFs / volunteer sign-up (#14).
+
+---
+
 ## 2026-08-12 · Rework — Outreach & Missions (Here·Near·Far) + sitewide stub-link system
 
 **Status:** shipped to `web` main · ui-shell `v0.1.0-beta.6` · closes **#13**. Ran on

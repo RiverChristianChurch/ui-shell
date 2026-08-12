@@ -164,6 +164,24 @@ first unchecked Section below. One item per night, same ship/report discipline.
 - Never touch `ui-shell/options/` (archive) or brand-guide decisions (accent,
   type, logo tiers, seasonal policy) — propose changes via issue instead.
 - Taxonomy (web #1) is undecided — use current ministry names verbatim.
+- **No emojis as UI (Jason, 2026-08-12).** Never use emoji for icons/bullets/accents.
+  Use `<RccIcon name="…">` (inline-SVG, open-license Lucide paths in `web/components/`)
+  or text/typographic treatment. Emoji purged from next-steps/ministries/outreach on
+  2026-08-12. (FA Pro can replace RccIcon later — it needs the FontAwesome npm token in
+  `.npmrc`; until then RccIcon is the icon source.)
+- **Recurring times/locations live in `web/utils/siteConfig.ts` (`SITE`) — ONE source
+  of truth (Jason, 2026-08-12).** Service times, office hours, the weekly prayer time,
+  address, and the Subsplash giving URL are there; pages read from it so a time/day
+  change happens in exactly one place. ⚠️ `SITE.prayer.day` is UNCONFIRMED — the live
+  prayer page says "each week" with no weekday; set it once Jason confirms (Wednesday?).
+- **Sermon scraper must capture the SERIES GRAPHIC (Jason, 2026-08-12).** The browser
+  metadata pass records `artworkUrl` per message; `subsplash-fetch.mjs` downloads it to
+  `public/sermon-art/<slug>` and sets the record `thumb`. `/watch` shows the real series
+  art — never YouTube's gray 3-dot placeholder (a branded gradient shows until art lands).
+- **Readable measure.** Body/funnel text gets a ~68ch max-width so lines don't stretch
+  the full 1280px container (Jason, 2026-08-12 — Next Steps steps were the example).
+- **Stubbed links, disabled until ready** — see step 5b. New links to unbuilt pages use
+  `<RccLink>` + a `false` registry entry; flip to `true` when the page ships.
 - Google Fonts / open-license only. Tokens only. No paid assets.
 - Commit + push every night — git is the only cross-machine channel.
 - Work on dd-mini's canonical checkout.
