@@ -95,7 +95,7 @@
       <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Outreach &amp; Missions · <strong>LifeGroups · Give</strong> — real Nuxt routes, SSR, on-brand.</p></div>
       <div class="card"><h4>Stub-link system</h4><p>Every internal link is an <kbd>&lt;RccLink&gt;</kbd> reading a route registry — real link when the page exists, disabled <strong>"soon"</strong> stub when it doesn't. No 404-bait.</p></div>
       <div class="card"><h4>Give is live</h4><p><strong>New.</strong> <kbd>/give</kbd> embeds the church's <strong>real Subsplash giving form</strong>. Recurring times/URLs now come from one config (<kbd>siteConfig.ts</kbd>).</p></div>
-      <div class="card"><h4>Autobuild</h4><p><strong>Tonight (multi-session):</strong> more sermons · Sections 6–8 · Serve join-flow · auth strategy (ADR-006) · ticket tool · code audit · pre-commit gate. See §04.</p></div>
+      <div class="card"><h4>Autobuild</h4><p><strong>Tonight (multi-session):</strong> more sermons · Sections 6–8 · Serve join-flow · auth strategy · ticket tool · graphic-request form · code audit · pre-commit gate. See §04.</p></div>
     </div>
   </section>
 
@@ -146,6 +146,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
       <li><strong>Serve “join” custom form</strong> — session-aware; prefill + submit on behalf if signed in, name + phone-last-4 verify if not. Replaces the Church Center redirect. <span class="tag">#17</span></li>
       <li><strong>Auth strategy (ADR-006)</strong> — min PCO permission for member sign-in vs. our own auth + PCO link. Foundational; gates the items below. <span class="tag">#19</span></li>
       <li><strong>Website ticket system</strong> — admin-gated portal tool: submit tickets + see status/outcome. <span class="tag">#18</span></li>
+      <li><strong>Graphic / ad request form</strong> — admins + ministry leaders; implements the Graphics &amp; Comms Plan §3 intake (Ministry×Category, lead-time rule, channels) + a status queue. <span class="tag">#20</span></li>
       <li><strong>Full code audit</strong> — ESLint + Prettier + typecheck to industry standard; fix findings.</li>
       <li><strong>Pre-commit gate</strong> — lint + typecheck + build must pass before any commit lands.</li>
     </ol>

@@ -72,6 +72,11 @@ ship + report each piece; `/clear` between them. Order:
 7. **Website ticket system (#18).** Admin-gated (account admins only, for now) portal tool: submit a
    website ticket + a listing showing status (new → in progress → resolved) + outcome. Our own store
    (Redis/table — app data, not PCO). Behind portal auth (#3); keep separate from PCO's support form.
+8. **Graphic / ad request form + queue (#20).** For admins + team/ministry leaders. Implements the
+   RCC Graphics & Communications Plan §3 intake (`BRAIN/50-RCC/5010-Projects/Graphics/`): Ministry ×
+   Category routing, character caps at entry, the 3-wk/10-day/<10-day lead-time rule, channel
+   checkboxes, reach→promo-tier, "I don't know what this should look like." Listing with status.
+   Shares the request/listing infra with #18; role gating from #19.
 
 Report each in `NIGHTLY-REPORTS.md`; anything needing Jason → a `needs-jason` issue.
 
