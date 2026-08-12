@@ -60,9 +60,13 @@
 
   .tonight{background:var(--brand-wash);border:1px solid color-mix(in srgb,var(--brand) 22%,transparent);border-radius:var(--radius);padding:1.25rem 1.4rem;}
   .tonight h2{margin-top:0;}
-  .steps{counter-reset:s;display:grid;gap:.55rem;margin:0;padding:0;list-style:none;}
-  .steps li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:.75rem;font-size:.92rem;align-items:start;}
-  .steps li::before{content:counter(s);font-family:var(--mono);font-weight:700;font-size:.78rem;color:var(--brand-soft);background:var(--surface);border:1px solid var(--line-strong);border-radius:6px;width:1.6rem;height:1.6rem;display:grid;place-items:center;}
+  /* Numbered steps: the count is an absolutely-positioned chip and the content flows
+     as one normal block (padding-left clears the chip). Do NOT use display:grid on the
+     <li> — that turns every inline child (<strong>, text runs, <kbd>, <span class=tag>)
+     into a separate grid cell and scatters them. */
+  .steps{counter-reset:s;display:grid;gap:.7rem;margin:0;padding:0;list-style:none;}
+  .steps li{counter-increment:s;position:relative;padding-left:2.5rem;min-height:1.6rem;font-size:.92rem;line-height:1.55;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:.05rem;font-family:var(--mono);font-weight:700;font-size:.78rem;color:var(--brand-soft);background:var(--surface);border:1px solid var(--line-strong);border-radius:6px;width:1.6rem;height:1.6rem;display:grid;place-items:center;}
 
   .pipe{font-family:var(--mono);font-size:.78rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem;overflow-x:auto;color:var(--muted);white-space:pre;box-shadow:var(--shadow);}
   ul.plain{margin:.25rem 0 1rem;padding-left:1.1rem;} ul.plain li{margin:.3rem 0;font-size:.92rem;}
@@ -78,9 +82,9 @@
     <h1>Progress — live tracker</h1>
     <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Eleven pages live (LifeGroups finder + Serve ported from the volunteer app); every internal link self-validates; icons are FontAwesome Free.</p>
     <div class="meta">
-      <span><b>As of</b> Aug 12, 2026 (review pass)</span>
+      <span><b>As of</b> Aug 12, 2026 (cards + Serve flow)</span>
       <span><b>Dev</b> localhost:1721</span>
-      <span><b>ui-shell</b> v0.1.0-beta.6</span>
+      <span><b>ui-shell</b> v0.1.0-beta.7</span>
       <span><b>Live</b> web@main → DigitalOcean (ADR-005)</span>
     </div>
   </header>
@@ -91,7 +95,7 @@
       <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Outreach &amp; Missions · <strong>LifeGroups · Give</strong> — real Nuxt routes, SSR, on-brand.</p></div>
       <div class="card"><h4>Stub-link system</h4><p>Every internal link is an <kbd>&lt;RccLink&gt;</kbd> reading a route registry — real link when the page exists, disabled <strong>"soon"</strong> stub when it doesn't. No 404-bait.</p></div>
       <div class="card"><h4>Give is live</h4><p><strong>New.</strong> <kbd>/give</kbd> embeds the church's <strong>real Subsplash giving form</strong>. Recurring times/URLs now come from one config (<kbd>siteConfig.ts</kbd>).</p></div>
-      <div class="card"><h4>Autobuild</h4><p>Review pass done. Next up: <strong>Section 6 — Students/REACH, Men, Women + MOMs</strong>.</p></div>
+      <div class="card"><h4>Autobuild</h4><p><strong>Tonight (multi-session):</strong> more sermons · Sections 6–8 · Serve join-flow (#17) · code audit · pre-commit gate. See §04.</p></div>
     </div>
   </section>
 
