@@ -4,6 +4,64 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-12 · Rework — Outreach & Missions (Here·Near·Far) + sitewide stub-link system
+
+**Status:** shipped to `web` main · ui-shell `v0.1.0-beta.6` · closes **#13**. Ran on
+Jason's #13 feedback (not autonomous): keep & build out Here/Near/Far; stub links to
+planned pages (disabled until ready) + validate links every nightly run.
+
+### The reconciliation (#13)
+Jason corrected a de-invention from the prior run: the **"Here/Near/Far"** I'd removed
+from Next Steps **is real RCC content** — it's `/ministries/outreach-missions/`, framed
+on **Acts 1:8** (Jerusalem → Judea & Samaria → Ends of the Earth). So instead of keeping
+it cut, I **built the missions page out** from the church's own words.
+
+### What shipped
+1. **New page `web/pages/ministries/outreach-missions.vue`** (route
+   `/ministries/outreach-missions`). VERBATIM from the live page: hero
+   ("Outreach & Missions" / "RCC Outreach Gameplan"), the **Acts 1:8 (NIV)** quote, the
+   "We Need You!" blurb, and **all 16 partner ministries** across the three tiers
+   (8 local / 3 regional / 5 global) with their exact one-line descriptions. The **only
+   DRAFT chip** is the added **"Here·Near·Far / Local·Regional·Global"** overlay on the
+   biblical tier labels — that plain-language taxonomy is the model-site pattern, not RCC
+   copy, so it's chipped with a source note. Wired **Next Steps' Serve step** to link here
+   ("See where we serve — here, near & far →").
+2. **Sitewide stub-link system** (Jason's ask). `web/utils/routeRegistry.ts` is the
+   single source of truth (route → ready?); `<RccLink>` renders a real `<NuxtLink>` when
+   the target is built and a disabled **"soon"** stub (muted, non-clickable, hover note)
+   when it isn't; ui-shell `.rcc-link-soon` / `.rcc-soon-tag` style it (v0.1.0-beta.6).
+   **Swept every page** — all static internal links to unbuilt routes (`/connect`,
+   `/give`, `/serve`, `/about`, `/groups`, `/preschool`, `/this-week`, ministry
+   sub-pages) now render disabled instead of 404-ing; live routes stay clickable.
+   Disabled stubs render as hrefless `<a>` so they inherit nav/footer `a` styling.
+3. **Nightly loop step 5b (link validation)** added to `NIGHTLY-LOOP.md`: every night,
+   point new links at planned routes via `<RccLink>`, flip a route to `true` when its
+   page ships (auto-enables every link to it), and sweep for drift (no live href to a
+   `false` route; no `<RccLink>` to a route missing from the registry).
+
+### ≥2 model borrowings
+1. **Traders Point (TPCC) / East 91st (E91)** — the concentric **"Here · Near · Far"**
+   missions taxonomy layered over local/regional/global partners. Used as the scannable
+   overlay on RCC's Acts 1:8 tiers (chipped as DRAFT — it's the added framing).
+2. **The Chapel / Eleven22-style missions directory** — a text-first **partner-card grid**
+   (name + one-line description per organization) rather than logo walls. Every RCC
+   partner is a card under its tier.
+
+### Validation
+`npm run build` passes; SSR `200` on the new route with all verbatim strings + the three
+Here/Near/Far tags + the DRAFT chip; stub links render `.rcc-link-soon`; **no live `href`
+points at any unbuilt route** across `/ /next-steps /ministries /visit /watch /events` and
+the new page.
+
+### Needs Jason
+- Real destinations still open (now safely stubbed, not silently wrong): the Church Center
+  **baptism form**, the two **PDF packets**, and the **volunteer sign-up** form. Give a URL
+  and I flip each stub to the real link.
+- OK on the single DRAFT overlay (Here·Near·Far tags) on the missions page? If you'd rather
+  use RCC's biblical labels only, I'll drop the tags.
+
+---
+
 ## 2026-08-12 · Rework — Next Steps content-fidelity audit + condense
 
 **Status:** shipped to `web` main (`5a4cde5`) · rework-queue box checked. Autonomous run.

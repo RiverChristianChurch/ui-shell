@@ -39,6 +39,18 @@ first unchecked Section below. One item per night, same ship/report discipline.
       the paraphrased Prayer-team paragraph (omission, not reword — no chip). One
       DRAFT remains: native prayer-request form (routes to Connect Card). (b) Condensed
       8 bands → 4 (single Growth Track funnel section). Build + SSR verified.
+- [x] **Outreach & Missions + Here/Near/Far reversal + stub-link system** — DONE
+      2026-08-12 (Jason's #13 feedback). Jason: the "Here/Near/Far" I'd de-invented
+      IS real — it's `/ministries/outreach-missions/` framed on **Acts 1:8**
+      (Jerusalem/Judea&Samaria/Ends of the Earth). So I (a) BUILT
+      `web/pages/ministries/outreach-missions.vue` — verbatim hero + Acts 1:8 + all 16
+      partners; the only DRAFT chip is the added "Here·Near·Far / Local·Regional·Global"
+      overlay (TPCC/E91 pattern). (b) Wired Next Steps' Serve step to it. (c) Shipped
+      the **stub-link system** (`utils/routeRegistry.ts` + `<RccLink>` + ui-shell
+      `.rcc-link-soon`, ui-shell v0.1.0-beta.6) and swept EVERY page: all static
+      internal links now render disabled "soon" stubs when their target isn't built.
+      New nightly step **5b (link validation)** added above. Build + SSR verified;
+      no live href leaks to an unbuilt route.
 
 ## Section queue (check off when done)
 
@@ -87,6 +99,24 @@ first unchecked Section below. One item per night, same ship/report discipline.
    `node .output/server/index.mjs` and `curl` the route to confirm SSR renders the
    real content; internal links/anchors resolve; responsive at 768/1024; no
    hardcoded colors. Browser screenshot if a Chrome is connected.
+5b. **Link validation (EVERY night, across ALL built pages — not just tonight's).**
+   The stub-link system is `web/utils/routeRegistry.ts` (route → ready?) + the
+   `<RccLink>` component (renders a real link when ready, a disabled "soon" stub when
+   not). Each night:
+   - **New links → point them at the planned route via `<RccLink>`.** When a page you
+     build should link somewhere on the sitemap that isn't built yet, add the link
+     anyway with `<RccLink to="/that-route">` and add `/that-route: false` to the
+     registry — it renders disabled until that page ships. Never leave a bare
+     `<NuxtLink>`/`<a href>` pointing at an unbuilt page (it 404s).
+   - **Shipped a page tonight? → flip its route to `true`** in the registry. Every
+     `<RccLink>` sitewide that points at it auto-enables — no per-link edits.
+   - **Sweep + verify all existing pages.** `grep -rn 'NuxtLink to=\|href="/' web/pages
+     web/layouts`: every STATIC internal link should be an `<RccLink>` (dynamic
+     `:to="\`/x/${slug}\`"` detail links stay `<NuxtLink>` — their parent pages exist).
+     Then boot the build and confirm **no live `href` points at a `false` route**
+     (`curl` each page; grep for `href="/<unbuilt>"` → must be empty) and **no
+     `<RccLink>` references a route missing from the registry** (missing = treated as
+     not-ready). Fix drift before shipping.
 6. **Ship**: small commits to `web` `main`, push (Vercel deploys). If ui-shell
    changed, commit + push it + the new tag first.
 7. **Update state**: check the section box above (commit this file to ui-shell);

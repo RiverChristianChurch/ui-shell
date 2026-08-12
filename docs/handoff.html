@@ -76,11 +76,11 @@
   <header class="masthead">
     <div class="eyebrow">River Christian Church · Website Rebuild</div>
     <h1>Progress — live tracker</h1>
-    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Six pages live; the sermon back-catalog is captured and staged.</p>
+    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Seven pages live; every internal link now self-validates (disabled "soon" stub until its page ships).</p>
     <div class="meta">
-      <span><b>As of</b> Aug 12, 2026 (03:15 run)</span>
+      <span><b>As of</b> Aug 12, 2026 (#13 rework)</span>
       <span><b>Dev</b> localhost:1721</span>
-      <span><b>ui-shell</b> v0.1.0-beta.5</span>
+      <span><b>ui-shell</b> v0.1.0-beta.6</span>
       <span><b>Live</b> web@main → Vercel</span>
     </div>
   </header>
@@ -88,10 +88,10 @@
   <section>
     <h2><span class="n">01</span> Snapshot</h2>
     <div class="snap">
-      <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · <strong>Ministries + Kids</strong> — real Nuxt routes, SSR, on-brand.</p></div>
-      <div class="card"><h4>Sermon catalog</h4><p><strong>15 messages captured</strong> (Overcomer ×10, Real Relationships ×5). Metadata + YouTube sidecars staged on the ARCHIVE drive.</p></div>
+      <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · Ministries + Kids · <strong>Outreach &amp; Missions</strong> — real Nuxt routes, SSR, on-brand.</p></div>
+      <div class="card"><h4>Stub-link system</h4><p><strong>New.</strong> Every internal link is an <kbd>&lt;RccLink&gt;</kbd> reading a route registry — real link when the page exists, disabled <strong>"soon"</strong> stub (hover note) when it doesn't. No more 404-bait.</p></div>
       <div class="card"><h4>Preview</h4><p><kbd>cd ~/dev/rcc/web &amp;&amp; git pull &amp;&amp; npm run dev</kbd> → localhost:1721</p></div>
-      <div class="card"><h4>Autobuild</h4><p>Rework queue is now <strong>clear</strong>. Next up: <strong>Section 6 — Students/REACH, Men, Women + MOMs</strong>.</p></div>
+      <div class="card"><h4>Autobuild</h4><p>#13 reconciled. Next up: <strong>Section 6 — Students/REACH, Men, Women + MOMs</strong>.</p></div>
     </div>
   </section>
 
@@ -103,7 +103,8 @@
         <tbody>
           <tr><td class="pg">Home<small>/</small></td><td><span class="badge b-live">Live</span></td><td>RCC video hero (pulled from the current site), always-glass header.</td></tr>
           <tr><td class="pg">Visit<small>/visit</small></td><td><span class="badge b-live">Live</span></td><td>Condensed 5 bands; <strong>verbatim RCC copy</strong>. Kids-age DRAFT chip flags the grade conflict.</td></tr>
-          <tr><td class="pg">Next Steps<small>/next-steps</small></td><td><span class="badge b-live">Live</span></td><td>Fidelity pass done — all prose now <strong>verbatim</strong> from the live site; cut the invented Serve tiers / group-finder / prayer paragraph; condensed 8 bands → 4. One DRAFT: native prayer form.</td></tr>
+          <tr><td class="pg">Next Steps<small>/next-steps</small></td><td><span class="badge b-live">Live</span></td><td>Verbatim prose; 8 bands → 4. Serve step now links to <strong>Outreach &amp; Missions</strong> ("here, near &amp; far"). CTAs stubbed as "soon" until their targets ship. One DRAFT: native prayer form.</td></tr>
+          <tr><td class="pg">Outreach &amp; Missions<small>/ministries/outreach-missions</small></td><td><span class="badge b-live">Live</span></td><td><strong>New (#13).</strong> The Here·Near·Far build-out on RCC's real <strong>Acts 1:8</strong> framing — verbatim hero + all 16 partner ministries (local/regional/global). One DRAFT chip: the added Here·Near·Far overlay.</td></tr>
           <tr><td class="pg">Watch<small>/watch</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Live band + series drill-down + media options + notes. Real archive lands once sermon media is wired (see §03).</td></tr>
           <tr><td class="pg">Events<small>/events</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Filterable list + detail w/ real Church Center registration handoff.</td></tr>
           <tr><td class="pg">Ministries<small>/ministries</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Copy owed</span></td><td><strong>New tonight.</strong> Hub: hero → directory grid → CTA. Card descriptions are drafted — need RCC's real one-liners (live hub lists names only).</td></tr>
@@ -140,7 +141,8 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">05</span> Your to-dos</h2>
     <ul class="todo">
-      <li><span class="box"></span><span><b>Review the Next Steps fidelity pass</b><small>Confirm it's OK to drop the invented Serve Here/Near/Far tiers, the LifeGroups group-finder, and the paraphrased prayer paragraph. And where should baptism scheduling, the two packet PDFs, and Sign-Up-to-Serve point (real Church Center forms exist)? Currently all → /connect.</small></span></li>
+      <li><span class="box"></span><span><b>Real destinations for the stubbed CTAs</b><small>Now safely disabled (not silently wrong): the Church Center <b>baptism form</b>, the two <b>packet PDFs</b>, and <b>Sign-Up-to-Serve</b>. Send each URL and I flip the stub to the live link. (Here/Near/Far is resolved — built out as Outreach &amp; Missions.)</small></span></li>
+      <li><span class="box"></span><span><b>OK on the Here·Near·Far overlay?</b><small>The missions page keeps RCC's verbatim Acts 1:8 tiers and adds a small "Here·Near·Far / Local·Regional·Global" tag on each (DRAFT-chipped). Say the word and I drop the tags for biblical labels only.</small></span></li>
       <li><span class="box"></span><span><b>Log into the Subsplash dashboard so I can pull video</b> <span class="tag">#12</span><small>The public embed gives audio only, and gates it on a stalling player (3/15 audio landed). The dashboard is the reliable source for video + the rest of the audio. Metadata + sidecars are staged and waiting.</small></span></li>
       <li><span class="box"></span><span><b>Confirm the church's YouTube channel + stand up API access</b> <span class="tag">#10</span><small>Data API v3 key (reads) + one-time OAuth (uploads). Needed before anything uploads.</small></span></li>
       <li><span class="box"></span><span><b>Kids grade range — a 3-way conflict to settle</b><small><kbd>/ministries/kids/</kbd> says RCC Kids = "Birth – 4th grade" &amp; FIVE 6 = "5th &amp; 6th"; <kbd>/what-to-expect/</kbd> says "birth through grade five"; you'd earlier asked for "6th grade." The Kids + Visit pages carry DRAFT chips until you pick one.</small></span></li>
@@ -152,6 +154,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">06</span> Recent log</h2>
     <ul class="log">
+      <li><time>Aug 12 AM</time><span><strong>#13 reconciled</strong>: built <strong>Outreach &amp; Missions</strong> (the real Here·Near·Far / Acts 1:8 page, verbatim + 16 partners) and shipped a <strong>sitewide stub-link system</strong> (<kbd>routeRegistry</kbd> + <kbd>&lt;RccLink&gt;</kbd>) — every link to an unbuilt page now renders disabled "soon". Nightly loop gained a link-validation step. Shipped to <kbd>main</kbd>.</span></li>
       <li><time>Aug 12 03:15</time><span><strong>Next Steps fidelity audit + condense</strong>: restored verbatim copy across the Growth Track, Baptism, LifeGroups, Serve &amp; Prayer sections; cut the invented tiers/finder/prayer-paragraph; 8 bands → 4. Shipped to <kbd>main</kbd>.</span></li>
       <li><time>Aug 11 eve</time><span>Built + shipped <strong>Section 5 — Ministries hub + Kids</strong> to <kbd>main</kbd>; both routes render SSR (HTTP 200). Loop state updated.</span></li>
       <li><time>Aug 11 eve</time><span>Captured <strong>15 sermons</strong> from Subsplash → manifest + <strong>drive sidecars</strong> (<kbd>ARCHIVE/rcc-sermons/</kbd>). Tried browser-native downloads: got <strong>3/15 audio</strong>, learned the public control is audio-only + player-gated → dashboard is the path for video.</span></li>
