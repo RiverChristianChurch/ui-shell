@@ -34,6 +34,33 @@ autonomously, ship, report, stop.
 - Model-site raw audits: `~/dev/rcc/web/docs/research/church-site-audits-2026-08.json`
 - Current-site content source: https://riverchristian.church
 
+## 🌙 TONIGHT — overnight batch (queued 2026-08-12 by Jason; multiple sessions OK)
+
+Jason authorized **multiple autonomous sessions tonight** to tackle this batch. Work top-down;
+ship + report each piece; `/clear` between them. Order:
+
+1. **Scrape more sermon series.** Run the Subsplash back-catalog pass on dd-mini (Chrome MCP).
+   Per Jason: downloads ARE on the public embed — **Download → Download Video + Download Audio**,
+   plus capture the **series artwork** (`artworkUrl`). Extend `content/subsplash-manifest.json`
+   with more series, run `scripts/subsplash-fetch.mjs`, commit the new `content/sermons/*.json`
+   (+ art in `public/sermon-art/`). /watch then shows real series graphics (see #12).
+2. **Build the next set of pages** (Section queue below): Section 6 (Students/REACH, Men,
+   Women + MOMs), Section 7 (Special Needs + Care & Support), Section 8 (About). Same discipline:
+   verbatim RCC copy (use `~/dev/rcc/volunteer/src/data/serveTeams.ts` + the ministries hub for
+   real write-ups), ≥2 model borrowings, DRAFT-chip invented copy, tight bands, no emojis
+   (`<RccIcon>`), stub links via `<RccLink>` + registry, waves per the source/dest rule.
+3. **Full code audit + organize to industry standard.** The imported volunteer code (`utils/
+   serveTeams.ts`, `utils/groups.ts`, `server/api/groups.get.ts`, `components/LifeGroupsMap.client.vue`,
+   `plugins/fontawesome.ts`) + everything built this week: verify structure, naming, and that it
+   passes lint/typecheck. Add/enable **ESLint + Prettier + `vue-tsc` typecheck** if not present
+   (`@nuxt/eslint`), fix findings, add `npm run lint` / `npm run typecheck` scripts.
+4. **Commit-time validation/testing process.** Stand up a pre-commit gate (Husky + lint-staged, or
+   a `.git/hooks/pre-commit`) that runs lint + typecheck (+ `npm run build` or fast tests) before a
+   commit lands. Document it in CLAUDE.md. This is the durable "validate before commit" workflow —
+   after tonight, **every session runs lint + typecheck before committing** (add to step 5 below).
+
+Report each in `NIGHTLY-REPORTS.md`; anything needing Jason → a `needs-jason` issue.
+
 ## Rework queue (PRIORITY — clear before taking a new section)
 
 Streamline/condense passes take precedence over new sections. In step 1, take the

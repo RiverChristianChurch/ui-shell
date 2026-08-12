@@ -4,6 +4,36 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-12 · PCO forms map + Serve page port + tonight's batch queued
+
+**Status:** shipped to `web` main. Volunteer-app sunset continues; forms design locked.
+
+- **PCO forms ↔ workflows mapping** (Jason asked, "you have access to PCO"): queried the live RCC
+  Planning Center read-only (PAT from the volunteer app's env) and wrote
+  `web/docs/reference/pco-forms-workflows.md` — every workflow (Baptism, Follow-Up Serve/LifeGroup/
+  First-Time-Guest/Pastoral-Care/Membership, Attends Welcome…) + the website-form → workflow routing.
+  **Key finding:** the PCO **Forms API can't accept submissions** and doesn't expose a form's
+  workflow automation — so branded forms create **Person + Workflow card** directly (ADR-004 updated).
+  A few routings are name-inferred → Jason confirms in the PCO Automations UI.
+- **Serve page ported** (`/serve`) — sunsetting the volunteer app, its two public embeds move here:
+  LifeGroups (done last session) + **Serve teams browse** now. `utils/serveTeams.ts` (verbatim RCC
+  team content) + a category/card directory; "Join" → the real Church Center form (937439 → Serve @
+  RCC workflow). `/serve` flipped ready — serve links across the site auto-enabled.
+- **Auth placement decided** (ADR-002 updated): public **browse** (LifeGroups finder, Serve teams)
+  stays public; the **onboarding/matrix/leader/admin/`/connect`** machinery folds into the **auth'd
+  portal**. Cutover 301s once those reach parity.
+- **Tonight queued** (Jason authorized multiple sessions): (1) scrape more sermon series + artwork,
+  (2) build Sections 6–8, (3) full code audit + lint/typecheck to industry standard, (4) stand up a
+  **pre-commit validation gate** (lint + typecheck + build) — see the 🌙 TONIGHT block in NIGHTLY-LOOP.
+- **FA Free** wired earlier this day; **LifeGroups finder** ported earlier this day.
+
+### Needs Jason
+- Confirm the _(inferred)_ form→workflow routings + the **List IDs** for Men's/Women's signups
+  (see the mapping doc). Set `NUXT_PCO_APP_ID/SECRET` in web env/Vercel to light up the live group
+  finder + forms.
+
+---
+
 ## 2026-08-12 · Review pass — Jason's 7 fixes (text width · icons · /give · /groups · ministries · waves · sermon art)
 
 **Status:** shipped to `web` main. Ran on Jason's review of the morning's work — 7 items.
