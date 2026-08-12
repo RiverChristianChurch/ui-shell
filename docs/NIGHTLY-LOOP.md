@@ -96,6 +96,11 @@ authorized batch above stands.
       a real phone** (screenshot the home-screen icon + standalone launch); confirm the manifest
       + service worker register (Chrome DevTools → Application). Update `.env.example` if any new
       config is introduced. Ship to `web` `main`; report + refresh the tracker.
+      **When you take this up, UPDATE the ADR in the same change:**
+      `web/docs/architecture/decisions/ADR-007-mobile-strategy-pwa.md` — flip its
+      **Implementation** line from `Not yet started` to `Done (<date>)` and record what shipped
+      (the `@vite-pwa/nuxt` config location, manifest + icon paths, offline-cache scope, and that
+      it was verified installed on a real phone). The ADR is the durable record — don't leave it stale.
       Related: the **Groups leader roster/attendance module** is a *separate* post-launch build —
       GitHub issue `RiverChristianChurch/web#21` (phase-2), not part of this task.
 
