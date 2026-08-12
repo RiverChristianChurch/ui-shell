@@ -18,6 +18,14 @@ autonomously, ship, report, stop.
 - `web` repo conventions: `layouts/default.vue` (nav/footer/supra), `pages/`, `nuxt.config.ts`, `tailwind.config.ts`, `CLAUDE.md`
 - Sitemap (target IA + statuses): https://claude.ai/code/artifact/8f944e6e-eb71-4f83-9e4a-61e3445562c0
 - BRAIN: `50-RCC/5010-Projects/Website-Feature-Inventory.md` (feature calls) + `Website-Rebuild.md` (decisions)
+- **Real serve-team + ministry write-ups** (verbatim RCC copy): the volunteer repo's
+  `~/dev/rcc/volunteer/src/data/serveTeams.ts` (5 categories, ~20 teams with
+  descriptions/leaders). Use it to source ministry blurbs instead of inventing.
+- **Forms pattern (confirmed 2026-08-12):** the current site uses **PCO Church Center
+  hosted forms** (e.g. serve = `churchcenter.com/people/forms/937439`) and **Subsplash**
+  for giving. So a form here = embed/link the Church Center form OR build a branded
+  Nuxt form → Nitro server route → PCO People API (ADR pending). Kids grade: RCC Kids =
+  Birth–4th; FIVE 6 = 5th–6th "tween" (separate). Both settled 2026-08-12.
 - Brand guide: `brand/index.html` (live at /ui-shell/brand/) — tokens, type, logo tiers, accent (pending lock: use `--rcc-accent`)
 - Model-site raw audits: `~/dev/rcc/web/docs/research/church-site-audits-2026-08.json`
 - Current-site content source: https://riverchristian.church
@@ -172,8 +180,8 @@ first unchecked Section below. One item per night, same ship/report discipline.
 - **Recurring times/locations live in `web/utils/siteConfig.ts` (`SITE`) — ONE source
   of truth (Jason, 2026-08-12).** Service times, office hours, the weekly prayer time,
   address, and the Subsplash giving URL are there; pages read from it so a time/day
-  change happens in exactly one place. ⚠️ `SITE.prayer.day` is UNCONFIRMED — the live
-  prayer page says "each week" with no weekday; set it once Jason confirms (Wednesday?).
+  change happens in exactly one place. Prayer is **Wednesday** (`SITE.prayer.day`,
+  confirmed by Jason 2026-08-12).
 - **Sermon scraper must capture the SERIES GRAPHIC (Jason, 2026-08-12).** The browser
   metadata pass records `artworkUrl` per message; `subsplash-fetch.mjs` downloads it to
   `public/sermon-art/<slug>` and sets the record `thumb`. `/watch` shows the real series
