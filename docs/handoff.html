@@ -80,9 +80,9 @@
   <header class="masthead">
     <div class="eyebrow">River Christian Church · Website Rebuild</div>
     <h1>Progress — live tracker</h1>
-    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Eleven pages live (LifeGroups finder + Serve ported from the volunteer app); every internal link self-validates; icons are FontAwesome Free.</p>
+    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Fourteen pages live — Section 6 shipped Students, Men, and Women+MOMs; every internal link self-validates; icons are FontAwesome Free.</p>
     <div class="meta">
-      <span><b>As of</b> Aug 12, 2026 (cards + Serve flow)</span>
+      <span><b>As of</b> Aug 13, 2026 (Section 6 — Students/Men/Women)</span>
       <span><b>Dev</b> localhost:1721</span>
       <span><b>ui-shell</b> v0.1.0-beta.7</span>
       <span><b>Live</b> web@main → DigitalOcean (ADR-005)</span>
@@ -92,10 +92,10 @@
   <section>
     <h2><span class="n">01</span> Snapshot</h2>
     <div class="snap">
-      <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Outreach &amp; Missions · <strong>LifeGroups · Give</strong> — real Nuxt routes, SSR, on-brand.</p></div>
+      <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · Ministries + Kids · <strong>Students · Men · Women+MOMs</strong> · Outreach &amp; Missions · LifeGroups · Give — real Nuxt routes, SSR, on-brand.</p></div>
       <div class="card"><h4>Stub-link system</h4><p>Every internal link is an <kbd>&lt;RccLink&gt;</kbd> reading a route registry — real link when the page exists, disabled <strong>"soon"</strong> stub when it doesn't. No 404-bait.</p></div>
       <div class="card"><h4>Give is live</h4><p><strong>New.</strong> <kbd>/give</kbd> embeds the church's <strong>real Subsplash giving form</strong>. Recurring times/URLs now come from one config (<kbd>siteConfig.ts</kbd>).</p></div>
-      <div class="card"><h4>Autobuild</h4><p><strong>Tonight (multi-session):</strong> more sermons · Sections 6–8 · Serve join-flow · auth strategy · ticket tool · graphic-request form · code audit · pre-commit gate. See §04.</p></div>
+      <div class="card"><h4>Autobuild</h4><p><strong>Section 6 done tonight.</strong> Next up: <strong>Section 7 — Special Needs + Care &amp; Support</strong>. Also queued: Serve join-flow · auth strategy (ADR-006) · ticket tool · graphic-request form · PWA.</p></div>
     </div>
   </section>
 
@@ -115,7 +115,10 @@
           <tr><td class="pg">Ministries<small>/ministries</small></td><td><span class="badge b-live">Live</span></td><td>Rebuilt <strong>text-only cards</strong> (no emoji) with a brand accent + "Soon" badge on unbuilt sub-pages; fixed the wave hard-cut. Card blurbs still DRAFT (live hub lists names only).</td></tr>
           <tr><td class="pg">Watch<small>/watch</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Live band + series drill-down + media options + notes. Real archive lands once sermon media is wired (see §03).</td></tr>
           <tr><td class="pg">Events<small>/events</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">Sample data</span></td><td>Filterable list + detail w/ real Church Center registration handoff.</td></tr>
-          <tr><td class="pg">Kids<small>/ministries/kids</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">3 draft blocks</span></td><td><strong>New tonight.</strong> Programs → check-in → safety → close. Verbatim RCC Kids + FIVE 6 copy; check-in / safety / pre-reg drafted on an E91 + Venture model.</td></tr>
+          <tr><td class="pg">Kids<small>/ministries/kids</small></td><td><span class="badge b-live">Live</span> <span class="badge b-draft">3 draft blocks</span></td><td>Programs → check-in → safety → close. Verbatim RCC Kids + FIVE 6 copy; check-in / safety / pre-reg drafted on an E91 + Venture model.</td></tr>
+          <tr><td class="pg">Students<small>/ministries/students</small></td><td><span class="badge b-live">Live</span></td><td><strong>New (Section 6).</strong> REACH (Sun 5–7) + GROW (Wed 6:30–8) + student-serve — all <strong>verbatim RCC copy</strong>, zero draft chips. Borrows Venture two-program split + E91 grade/time-in-hero.</td></tr>
+          <tr><td class="pg">Men<small>/ministries/men</small></td><td><span class="badge b-live">Live</span></td><td><strong>New (Section 6).</strong> Mission + Uncommon Groups + the real sample meeting agenda + studies. Verbatim; join CTA is a "soon" stub until the group-join URL lands (#22).</td></tr>
+          <tr><td class="pg">Women + MOMs<small>/ministries/women</small></td><td><span class="badge b-live">Live</span></td><td><strong>New (Section 6).</strong> Mission + John 15:5 + <strong>MOMs</strong> folded in (STARVED study, $32 / 2026 dates / childcare). Verbatim; register CTA is a "soon" stub until the Church Center URL lands (#22).</td></tr>
         </tbody>
       </table>
     </div>
@@ -142,7 +145,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
     <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Multiple sessions authorized. Ship + report each; full detail in <kbd>NIGHTLY-LOOP.md</kbd>.</p>
     <ol class="steps">
       <li><strong>Scrape more sermon series</strong> — pull the rest of the back-catalog + the <strong>series artwork</strong> from the Subsplash embed → records + <kbd>public/sermon-art/</kbd>. <span class="tag">#12</span></li>
-      <li><strong>Build Sections 6–8</strong> — Students/REACH · Men · Women + MOMs, then Special Needs + Care, then About.</li>
+      <li><strong>Build Sections 6–8</strong> — <s>Students/REACH · Men · Women + MOMs</s> <strong>✓ Section 6 shipped Aug 13</strong>; next <strong>Section 7</strong> (Special Needs + Care &amp; Support), then Section 8 (About).</li>
       <li><strong>Serve “join” custom form</strong> — session-aware; prefill + submit on behalf if signed in, name + phone-last-4 verify if not. Replaces the Church Center redirect. <span class="tag">#17</span></li>
       <li><strong>Auth strategy (ADR-006)</strong> — min PCO permission for member sign-in vs. our own auth + PCO link. Foundational; gates the items below. <span class="tag">#19</span></li>
       <li><strong>Website ticket system</strong> — admin-gated portal tool: submit tickets + see status/outcome. <span class="tag">#18</span></li>
@@ -162,7 +165,8 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
       <li><span class="box"></span><span><b>Run the Subsplash back-catalog pass on dd-mini</b> <span class="tag">#12</span><small>Corrected: the public embed <b>does</b> expose downloads — Download → Download Video + Download Audio. No dashboard login needed. The browser pass captures video + audio + the <b>series artwork</b> from the embed; then <kbd>subsplash-fetch</kbd> pulls them. Just needs running.</small></span></li>
       <li><span class="box"></span><span><b>Confirm the church's YouTube channel + stand up API access</b> <span class="tag">#10</span><small>Data API v3 key (reads) + one-time OAuth (uploads). Needed before anything uploads.</small></span></li>
       <li><span class="box"></span><span><b>Kids grade range — a 3-way conflict to settle</b><small><kbd>/ministries/kids/</kbd> says RCC Kids = "Birth – 4th grade" &amp; FIVE 6 = "5th &amp; 6th"; <kbd>/what-to-expect/</kbd> says "birth through grade five"; you'd earlier asked for "6th grade." The Kids + Visit pages carry DRAFT chips until you pick one.</small></span></li>
-      <li><span class="box"></span><span><b>Ministries directory — real card descriptions</b><small>The live hub lists ministry names only; I drafted one-liners. Send the real blurbs (or say "names only") to drop the chip.</small></span></li>
+      <li><span class="box"></span><span><b>Section 6 CTAs — real Church Center URLs</b> <span class="tag">#22</span><small>Students/Men/Women copy is all verbatim, but the action buttons are disabled "soon" stubs until you send URLs: <b>MOMs registration</b> (opens 8/1/26), Men's <b>"Find an Uncommon Group"</b>, and the three email/text-update signups. Also: keep <b>MOMs folded into Women</b>, or break out a standalone /ministries/moms page?</small></span></li>
+      <li><span class="box"></span><span><b>Ministries directory — real card descriptions</b><small>Hub card blurbs for Kids/Students/Men/Women/Outreach/Prayer now come from RCC's real copy; only <b>Care</b> and <b>Growth</b> are still drafted. Send those two (or say "names only") to drop the last chips.</small></span></li>
       <li><span class="box"></span><span><b>Later: NFC Connect Card links on each message</b> <span class="tag">#11 · phase 2</span><small>Depends on the /connect NFC task.</small></span></li>
     </ul>
   </section>
@@ -170,6 +174,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">06</span> Recent log</h2>
     <ul class="log">
+      <li><time>Aug 13 03:15</time><span><strong>Section 6 — Students, Men, Women + MOMs</strong>: shipped three real ministry pages to <kbd>main</kbd> (all SSR 200). <strong>REACH + GROW</strong> student programs; <strong>RCC Men</strong> (mission + Uncommon Groups + the real meeting agenda); <strong>RCC Women</strong> with <strong>MOMs folded in</strong> (STARVED study, $32 / 2026 dates). <strong>All copy verbatim RCC — zero draft chips.</strong> Routes flipped live in the registry; hub Men/Women blurbs re-sourced (2 chips dropped). Borrows named per page (Venture, E91, Seacoast, Fusion/Motivation). Filed <span class="tag">#22</span>: real Church Center URLs for the join/register/update CTAs + the MOMs-page-structure decision.</span></li>
       <li><time>Aug 12 late</time><span><strong>Mobile strategy decided — PWA, no native app</strong>: with giving on <strong>Subsplash</strong> and check-in at <strong>on-site stations</strong> (not parent mobile QR), Church Center's only real daily job is group roster/attendance. So: ship a <strong>PWA</strong> (installable web app — home-screen icon, standalone, offline shell; <kbd>@vite-pwa/nuxt</kbd>) as "the app" — no App Store, no branded wrapper. <strong>Queued for a nightly run (NOT tonight)</strong> in <kbd>NIGHTLY-LOOP.md</kbd>. Group leader roster/attendance rebuilt in the portal via PCO Groups is <strong>post-launch</strong> — filed <span class="tag">#21 · phase 2</span>. Events stay authored in PCO Calendar.</span></li>
       <li><time>Aug 12 late</time><span><strong>Two more tonight tasks</strong>: <strong>website ticket tool</strong> (admin-gated — submit + status/outcome, #18) and <strong>auth strategy (ADR-006)</strong> — min PCO permission for member sign-in vs. our own auth + PCO link (#19, foundational). Both queued in §04. Fixed the Tonight card's scrambled list (grid → hanging-number).</span></li>
       <li><time>Aug 12 late</time><span><strong>Cards + Serve-flow task</strong>: cards now <strong>stand out</strong> (border + radius + spacing + brand-lift hover, sitewide). Filed the <strong>Serve custom-join flow</strong> (#17 — session-aware, prefill+submit-on-behalf if signed in, name+phone-last-4 verify if not; no Church Center redirect) for tonight. Reworked the "Tonight" card here.</span></li>
