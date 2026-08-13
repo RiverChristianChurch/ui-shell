@@ -419,3 +419,60 @@ Static: HTML tag-balanced; **zero hardcoded colors** (all `var(--rcc-*)`); inter
 
 ### Next up
 Section 2 — **Next Steps** (Growth Track, Baptism, LifeGroups finder, Serve, Prayer).
+
+---
+
+## 2026-08-13 — Section 6: Ministries — Students (REACH), Men, Women + MOMs
+
+**Shipped (web `main`, commit `92e1cb3`; DigitalOcean deploys on push):**
+- `/ministries/students` — RCC Students (REACH). Hero surfaces grade + both meeting
+  times; PROGRAMS band = REACH (Sun 5:00–7:00) + GROW (Wed 6:30–8:00) verbatim;
+  SERVE band (students-serve paragraph verbatim); close = Get Student Updates.
+- `/ministries/men` — mission statement verbatim; UNCOMMON GROUPS band with the real
+  four-block Sample Meeting Agenda; STUDIES band (Four-Week Daniel Study, Authentic
+  Manhood resources); close = Get Email/Text Updates.
+- `/ministries/women` — mission verbatim + John 15:5(a) pull-quote; **MOMs** folded in
+  as the substantive band: Mentoring of Moms (Titus 2:4) verbatim, STARVED study by
+  Amy Seiffert + its 4 practices, and a registration card ($32 · 2026 semester dates ·
+  limited childcare · opens 8/1/26).
+- routeRegistry: `students`/`men`/`women` flipped `true` (hub cards + every sitewide
+  `<RccLink>` auto-enable). Hub Men/Women blurbs re-sourced from real mission copy
+  (two DRAFT chips dropped).
+
+**Model borrowings (≥2 per page, named):**
+- *Students* — (1) **Venture Christian** `/students`: two clearly-labeled programs split
+  by meeting (ELEVATE MS / MOMENTUM HS) → RCC REACH (Sun) + GROW (Wed) as two program
+  cards each carrying day/time/grade meta. (2) **E91 Students**: lead with grade range +
+  meeting time in the hero so "who + when" reads before scrolling.
+- *Men* — (1) **Seacoast Church**: keeps a *dedicated* Men page under Ministries (not a
+  generic `/adults` hub) → standalone `/men` leading with its own mission statement.
+  (2) **Motivation (Motivation Men)**: mission-statement hero + a single "join a group"
+  CTA repeated top & bottom, updates via Church Center → "Find an Uncommon Group" +
+  "Get Email/Text Updates."
+- *Women/MOMs* — (1) **Seacoast**: separate Women page under Ministries → dedicated page
+  w/ mission + scripture. (2) **Fusion / Motivation**: study registration surfaced with
+  concrete dates + cost and a register CTA → RCC's real MOMs $32 / 2026-dates / childcare
+  block instead of a vague "sign up."
+
+**DRAFT-flagged (invented copy):** none. All body copy is verbatim RCC (grammar/flow only).
+Section labels/titles are editorial framing (consistent with prior ministry pages), not
+content copy. MOMs was *folded* from its own live nav page into a band on Women — pure
+editorial condensing (no chip, per the omission rule).
+
+**Validation:** `npm run build` passes; booted `.output/server` and curled all four routes
+(students/men/women/hub) → HTTP 200 with correct SSR content per page. Link sweep: new pages
+use only `<RccLink>` + in-page anchors (no bare NuxtLink/href); no live `href` points at a
+`false` route across all built pages. Zero hardcoded colors — swapped my rgba/px literals for
+`var(--rcc-dark-border)` / `var(--rcc-radius)` tokens. Responsive rule added (MOMs grid
+collapses to 1 col ≤768). Browser eyeball deferred (no Chrome connected).
+
+**Decisions needed → `needs-jason` issue (web):**
+- Real **Church Center URLs** to replace the `/connect` "soon" placeholders on all join CTAs:
+  Men "Find an Uncommon Group" (live page = email-the-leader), **MOMs "Register"** (live
+  "Register HERe" → Church Center form; registration opens 8/1/26), and the three
+  "Get Updates" email-signup CTAs. Until wired they render as disabled "soon" stubs.
+- Confirm **MOMs stays folded into Women** (live site lists it as its own top-nav item) vs.
+  breaking out a standalone `/ministries/moms` page.
+
+### Next up
+Section 7 — **Special Needs** (full page; model Highlands/Seacoast) + **Care & Support**.

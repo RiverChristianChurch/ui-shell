@@ -145,7 +145,12 @@ first unchecked Section below. One item per night, same ship/report discipline.
       (RCC Kids: programs → first-time/check-in → safety → close). Verbatim RCC
       copy; check-in/safety/pre-reg drafted (E91 + Venture model) with DRAFT chips.
       OPEN: grade-range conflict (see below) + directory-card descriptions need real copy.
-- [ ] 6. Ministries: Students/REACH, Men, Women + MOMs
+- [x] 6. Ministries: Students/REACH, Men, Women + MOMs — DONE 2026-08-13.
+      `/ministries/students` (REACH + GROW + serve), `/ministries/men` (mission +
+      Uncommon Groups + agenda + studies), `/ministries/women` (mission + John 15:5
+      + MOMs band w/ STARVED study + $32/2026-dates register block). Verbatim RCC
+      copy; routes flipped true; hub Men/Women blurbs now sourced. MOMs register +
+      all join CTAs point at /connect (soon) — real Church Center URLs needed (#issue).
 - [ ] 7. Special Needs (full page — model on Highlands/Seacoast examples) + Care & Support
 - [ ] 8. About — story, beliefs, staff, contact, This Week (email archive concept)
 - [ ] 9. Give + supra-menu (Preschool, This Week) + footer (sitewide pattern)
