@@ -53,6 +53,20 @@ for r in "$REPO" "$WEB"; do
   fi
 done
 
+# 3.5 Clear the context BEFORE injecting. This session doubles as Jason's interactive REPL,
+#      so by 03:15 it is frequently at/near the context limit. Submitting the nightly prompt
+#      onto a full context makes Claude Code AUTO-COMPACT (/compact) first — and the compact
+#      SWALLOWS the injected prompt (it is not re-submitted afterward), so the turn never runs.
+#      That is the exact root cause of the 2026-08-14 no-op run (injector logged "Injected"
+#      but no section shipped). The nightly prompt is fully self-contained — it re-reads
+#      docs/NIGHTLY-LOOP.md and cd's into both repos — so a fresh context loses nothing the
+#      run needs. We already confirmed the session is idle (step 2) and clean (step 3) above,
+#      so clearing here cannot interrupt an in-progress turn or discard uncommitted work.
+tmux send-keys -t "$SESSION" -l "/clear"
+sleep 1
+tmux send-keys -t "$SESSION" Enter
+sleep 3
+
 # 4. Inject the one-line nightly prompt and submit it robustly.
 PROMPT='NIGHTLY RCC WEBSITE ITERATION. cd ~/dev/rcc/ui-shell && git pull, then read docs/NIGHTLY-LOOP.md and follow it EXACTLY. BUILD TARGET IS THE web REPO (~/dev/rcc/web) — real Nuxt pages, NOT static mockups. cd ~/dev/rcc/web && git checkout main && git pull. Take the FIRST unchecked section from the queue. Research the model churches for THAT section only (single-site cohort first — E91, Venture, Real Life Sac, Motivation, Fusion, Brooklake — via the raw audits at ~/dev/rcc/web/docs/research/church-site-audits-2026-08.json plus live fetches). EACH section must earn >=2 concrete model borrowings — name them in the report; do not invent sections the cohort does not justify. Pull real RCC copy from https://riverchristian.church; cross-check the sitemap artifact for decided IA (it can CUT things). RCC content takes precedence — edit only for grammar/flow; any copy you invent gets a .rcc-draft/.rcc-draft-chip DRAFT badge until Jason reviews. Build web/pages/<section>.vue (+ web/components/* as needed) with useHead for title/description; nav/footer/supra live in web/layouts/default.vue (pages supply content only). Use ui-shell classes; NO hardcoded colors/fonts. If you need a NEW shared token/component, add it to ui-shell/src/css FIRST, bump ui-shell version+tag (git tag vX; push), then npm i @riverchristianchurch/ui-shell@github:RiverChristianChurch/ui-shell#vX in web and use it. Give never highlighted; supra carries Preschool + This Week; taxonomy undecided -> current ministry names. Never touch ui-shell/options/ or brand-guide decisions (accent/type/logo tiers/seasonal) — propose via issue. VALIDATE: cd ~/dev/rcc/web && npm run build must pass; boot node .output/server/index.mjs and curl the route to confirm SSR renders real content; internal links/anchors resolve; responsive 768/1024; no hardcoded colors. SHIP: small commits to web main + push (Vercel deploys); if ui-shell changed, push it + its new tag first. Then check the section box in ui-shell docs/NIGHTLY-LOOP.md (commit to ui-shell), and update that section status dot in the sitemap artifact (pass URL https://claude.ai/code/artifact/8f944e6e-eb71-4f83-9e4a-61e3445562c0 to the Artifact tool) from open to partial/done. REPORT: append to ui-shell docs/NIGHTLY-REPORTS.md — date, section, route shipped, the >=2 borrowings, DRAFT-flagged list, decisions needed. Anything needing Jason = a GitHub issue labeled needs-jason (repo you touched; default RiverChristianChurch/web). Then call PushNotification ONCE with a phone-readable summary. ONE section per night — STOP after the report. Never commit secrets. Begin now.'
 
