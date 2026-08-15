@@ -1,0 +1,288 @@
+<title>RCC Sitemap — Rebuild Target</title>
+<style>
+  :root {
+    --brand: #095879; --brand-light: #0b7aab; --brand-soft: #6cc4ea;
+    --bg: #0c0c0e; --card: #16171a; --line: rgba(255,255,255,0.08);
+    --ink: rgba(255,255,255,0.88); --muted: rgba(255,255,255,0.48);
+    --keep: #6cc4ea; --keep-bg: rgba(9,88,121,0.22);
+    --evolve: #fbbf24; --evolve-bg: rgba(251,191,36,0.12);
+    --new: #34d399; --new-bg: rgba(52,211,153,0.12);
+    --future: rgba(255,255,255,0.55); --future-bg: rgba(255,255,255,0.07);
+    --cut: #f87171; --cut-bg: rgba(248,113,113,0.10);
+    --open: #c4b5fd; --open-bg: rgba(196,181,253,0.12);
+    --live: #34d399; --part: #fbbf24;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f5f7; --card: #ffffff; --line: rgba(9,40,60,0.12);
+      --ink: #16232b; --muted: #5b6b74;
+      --keep: #095879; --keep-bg: rgba(9,88,121,0.10);
+      --evolve: #92610a; --evolve-bg: rgba(180,120,10,0.12);
+      --new: #047857; --new-bg: rgba(4,120,87,0.10);
+      --future: #5b6b74; --future-bg: rgba(9,40,60,0.06);
+      --cut: #b91c1c; --cut-bg: rgba(185,28,28,0.08);
+      --open: #6d28d9; --open-bg: rgba(109,40,217,0.08);
+      --live: #047857; --part: #92610a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c0c0e; --card: #16171a; --line: rgba(255,255,255,0.08);
+    --ink: rgba(255,255,255,0.88); --muted: rgba(255,255,255,0.48);
+    --keep: #6cc4ea; --keep-bg: rgba(9,88,121,0.22);
+    --evolve: #fbbf24; --evolve-bg: rgba(251,191,36,0.12);
+    --new: #34d399; --new-bg: rgba(52,211,153,0.12);
+    --future: rgba(255,255,255,0.55); --future-bg: rgba(255,255,255,0.07);
+    --cut: #f87171; --cut-bg: rgba(248,113,113,0.10);
+    --open: #c4b5fd; --open-bg: rgba(196,181,253,0.12);
+    --live: #34d399; --part: #fbbf24;
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f5f7; --card: #ffffff; --line: rgba(9,40,60,0.12);
+    --ink: #16232b; --muted: #5b6b74;
+    --keep: #095879; --keep-bg: rgba(9,88,121,0.10);
+    --evolve: #92610a; --evolve-bg: rgba(180,120,10,0.12);
+    --new: #047857; --new-bg: rgba(4,120,87,0.10);
+    --future: #5b6b74; --future-bg: rgba(9,40,60,0.06);
+    --cut: #b91c1c; --cut-bg: rgba(185,28,28,0.08);
+    --open: #6d28d9; --open-bg: rgba(109,40,217,0.08);
+    --live: #047857; --part: #92610a;
+  }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.45; margin: 0; padding: 2.5rem 1.5rem 4rem;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+  .eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-light); margin: 0 0 0.4rem; }
+  h1 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.35rem; text-wrap: balance; }
+  .sub { color: var(--muted); font-size: 0.9rem; margin: 0 0 1.5rem; max-width: 62ch; }
+  .waves { color: var(--brand-light); font-weight: 800; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-bottom: 0.6rem; }
+  .chip {
+    display: inline-flex; align-items: center; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px;
+    border-radius: 999px; white-space: nowrap; flex-shrink: 0;
+  }
+  .c-keep   { color: var(--keep);   background: var(--keep-bg); }
+  .c-evolve { color: var(--evolve); background: var(--evolve-bg); }
+  .c-new    { color: var(--new);    background: var(--new-bg); }
+  .c-future { color: var(--future); background: var(--future-bg); }
+  .c-cut    { color: var(--cut);    background: var(--cut-bg); }
+  .c-open   { color: var(--open);   background: var(--open-bg); }
+  .legend .lg { font-size: 0.72rem; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+
+  .st { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 6px; }
+  .st-no   { border: 1.5px solid var(--muted); }
+  .st-part { background: var(--part); }
+  .st-live { background: var(--live); }
+
+  .supra { background: var(--card); border: 1px solid var(--line); border-bottom: none; border-radius: 12px 12px 0 0; padding: 0.45rem 1.25rem; display: flex; gap: 1.2rem; font-size: 0.72rem; }
+  .supra a { color: var(--brand-soft); font-weight: 700; text-decoration: none; }
+  .supra span { color: var(--muted); }
+  .navmock { background: var(--card); border: 1px solid var(--line); border-radius: 0 0 12px 12px; padding: 1rem 1.25rem; overflow-x: auto; }
+  .navmock-inner { display: flex; align-items: center; gap: 1.4rem; min-width: max-content; }
+  .navmock .logo { font-weight: 800; letter-spacing: 0.02em; color: var(--ink); }
+  .navmock a { color: var(--muted); font-size: 0.82rem; font-weight: 600; text-decoration: none; }
+  .navmock .util { margin-left: auto; display: flex; gap: 0.9rem; align-items: center; }
+  .navmock .signin { border: 1px solid var(--line); padding: 5px 14px; border-radius: 6px; color: var(--ink); font-size: 0.78rem; }
+  .navnote { font-size: 0.75rem; color: var(--muted); margin: 0.6rem 0 2rem; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.15rem 1.3rem 1.3rem; }
+  .card h2 { font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; margin: 0 0 0.2rem; display: flex; align-items: center; gap: 0.5rem; }
+  .card .desc { font-size: 0.74rem; color: var(--muted); margin: 0 0 0.85rem; }
+  .card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.55rem; }
+  .card li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.86rem; }
+  .card li .n { flex: 1; }
+  .card li .note { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
+  .card li .chip { margin-top: 2px; }
+  .cutlist li .n { color: var(--muted); }
+  .span2 { grid-column: span 2; }
+  @media (max-width: 760px) { .span2 { grid-column: span 1; } }
+  .foot { margin-top: 2rem; font-size: 0.72rem; color: var(--muted); }
+  .sect { margin: 2.2rem 0 0.8rem; }
+  .sect h3 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0; }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">River Christian Church · Website Rebuild</p>
+  <h1><span class="waves">≋</span> Proposed Sitemap</h1>
+  <p class="sub">Target information architecture for the new riverchristian.church, grounded in the 10-site feature inventory (2026-08-07). Chips = what happens vs today's site. Dots = build status, updated as nightly iteration ships sections.</p>
+
+  <div class="legend">
+    <span class="lg"><span class="chip c-keep">Keep</span> exists, stays</span>
+    <span class="lg"><span class="chip c-evolve">Evolve</span> exists, changes</span>
+    <span class="lg"><span class="chip c-new">New</span> doesn't exist today</span>
+    <span class="lg"><span class="chip c-future">Future</span> post-launch</span>
+    <span class="lg"><span class="chip c-cut">Cut</span> removed</span>
+    <span class="lg"><span class="chip c-open">Open</span> decision pending</span>
+  </div>
+  <div class="legend">
+    <span class="lg"><span class="st st-no"></span> not started in new stack</span>
+    <span class="lg"><span class="st st-part"></span> in beta / partial</span>
+    <span class="lg"><span class="st st-live"></span> live today (external/standalone), continues or folds in</span>
+  </div>
+
+  <div class="supra">
+    <a>River Preschool</a>
+    <a>This Week</a>
+    <span>— supra-menu bar: RPK highlighted early without spending a nav slot</span>
+  </div>
+  <div class="navmock">
+    <div class="navmock-inner">
+      <span class="logo"><span class="waves">≋</span> RCC</span>
+      <a>Visit</a><a>Next Steps</a><a>Watch</a><a>Ministries</a><a>Events</a><a>About</a><a>Give</a>
+      <span class="util"><span class="signin">Sign In</span></span>
+    </div>
+  </div>
+  <p class="navnote">7 flat items + Sign In. No "Home" (0/9 models). Give is a plain nav item, <strong>not a highlighted button</strong> — per the models (E91 and Venture even run it footer-only). Preschool + This Week live in the supra-menu bar.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Visit</h2>
+      <p class="desc">Visitor funnel — the homepage's primary CTA lands here · <strong style="color:var(--part)">shipped 2026-08-08 → web /visit</strong></p>
+      <ul>
+        <li><span class="st st-part"></span><span class="n">What to Expect<span class="note">absorbs "New? Start Here!"</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-part"></span><span class="n">Service Times &amp; Directions</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Visitor FAQ</span><span class="chip c-new">New</span></li>
+        <li><span class="st st-part"></span><span class="n">Kids check-in preview<span class="note">links to Kids page practicals</span></span><span class="chip c-new">New</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Next Steps</h2>
+      <p class="desc">Named on-ramp anchors the funnel (universal pattern) · <strong style="color:var(--part)">shipped 2026-08-12 → web /next-steps</strong></p>
+      <ul>
+        <li><span class="st st-part"></span><span class="n">Growth Track</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Baptism</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">LifeGroups<span class="note">group finder + online join (PCO Groups) — /groups</span></span><span class="chip c-new">New</span></li>
+        <li><span class="st st-part"></span><span class="n">Serve<span class="note">volunteer app live standalone — goes native, retire iframe + legacy forms</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-part"></span><span class="n">Prayer<span class="note">form + follow-up opt-in — best in cohort</span></span><span class="chip c-keep">Keep</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Watch</h2>
+      <p class="desc">Native content, off Subsplash embeds · <strong style="color:var(--part)">shipped → web /watch</strong></p>
+      <ul>
+        <li><span class="st st-part"></span><span class="n">Watch Live</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Messages<span class="note">native archive · series / speaker / date · Service Rewind folds in</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-no"></span><span class="n">Sermon backend<span class="note">decided: YouTube ingest → native pages · legacy video exports from Subsplash (web #7)</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-no"></span><span class="n">Podcast</span><span class="chip c-future">Future</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Ministries</h2>
+      <p class="desc">Hub + sub-pages · <strong style="color:var(--part)">Kids, Outreach, Students, Men, Women+MOMs, Care shipped → web /ministries/*</strong> · taxonomy axis still <span class="chip c-open">Open</span> (web #1)</p>
+      <ul>
+        <li><span class="st st-part"></span><span class="n">Kids — RCC Kids + Five6<span class="note">+ check-in, safety, pre-registration info (drafted)</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-part"></span><span class="n">Students / REACH<span class="note">REACH (Sun) + GROW (Wed) + serve</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Men<span class="note">mission + Uncommon Groups + agenda + studies</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Women + MOMs<span class="note">mission + John 15:5 + MOMs STARVED study / registration</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Care &amp; Support<span class="note">shipped → /ministries/care · CR · DivorceCare · GriefShare · Mental Health stub (Section 7)</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">Special Needs<span class="note">no source content on live site — needs-jason web#25: does RCC want one + copy?</span></span><span class="chip c-open">Open</span></li>
+        <li><span class="st st-part"></span><span class="n">Outreach &amp; Missions<span class="note">Acts 1:8 · 16 partners · Here/Near/Far</span></span><span class="chip c-keep">Keep</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Events</h2>
+      <p class="desc">Flat nav item; the structural fix of the rebuild · <strong style="color:var(--part)">shipped → web /events</strong></p>
+      <ul>
+        <li><span class="st st-part"></span><span class="n">Event list<span class="note">native + structured from PCO · text-first · ministry/type filters</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-part"></span><span class="n">Per-event detail pages<span class="note">E91 / Eleven22 pattern — real text, SEO-visible</span></span><span class="chip c-new">New</span></li>
+        <li><span class="st st-no"></span><span class="n">Single registration path → PCO<span class="note">replaces Church Center + dvforms + Subsplash + WP landings</span></span><span class="chip c-evolve">Evolve</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>About</h2>
+      <ul>
+        <li><span class="st st-no"></span><span class="n">Our Story</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">What We Believe</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">Staff<span class="note">among the fullest in cohort — photos, bios, emails</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">Contact</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">This Week<span class="note">weekly email archive on site · also in supra-menu</span></span><span class="chip c-new">New</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Give</h2>
+      <p class="desc">Plain nav item — no visual highlight (per models) · <strong style="color:var(--part)">shipped → web /give</strong></p>
+      <ul>
+        <li><span class="st st-live"></span><span class="n">Giving portal<span class="note">Subsplash giving stays indefinitely (giving ONLY — app + media retire)</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Give page — FAQ + ways to give</span><span class="chip c-keep">Keep</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Preschool <span class="chip c-keep">Keep</span></h2>
+      <p class="desc">Supra-menu placement — highlighted early, no nav slot spent</p>
+      <ul>
+        <li><span class="st st-no"></span><span class="n">River Preschool page<span class="note">content migrates from current site</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">RPK parent portal<span class="note">PCO login · class levels · Stripe payments</span></span><span class="chip c-future">Future</span></li>
+      </ul>
+    </div>
+
+    <div class="card span2">
+      <h2>Portal <span class="chip c-new">New</span></h2>
+      <p class="desc">Sign In → PCO OAuth. Role-aware. The volunteer app + /connect fold in (ADR-002).</p>
+      <ul>
+        <li><span class="st st-part"></span><span class="n">Dashboard — serve schedule, my groups, registrations, giving<span class="note">scaffold shipped → web /portal</span></span><span class="chip c-new">New</span></li>
+        <li><span class="st st-live"></span><span class="n">Volunteer onboarding<span class="note">live at volunteer.riverchristian.church — migrates at parity</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-live"></span><span class="n">Leader tools — rosters, requirements matrix<span class="note">live in volunteer app</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-no"></span><span class="n">Staff tools — sync, connect-page editor, request intake</span><span class="chip c-new">New</span></li>
+        <li><span class="st st-live"></span><span class="n">/connect — NFC/QR seat-back page<span class="note">live · weekly CTAs · also carries app promotion</span></span><span class="chip c-evolve">Evolve</span></li>
+      </ul>
+    </div>
+
+    <div class="card span2">
+      <h2>Footer (sitewide)</h2>
+      <ul>
+        <li><span class="st st-part"></span><span class="n">Service times · contact · hours</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">Newsletter signup<span class="note">moves from homepage-only to every page</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-no"></span><span class="n">App links<span class="note">replaces standalone app page</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-no"></span><span class="n">Jobs<span class="note">/jobs exists — finally linked</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-no"></span><span class="n">This Week · socials · privacy</span><span class="chip c-keep">Keep</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sect"><h3>Future layer — post-launch</h3></div>
+  <div class="grid">
+    <div class="card span2">
+      <ul>
+        <li><span class="st st-no"></span><span class="n">Podcast feed</span><span class="chip c-future">Future</span></li>
+        <li><span class="st st-no"></span><span class="n">Gear page<span class="note">replaces /products/</span></span><span class="chip c-future">Future</span></li>
+        <li><span class="st st-no"></span><span class="n">Facility / weddings</span><span class="chip c-future">Future</span></li>
+        <li><span class="st st-no"></span><span class="n">RPK parent portal</span><span class="chip c-future">Future</span></li>
+        <li><span class="st st-no"></span><span class="n">Weekly-email automation<span class="note">one pipeline feeds site + email — no more site update AND Mailchimp build</span></span><span class="chip c-future">Future</span></li>
+        <li><span class="st st-no"></span><span class="n">Sunday "We're Live" homepage mode</span><span class="chip c-future">Future</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sect"><h3>Cut from the current site</h3></div>
+  <div class="grid">
+    <div class="card span2 cutlist">
+      <ul>
+        <li><span class="n">"Home" nav item</span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">14-link utility bar (duplicates dropdowns)<span class="note">replaced by the 2-link supra-menu</span></span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">~24 stale event posts 2023–25<span class="note">archive + 301 redirects</span></span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">Service Rewind page<span class="note">merges into Messages</span></span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">Plan-a-visit form<span class="note">What-to-Expect + FAQ is the funnel</span></span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">Site search</span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">Español</span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">/products/ page<span class="note">→ future Gear page</span></span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">Standalone app page<span class="note">→ footer + /connect; Subsplash app disabled post-launch</span></span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">Ministry Leader Resources public downloads<span class="note">→ portal, role-gated</span></span><span class="chip c-cut">Cut</span></li>
+        <li><span class="n">Subsplash embeds (events, sermons, calendar)<span class="note">Subsplash remains for giving only</span></span><span class="chip c-cut">Cut</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="foot">Draft 2 · updated 2026-08-15 · Sources: BRAIN / Website-Feature-Inventory (10-site audit) · Remaining open decisions: taxonomy axis (web #1), content editing (CMS), domain layout, Special Needs (web #25) · Design per ui-shell Option 1 + brand guide · Status dots update as nightly iteration ships sections. Build target: real Nuxt pages in the web repo (decided 2026-08-08). Latest: Section 7 → /ministries/care (Care &amp; Support); Special Needs deferred (no source content).</p>
+</div>
