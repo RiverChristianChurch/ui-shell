@@ -151,7 +151,15 @@ first unchecked Section below. One item per night, same ship/report discipline.
       + MOMs band w/ STARVED study + $32/2026-dates register block). Verbatim RCC
       copy; routes flipped true; hub Men/Women blurbs now sourced. MOMs register +
       all join CTAs point at /connect (soon) — real Church Center URLs needed (#issue).
-- [ ] 7. Special Needs (full page — model on Highlands/Seacoast examples) + Care & Support
+- [x] 7. Care & Support — DONE 2026-08-15. `/ministries/care` (Care Services:
+      Hospital Visit + Counseling Referrals; Support Groups: Celebrate Recovery /
+      DivorceCare / GriefShare as scannable meeting cards). ALL copy verbatim from
+      /ministries/care/ — no invented prose. Mental Health Resources stubbed
+      (`/ministries/care/mental-health` = soon). Registry flipped; hub Care card
+      auto-enabled. **Special Needs: NOT built — RCC has no special-needs / buddy /
+      accessibility content on the live site (404) and none in serveTeams; building
+      a page would be 100% invented (hard-rule violation). Filed needs-jason issue
+      w/ Highlands Haven model → does RCC want one + supply copy.**
 - [ ] 8. About — story, beliefs, staff, contact, This Week (email archive concept)
 - [ ] 9. Give + supra-menu (Preschool, This Week) + footer (sitewide pattern)
 - [ ] 10. Portal deepening — dashboard states per role, group/serve/give cards

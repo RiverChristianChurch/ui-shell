@@ -4,6 +4,67 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-15 · Section 7 — Care & Support (Special Needs deferred)
+
+**Status:** shipped to `web` main (`e1c4762`). DigitalOcean auto-deploys from `main`.
+
+**Shipped:** `/ministries/care` (`web/pages/ministries/care.vue`) — the Care Ministries
+hub, ALL prose **verbatim** from the live `/ministries/care/`:
+- **Care Services** (pastoral): *Hospital Visit* + *Counseling Referrals* — two cards.
+- **Support Groups**: *Celebrate Recovery* (Fri 7 PM), *DivorceCare* (Mon 6:30, Portable 2),
+  *GriefShare* (Tue 6:30, Portable 2) — scannable meeting cards leading with day/time/
+  location/leaders, then the verbatim description. DivorceCare carries its own three-part
+  "What to Expect" (Video with Experts / Discussion with Purpose / Personal Reflection).
+- **Mental Health Resources** — a named live Care ministry; its page isn't built here yet,
+  so it's a **stubbed `<RccLink>`** to `/ministries/care/mental-health` (renders "soon"),
+  not the old WordPress page and not a 404.
+- Registry: `/ministries/care` flipped **true** → the Ministries-hub Care card auto-enabled
+  (its "Soon" badge dropped, no per-link edit). Close CTA routes to Connect Card + Prayer.
+
+**Special Needs — NOT built (deliberate).** Section 7 paired Care with a Special Needs page,
+but RCC has **no special-needs / buddy / accessibility content to source**: `/special-needs/`
+and `/ministries/special-needs/` both 404, nothing in `serveTeams.ts`, no mention on Kids.
+A page would be 100% invented → hard-rule violation. Filed **needs-jason issue
+`RiverChristianChurch/web#25`** (models: Highlands "Highlands Haven", audits[8]) asking
+whether RCC wants one and for real copy. Care & Support stands as the Section 7 deliverable.
+
+**Model borrowings (≥2, named):**
+- (1) **Motivation Church "Support & Recovery"** (`audits[2]`): one Care hub that pairs
+  *pastoral* care (hospital visitation, referrals) with the *recovery/support* groups, each
+  group carrying scannable logistics → RCC Care = two tiers ("Care Services" + "Support
+  Groups"), every group card leading with day · time · location · leaders.
+- (2) **Real Life Church Sacramento** Care page (`audits[4]`): "honestly outsources — named
+  counseling partners + a plainly stated referral policy," not implied in-house clinical
+  counseling → RCC's *Counseling Referrals* policy surfaced up front as an honest "we point
+  you toward options, you choose" card, verbatim.
+
+**DRAFT-flagged (invented copy):** none. All body copy is verbatim RCC (grammar/flow only —
+e.g. "6 pm" → "6:00 PM", the meeting-logistics reformat). Section labels/titles ("From Crisis
+to Community", "We're Here When Life Is Hard") are editorial framing, consistent with prior
+ministry pages — not content copy, no chip. Leader **emails are obfuscated on the live site**,
+so none reproduced (would be fabrication); contact routes via office phone + Connect Card.
+
+**Validation:** `npm run build` passes; booted `.output/server` and curled
+`/ministries/care/` → HTTP 200 with correct SSR (verbatim strings "from crisis to community",
+"hurts and hangups", "15,000+ churches", "point you towards specific options" all present).
+Link sweep across ALL pages: only `<RccLink>` + in-page anchors on the new page; **no live
+`href` points at a `false` route** (`/connect`, `/ministries/prayer`, `/ministries/care/
+mental-health` all render disabled "coming soon"). Zero hardcoded colors — all `var(--rcc-*)`
+tokens (fixed two invalid `--rcc-muted`/`--rcc-border` → `--rcc-text-muted-dark`/
+`--rcc-dark-border`). Responsive: care-services + What-to-Expect grids collapse to 1 col ≤768.
+Browser eyeball deferred (no Chrome connected).
+
+**Decisions needed → `needs-jason`:**
+- **#25 — Special Needs**: does RCC have (or want) a special-needs/accessibility ministry, and
+  the real copy? Off the site until answered.
+- **Mental Health Resources** page: build it next (source = live `/mental-health/`), or link
+  out? Currently a "soon" stub.
+
+### Next up
+Section 8 — **About** (story, beliefs, staff, contact, This Week email-archive concept).
+
+---
+
 ## 2026-08-12 · PCO forms map + Serve page port + tonight's batch queued
 
 **Status:** shipped to `web` main. Volunteer-app sunset continues; forms design locked.
