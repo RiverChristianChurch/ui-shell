@@ -79,9 +79,9 @@
   <header class="masthead">
     <div class="eyebrow">River Christian Church · Website Rebuild</div>
     <h1>Progress — live tracker</h1>
-    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Fifteen pages live — the nightly loop is back (Aug 15) with <strong>Section 7 — Care &amp; Support</strong>; Special Needs is deferred for lack of source content.</p>
+    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Sixteen pages live — the nightly loop shipped <strong>Section 8 — About</strong> (Aug 16): the live site's five About-Us pages consolidated into one anchor-navigable page, all copy verbatim.</p>
     <div class="meta">
-      <span><b>As of</b> Aug 15, 2026 (Section 7 — Care &amp; Support)</span>
+      <span><b>As of</b> Aug 16, 2026 (Section 8 — About)</span>
       <span><b>Dev</b> localhost:1721</span>
       <span><b>ui-shell</b> v0.1.0-beta.7</span>
       <span><b>Live</b> web@main → DigitalOcean (ADR-005)</span>
@@ -91,10 +91,10 @@
   <section>
     <h2><span class="n">01</span> Snapshot</h2>
     <div class="snap">
-      <div class="card"><h4>Live pages</h4><p>Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Students · Men · Women+MOMs · <strong>Care &amp; Support</strong> · Outreach &amp; Missions · LifeGroups · Give — real Nuxt routes, SSR, on-brand.</p></div>
+      <div class="card"><h4>Live pages</h4><p><strong>About</strong> · Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Students · Men · Women+MOMs · Care &amp; Support · Outreach &amp; Missions · LifeGroups · Give — real Nuxt routes, SSR, on-brand.</p></div>
       <div class="card"><h4>Section 6 CTAs are LIVE</h4><p>The Men <strong>Uncommon Groups</strong> join + the <strong>MOMs registration</strong> point at the real Church Center URLs (pulled from prod + verified via PCO), not "soon" stubs.</p></div>
       <div class="card"><h4>Per-ministry events</h4><p>A shared <kbd>&lt;RccMinistryEvents&gt;</kbd> strip embeds each ministry's events and <strong>omits itself entirely</strong> when there are none — no empty "no events" blocks.</p></div>
-      <div class="card"><h4>Nightly loop</h4><p><strong>Ran Aug 15 → Section 7 (Care &amp; Support) shipped.</strong> Special Needs deferred (no source content, <span class="tag">#25</span>). Next up: <strong>Section 8 — About</strong>; and <strong>auth ADR-006</strong> is still the recommended next focused session.</p></div>
+      <div class="card"><h4>Nightly loop</h4><p><strong>Ran Aug 16 → Section 8 (About) shipped.</strong> Five About-Us pages consolidated into one; all verbatim, zero draft chips. Next up: <strong>Section 9 — Give + supra/footer</strong>; and <strong>auth ADR-006</strong> is still the recommended focused session.</p></div>
     </div>
   </section>
 
@@ -119,6 +119,7 @@
           <tr><td class="pg">Men<small>/ministries/men</small></td><td><span class="badge b-live">Live</span></td><td>Mission + Uncommon Groups + real meeting agenda. <strong>CTAs LIVE</strong> — "Find an Uncommon Group" → real Church Center group page. "Brotherhood on Purpose" now 2-col; outdated Studies &amp; Resources removed (pending file storage #23).</td></tr>
           <tr><td class="pg">Women + MOMs<small>/ministries/women</small></td><td><span class="badge b-live">Live</span></td><td>Mission + John 15:5 + <strong>MOMs</strong> band. <strong>CTAs LIVE + MOMs-forward</strong> — "Register for MOMs" → real Church Center registration ("MOMs - 2026", PCO-confirmed). Women's Bible Study surfaced via the events strip; "class" → "semester".</td></tr>
           <tr><td class="pg">Care &amp; Support<small>/ministries/care</small></td><td><span class="badge b-live">Live</span></td><td><strong>New (Section 7, Aug 15).</strong> Care Services (Hospital Visit + Counseling Referrals) + support groups (Celebrate Recovery / DivorceCare / GriefShare) as scannable meeting cards. <strong>All copy verbatim, zero draft chips.</strong> Mental Health Resources is a "soon" stub. <strong>Special Needs not built</strong> — no source content (<span class="tag">#25</span>).</td></tr>
+          <tr><td class="pg">About<small>/about</small></td><td><span class="badge b-live">Live</span></td><td><strong>New (Section 8, Aug 16).</strong> The live site's <strong>five About-Us pages consolidated into one</strong> anchor-navigable page: Our Story <strong>location timeline</strong> (6 milestones w/ avg attendance) → What We Believe <strong>8-doctrine accordion</strong> w/ inline Scripture → Our Team (17 staff grouped by dept + <strong>Our Elders</strong> board) → Contact (office/mailing/times from <kbd>SITE</kbd>). <strong>All copy verbatim, zero draft chips.</strong> "Send Us a Message" → Connect Card "soon" stub (<span class="tag">#26</span>). Borrows: Fusion one-page About; Church of Eleven22 inline-scripture; Venture staff+elders.</td></tr>
         </tbody>
       </table>
     </div>
@@ -137,10 +138,10 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
 
   <div class="tonight">
     <h2><span class="n">04</span> Queue — next autonomous runs</h2>
-    <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Full detail in <kbd>NIGHTLY-LOOP.md</kbd>. The nightly loop ran cleanly Aug 15 (Section 7).</p>
+    <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Full detail in <kbd>NIGHTLY-LOOP.md</kbd>. The nightly loop ran cleanly Aug 16 (Section 8 — About).</p>
     <ol class="steps">
       <li><strong>Auth strategy (ADR-006)</strong> — <span class="tag">#19</span> the recommended next session. Test whether a Church-Center-only member can authorize our PCO OAuth app + at what scope, then decide PCO-OAuth-primary vs. own-auth+PCO-link and write the ADR. <strong>Gates #3, #17, and the ticket tool.</strong></li>
-      <li><strong>Section 8 — About</strong> — story, beliefs, staff, contact, the This Week email-archive concept. <em>(Section 7 Care &amp; Support shipped Aug 15; Special Needs deferred, <span class="tag">#25</span>.)</em></li>
+      <li><strong>Section 9 — Give + supra/footer</strong> — the sitewide Give page pass plus the supra-menu (Preschool, This Week) and footer pattern. <em>(Section 8 About shipped Aug 16 — five About-Us pages consolidated, all verbatim; contact-form endpoint + This Week concept filed <span class="tag">#26</span>.)</em></li>
       <li><strong>Five6 as its own ministry page</strong> — <span class="tag">#24</span> split Kids / Five6 / Students; borrow the Kids check-in component.</li>
       <li><strong>File storage for ministry resources</strong> — <span class="tag">#23</span> admin upload / leader download, no repo changes or deploys (first consumers: LifeGroup study material, men's resources).</li>
       <li><strong>Serve "join" custom form</strong> — <span class="tag">#17</span> session-aware; replaces the Church Center redirect (needs auth).</li>
@@ -168,6 +169,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">06</span> Recent log</h2>
     <ul class="log">
+      <li><time>Aug 16 03:15</time><span><strong>Section 8 — About</strong>: shipped <kbd>/about</kbd> to <kbd>main</kbd> (SSR 200). The live site's <strong>five About-Us pages</strong> (who-we-are / our-story / what-we-believe / our-team / contact) <strong>consolidated into one</strong> anchor-navigable page — Our Story <strong>location timeline</strong> (Eagle Harbor Pool → cemetery → funeral home → dance studio → SJCA → 5900 US-17, w/ avg attendance), What We Believe <strong>8-doctrine accordion</strong> w/ inline Scripture refs, Our Team (17 staff grouped by dept + <strong>Our Elders</strong>), Contact (office/mailing/times from <kbd>SITE</kbd>). <strong>All copy verbatim, zero draft chips.</strong> Registry flipped <kbd>/about</kbd> → true (nav/footer links auto-live). Borrows: Fusion one-page About; Church of Eleven22 inline-scripture statement of faith; Venture staff+elders. Filed <span class="tag">#26</span> (contact-form endpoint + This Week concept).</span></li>
       <li><time>Aug 15 03:15</time><span><strong>Section 7 — Care &amp; Support</strong>: shipped <kbd>/ministries/care</kbd> to <kbd>main</kbd> (SSR 200). <strong>Care Services</strong> (Hospital Visit + Counseling Referrals) + <strong>support groups</strong> (Celebrate Recovery / DivorceCare / GriefShare) as scannable meeting cards — <strong>all copy verbatim, zero draft chips</strong>. Registry flipped; the Ministries-hub Care card auto-enabled. Mental Health Resources left a "soon" stub. Borrows: Motivation "Support &amp; Recovery" two-tier hub; Real Life Sac honest-referral Care page. <strong>Special Needs NOT built</strong> — RCC has no special-needs source content (404 + nothing in serve teams); filed <span class="tag">#25</span> asking whether RCC wants one + real copy.</span></li>
       <li><time>Aug 14</time><span><strong>Cleanup pass + Section 6 CTAs wired</strong> (interactive, 6 commits to <kbd>main</kbd>). Looked up + wired the real Church Center URLs myself — <strong>MOMs registration</strong> (PCO-confirmed "MOMs - 2026") + <strong>Men's Uncommon Groups</strong>; closed <span class="tag">#22</span>, MOMs stays folded (+ hub card). Found the real <strong>Subsplash widget embed</strong> on the WP droplet → <kbd>/give</kbd> now embeds the widget (not the portal) 2-col. Fixed empty-right-half layouts (Men "Brotherhood", Students serve, Growth Track → timeline). <strong>Kids</strong>: full-width check-in + Safety moved off the off-shell white bg to the dark shell (emoji cards → text). <strong>LifeGroups</strong>: pulled study chips, stripped River Crossers, Study Material 2-col. New shared <strong>per-ministry events strip</strong> (omit-on-empty) on all five ministry pages; Women's Bible Study surfaced, buttons MOMs-forward. Filed <span class="tag">#23</span> (file storage) + <span class="tag">#24</span> (Five6 page); noted the /connect modal requirement on <span class="tag">#6</span>. <strong>Nightly loop did NOT run Aug 13→14.</strong></span></li>
       <li><time>Aug 13 03:15</time><span><strong>Section 6 — Students, Men, Women + MOMs</strong>: shipped three real ministry pages to <kbd>main</kbd> (all SSR 200). REACH + GROW; RCC Men (mission + Uncommon Groups + agenda); RCC Women with MOMs folded in (STARVED, $32 / 2026 dates). All copy verbatim. Filed <span class="tag">#22</span> for the CTA URLs + MOMs-structure decision.</span></li>
