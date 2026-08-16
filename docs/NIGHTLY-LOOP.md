@@ -160,7 +160,16 @@ first unchecked Section below. One item per night, same ship/report discipline.
       accessibility content on the live site (404) and none in serveTeams; building
       a page would be 100% invented (hard-rule violation). Filed needs-jason issue
       w/ Highlands Haven model → does RCC want one + supply copy.**
-- [ ] 8. About — story, beliefs, staff, contact, This Week (email archive concept)
+- [x] 8. About — DONE 2026-08-16. `/about` consolidates the live site's five
+      About-Us sub-pages (who-we-are, our-story, what-we-believe, our-team,
+      contact) into one anchor-navigable page: Our Story location timeline (6
+      milestones, verbatim + avg attendance), What We Believe 8-doctrine
+      accordion w/ inline Scripture refs, Our Team (17 staff grouped by dept +
+      Our Elders board), Contact (office/mailing/service-times from SITE).
+      ALL prose verbatim — no invented copy, no chips. Message CTA → Connect
+      Card (soon). Registry flipped `/about` → true (nav/footer links auto-live).
+      **This Week (email-archive concept) NOT built — stays `/this-week` stub in
+      supra; it's a distinct concept, filed for a later section.**
 - [ ] 9. Give + supra-menu (Preschool, This Week) + footer (sitewide pattern)
 - [ ] 10. Portal deepening — dashboard states per role, group/serve/give cards
 - [ ] 11. Home polish + cross-linking + mobile QA sweep

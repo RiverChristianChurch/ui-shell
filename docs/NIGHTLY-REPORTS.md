@@ -4,6 +4,70 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-16 · Section 8 — About (story · beliefs · team · contact)
+
+**Route shipped:** `/about` (`web/pages/about.vue`) → riverchristian.church deploy via
+DigitalOcean App Platform on push to `web` `main` (commit `a87a189`). Registry `/about` flipped
+to `true`, so the nav "About", footer "Our Team", and footer "Beliefs" `<RccLink>`s all went
+live sitewide in the same change.
+
+**What it is:** the live site's whole **About-Us** section is five separate WordPress pages —
+`/who-we-are/`, `/our-story/`, `/what-we-believe/`, `/our-team/`, `/contact/`. This collapses
+them into ONE tight, anchor-navigable page (5 bands):
+1. **Hero — Who We Are.** Verbatim Restoration-Movement opener + WIN·TRAIN·UNLEASH mission
+   pills + anchor buttons (#story / #beliefs).
+2. **Our Story (#story).** The six-location **timeline** — Eagle Harbor Pool (Mar 2015, ~30) →
+   Russell Haven of Rest **Cemetery** → **Funeral Home** → Wehner's Dance Studio (Easter 2018) →
+   Saint John's Classical Academy (sprinkler burst) → 5900 US-17 (~1200+). Each milestone
+   verbatim with its avg-attendance. Closes on the verbatim "Where We Are Headed" mission block.
+3. **What We Believe (#beliefs).** 8-doctrine **accordion** (God · Jesus · Holy Spirit · Man ·
+   The Bible · Baptism · Salvation · Eternity), each statement verbatim with its Scripture
+   references rendered inline beneath.
+4. **Our Team (#team).** 17 staff as compact accent-bar cards **grouped by department**
+   (Pastoral / Kids & Preschool / Students / Office & Admin), bios verbatim, + the **Our Elders**
+   board (Tim Collins · Nathan Freeman · Dennis Morrison · Tim Queen · Tony Rodriguez · Rick Wood).
+5. **Contact (#contact).** Office address/phone/hours + **mailing PO Box 10075** + weekend
+   service times, all read from `SITE` (siteConfig). "Send Us a Message" → Connect Card (soon).
+
+**≥2 model borrowings (named):**
+- **Fusion Christian Church** (audits — "`/about/` … mission #values, #beliefs, #staff on one
+  page"): a single About page carrying mission/beliefs/staff as in-page anchors, not five pages.
+  → RCC's five About-Us sub-pages collapse into one anchor-navigable `/about`, matching the
+  condensed-pages rule.
+- **Church of Eleven22** (coe22.com, our Jacksonville-area peer — audits notable: "Statement of
+  Faith written inline on `/about` with per-claim scripture documentation"): each doctrine shows
+  its supporting Scripture inline. → What We Believe accordion renders every belief's verbatim
+  reference list beneath the statement.
+- **Venture Christian Church** (audits — "`/staff-working` (Staff & Leaders + Elders…)"): staff
+  and the elder board surfaced together. → Our Team pairs the staff directory with RCC's
+  verbatim "Our Elders" governance list.
+
+**DRAFT-flagged (invented copy):** none. Every prose block is verbatim RCC (grammar/flow only).
+Section labels/titles and the department groupings under Our Team are editorial framing
+(consistent with prior pages), not content copy — no chips. Consolidating five live pages into
+one is the documented reason the page runs to 5 bands rather than ~4. Staff **emails** are
+Cloudflare-obfuscated on the live site, so — as on Care — they are NOT reproduced or fabricated;
+contact routes through the office phone + Connect Card.
+
+**Validation:** `npm run build` passes; booted `.output/server` and curled `/about` → HTTP 200
+with correct SSR (verified Restoration Movement, The Cemetery, Wehner's, 1200+, baptizo, full
+staff, PO Box, mission pills, per-doctrine Scripture all render server-side). Accordion = 8
+`<details>`, first `open`. Link sweep: only `<RccLink>` + in-page anchors + the always-live
+`/visit` NuxtLink (matches the layout's Plan-a-Visit convention); no live `href` at a `false`
+route; zero hardcoded colors (tokens only). **Browser-eyeballed** in Chrome at 645px — hero,
+timeline spine, beliefs accordion, grouped team cards, and teal contact band all render clean.
+
+**Decisions needed → `needs-jason` issue (web):**
+- Real **Church Center / contact-form URL** to replace the `/connect` "soon" placeholder on the
+  "Send Us a Message" CTA (live `/contact/` uses a WPForms form with a Topic dropdown:
+  General / Outreach·Missions / LifeGroups / Care / Kids / Students / Giving / Technical). Ties
+  into ADR-004 custom-forms build (batch #17) — until then it's a disabled stub.
+- **This Week** (email-archive concept, part of the Section 8 line) is NOT built — it's a
+  distinct concept and stays the `/this-week` supra stub. Confirm what it should be (Subsplash/
+  Mailchimp archive embed vs. native list) before a future night builds it.
+
+---
+
 ## 2026-08-15 · Section 7 — Care & Support (Special Needs deferred)
 
 **Status:** shipped to `web` main (`e1c4762`). DigitalOcean auto-deploys from `main`.
