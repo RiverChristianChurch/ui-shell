@@ -79,11 +79,11 @@
   <header class="masthead">
     <div class="eyebrow">River Christian Church · Website Rebuild</div>
     <h1>Progress — live tracker</h1>
-    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Sixteen pages live — the nightly loop shipped <strong>Section 8 — About</strong> (Aug 16): the live site's five About-Us pages consolidated into one anchor-navigable page, all copy verbatim.</p>
+    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Sixteen pages live — the nightly loop shipped <strong>Section 9 — Give</strong> (Aug 17): the live <kbd>/give</kbd> page rebuilt to <strong>verbatim</strong> copy (why-we-give · ways to give · a 6-question giving FAQ), plus the sitewide footer socials wired to real links.</p>
     <div class="meta">
-      <span><b>As of</b> Aug 16, 2026 (Section 8 — About)</span>
+      <span><b>As of</b> Aug 17, 2026 (Section 9 — Give)</span>
       <span><b>Dev</b> localhost:1721</span>
-      <span><b>ui-shell</b> v0.1.0-beta.7</span>
+      <span><b>ui-shell</b> v0.1.0-beta.8</span>
       <span><b>Live</b> web@main → DigitalOcean (ADR-005)</span>
     </div>
   </header>
@@ -91,10 +91,10 @@
   <section>
     <h2><span class="n">01</span> Snapshot</h2>
     <div class="snap">
-      <div class="card"><h4>Live pages</h4><p><strong>About</strong> · Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Students · Men · Women+MOMs · Care &amp; Support · Outreach &amp; Missions · LifeGroups · Give — real Nuxt routes, SSR, on-brand.</p></div>
-      <div class="card"><h4>Section 6 CTAs are LIVE</h4><p>The Men <strong>Uncommon Groups</strong> join + the <strong>MOMs registration</strong> point at the real Church Center URLs (pulled from prod + verified via PCO), not "soon" stubs.</p></div>
-      <div class="card"><h4>Per-ministry events</h4><p>A shared <kbd>&lt;RccMinistryEvents&gt;</kbd> strip embeds each ministry's events and <strong>omits itself entirely</strong> when there are none — no empty "no events" blocks.</p></div>
-      <div class="card"><h4>Nightly loop</h4><p><strong>Ran Aug 16 → Section 8 (About) shipped.</strong> Five About-Us pages consolidated into one; all verbatim, zero draft chips. Next up: <strong>Section 9 — Give + supra/footer</strong>; and <strong>auth ADR-006</strong> is still the recommended focused session.</p></div>
+      <div class="card"><h4>Live pages</h4><p><strong>Give (rebuilt verbatim)</strong> · About · Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Students · Men · Women+MOMs · Care &amp; Support · Outreach &amp; Missions · LifeGroups · Serve — real Nuxt routes, SSR, on-brand.</p></div>
+      <div class="card"><h4>Give is now 100% verbatim</h4><p>Fixed a content-fidelity slip — the hero had paraphrased "why we give" with <strong>no chip</strong>. Every block now matches the live <kbd>/give/</kbd> word-for-word, incl. the church's own <strong>6 giving FAQs</strong>. <strong>Zero draft chips.</strong></p></div>
+      <div class="card"><h4>Sitewide footer socials</h4><p>Facebook / Instagram / YouTube were dead text — now real links from <kbd>SITE.social</kbd> (hrefs verbatim off the live footer), via a new ui-shell <kbd>.rcc-footer-social</kbd>.</p></div>
+      <div class="card"><h4>Nightly loop</h4><p><strong>Ran Aug 17 → Section 9 (Give) shipped.</strong> Content sections 1–9 done. Remaining: <strong>Section 10 — Portal deepening</strong> &amp; <strong>Section 11 — Home polish</strong>; the queued <strong>PWA</strong> is priority before those. <strong>Auth ADR-006</strong> stays the recommended focused session.</p></div>
     </div>
   </section>
 
@@ -108,7 +108,7 @@
           <tr><td class="pg">Visit<small>/visit</small></td><td><span class="badge b-live">Live</span></td><td>Condensed 5 bands; <strong>verbatim RCC copy</strong>. Kids-age DRAFT chip flags the grade conflict.</td></tr>
           <tr><td class="pg">Next Steps<small>/next-steps</small></td><td><span class="badge b-live">Live</span></td><td>Verbatim prose at a readable measure. Growth Track reshaped into a full-width <strong>numbered timeline</strong> (was left-heavy with an empty right half). Give = step 05; LifeGroup material moved to <kbd>/groups</kbd>.</td></tr>
           <tr><td class="pg">Outreach &amp; Missions<small>/ministries/outreach-missions</small></td><td><span class="badge b-live">Live</span></td><td>Here·Near·Far on RCC's <strong>Acts 1:8</strong> framing — verbatim hero + all 16 partners. Per-ministry events strip added (Outreach).</td></tr>
-          <tr><td class="pg">Give<small>/give</small></td><td><span class="badge b-live">Live</span></td><td>Embeds the real Subsplash <strong>widget</strong> (<kbd>wallet.subsplash.com/ui/embed</kbd> — pulled from prod), not the whole portal, in a <strong>2-col layout</strong> (copy left, widget right).</td></tr>
+          <tr><td class="pg">Give<small>/give</small></td><td><span class="badge b-live">Live</span></td><td><strong>Rebuilt verbatim (Section 9, Aug 17).</strong> Fixed a fidelity slip — the hero had paraphrased "why we give" with no chip. Now every block matches the live <kbd>/give/</kbd> word-for-word: hero, <strong>Ways to Give</strong> (In-Person / Mobile Apps / Mail), + the church's own <strong>6-question giving FAQ</strong> accordion. Real Subsplash <strong>widget</strong> embed (<kbd>wallet.subsplash.com/ui/embed</kbd>), 2-col. <strong>Zero draft chips.</strong> Borrows: Venture Give+FAQs, Fusion alternate-ways breakout, E91 Give-in-footer.</td></tr>
           <tr><td class="pg">LifeGroups<small>/groups</small></td><td><span class="badge b-live">Live</span></td><td>PCO Groups finder + Leaflet map + filters (62 groups / 58 pins). <strong>Cleanup:</strong> pulled the public study-topic chips (members-only → portal link); stripped <strong>River Crossers</strong> + template groups; Study Material rebalanced 2-col.</td></tr>
           <tr><td class="pg">Serve<small>/serve</small></td><td><span class="badge b-live">Live</span></td><td>Ported from the volunteer app (sunsetting it). Serve teams by category, verbatim RCC copy; "Join" → the real Church Center serving form.</td></tr>
           <tr><td class="pg">Ministries<small>/ministries</small></td><td><span class="badge b-live">Live</span></td><td>Text-only cards + "Soon" badges. Added a <strong>MOMs card</strong> deep-linking to Women's <kbd>#moms</kbd> band; <strong>Five6 unlumped</strong> from Kids (its own route, "Soon"). Care card now live.</td></tr>
@@ -138,21 +138,22 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
 
   <div class="tonight">
     <h2><span class="n">04</span> Queue — next autonomous runs</h2>
-    <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Full detail in <kbd>NIGHTLY-LOOP.md</kbd>. The nightly loop ran cleanly Aug 16 (Section 8 — About).</p>
+    <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Full detail in <kbd>NIGHTLY-LOOP.md</kbd>. The nightly loop ran cleanly Aug 17 (Section 9 — Give). <strong>Content sections 1–9 are done.</strong></p>
     <ol class="steps">
       <li><strong>Auth strategy (ADR-006)</strong> — <span class="tag">#19</span> the recommended next session. Test whether a Church-Center-only member can authorize our PCO OAuth app + at what scope, then decide PCO-OAuth-primary vs. own-auth+PCO-link and write the ADR. <strong>Gates #3, #17, and the ticket tool.</strong></li>
-      <li><strong>Section 9 — Give + supra/footer</strong> — the sitewide Give page pass plus the supra-menu (Preschool, This Week) and footer pattern. <em>(Section 8 About shipped Aug 16 — five About-Us pages consolidated, all verbatim; contact-form endpoint + This Week concept filed <span class="tag">#26</span>.)</em></li>
+      <li><strong>PWA — installable web app</strong> — the priority queued build (<kbd>@vite-pwa/nuxt</kbd>: manifest + service worker + offline shell), to run <strong>before</strong> finishing the last content sections. Updates ADR-007. <em>Verify by installing on a real phone.</em></li>
+      <li><strong>Section 10 — Portal deepening</strong> then <strong>Section 11 — Home polish + mobile QA</strong> — the two remaining content sections. <em>(Section 9 Give shipped Aug 17 — verbatim rebuild + footer socials; two de-linked Give links + hero photo filed <span class="tag">#27</span>.)</em></li>
       <li><strong>Five6 as its own ministry page</strong> — <span class="tag">#24</span> split Kids / Five6 / Students; borrow the Kids check-in component.</li>
       <li><strong>File storage for ministry resources</strong> — <span class="tag">#23</span> admin upload / leader download, no repo changes or deploys (first consumers: LifeGroup study material, men's resources).</li>
       <li><strong>Serve "join" custom form</strong> — <span class="tag">#17</span> session-aware; replaces the Church Center redirect (needs auth).</li>
       <li><strong>Ticket tool + graphic-request form</strong> — <span class="tag">#18</span> · <span class="tag">#20</span> admin/leader-gated (need auth).</li>
-      <li><strong>/connect in-page modals</strong> — <span class="tag">#6</span> give + other buttons open modals on the NFC page (sermon notes is the navigate-away exception).</li>
     </ol>
   </div>
 
   <section>
     <h2><span class="n">05</span> Your to-dos</h2>
     <ul class="todo">
+      <li><span class="box"></span><span><b>Give — two links to finish + a hero photo</b> <span class="tag">#27</span><small>Section 9 shipped the page fully verbatim. Two "here" links from the live FAQ are plain text until we have real routes: the <b>contribution-statement request form</b> and the optional <b>historical-Breeze-donations</b> link (both → the future Connect Card / contact route). And the give hero uses an Unsplash placeholder — swap to a Glen Reed shoot asset when ready.</small></span></li>
       <li><span class="box done"></span><span><b>Section 6 CTAs — resolved</b> <span class="tag">#22 · closed</span><small>Found + wired the real Church Center URLs myself (prod + PCO): <b>MOMs registration</b> ("MOMs - 2026") and <b>Men's Uncommon Groups</b>. MOMs <b>stays folded into Women</b> (+ a hub card). The three email/text signups route through the sitewide Connect Card by decision.</small></span></li>
       <li><span class="box"></span><span><b>Special Needs ministry — does RCC want a page?</b> <span class="tag">#25</span><small>Section 7 paired Care with Special Needs, but there's <b>no source content anywhere</b> (live site 404s, nothing in serve teams) — building one would be fully invented. Do you have (or want) a special-needs/accessibility ministry? If yes, send the real copy or say "draft it" (modeled on Highlands Haven); if not, it stays off the sitemap.</small></span></li>
       <li><span class="box"></span><span><b>Mental Health Resources page</b> <span class="tag">Section 7</span><small>A named Care ministry (live <kbd>/mental-health/</kbd>). On the new Care page it's a disabled "soon" stub. Want it built as its own page from the live content, or left as a link?</small></span></li>
@@ -169,6 +170,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">06</span> Recent log</h2>
     <ul class="log">
+      <li><time>Aug 17 03:15</time><span><strong>Section 9 — Give</strong>: rebuilt <kbd>/give</kbd> to <strong>verbatim</strong> live-site copy and pushed to <kbd>main</kbd> (SSR 200). Fixed a content-fidelity slip — the hero had paraphrased "why we give" with <strong>no chip</strong>; now the hero, <strong>Ways to Give</strong> (In-Person / Mobile Apps / Mail), and the church's own <strong>6-question giving FAQ</strong> accordion all match the live <kbd>/give/</kbd> word-for-word. <strong>Zero draft chips.</strong> Sitewide footer socials (FB/IG/YouTube) → real links from <kbd>SITE.social</kbd> via new ui-shell <kbd>.rcc-footer-social</kbd> (bumped <strong>v0.1.0-beta.8</strong>). Borrows: Venture Give+FAQs, Fusion alternate-ways breakout, E91 Give-in-footer. Filed <span class="tag">#27</span> (two de-linked FAQ links + hero photo).</span></li>
       <li><time>Aug 16 03:15</time><span><strong>Section 8 — About</strong>: shipped <kbd>/about</kbd> to <kbd>main</kbd> (SSR 200). The live site's <strong>five About-Us pages</strong> (who-we-are / our-story / what-we-believe / our-team / contact) <strong>consolidated into one</strong> anchor-navigable page — Our Story <strong>location timeline</strong> (Eagle Harbor Pool → cemetery → funeral home → dance studio → SJCA → 5900 US-17, w/ avg attendance), What We Believe <strong>8-doctrine accordion</strong> w/ inline Scripture refs, Our Team (17 staff grouped by dept + <strong>Our Elders</strong>), Contact (office/mailing/times from <kbd>SITE</kbd>). <strong>All copy verbatim, zero draft chips.</strong> Registry flipped <kbd>/about</kbd> → true (nav/footer links auto-live). Borrows: Fusion one-page About; Church of Eleven22 inline-scripture statement of faith; Venture staff+elders. Filed <span class="tag">#26</span> (contact-form endpoint + This Week concept).</span></li>
       <li><time>Aug 15 03:15</time><span><strong>Section 7 — Care &amp; Support</strong>: shipped <kbd>/ministries/care</kbd> to <kbd>main</kbd> (SSR 200). <strong>Care Services</strong> (Hospital Visit + Counseling Referrals) + <strong>support groups</strong> (Celebrate Recovery / DivorceCare / GriefShare) as scannable meeting cards — <strong>all copy verbatim, zero draft chips</strong>. Registry flipped; the Ministries-hub Care card auto-enabled. Mental Health Resources left a "soon" stub. Borrows: Motivation "Support &amp; Recovery" two-tier hub; Real Life Sac honest-referral Care page. <strong>Special Needs NOT built</strong> — RCC has no special-needs source content (404 + nothing in serve teams); filed <span class="tag">#25</span> asking whether RCC wants one + real copy.</span></li>
       <li><time>Aug 14</time><span><strong>Cleanup pass + Section 6 CTAs wired</strong> (interactive, 6 commits to <kbd>main</kbd>). Looked up + wired the real Church Center URLs myself — <strong>MOMs registration</strong> (PCO-confirmed "MOMs - 2026") + <strong>Men's Uncommon Groups</strong>; closed <span class="tag">#22</span>, MOMs stays folded (+ hub card). Found the real <strong>Subsplash widget embed</strong> on the WP droplet → <kbd>/give</kbd> now embeds the widget (not the portal) 2-col. Fixed empty-right-half layouts (Men "Brotherhood", Students serve, Growth Track → timeline). <strong>Kids</strong>: full-width check-in + Safety moved off the off-shell white bg to the dark shell (emoji cards → text). <strong>LifeGroups</strong>: pulled study chips, stripped River Crossers, Study Material 2-col. New shared <strong>per-ministry events strip</strong> (omit-on-empty) on all five ministry pages; Women's Bible Study surfaced, buttons MOMs-forward. Filed <span class="tag">#23</span> (file storage) + <span class="tag">#24</span> (Five6 page); noted the /connect modal requirement on <span class="tag">#6</span>. <strong>Nightly loop did NOT run Aug 13→14.</strong></span></li>
@@ -187,7 +189,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
 
   <footer>
     <span>Decision records: <kbd>web/docs/architecture/decisions/</kbd></span>
-    <span>Tickets: RiverChristianChurch/web #6 · #19 · #23 · #24 · #25</span>
+    <span>Tickets: RiverChristianChurch/web #6 · #19 · #23 · #24 · #25 · #27</span>
     <span>Drive: <kbd>/Volumes/ARCHIVE/rcc-sermons/INDEX.md</kbd></span>
   </footer>
 </div>
