@@ -376,6 +376,13 @@
   display: flex; justify-content: space-between;
   font-size: 0.75rem; color: var(--rcc-text-muted-dark);
 }
+/* Social links sit inline in the footer bottom bar (override the stacked
+   `display:block` of `.rcc-footer a`). */
+.rcc-footer-social { display: inline-flex; gap: 1.25rem; }
+.rcc-footer-social a { display: inline; padding: 0; font-size: 0.75rem; }
+@media (max-width: 560px) {
+  .rcc-footer-bottom { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+}
 
 /* ═══════════════════════════════════════════════════════════
    VISIT / SITEWIDE ADDITIONS (night 1 — Visit section)
