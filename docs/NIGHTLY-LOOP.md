@@ -170,7 +170,18 @@ first unchecked Section below. One item per night, same ship/report discipline.
       Card (soon). Registry flipped `/about` → true (nav/footer links auto-live).
       **This Week (email-archive concept) NOT built — stays `/this-week` stub in
       supra; it's a distinct concept, filed for a later section.**
-- [ ] 9. Give + supra-menu (Preschool, This Week) + footer (sitewide pattern)
+- [x] 9. Give + supra-menu (Preschool, This Week) + footer (sitewide pattern) —
+      DONE 2026-08-17. `/give` rebuilt to VERBATIM live-site copy: fixed a
+      verbatim-rule violation (hero previously paraphrased "why we give" with no
+      chip), replaced paraphrased/DRAFT-chipped Ways-to-Give cards (In-Person /
+      Mobile Apps / Mail) with the live wording, and added a Giving FAQs accordion
+      (6 Qs, verbatim from the live /give/ FAQ — Venture "Give + FAQs" pattern).
+      ZERO draft chips remain. Sitewide footer social row now real external links
+      from `SITE.social` (ui-shell `.rcc-footer-social`, v0.1.0-beta.8); supra
+      (Preschool + This Week) already present, both stay disabled stubs until built.
+      Borrowings: Venture (Give+FAQs), Fusion (alternate-ways breakout), E91 (Give
+      in footer, not a highlighted header button). Build + SSR verified; no chips,
+      no hardcoded colors, no link drift.
 - [ ] 10. Portal deepening — dashboard states per role, group/serve/give cards
 - [ ] 11. Home polish + cross-linking + mobile QA sweep
 

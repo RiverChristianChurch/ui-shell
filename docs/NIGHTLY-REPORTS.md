@@ -4,6 +4,71 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-17 · Section 9 — Give (verbatim rebuild) + sitewide footer social
+
+**Shipped:** `web/pages/give.vue` (route **`/give`**, already live in the registry;
+pushed to `web` `main` → DigitalOcean deploys) + sitewide footer social in
+`web/layouts/default.vue`. ui-shell bumped **v0.1.0-beta.7 → v0.1.0-beta.8** for one
+new footer sub-component class.
+
+**What changed (content-fidelity pass, the real work):** the existing `/give` page had
+a **verbatim-rule violation** — the hero paraphrased RCC's "why we give" as *"Giving is
+the primary way we acknowledge that God is first…"* with **no DRAFT chip**, and the
+"Ways to Give" cards were paraphrased and DRAFT-chipped. I fetched the live
+`riverchristian.church/give/` raw HTML and rebuilt every block to **verbatim** copy:
+- **Hero** → RCC's exact "WHY WE GIVE" paragraph (…"a joy and an honor to sow some of
+  our resources back into the Kingdom of God… (2 Corinthians 9:6–8)…").
+- **Give Now** → verbatim "ONLINE" copy beside the unchanged Subsplash widget embed
+  (`wallet.subsplash.com/ui/embed/8MDG8H`).
+- **Ways to Give** → verbatim **In-Person / Mobile Apps / Mail** cards (dropped the
+  invented "Bank Bill Pay" card — that content lives in the FAQ on the live site).
+- **NEW: Giving FAQs** accordion → the live page's own **6 questions verbatim** (fund
+  usage, contribution statements, giving history, card fees, online fees, bank bill pay).
+- **Result: ZERO draft chips** on `/give` — the whole page is now source-traceable.
+
+**Sitewide footer/supra pattern:** footer social row (Facebook/Instagram/YouTube) was
+**dead plain text** — now real external links from **`SITE.social`** (hrefs verbatim off
+the live footer: `facebook.com/rivercc`, `instagram.com/clayrivercc`, `youtube.com/rivercc`),
+rendered via new ui-shell **`.rcc-footer-social`** (inline-flex; base `.rcc-footer a` is
+`display:block`/stacked) with a ≤560px stack. Supra (Preschool + This Week) already in the
+layout; both remain disabled `<RccLink>` stubs until those pages ship.
+
+**≥2 model borrowings (named):**
+1. **Venture Christian Church** (Restoration peer) — `/giving` = **"Give + FAQs"**: pairs
+   the giving form with a giving-FAQ block → RCC's own six FAQs elevated into an accordion
+   band beside the form.
+2. **Fusion Christian Church** (runs on Planning Center/Church Center like RCC) — splits a
+   dedicated **`/alternate-ways-of-giving/`** page → shapes the scannable "More Ways to
+   Give" card band (In-Person / Mobile / Mail).
+3. **East 91st Street (E91)** (Restoration peer) — *"No header Give button — Give lives in
+   footer only"* → confirms RCC's **Give-never-highlighted** rule (plain nav item; the
+   highlighted CTA stays "Plan a Visit") and a Give link carried in the footer Connect column.
+
+**DRAFT-flagged (invented copy):** **none.** All prose is verbatim RCC. Editorial-only:
+dropped the transitional "we changed providers from Breeze to Subsplash / instructions here"
+note and de-linked two live "here" hyperlinks whose exact URLs we don't hold (Breeze history,
+the contribution-statement request form) — kept the FAQ text, rendered "here" as plain words
+(pure omission of a link, not a reword → no chip).
+
+**Validation:** `npm run build` passes; booted `.output/server` and curled `/give` → SSR
+renders all verbatim blocks (hero, ways cards, all 6 FAQs, embed); confirmed **no
+`rcc-draft-chip` element** (only the CSS class def is inlined) and the old paraphrase is
+gone. Footer social links resolve on `/`. Link sweep: no live `href` points at a `false`
+route (preschool/this-week/connect/prayer/mental-health/five6 all render as disabled stubs);
+only non-RccLink static internal link is `about.vue`'s `NuxtLink to="/visit"` → a live route.
+Zero hardcoded colors in changed files. Responsive: give-grid → 1 col ≤860px, footer-bottom
+stacks ≤560px. Browser eyeball deferred (no Chrome connected).
+
+**Decisions needed → `needs-jason` issue (web):**
+- Real destinations for two Give links currently de-linked to plain text: the
+  **contribution-statement request form** ("complete our contact form, topic = Giving") and,
+  if desired, a **historical-Breeze-donations** link. Both map to the future Connect Card /
+  contact route (`/connect`, not built) — wire when that ships.
+- Confirm the **"why we give" hero photo** (currently an Unsplash placeholder) → swap to a
+  Glen Reed shoot asset when available.
+
+---
+
 ## 2026-08-16 · Section 8 — About (story · beliefs · team · contact)
 
 **Route shipped:** `/about` (`web/pages/about.vue`) → riverchristian.church deploy via
