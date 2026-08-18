@@ -79,9 +79,9 @@
   <header class="masthead">
     <div class="eyebrow">River Christian Church · Website Rebuild</div>
     <h1>Progress — live tracker</h1>
-    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). Sixteen pages live — the nightly loop shipped <strong>Section 9 — Give</strong> (Aug 17): the live <kbd>/give</kbd> page rebuilt to <strong>verbatim</strong> copy (why-we-give · ways to give · a 6-question giving FAQ), plus the sitewide footer socials wired to real links.</p>
+    <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). The nightly loop shipped the <strong>PWA</strong> (Aug 18): the site is now an <strong>installable Progressive Web App</strong> — home-screen icon, fullscreen/standalone launch, offline app-shell cache (ADR-007). No native app, no store. One acceptance step left: install it on a real phone.</p>
     <div class="meta">
-      <span><b>As of</b> Aug 17, 2026 (Section 9 — Give)</span>
+      <span><b>As of</b> Aug 18, 2026 (PWA — ADR-007)</span>
       <span><b>Dev</b> localhost:1721</span>
       <span><b>ui-shell</b> v0.1.0-beta.8</span>
       <span><b>Live</b> web@main → DigitalOcean (ADR-005)</span>
@@ -92,9 +92,9 @@
     <h2><span class="n">01</span> Snapshot</h2>
     <div class="snap">
       <div class="card"><h4>Live pages</h4><p><strong>Give (rebuilt verbatim)</strong> · About · Home · Visit · Next Steps · Watch · Events · Ministries + Kids · Students · Men · Women+MOMs · Care &amp; Support · Outreach &amp; Missions · LifeGroups · Serve — real Nuxt routes, SSR, on-brand.</p></div>
-      <div class="card"><h4>Give is now 100% verbatim</h4><p>Fixed a content-fidelity slip — the hero had paraphrased "why we give" with <strong>no chip</strong>. Every block now matches the live <kbd>/give/</kbd> word-for-word, incl. the church's own <strong>6 giving FAQs</strong>. <strong>Zero draft chips.</strong></p></div>
-      <div class="card"><h4>Sitewide footer socials</h4><p>Facebook / Instagram / YouTube were dead text — now real links from <kbd>SITE.social</kbd> (hrefs verbatim off the live footer), via a new ui-shell <kbd>.rcc-footer-social</kbd>.</p></div>
-      <div class="card"><h4>Nightly loop</h4><p><strong>Ran Aug 17 → Section 9 (Give) shipped.</strong> Content sections 1–9 done. Remaining: <strong>Section 10 — Portal deepening</strong> &amp; <strong>Section 11 — Home polish</strong>; the queued <strong>PWA</strong> is priority before those. <strong>Auth ADR-006</strong> stays the recommended focused session.</p></div>
+      <div class="card"><h4>Installable app</h4><p><kbd>@vite-pwa/nuxt</kbd> manifest ("River", standalone, brand-teal) + Workbox SW precaching the app shell for weak worship-center signal. Home-screen shortcuts: Visit · Watch · Events · Give.</p></div>
+      <div class="card"><h4>Home-screen icon</h4><p>New regenerable <kbd>scripts/generate-pwa-icons.mjs</kbd> renders the RCC <strong>waves mark on brand teal</strong> → 192/512 <kbd>any</kbd> + 512 <kbd>maskable</kbd> + 180 apple-touch + favicons. Mirrors Venture's icon-tier tile.</p></div>
+      <div class="card"><h4>Nightly loop</h4><p><strong>Ran Aug 18 → PWA shipped (ADR-007 → Done).</strong> Content sections 1–9 done. Remaining: <strong>Section 10 — Portal deepening</strong> &amp; <strong>Section 11 — Home polish</strong>. <strong>Auth ADR-006</strong> is the recommended next focused session.</p></div>
     </div>
   </section>
 
@@ -138,11 +138,10 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
 
   <div class="tonight">
     <h2><span class="n">04</span> Queue — next autonomous runs</h2>
-    <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Full detail in <kbd>NIGHTLY-LOOP.md</kbd>. The nightly loop ran cleanly Aug 17 (Section 9 — Give). <strong>Content sections 1–9 are done.</strong></p>
+    <p style="margin:.1rem 0 1rem;color:var(--muted);font-size:.92rem;">Full detail in <kbd>NIGHTLY-LOOP.md</kbd>. The nightly loop ran cleanly Aug 18 (PWA — ADR-007). <strong>Content sections 1–9 + the PWA are done.</strong></p>
     <ol class="steps">
       <li><strong>Auth strategy (ADR-006)</strong> — <span class="tag">#19</span> the recommended next session. Test whether a Church-Center-only member can authorize our PCO OAuth app + at what scope, then decide PCO-OAuth-primary vs. own-auth+PCO-link and write the ADR. <strong>Gates #3, #17, and the ticket tool.</strong></li>
-      <li><strong>PWA — installable web app</strong> — the priority queued build (<kbd>@vite-pwa/nuxt</kbd>: manifest + service worker + offline shell), to run <strong>before</strong> finishing the last content sections. Updates ADR-007. <em>Verify by installing on a real phone.</em></li>
-      <li><strong>Section 10 — Portal deepening</strong> then <strong>Section 11 — Home polish + mobile QA</strong> — the two remaining content sections. <em>(Section 9 Give shipped Aug 17 — verbatim rebuild + footer socials; two de-linked Give links + hero photo filed <span class="tag">#27</span>.)</em></li>
+      <li><strong>Section 10 — Portal deepening</strong> then <strong>Section 11 — Home polish + mobile QA</strong> — the two remaining content sections. <em>(PWA shipped Aug 18 — install-on-a-real-phone acceptance filed <span class="tag">#28</span>.)</em></li>
       <li><strong>Five6 as its own ministry page</strong> — <span class="tag">#24</span> split Kids / Five6 / Students; borrow the Kids check-in component.</li>
       <li><strong>File storage for ministry resources</strong> — <span class="tag">#23</span> admin upload / leader download, no repo changes or deploys (first consumers: LifeGroup study material, men's resources).</li>
       <li><strong>Serve "join" custom form</strong> — <span class="tag">#17</span> session-aware; replaces the Church Center redirect (needs auth).</li>
@@ -153,6 +152,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">05</span> Your to-dos</h2>
     <ul class="todo">
+      <li><span class="box"></span><span><b>PWA — install it on a real phone</b> <span class="tag">#28</span><small>The PWA is live; everything checks out headless (build + manifest/SW served + SSR head + icons). The one thing the nightly run can't do is the on-device check. On your phone (once it deploys): iOS Safari → Share → <b>Add to Home Screen</b>; Android Chrome → <b>Install</b>. Confirm the icon is the teal waves tile and it launches fullscreen/standalone. Screenshot it on the issue → closes ADR-007.</small></span></li>
       <li><span class="box"></span><span><b>Give — two links to finish + a hero photo</b> <span class="tag">#27</span><small>Section 9 shipped the page fully verbatim. Two "here" links from the live FAQ are plain text until we have real routes: the <b>contribution-statement request form</b> and the optional <b>historical-Breeze-donations</b> link (both → the future Connect Card / contact route). And the give hero uses an Unsplash placeholder — swap to a Glen Reed shoot asset when ready.</small></span></li>
       <li><span class="box done"></span><span><b>Section 6 CTAs — resolved</b> <span class="tag">#22 · closed</span><small>Found + wired the real Church Center URLs myself (prod + PCO): <b>MOMs registration</b> ("MOMs - 2026") and <b>Men's Uncommon Groups</b>. MOMs <b>stays folded into Women</b> (+ a hub card). The three email/text signups route through the sitewide Connect Card by decision.</small></span></li>
       <li><span class="box"></span><span><b>Special Needs ministry — does RCC want a page?</b> <span class="tag">#25</span><small>Section 7 paired Care with Special Needs, but there's <b>no source content anywhere</b> (live site 404s, nothing in serve teams) — building one would be fully invented. Do you have (or want) a special-needs/accessibility ministry? If yes, send the real copy or say "draft it" (modeled on Highlands Haven); if not, it stays off the sitemap.</small></span></li>
@@ -170,6 +170,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
   <section>
     <h2><span class="n">06</span> Recent log</h2>
     <ul class="log">
+      <li><time>Aug 18 03:15</time><span><strong>PWA — installable web app</strong> (ADR-007): added <kbd>@vite-pwa/nuxt</kbd> and pushed to <kbd>main</kbd> (<kbd>4c928a7</kbd>). Web <strong>manifest</strong> (name "River", <kbd>display:standalone</kbd>, brand-teal theme/bg, home-screen shortcuts Visit/Watch/Events/Give) + a <strong>Workbox service worker</strong> precaching the built app shell (offline / weak worship-center signal). New regenerable <kbd>scripts/generate-pwa-icons.mjs</kbd> renders the RCC <strong>waves mark on brand teal</strong> → <kbd>public/icons/*</kbd> (192/512 <kbd>any</kbd>, 512 <kbd>maskable</kbd>, 180 apple-touch, favicons). Manifest link server-rendered via <kbd>&lt;VitePwaManifest&gt;</kbd> in <kbd>app.vue</kbd>; ADR-007 flipped to <strong>Done</strong>. Borrows: Venture (icon-tier mark + theme-color), Fusion/Motivation/Brooklake (180px webclip). Verified headless (build + manifest/SW 200 + SSR head + SW registration); <strong>real-phone install deferred</strong> to Jason → <span class="tag">#28</span> (nightly Chrome isn't co-located with dd-mini's server).</span></li>
       <li><time>Aug 17 03:15</time><span><strong>Section 9 — Give</strong>: rebuilt <kbd>/give</kbd> to <strong>verbatim</strong> live-site copy and pushed to <kbd>main</kbd> (SSR 200). Fixed a content-fidelity slip — the hero had paraphrased "why we give" with <strong>no chip</strong>; now the hero, <strong>Ways to Give</strong> (In-Person / Mobile Apps / Mail), and the church's own <strong>6-question giving FAQ</strong> accordion all match the live <kbd>/give/</kbd> word-for-word. <strong>Zero draft chips.</strong> Sitewide footer socials (FB/IG/YouTube) → real links from <kbd>SITE.social</kbd> via new ui-shell <kbd>.rcc-footer-social</kbd> (bumped <strong>v0.1.0-beta.8</strong>). Borrows: Venture Give+FAQs, Fusion alternate-ways breakout, E91 Give-in-footer. Filed <span class="tag">#27</span> (two de-linked FAQ links + hero photo).</span></li>
       <li><time>Aug 16 03:15</time><span><strong>Section 8 — About</strong>: shipped <kbd>/about</kbd> to <kbd>main</kbd> (SSR 200). The live site's <strong>five About-Us pages</strong> (who-we-are / our-story / what-we-believe / our-team / contact) <strong>consolidated into one</strong> anchor-navigable page — Our Story <strong>location timeline</strong> (Eagle Harbor Pool → cemetery → funeral home → dance studio → SJCA → 5900 US-17, w/ avg attendance), What We Believe <strong>8-doctrine accordion</strong> w/ inline Scripture refs, Our Team (17 staff grouped by dept + <strong>Our Elders</strong>), Contact (office/mailing/times from <kbd>SITE</kbd>). <strong>All copy verbatim, zero draft chips.</strong> Registry flipped <kbd>/about</kbd> → true (nav/footer links auto-live). Borrows: Fusion one-page About; Church of Eleven22 inline-scripture statement of faith; Venture staff+elders. Filed <span class="tag">#26</span> (contact-form endpoint + This Week concept).</span></li>
       <li><time>Aug 15 03:15</time><span><strong>Section 7 — Care &amp; Support</strong>: shipped <kbd>/ministries/care</kbd> to <kbd>main</kbd> (SSR 200). <strong>Care Services</strong> (Hospital Visit + Counseling Referrals) + <strong>support groups</strong> (Celebrate Recovery / DivorceCare / GriefShare) as scannable meeting cards — <strong>all copy verbatim, zero draft chips</strong>. Registry flipped; the Ministries-hub Care card auto-enabled. Mental Health Resources left a "soon" stub. Borrows: Motivation "Support &amp; Recovery" two-tier hub; Real Life Sac honest-referral Care page. <strong>Special Needs NOT built</strong> — RCC has no special-needs source content (404 + nothing in serve teams); filed <span class="tag">#25</span> asking whether RCC wants one + real copy.</span></li>
@@ -189,7 +190,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
 
   <footer>
     <span>Decision records: <kbd>web/docs/architecture/decisions/</kbd></span>
-    <span>Tickets: RiverChristianChurch/web #6 · #19 · #23 · #24 · #25 · #27</span>
+    <span>Tickets: RiverChristianChurch/web #6 · #19 · #23 · #24 · #25 · #27 · #28</span>
     <span>Drive: <kbd>/Volumes/ARCHIVE/rcc-sermons/INDEX.md</kbd></span>
   </footer>
 </div>
