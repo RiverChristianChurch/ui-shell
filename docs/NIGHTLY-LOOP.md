@@ -86,7 +86,17 @@ Priority queued item — run this on an upcoming night **before** finishing the
 remaining lower-priority ministry sections (6–11). **Do NOT run it tonight** — tonight's
 authorized batch above stands.
 
-- [ ] **PWA — installable web app.** Add **`@vite-pwa/nuxt`**: web manifest (name, RCC
+- [x] **PWA — installable web app.** DONE 2026-08-18. `@vite-pwa/nuxt@1.1.1` in
+      `web/nuxt.config.ts` (`pwa` block): manifest (name "River", `standalone`,
+      brand-teal theme/bg, shortcuts Visit/Watch/Events/Give) + Workbox SW precaching
+      the app shell (offline / weak signal). Icons: `web/scripts/generate-pwa-icons.mjs`
+      → `web/public/icons/*` (waves mark on teal; 192/512 any + 512 maskable + 180
+      apple-touch + favicons). Manifest link server-rendered via `<VitePwaManifest>` in
+      `app.vue`. ADR-007 flipped to Done. Verified headless (build + manifest/sw 200 +
+      SSR head + SW registration). Real-phone install screenshot deferred to Jason
+      (needs-jason issue) — nightly Chrome isn't co-located with dd-mini's server.
+      Original task spec below (kept for reference):
+- [ ] ~~**PWA — installable web app.** Add **`@vite-pwa/nuxt`**~~: web manifest (name, RCC
       icons, theme color, `display: standalone`) + a service worker (install + offline-cache
       the shell so it loads on weak worship-center signal). Result: the site installs to the
       home screen (iOS Share → Add to Home Screen / Android install prompt) and launches

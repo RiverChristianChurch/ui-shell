@@ -666,3 +666,56 @@ collapses to 1 col ≤768). Browser eyeball deferred (no Chrome connected).
 
 ### Next up
 Section 7 — **Special Needs** (full page; model Highlands/Seacoast) + **Care & Support**.
+
+## 2026-08-18 · Priority item — PWA (installable web app, ADR-007)
+
+**Shipped:** `web` `main` @ `4c928a7` (DigitalOcean auto-deploys). Not a content
+section — this is the mobile strategy: the site is now an **installable PWA** (no
+native app, no store wrapper — ADR-007).
+
+- **Module:** `@vite-pwa/nuxt@1.1.1` added to `nuxt.config.ts` (`modules` + a `pwa {}`
+  block). `registerType: 'autoUpdate'`.
+- **Manifest** (`/manifest.webmanifest`, served 200): name "River Christian Church" /
+  short_name **"River"**, `display: standalone`, `theme_color #063d54` (`--rcc-brand-dark`,
+  matches the deep-teal header), `background_color #095879` (`--rcc-brand`, seamless with
+  the icon field on the splash), scope `/`, start_url `/`, + 4 home-screen **shortcuts**
+  (Plan a Visit / Watch / Events / Give).
+- **Service worker** (`/sw.js`, served 200): Workbox precache of the built app shell —
+  `globPatterns: **/*.{js,css,html,svg,png,ico,woff2}`, `navigateFallback: '/'`,
+  `cleanupOutdatedCaches`. This is the offline / weak-worship-center-signal cache.
+- **Icons:** new regenerable `web/scripts/generate-pwa-icons.mjs` (devDep `sharp`) renders
+  the ui-shell **waves mark** (white) centered on the brand-teal field → `web/public/icons/`:
+  `pwa-192x192`, `pwa-512x512` (`any`), `maskable-512x512` (extra safe-zone padding),
+  `apple-touch-icon` (180, opaque teal), `favicon-{16,32}`. No hardcoded colors in CSS —
+  the two hex values live only in the JSON manifest / `theme-color` meta (manifests can't
+  reference CSS vars), sourced from the ui-shell tokens and documented in comments.
+- **Head:** `<link rel="manifest">` is **server-rendered** via `<VitePwaManifest>` placed in
+  `app.vue` (the module only registers it globally — it must be mounted to hit SSR);
+  `theme-color`, `apple-mobile-web-app-*`, `apple-touch-icon` + PNG favicons in `app.head`.
+- **ADR-007** flipped `Implementation: Not yet started → Done (2026-08-18)` with the full
+  what-shipped record (same commit).
+
+**Model borrowings (≥2, named — from live-cohort manifests/meta):**
+- **Venture Christian Church** — ships a declared `theme-color` + a home-screen icon that is
+  the **icon-tier logo *mark*** (`VCC-Logo_icon-duotone-dark.png` — the glyph, not the
+  wordmark). RCC mirrors this exactly: the **waves mark** on a solid brand-teal field as the
+  app icon, plus a brand-dark `theme_color`, rather than cramming the full logo into a tile.
+- **Fusion, Motivation, Brooklake** — each ships a dedicated **180×180 "webclip" /
+  `apple-touch-icon`** so iOS *Add to Home Screen* yields a branded rounded tile (not a page
+  screenshot). RCC ships `apple-touch-icon.png` (180, opaque teal) for the same reason.
+
+**DRAFT-flagged (invented copy):** none — no page copy touched (infra-only change).
+
+**Validation:** `npm run build` passes. Booted `.output/server/index.mjs` →
+`manifest.webmanifest` + `sw.js` both `200`; SSR HTML carries the manifest link +
+`theme-color #063d54` + apple-touch/apple-mobile-web-app tags; client bundle registers
+`navigator.serviceWorker`; all icons render correctly (verified visually). Link sweep clean
+(no live href → `false` route). **Real-device install NOT verified** — the nightly run's
+connected Chrome is not co-located with dd-mini's dev server (localhost unreachable from it),
+so the on-device "Add to Home Screen" + standalone-launch screenshot is deferred.
+
+**Decisions needed → `needs-jason` issue (web):**
+- **Install + screenshot on a real phone** (iOS Share → Add to Home Screen; Android install
+  prompt): confirm the home-screen icon renders as the teal waves tile and the app launches
+  fullscreen/standalone with the deep-teal status bar. This is the last acceptance step the
+  ADR requires and the only thing the autonomous run can't do.
