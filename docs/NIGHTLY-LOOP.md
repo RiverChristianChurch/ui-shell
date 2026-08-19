@@ -192,7 +192,20 @@ first unchecked Section below. One item per night, same ship/report discipline.
       Borrowings: Venture (Give+FAQs), Fusion (alternate-ways breakout), E91 (Give
       in footer, not a highlighted header button). Build + SSR verified; no chips,
       no hardcoded colors, no link drift.
-- [ ] 10. Portal deepening — dashboard states per role, group/serve/give cards
+- [x] 10. Portal deepening — DONE 2026-08-19. `/portal` rebuilt as one shell, two
+      audiences: (a) **guest sign-in gate** (PCO OAuth CTA, disabled until ADR-006 +
+      a what-you-get feature list) and (b) **role-differentiated dashboard** —
+      member / volunteer / leader / staff — with Your Next Steps (Growth Track for
+      members; ported volunteer onboarding checklist + progress for servers), Your
+      Groups, Serving, Giving (Give + My Giving, Eleven22 pattern), This Weekend,
+      plus leader/staff admin cards. State flows ONLY through the new
+      `usePortalSession()` composable (the auth seam): guest by default, representative
+      role fixtures via `?preview=<role>` with a visible amber Preview notice, until
+      ADR-006 wires the real server session (template unchanged then). Onboarding
+      steps VERBATIM from the volunteer app (ADR-002). Phase-2 admin tools render as
+      disabled `<RccLink>` stubs (`/portal/{team,tickets,graphics}`). ui-shell
+      dashboard vocab reused as-is (no tag bump); zero hardcoded colors. **Live data /
+      sign-in still gated on ADR-006 (Jason: OAuth creds + test account).**
 - [ ] 11. Home polish + cross-linking + mobile QA sweep
 
 ## Nightly steps

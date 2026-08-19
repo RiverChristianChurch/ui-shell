@@ -719,3 +719,76 @@ so the on-device "Add to Home Screen" + standalone-launch screenshot is deferred
   prompt): confirm the home-screen icon renders as the teal waves tile and the app launches
   fullscreen/standalone with the deep-teal status bar. This is the last acceptance step the
   ADR requires and the only thing the autonomous run can't do.
+
+## 2026-08-19 · Section 10 — Portal deepening (role dashboard shell)
+
+**Shipped:** `web` `main` @ `d68c4ef` (DigitalOcean auto-deploys). Route: **`/portal`**
+(noindex). Not a public content page — this is the signed-in **Member Portal** shell:
+one page, two audiences (CLAUDE.md principle #2).
+
+- **Guest state (the real front door):** sign-in gate — "Sign in with Planning Center"
+  CTA (disabled + `soon` until ADR-006 auth is wired) beside a `.rcc-portal-features`
+  list of what signing in unlocks (Next Steps / Groups / Serving / Giving / This
+  Weekend). Links to the migrating volunteer portal (ADR-002).
+- **Authed state (role-differentiated dashboard):** `.rcc-dash-grid` cards that change
+  per role — **member / volunteer / leader / staff**:
+  - **Your Next Steps** — members see a Growth Track prompt; servers (volunteer+) see the
+    ported onboarding checklist w/ progress bar + `n/5` pill.
+  - **Your Groups** — "find a group" (not in one) vs. group name + meeting time (in one).
+  - **Serving** — "explore teams" vs. team list; leaders also get a Team-roster action.
+  - **Giving** — Give now + **My giving** (both → Subsplash; Eleven22 "My Giving" pattern).
+  - **This Weekend** — service times from `SITE.services` + Watch/Visit links.
+  - **Leader Tools / Staff Tools** — role-gated admin cards (roster, website tickets,
+    graphics requests) as disabled phase-2 stubs.
+- **The auth seam:** all state flows through a new `usePortalSession()` composable. Today
+  it returns **guest** by default and **representative role fixtures via `?preview=<role>`**
+  (visible amber Preview notice + role switcher). When ADR-006 ships, swap that composable's
+  body for a `GET /api/auth/session` fetch — the page template and every card stay identical.
+  Onboarding checklist labels are VERBATIM from the production volunteer app (ADR-002).
+- ui-shell already shipped the full dashboard vocabulary (`.rcc-dash-*`, `.rcc-checklist`,
+  `.rcc-progress`, pills, `.rcc-portal-*`, `.rcc-avatar`) — **reused as-is, no ui-shell
+  change / no tag bump.** Added FA icons only (web `plugins/fontawesome.ts`).
+
+**Model borrowings (≥2, named):** The single-site cohort (E91, Venture, Fusion, Brooklake,
+Motivation, Real Life) deliberately has **no member portal / sign-in** — they push the
+signed-in experience entirely into Church Center / Subsplash apps (an audit finding in its
+own right). The portal pattern is therefore sourced from the **multi-site cohort**:
+- **Church of Eleven22** — utility-nav Login + a **profile dropdown (My Account / My Giving
+  (Pushpay) / Logout)**. RCC mirrors this: a signed-in profile chip (avatar + name + role
+  pill) with Sign out, and **"My giving"** surfaced as a first-class card action → the
+  member's real Subsplash giving portal (no shadow store — matches ADR-001/006).
+- **Seacoast Church** — a **named, branded member portal ("My Seacoast")** as the signed-in
+  home, distinct from public nav. RCC's `/portal` is that branded signed-in home rather than
+  a bare login redirect (the prior stub).
+- **Cohort-wide pattern — Church Center as one back office** ("one back office, zero custom
+  forms … so data lands in one platform"): every dashboard card links into the member's real
+  Church Center / Subsplash surface (give, groups, serve, watch) instead of a mirrored DB.
+
+**DRAFT-flagged (invented copy):** the portal is a NEW app surface with **no live-site copy**
+to draw from, so all wording is UI microcopy authored here. It is disclosed two ways rather
+than chipping every line: (1) an inline `.rcc-draft-chip` on the one substantive claim
+("no separate account/password") citing ADR-006; (2) a page-level amber `.rcc-draft`
+**Preview** notice on the authed state. Preview person names + sample groups/teams are
+representative scaffolding (not real member data, not church content).
+
+**Validation:** `npm run build` passes. Booted `.output/server` and curled **all four states**
+(`/portal` guest + `?preview=member|volunteer|leader|staff`) → HTTP 200 with the correct
+per-role SSR content (Growth Track vs. checklist, group present/absent, serve teams, staff
+tools, verbatim onboarding steps). Link sweep: phase-2 admin routes render as `.rcc-link-soon`
+disabled stubs; **no live `href` points at a `false` route** on any portal state or any other
+built page. Responsive: `.rcc-dash-grid` → 2 cols @1024 → 1 col @768 (ui-shell media queries).
+**Zero hardcoded colors** (scoped styles use only `var(--rcc-*)` tokens). Browser eyeball
+deferred (nightly Chrome not co-located with dd-mini's dev server).
+
+**Decisions needed → `needs-jason` issue (web):**
+- **ADR-006 (auth) is the blocker for going live.** To turn the gate on and swap fixtures for
+  real data, need: the PCO OAuth app registered (`NUXT_PCO_OAUTH_CLIENT_ID/SECRET` + redirect
+  URIs) and a **Church-Center-only test account** for the pre-build verification. Until then
+  the portal ships as the reviewable shell.
+- Confirm the **role → PCO mapping** draft (People-app permission → staff; leads a group/team →
+  leader; on any serve team → volunteer; else member) before wiring role resolution.
+- Confirm "My giving" should point at the Subsplash access portal (`SITE.givingUrl`) vs. a
+  future Church Center giving link.
+
+### Next up
+Section 11 — **Home polish + cross-linking + mobile QA sweep** (the last queued section).
