@@ -212,10 +212,10 @@
 
     <div class="card">
       <h2>Give</h2>
-      <p class="desc">Plain nav item — no visual highlight (per models) · <strong style="color:var(--part)">shipped → web /give</strong></p>
+      <p class="desc">Plain nav item — no visual highlight (per models) · <strong style="color:var(--part)">rebuilt verbatim 2026-08-17 → web /give</strong></p>
       <ul>
         <li><span class="st st-live"></span><span class="n">Giving portal<span class="note">Subsplash giving stays indefinitely (giving ONLY — app + media retire)</span></span><span class="chip c-keep">Keep</span></li>
-        <li><span class="st st-part"></span><span class="n">Give page — FAQ + ways to give</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-part"></span><span class="n">Give page — why-we-give + ways to give + giving FAQs<span class="note">all copy verbatim from live /give/ · Subsplash embed · Venture Give+FAQs pattern</span></span><span class="chip c-keep">Keep</span></li>
       </ul>
     </div>
 
@@ -230,12 +230,12 @@
 
     <div class="card span2">
       <h2>Portal <span class="chip c-new">New</span></h2>
-      <p class="desc">Sign In → PCO OAuth. Role-aware. The volunteer app + /connect fold in (ADR-002).</p>
+      <p class="desc">Sign In → PCO OAuth. Role-aware. The volunteer app + /connect fold in (ADR-002). · <strong style="color:var(--part)">role dashboard shell shipped 2026-08-19 → web /portal</strong></p>
       <ul>
-        <li><span class="st st-part"></span><span class="n">Dashboard — serve schedule, my groups, registrations, giving<span class="note">scaffold shipped → web /portal</span></span><span class="chip c-new">New</span></li>
-        <li><span class="st st-live"></span><span class="n">Volunteer onboarding<span class="note">live at volunteer.riverchristian.church — migrates at parity</span></span><span class="chip c-evolve">Evolve</span></li>
-        <li><span class="st st-live"></span><span class="n">Leader tools — rosters, requirements matrix<span class="note">live in volunteer app</span></span><span class="chip c-evolve">Evolve</span></li>
-        <li><span class="st st-no"></span><span class="n">Staff tools — sync, connect-page editor, request intake</span><span class="chip c-new">New</span></li>
+        <li><span class="st st-part"></span><span class="n">Dashboard — role-aware (member/volunteer/leader/staff): next steps, groups, serving, giving, this weekend<span class="note">shipped → web /portal · one usePortalSession() seam · live data + sign-in gated on ADR-006 auth (web#29)</span></span><span class="chip c-new">New</span></li>
+        <li><span class="st st-live"></span><span class="n">Volunteer onboarding<span class="note">live at volunteer.riverchristian.church — migrates at parity; checklist ported into the dashboard</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-live"></span><span class="n">Leader tools — rosters, requirements matrix<span class="note">live in volunteer app; dashboard has the leader roster entry (phase-2 stub)</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-no"></span><span class="n">Staff tools — sync, connect-page editor, request intake<span class="note">dashboard has ticket + graphics entries as phase-2 stubs (web#18/#20)</span></span><span class="chip c-new">New</span></li>
         <li><span class="st st-live"></span><span class="n">/connect — NFC/QR seat-back page<span class="note">live · weekly CTAs · also carries app promotion</span></span><span class="chip c-evolve">Evolve</span></li>
       </ul>
     </div>
@@ -244,10 +244,11 @@
       <h2>Footer (sitewide)</h2>
       <ul>
         <li><span class="st st-part"></span><span class="n">Service times · contact · hours</span><span class="chip c-keep">Keep</span></li>
-        <li><span class="st st-no"></span><span class="n">Newsletter signup<span class="note">moves from homepage-only to every page</span></span><span class="chip c-evolve">Evolve</span></li>
+        <li><span class="st st-part"></span><span class="n">Socials — Facebook · Instagram · YouTube<span class="note">now real links from SITE.social (Section 9)</span></span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">Newsletter signup<span class="note">moves from homepage-only to every page — needs ADR-004 form (home + footer)</span></span><span class="chip c-evolve">Evolve</span></li>
         <li><span class="st st-no"></span><span class="n">App links<span class="note">replaces standalone app page</span></span><span class="chip c-evolve">Evolve</span></li>
         <li><span class="st st-no"></span><span class="n">Jobs<span class="note">/jobs exists — finally linked</span></span><span class="chip c-evolve">Evolve</span></li>
-        <li><span class="st st-no"></span><span class="n">This Week · socials · privacy</span><span class="chip c-keep">Keep</span></li>
+        <li><span class="st st-no"></span><span class="n">This Week · privacy</span><span class="chip c-keep">Keep</span></li>
       </ul>
     </div>
   </div>
@@ -261,7 +262,7 @@
         <li><span class="st st-no"></span><span class="n">Facility / weddings</span><span class="chip c-future">Future</span></li>
         <li><span class="st st-no"></span><span class="n">RPK parent portal</span><span class="chip c-future">Future</span></li>
         <li><span class="st st-no"></span><span class="n">Weekly-email automation<span class="note">one pipeline feeds site + email — no more site update AND Mailchimp build</span></span><span class="chip c-future">Future</span></li>
-        <li><span class="st st-no"></span><span class="n">Sunday "We're Live" homepage mode</span><span class="chip c-future">Future</span></li>
+        <li><span class="st st-no"></span><span class="n">Sunday "We're Live" homepage mode<span class="note">home swaps to a live-now banner on service mornings — needs a live signal (Section 11 deferred)</span></span><span class="chip c-future">Future</span></li>
       </ul>
     </div>
   </div>
@@ -285,5 +286,5 @@
     </div>
   </div>
 
-  <p class="foot">Draft 2 · updated 2026-08-16 · Sources: BRAIN / Website-Feature-Inventory (10-site audit) · Remaining open decisions: taxonomy axis (web #1), content editing (CMS), domain layout, Special Needs (web #25), About contact-form + This Week concept (web #26) · Design per ui-shell Option 1 + brand guide · Status dots update as nightly iteration ships sections. Build target: real Nuxt pages in the web repo (decided 2026-08-08). Latest: Section 8 → /about (five About-Us pages consolidated, all verbatim); This Week deferred (web #26).</p>
+  <p class="foot">Draft 2 · updated 2026-08-20 · Sources: BRAIN / Website-Feature-Inventory (10-site audit) · Remaining open decisions: taxonomy axis (web #1), content editing (CMS), domain layout, Special Needs (web #25), About contact-form + This Week concept (web #26), auth strategy (ADR-006 / web#29) · Design per ui-shell Option 1 + brand guide · Status dots update as nightly iteration ships sections. Build target: real Nuxt pages in the web repo (decided 2026-08-08). <strong>Section queue COMPLETE (1–11).</strong> Latest: Section 11 → <strong>/</strong> rebuilt as the cross-linking hub (Start Here tiles · Ministries showcase · Join Us This Sunday); every internal link is a stub-aware &lt;RccLink&gt;; hero welcome line flagged DRAFT (web#30). Homepage newsletter signup + "We're Live" mode remain not-built (need ADR-004 forms / a live signal).</p>
 </div>
