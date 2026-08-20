@@ -206,7 +206,23 @@ first unchecked Section below. One item per night, same ship/report discipline.
       disabled `<RccLink>` stubs (`/portal/{team,tickets,graphics}`). ui-shell
       dashboard vocab reused as-is (no tag bump); zero hardcoded colors. **Live data /
       sign-in still gated on ADR-006 (Jason: OAuth creds + test account).**
-- [ ] 11. Home polish + cross-linking + mobile QA sweep
+- [x] 11. Home polish + cross-linking + mobile QA sweep — DONE 2026-08-20.
+      `/` rebuilt from hero-only into the site's front door + primary
+      cross-linking hub: **Start Here** 4 quick tiles (Visit/Watch/Next
+      Steps/Give), **Ministries** "There's a Place for You" grid → the 6
+      built ministry pages + LifeGroups (blurbs reuse the RCC-sourced hub
+      one-liners — no new copy), **Join Us This Sunday** closing visit CTA
+      (online line VERBATIM from live Church Online callout; times from
+      SITE). Every internal link is `<RccLink>`. Flagged the carried-over
+      invented hero welcome line with a DRAFT chip. **Link sweep (5b):**
+      converted the last bare static internal links to `<RccLink>`
+      (about Plan-a-Visit; layout Sign In / Plan a Visit); verified across
+      all 18 built pages — no live href points at any `false` route. Build
+      + SSR verified; responsive breakpoints confirmed (tiles 4→2→1,
+      portal-grid 1-col ≤1024). Visual phone capture constrained by the
+      nightly Chrome window's ~1200px min-width — relied on the verified
+      responsive CSS (ui-shell breakpoints + per-page scoped queries, same
+      as prior-QA'd pages). **Section queue COMPLETE.**
 
 ## Nightly steps
 

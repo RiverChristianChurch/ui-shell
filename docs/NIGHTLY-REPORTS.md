@@ -792,3 +792,75 @@ deferred (nightly Chrome not co-located with dd-mini's dev server).
 
 ### Next up
 Section 11 — **Home polish + cross-linking + mobile QA sweep** (the last queued section).
+
+## 2026-08-20 · Section 11 — Home polish + cross-linking + mobile QA sweep
+
+**Route shipped:** `/` (`web/pages/index.vue`) — DigitalOcean App Platform auto-deploys
+from `main` (ADR-005). Commit `f839ca2`.
+
+**What shipped.** The home page was **hero-only**. Section 11 builds it into the site's
+front door + the primary cross-linking hub that routes into every section shipped across
+the run. Kept the approved hero (mission tagline + weekend times over the church's own
+home video) and added three tight bands below it:
+
+1. **Start Here** — 4 quick-action tiles → `/visit`, `/watch`, `/next-steps`, `/give`.
+2. **Ministries — "There's a Place for You"** — a 7-card showcase → the six built ministry
+   pages (Kids, Students, Men, Women, Care & Support, Outreach & Missions) + LifeGroups
+   (`/groups`), plus a "See All Ministries" → `/ministries`. Card blurbs **reuse the
+   RCC-sourced one-liners already on the `/ministries` hub** — no new copy invented here.
+3. **Join Us This Sunday** — closing visit CTA. The online line is **VERBATIM** from the
+   live home-page Church Online callout ("Join us online on Sunday mornings at 10:00 or
+   11:30 AM"); the service-times card reads from `SITE` (utils/siteConfig.ts — one source
+   of truth), so a time change happens in one place.
+
+**≥2 model borrowings.**
+- **E91** — "quick action tiles (I'm New / Connect / Mission & Vision)" under the hero →
+  the **Start Here** band.
+- **Fusion** — "connect cards ×5 (Kids, Youth, Groups, Serve, Next Steps)" anchoring the
+  home page into each ministry → the **Ministries grid** pattern.
+- **Motivation / Real Life Sac / Seacoast** — the "Join Our Community" / "Get Connected"
+  ministry-card showcase + a **"Join Us This Sunday"** visit CTA with service times →
+  the Ministries grid + the closing band.
+- **Venture** — "Plan Your Visit w/ service times (9:30 & 11:00a)" block → the closing
+  **service-times card**.
+
+**Cross-linking / link sweep (step 5b).** Converted the last bare static internal links
+to `<RccLink>`: `about.vue` Plan-a-Visit, and the layout **Sign In / Plan a Visit** nav
+buttons (grep for `NuxtLink to="/"|href="/"` in pages+layouts is now clean except the
+logo link + the `/portal` self sign-out). Booted the build and verified across **all 18
+built pages**: **no live `href` points at any `false`-registry route** (exact
+href∩false-set intersection = empty). New home links all target built routes; unbuilt
+targets (Connect Card, Preschool, This Week, etc.) are only ever reached via `<RccLink>`,
+which renders them disabled.
+
+**DRAFT-flagged.** One chip added: the hero's carried-over welcome sentence ("Join us this
+weekend in Fleming Island … through the love of Jesus") is **invented** — the live home
+hero shows only the mission tagline + service times, so there's no verbatim source. Chip
+`data-note` says to replace with RCC's approved hero line or cut it. This corrects a
+pre-existing unflagged violation from an earlier build. No other invented copy on the page.
+
+**Validation.** `npm run build` passes. Booted `.output/server` and curled `/` → SSR renders
+all real content (Start Here, "There's a Place for You", "Join Us This Sunday", the verbatim
+online line, all ministry cards). Responsive: `.rcc-home-tiles` has explicit breakpoints
+(4→2 @1024 →1 @560); the closing `.rcc-portal-grid` collapses to 1-col @1024 and
+`.rcc-hero-meta` hides @768 (ui-shell). **Zero hardcoded colors** (scoped CSS uses only
+`var(--rcc-*)`); no emoji. **No ui-shell change needed** — reused existing classes; only
+scoped page CSS added.
+
+**Constraint noted (not a silent cap).** The nightly Chrome window would not resize below
+~1200px in this environment, so a true phone-width visual capture wasn't possible. Verified
+the responsive CSS is present and correct instead (same shared ui-shell breakpoints already
+eyeballed at 768/1024 on prior nights + the page's own scoped queries). Desktop was captured
+and looks right. A real-device eyeball is a good candidate for Jason's morning pass.
+
+**Decisions needed → Jason.** None new blocking this section. The **Section queue is now
+COMPLETE (1–11)** — the open cross-site blocker remains **ADR-006 (PCO OAuth)**, which gates
+the portal, custom forms, and the Connect Card (already tracked). The hero welcome line needs
+Jason's approved copy or a cut (DRAFT chip on `/`). Filed a `needs-jason` issue for the home
+hero line.
+
+### Next up
+**Section queue complete (1–11).** No unchecked Section or Rework item remains. Next nightly
+runs should either (a) take a newly-queued item Jason adds, or (b) shift from "build sections"
+to **polish/QA passes** — real-device mobile sweep, the ADR-006 auth build (unblocks portal +
+forms + Connect Card), and the phase-2 portal tools (web#18/#20/#21). Await Jason's direction.
