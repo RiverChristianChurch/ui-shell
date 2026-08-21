@@ -4,6 +4,66 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-21 · Code-quality hardening — ESLint + Prettier + typecheck + commit gate (batch #3/#4)
+
+**Not a page section.** The Section queue (1–11) and Rework queue are complete; the first
+unchecked **autonomous** batch items were #3 (code audit + tooling) and #4 (commit-time gate).
+Everything else remaining (#5 serve form, #6 auth/ADR-006, #7 tickets, #8 graphics) is gated on
+ADR-006 (PCO OAuth), which needs Jason's creds + a test account — already tracked in web#19/#17/#29.
+So tonight took the two fully-autonomous items instead. No model-church research / verbatim-copy
+rules apply (no page shipped).
+
+**What shipped (web `1c70745`, two commits — pushed to `main`, DO deploys on push):**
+
+- **ESLint** — `@nuxt/eslint` flat config (`web/eslint.config.mjs`) extending the project-aware
+  base Nuxt generates (Vue+TS+Nuxt aware). Stylistic off (Prettier owns formatting).
+  `no-explicit-any` → **warning** (allowed at the loose PCO/JSON boundary). Disabled
+  `vue/no-multiple-template-root` — a **Vue-2-only rule** that false-positived on all our Vue 3
+  fragment-root section pages (120 phantom errors; confirmed the templates are valid Vue 3).
+- **Prettier** — `.prettierrc.json` (no-semi, single-quote, 100 col) + `.prettierignore`
+  (build output, `content/`, `docs/research/` data, `.do/` deploy specs). Applied repo-wide as a
+  formatting baseline (2nd commit is formatting-only; **RCC copy content byte-identical** — only
+  surrounding quote chars changed, so no verbatim-copy impact).
+- **Typecheck** — `nuxt typecheck` (vue-tsc) + `@types/node`. **Clean.**
+- **Commit gate** — Husky + lint-staged (`.husky/pre-commit`): `eslint --fix` + `prettier --write`
+  on staged files, then full `npm run typecheck`. Build excluded (too slow per commit; DO
+  build-on-push is the backstop). **Verified live** — both of tonight's commits passed the gate.
+- **Scripts** — `lint`, `lint:fix`, `format`, `format:check`, `typecheck`, `prepare`.
+- **Docs** — new "Code Quality & Commit Gate" section in `web/CLAUDE.md`; nightly step 5 now
+  requires `lint && typecheck` before build (also enforced by the hook). Fixed a stale
+  `localhost:1720` → `1721` in the Commands block (1720 is the browser-blocked port).
+
+**Real fixes surfaced by the new gate (not just config):**
+- `web/server/api/groups.get.ts` — typed the PCO JSON:API envelope (`PcoResource`/`PcoResponse`/
+  `GroupsResult`) to break an implicit-any inference cascade (TS7022/7023/7024) under
+  `noImplicitAny`. **Behavior unchanged** — booted the build and confirmed `/api/groups` still
+  returns the friendly unconfigured `{"configured":false,…}` 200. Cut file `any` warnings 13→3.
+- `web/plugins/fontawesome.ts` — targeted `import/first` waiver for the deliberate
+  `autoAddCss=false`-before-stylesheet ordering (prevents SSR style flash).
+- Added `@types/node` (server route used `Buffer` with no node types); `npm audit fix` cleared a
+  transitive nanoid high-sev advisory (0 vulns).
+
+**Audit / organize finding.** Structure is already industry-standard — 20 pages, 4 components,
+5 utils, 2 server routes, 2 composables, clean route-group nesting. No reorg needed; the value was
+in the linting/typing gate + the PCO envelope types, not moving files.
+
+**Validation.** `npm run lint` → 0 errors (3–4 boundary `any` warnings, intentional). `npm run
+typecheck` → clean. `npm run build` → passes. Booted `.output/server` and curled `/`, `/about`,
+`/groups`, `/api/groups` → SSR renders real content; the refactored PCO route behaves identically.
+
+**Borrowings (n/a).** Tooling night — no model-church section built, so the ≥2-borrowings rule
+doesn't apply.
+
+**DRAFT-flagged.** None (no copy touched beyond quote-char normalization).
+
+**Decisions needed → Jason.** Nothing new tonight. The standing blocker is unchanged: **ADR-006
+(PCO OAuth)** gates the four remaining batch builds (#5 serve form, #7 tickets, #8 graphics, and
+portal go-live #29). Running that POC needs Jason's PCO OAuth client creds + a Church-Center-only
+test account — tracked in web#19. Until that lands, autonomous nights should shift to polish/QA
+(real-device mobile sweep) and any newly-queued items.
+
+---
+
 ## 2026-08-17 · Section 9 — Give (verbatim rebuild) + sitewide footer social
 
 **Shipped:** `web/pages/give.vue` (route **`/give`**, already live in the registry;

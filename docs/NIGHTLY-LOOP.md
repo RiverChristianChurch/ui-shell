@@ -49,15 +49,20 @@ ship + report each piece; `/clear` between them. Order:
    verbatim RCC copy (use `~/dev/rcc/volunteer/src/data/serveTeams.ts` + the ministries hub for
    real write-ups), ≥2 model borrowings, DRAFT-chip invented copy, tight bands, no emojis
    (`<RccIcon>`), stub links via `<RccLink>` + registry, waves per the source/dest rule.
-3. **Full code audit + organize to industry standard.** The imported volunteer code (`utils/
-   serveTeams.ts`, `utils/groups.ts`, `server/api/groups.get.ts`, `components/LifeGroupsMap.vue`,
-   `plugins/fontawesome.ts`) + everything built this week: verify structure, naming, and that it
-   passes lint/typecheck. Add/enable **ESLint + Prettier + `vue-tsc` typecheck** if not present
-   (`@nuxt/eslint`), fix findings, add `npm run lint` / `npm run typecheck` scripts.
-4. **Commit-time validation/testing process.** Stand up a pre-commit gate (Husky + lint-staged, or
-   a `.git/hooks/pre-commit`) that runs lint + typecheck (+ `npm run build` or fast tests) before a
-   commit lands. Document it in CLAUDE.md. This is the durable "validate before commit" workflow —
-   after tonight, **every session runs lint + typecheck before committing** (add to step 5 below).
+3. **[x] Full code audit + organize to industry standard — DONE 2026-08-21.** Stood up
+   **ESLint (@nuxt/eslint flat) + Prettier + `nuxt typecheck` (vue-tsc)** with `lint`/`lint:fix`/
+   `format`/`typecheck` scripts. Baseline: **0 lint errors** (4 boundary `any` warnings), **typecheck
+   clean**, build passes. Real fixes: typed the PCO JSON:API envelope in `server/api/groups.get.ts`
+   (broke an implicit-any cascade under noImplicitAny; behavior unchanged), `import/first` waiver in
+   `fontawesome.ts`, added `@types/node`. Prettier baseline applied repo-wide (formatting-only, RCC
+   copy byte-identical). Structure was already industry-standard (20 pages / 4 components / 5 utils /
+   2 server routes) — verified, no reorg needed. web `1c70745`.
+4. **[x] Commit-time validation/testing process — DONE 2026-08-21.** Husky + lint-staged pre-commit
+   gate (`.husky/pre-commit`): `eslint --fix` + `prettier --write` on staged files, then full
+   `npm run typecheck`. Build excluded (too slow per commit; DO build-on-push is the backstop).
+   Documented in `web/CLAUDE.md` (new "Code Quality & Commit Gate" section). Verified live — both of
+   tonight's commits passed the gate. **From now on every session runs lint + typecheck before
+   committing** (the hook enforces it automatically).
 5. **Serve "join" custom form (#17).** Replace the `/serve` → Church Center redirect with our own
    session-aware form: signed-in → prefill + submit the join on their behalf (→ Serve @ RCC workflow
    633475); not signed-in → PCO sign-in if they can auth, else name + phone-last-4 confirm (port the
@@ -249,7 +254,9 @@ first unchecked Section below. One item per night, same ship/report discipline.
    (`vX` → `git tag`/push), then `npm i @riverchristianchurch/ui-shell@github:...#vX`
    in `web` and use it. Brand guide governs logo tiers; Give never highlighted;
    supra-menu carries Preschool + This Week; taxonomy undecided → current names.
-5. **Validate**: `cd ~/dev/rcc/web && npm run build` must pass; boot
+5. **Validate**: `cd ~/dev/rcc/web && npm run lint && npm run typecheck` must both pass
+   (standing gate since 2026-08-21 — the pre-commit hook enforces it too), then
+   `npm run build` must pass; boot
    `node .output/server/index.mjs` and `curl` the route to confirm SSR renders the
    real content; internal links/anchors resolve; responsive at 768/1024; no
    hardcoded colors. Browser screenshot if a Chrome is connected.
