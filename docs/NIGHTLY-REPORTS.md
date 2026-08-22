@@ -924,3 +924,67 @@ hero line.
 runs should either (a) take a newly-queued item Jason adds, or (b) shift from "build sections"
 to **polish/QA passes** — real-device mobile sweep, the ADR-006 auth build (unblocks portal +
 forms + Connect Card), and the phase-2 portal tools (web#18/#20/#21). Await Jason's direction.
+
+## 2026-08-22 · FIVE 6 — preteen ministry as its own page (web#24)
+
+**Route shipped:** `/ministries/five6` (`web/pages/ministries/five6.vue`, new) — DigitalOcean
+App Platform auto-deploys from `main` (ADR-005). Commit `3e82987`.
+
+**Context.** The Section queue (1–11) and the Rework queue are complete; every remaining
+`needs-jason` / auth-gated item (portal go-live, custom forms, ticket + graphics queues) is
+blocked on **ADR-006 (PCO OAuth)**. The first *non-blocked, content-forward* item is the
+`enhancement` issue **web#24 — split FIVE 6 out of the Kids page into its own ministry page**
+(verbatim copy already exists; the hub already had a FIVE 6 directory card wired to
+`/ministries/five6` rendering as a "soon" stub). Took that.
+
+**What shipped.** A tight, 5-band FIVE 6 page for RCC's preteen (5th & 6th grade) ministry:
+1. **Hero** — grade range + service times surfaced; hero sub is the verbatim opening line.
+2. **About** — the **full verbatim 3-paragraph FIVE 6 description** from `/ministries/kids/#five6`
+   ("A preteen ministry can be a very powerful place…" through "…builds a bridge to the next step
+   of their lives and faith journeys."), on a ~68ch readable measure.
+3. **Check-in** — DRAFT (E91 + Venture borrow), the same reviewed pattern the Kids page carries.
+4. **The Pathway — "A Bridge to the Next Step"** — Kids (Birth–4th) → FIVE 6 (5th–6th) → REACH
+   (7th–12th), cross-linking `/ministries/kids` and `/ministries/students`.
+5. **Close** — parent connect (email/Facebook/resources) + `RccMinistryEvents`.
+
+**Verbatim fidelity + a latent violation fixed.** All ministry prose on the new page is verbatim;
+only the check-in band is invented and it's DRAFT-chipped. Card blurbs in the pathway band are pure
+category labels ("Children's ministry", "Student ministry") + a nav cue, not reworded site prose.
+**Fixed a pre-existing violation on the Kids page:** its FIVE 6 blurb had a *paraphrased* second
+paragraph with **no DRAFT chip**. Replaced it with the verbatim opening sentence + an "Explore
+FIVE 6 →" pointer to the new page (removes the reword; adds the cross-link).
+
+**≥2 model borrowings.**
+- **E91 + Venture** — kids **check-in** ("kiosk opens ~10 min early, online pre-registration,
+  name-tag/security-tag match, text-paging"). web#24 explicitly asks to "borrow Kids check-in";
+  preteens check in through the same RCC Kids system → the FIVE 6 check-in band (DRAFT).
+- **E91 / Venture** — lead the hero with **"who + when"** (grade range + service times) so a parent
+  knows fit + timing before scrolling → FIVE 6 hero meta.
+- **Cohort ministry-pathway pattern** (Kids → preteen → students shown as a progression) → the
+  **"Bridge to the Next Step"** band. RCC's own verbatim copy frames FIVE 6 as a "two-year
+  transitional period" that "builds a bridge to the next step," so the framing is the site's.
+
+**DRAFT-flagged.** One band: the FIVE 6 **check-in** flow (chip + `data-note` citing E91/Venture and
+asking Jason to confirm RCC's real kiosk timing / tag-match / paging). No other invented copy.
+
+**Link validation (step 5b).** `/ministries/five6` flipped to `true` in `utils/routeRegistry.ts`
+→ the hub FIVE 6 card and the Kids pointer both auto-enabled (verified live NuxtLinks, not stubs).
+Swept all **18** built pages against the served HTML: **no live `href` points at any `false`-registry
+route** (`/connect`, `/preschool`, `/this-week`, `/ministries/prayer`, `/ministries/care/mental-health`,
+`/portal/{team,tickets,graphics}` all only reachable via disabled `<RccLink>`).
+
+**Validation.** `npm run lint` = 0 errors (4 pre-existing boundary `any` warnings). `npm run typecheck`
+clean. `npm run build` passes. Booted `.output/server` and curled `/ministries/five6` → SSR renders
+all real content (About verbatim paras, pathway, check-in). Zero hardcoded colors (scoped CSS uses
+only `var(--rcc-*)`); no emoji; steps collapse to 1-col ≤768px.
+
+**Decisions needed → Jason.** (1) Confirm the FIVE 6 **check-in** process (or that FIVE 6 uses the
+same RCC Kids check-in) so the DRAFT chip can drop — same open question as the Kids page. (2) Nothing
+else new. The site-wide blocker remains **ADR-006 (PCO OAuth)**.
+
+### Next up
+No unchecked Section or Rework item remains. Non-blocked `enhancement` candidates still open:
+**web#23** (file storage for ministry resources — needs a storage backend decision) and **web#7**
+(native sermon archive + YouTube ingest). Everything else waiting on Jason is the **ADR-006 auth
+POC** (gates portal go-live, custom forms, ticket/graphics queues). Await Jason's direction on
+which non-blocked build to take, or the auth POC session.

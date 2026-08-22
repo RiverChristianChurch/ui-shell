@@ -229,6 +229,27 @@ first unchecked Section below. One item per night, same ship/report discipline.
       responsive CSS (ui-shell breakpoints + per-page scoped queries, same
       as prior-QA'd pages). **Section queue COMPLETE.**
 
+## Post-section enhancement builds (Section queue done — take these next; check off)
+
+Section queue (1–11) + Rework queue are complete. When no Section/Rework item is
+open, take the first unchecked, **non-blocked** GitHub enhancement here (skip any
+gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
+
+- [x] **web#24 — FIVE 6 as its own ministry page.** DONE 2026-08-22. Built
+      `web/pages/ministries/five6.vue` (hero → verbatim About → DRAFT check-in →
+      Kids→FIVE 6→Students pathway → parent connect). Full verbatim FIVE 6 copy
+      from `/ministries/kids/#five6`; fixed a latent Kids-page paraphrase-without-chip
+      by swapping it for a verbatim-line pointer. Registry flipped `/ministries/five6`
+      → true (hub card + Kids pointer auto-live). web `3e82987`.
+- [ ] **web#23 — file storage for ministry resources** (admin upload / leader
+      download). Needs a storage-backend decision first — likely a `needs-jason`
+      call; scope before building.
+- [ ] **web#7 — native sermon archive + YouTube ingest** (replaces the Subsplash
+      embed on /watch). Non-blocked build; larger scope.
+
+Blocked (do NOT take autonomously — need Jason): web#17/#18/#19/#20 (auth/forms/
+queues, all gated on **ADR-006 PCO OAuth**), plus the open `needs-jason` issues.
+
 ## Nightly steps
 
 1. `cd ~/dev/rcc/ui-shell && git pull` (loop state + design system), then
