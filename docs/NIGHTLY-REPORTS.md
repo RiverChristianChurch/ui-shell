@@ -4,6 +4,53 @@ One entry per night. Newest first. See `NIGHTLY-LOOP.md` for the queue and rules
 
 ---
 
+## 2026-08-23 · web#23 file storage — SCOPED to ADR-008 (Proposed), not built
+
+**Not a page section — a scoping/proposal night.** With the Section queue (1–11) + Rework
+queue complete, the first unchecked post-section item is **web#23 (file storage for ministry
+resources)**. Its queue note says *"needs a storage-backend decision first… scope before
+building."* The next item, **web#7 (native sermon archive + YouTube ingest), is blocked** — the
+/watch page's own DRAFT note flags the YouTube channel as UNVERIFIED and web#10 (needs-jason)
+exists to confirm it; building ingest against an unconfirmed channel would push wrong sermons to
+the congregation (hard-rule violation). So tonight I **scoped #23** rather than build anything
+blind. No model-church research / verbatim rules apply (no page shipped).
+
+**Why it can't be built blind:** a role-gated resource library fits none of the app's three data
+planes — PCO (system of record, not a file store), Redis (cache-only, can't own data), or git
+content (every change is a deploy — the one thing #23 forbids). It forces **the app's first
+app-owned database** for file metadata, a decision shared with #18 (tickets) and #20 (graphics
+queue).
+
+**Shipped (web `1c56fc9` → `main`, pushed):**
+- **ADR-008** — `docs/architecture/decisions/ADR-008-file-storage-and-app-data.md`, Status
+  **Proposed**. Two-part recommendation: (1) **DO Spaces** for the blobs — private objects +
+  short-TTL pre-signed URLs, admin-gated Nitro upload route (**ready to build, no blocker**);
+  (2) a **small managed Postgres** for the metadata — the app's first app-owned DB.
+- **Proposal Artifact** (RCC teal, phone-first, theme-aware):
+  `https://claude.ai/code/artifact/f5383b65-4ef8-4191-97a5-7ffd3e517085`
+- **web#23** commented with the recommendation + Artifact, labeled **needs-jason**.
+
+**Model borrowings (structural, from ADR-003's proven shape — no new page cohort to mine):**
+1. **ADR-003's "cheap blob store + owned metadata" split** — reused verbatim as Spaces (blobs) +
+   Postgres (catalog); ADR-003 already anticipated "Notes/PDFs live in… a cheap object store."
+2. **The portal's `usePortalSession()` preview-gate seam (Section 10)** — reused so the
+   upload/download pipeline can be built and demoed now behind the same guest/preview gate and
+   flip live when ADR-006's real session lands, no redesign.
+
+**DRAFT-flagged copy:** none (no page copy produced).
+
+**Decisions needed from Jason (why it's needs-jason):**
+1. **App-data store: DO Managed Postgres (rec., ~$15/mo, one bill per ADR-005) vs. reuse an
+   existing Supabase instance (~$0, already operated).** Sets the precedent for #18/#20.
+2. **Budget:** ~$20/mo all-DO, or ~$5/mo reusing Supabase.
+3. **Role floors** for download: anything member-visible, or leader-and-up to start?
+4. **Blocked-not-stalled:** download *enforcement* reads roles from **ADR-006** (contested, POC-
+   blocked). Storage/schema/route design don't wait on it.
+
+**Sitemap dot:** unchanged — #23 is infra, not an IA section.
+
+---
+
 ## 2026-08-21 · Code-quality hardening — ESLint + Prettier + typecheck + commit gate (batch #3/#4)
 
 **Not a page section.** The Section queue (1–11) and Rework queue are complete; the first

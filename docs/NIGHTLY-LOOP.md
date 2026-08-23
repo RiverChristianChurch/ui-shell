@@ -242,8 +242,14 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       by swapping it for a verbatim-line pointer. Registry flipped `/ministries/five6`
       → true (hub card + Kids pointer auto-live). web `3e82987`.
 - [ ] **web#23 — file storage for ministry resources** (admin upload / leader
-      download). Needs a storage-backend decision first — likely a `needs-jason`
-      call; scope before building.
+      download). **SCOPED 2026-08-23 → ADR-008 (Proposed), now `needs-jason`.**
+      web `1c56fc9`. Recommendation: DO Spaces for the blobs (private + short-TTL
+      pre-signed URLs, admin-gated upload — **ready to build**) + the app's **first
+      app-owned Postgres** for file metadata (shared with #18/#20). The one open call
+      is the data store: **DO Managed Postgres vs. reuse Supabase** (+ budget ~$20 or
+      ~$5/mo). Download enforcement gated on ADR-006. Proposal Artifact:
+      `https://claude.ai/code/artifact/f5383b65-4ef8-4191-97a5-7ffd3e517085`. Box
+      stays unchecked — the BUILD is unstarted, waiting on Jason's backend pick.
 - [ ] **web#7 — native sermon archive + YouTube ingest** (replaces the Subsplash
       embed on /watch). Non-blocked build; larger scope.
 
