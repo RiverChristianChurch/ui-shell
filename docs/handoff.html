@@ -129,13 +129,21 @@
   </section>
 
   <section>
-    <h2><span class="n">03</span> Sermon media — catalog captured, media pending</h2>
-    <p><strong>Status unchanged this session.</strong> The full current Subsplash embed is captured into a clean catalog — <strong>15 messages, 2 series</strong>, each with title, date, speaker, scripture, and teaching notes — and one folder per message is staged on the <strong>ARCHIVE drive</strong> (<kbd>/Volumes/ARCHIVE/rcc-sermons/</kbd>) with a <kbd>sidecar.json</kbd> + paste-ready <kbd>youtube.txt</kbd>.</p>
-    <div class="pipe">Subsplash embed ──(browser metadata pass)──▶ manifest ──subsplash-sidecars──▶ ARCHIVE/rcc-sermons/&lt;date&gt;-&lt;slug&gt;/  (sidecar.json + youtube.txt)   ✅ DONE
-                                                                        └── video.mp4 / audio.mp3  ⛔ needs a decision (below)
-media + sidecar ──upload-youtube──▶ YouTube (playlist per series) ⛔ gated on channel + API (#10)
-records ──build-podcast-feed──▶ /podcast.xml</div>
-    <p><strong>Recommendation → the Subsplash dashboard (you own the account).</strong> The public embed's Download is <strong>audio-only</strong> and gated on a stalling player (only 3/15 audio landed reliably). The dashboard is the reliable source for <em>video</em>; the existing <kbd>subsplash-fetch</kbd> / <kbd>upload-youtube</kbd> scripts take over from the files. Metadata + sidecars for all 15 are staged and waiting on bytes.</p>
+    <h2><span class="n">03</span> Sermon media — archive built, YouTube ingest still blocked</h2>
+    <p><strong>Changed Aug 25.</strong> The catalog is no longer a sample — <strong>291 messages across 65 series</strong>
+    (Jan 2021 → Aug 2026) are now real records in the repo, rendered as real pages. Each one carries its title,
+    series, speaker, Scripture references and the <strong>published note outline</strong>, all verbatim from RCC's own
+    media library, plus the actual series graphic. <kbd>/watch</kbd> filters by series, speaker and year (and searches
+    titles + Scripture); <kbd>/watch/series</kbd> browses all 65; every message has its own page. That closes the
+    audit's #1 knock on the current site — sermons living inside a Subsplash JS embed with <em>zero SEO visibility</em>.</p>
+    <div class="pipe">manifest ──manifest-catalog──▶ content/sermons/*.json + series artwork ──build-sermon-index──▶ /watch, /watch/series, /watch/[slug]   ✅ DONE (291 messages)
+records ──upload-youtube──▶ YouTube (playlist per series) ⛔ gated on a confirmed channel + API key (#10)
+records ──extract-audio──▶ build-podcast-feed ──▶ /podcast.xml   ⛔ after the media move</div>
+    <p><strong>What's still missing is durable media.</strong> Until the YouTube ingest runs, each message plays from
+    the church's own Subsplash file — which dies at contract end. That step needs two things from you: the
+    <strong>confirmed channel id</strong> (several similarly-named channels exist) and a <strong>Data API key</strong>
+    (<span class="tag">#10</span>). Also open: <span class="tag">#32</span> (press play once in a normal browser — see
+    to-dos) and <span class="tag">#31</span> (61 undated captures excluded from the archive).</p>
   </section>
 
   <div class="tonight">
@@ -167,7 +175,7 @@ records ──build-podcast-feed──▶ /podcast.xml</div>
       <li><span class="box"></span><span><b>PCO credentials + workflow IDs</b> <span class="tag">forms &amp; groups</span><small>(1) set <kbd>NUXT_PCO_APP_ID</kbd> / <kbd>NUXT_PCO_SECRET</kbd> in DO so the LifeGroups finder shows real groups in prod; (2) PCO <b>Workflow IDs</b> for Connect / Prayer / Baptism / Serve so branded forms (ADR-004) route to the right team.</small></span></li>
       <li><span class="box"></span><span><b>Auth strategy — pick a direction (now the portal blocker)</b> <span class="tag">#19 · #29 · ADR-006</span><small>The Member Portal shell shipped tonight; it renders preview role states until this lands. Need: PCO OAuth app registered (<kbd>NUXT_PCO_OAUTH_CLIENT_ID/SECRET</kbd> + redirect URIs), a <b>Church-Center-only test account</b>, and a confirmed role→role mapping. Gates sign-in, the serve flow, and the ticket tool — <b>recommended next focused session.</b> Review the shell now: <kbd>/portal?preview=member|volunteer|leader|staff</kbd>.</small></span></li>
       <li><span class="box"></span><span><b>Real destinations for the remaining stubbed CTAs</b> <span class="tag">#14</span><small>Still disabled (not silently wrong): the Church Center <b>baptism form</b>, the two <b>packet PDFs</b>, and <b>Sign-Up-to-Serve</b>. Send each URL and I flip the stub to the live link.</small></span></li>
-      <li><span class="box"></span><span><b>Run the Subsplash back-catalog pass + confirm YouTube channel/API</b> <span class="tag">#12 · #10</span><small>Video needs the Subsplash dashboard (public embed is audio-only + player-gated). And Data API v3 key + one-time OAuth before anything uploads.</small></span></li>
+      <li><span class="box done"></span><span><b>Subsplash back-catalog — captured and now live on the site</b> <span class="tag">#12</span><small>The metadata pass is done and ingested: <b>291 messages / 65 series</b> render on <kbd>/watch</kbd> with real series artwork. Moving the <i>media</i> to YouTube is the remaining step — that's the channel + API key to-do above.</small></span></li>
       <li><span class="box"></span><span><b>Kids grade range — a 3-way conflict to settle</b><small><kbd>/ministries/kids/</kbd> says Birth–4th + FIVE 6 = 5th–6th; <kbd>/what-to-expect/</kbd> says "birth through grade five"; you'd earlier asked for "6th grade." Kids + Visit carry DRAFT chips until you pick one.</small></span></li>
       <li><span class="box"></span><span><b>Weekly Message notes form</b> <span class="tag">#15</span><small>Enter sermon notes once → Photoshop + ProPresenter + the Connect Card page. Filed.</small></span></li>
       <li><span class="box"></span><span><b>WP-droplet access from this session</b><small>The give embed was pulled by curling live prod, because <kbd>ssh-rcc.com</kbd> / the <kbd>dd</kbd> doctl context / <kbd>id_rsa</kbd> aren't wired into this shell. Worth confirming that access if you want me hitting the WP DB directly.</small></span></li>
