@@ -241,7 +241,12 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       from `/ministries/kids/#five6`; fixed a latent Kids-page paraphrase-without-chip
       by swapping it for a verbatim-line pointer. Registry flipped `/ministries/five6`
       → true (hub card + Kids pointer auto-live). web `3e82987`.
-- [ ] **web#23 — file storage for ministry resources** (admin upload / leader
+- [x] **web#23 — file storage for ministry resources** — BUILT 2026-08-23 (web `3f660bd`,
+      ADR-008 Accepted `a92fdb7`): private Supabase Storage bucket + Postgres metadata
+      catalog, staff upload, role-gated download via short-TTL signed URLs,
+      `/portal/resources` behind the portal preview gate. Live verification still
+      needs Supabase env vars + real sessions (ADR-006). Original scoping note:
+- [ ] ~~**web#23 — file storage for ministry resources**~~ (admin upload / leader
       download). **SCOPED 2026-08-23 → ADR-008 (Proposed), now `needs-jason`.**
       web `1c56fc9`. Recommendation: DO Spaces for the blobs (private + short-TTL
       pre-signed URLs, admin-gated upload — **ready to build**) + the app's **first
@@ -250,8 +255,21 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       ~$5/mo). Download enforcement gated on ADR-006. Proposal Artifact:
       `https://claude.ai/code/artifact/f5383b65-4ef8-4191-97a5-7ffd3e517085`. Box
       stays unchecked — the BUILD is unstarted, waiting on Jason's backend pick.
-- [ ] **web#7 — native sermon archive + YouTube ingest** (replaces the Subsplash
-      embed on /watch). Non-blocked build; larger scope.
+- [~] **web#7 — native sermon archive + YouTube ingest.** ARCHIVE HALF DONE
+      2026-08-25 (web `c29fe0b`). The catalog is real: **291 messages across 65
+      series**, built from the captured Subsplash library by the new
+      `scripts/manifest-catalog.mjs` — every title, speaker, Scripture ref and note
+      outline verbatim RCC, plus 65 series graphics downsampled to 5.2 MB. `/watch`
+      now carries a Series/Speaker/Year + keyword filter with Load More;
+      `/watch/series` is a new series index; `/watch/[slug]` renders the note outline,
+      prev/next in series and interim playback from the church's own Subsplash media.
+      Listing pages read a generated compact index (`build-sermon-index.mjs`, runs
+      before dev/build); full records lazy-load on the detail page.
+      **STILL OPEN — the YouTube ingest half:** `sync-youtube.mjs` + `upload-youtube.mjs`
+      exist but need `YT_API_KEY` / `YT_CHANNEL_ID` and channel confirmation (web#10,
+      needs-jason). Until then media plays from Subsplash CDN URLs that die at contract
+      end. Also open: web#31 (61 undated thin captures), web#32 (verify playback in a
+      real browser).
 
 Blocked (do NOT take autonomously — need Jason): web#17/#18/#19/#20 (auth/forms/
 queues, all gated on **ADR-006 PCO OAuth**), plus the open `needs-jason` issues.

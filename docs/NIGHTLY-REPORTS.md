@@ -1035,3 +1035,95 @@ No unchecked Section or Rework item remains. Non-blocked `enhancement` candidate
 (native sermon archive + YouTube ingest). Everything else waiting on Jason is the **ADR-006 auth
 POC** (gates portal go-live, custom forms, ticket/graphics queues). Await Jason's direction on
 which non-blocked build to take, or the auth POC session.
+
+## 2026-08-25 · web#7 (archive half) — the real sermon archive: 291 messages, filterable, SSR'd
+
+**Shipped.** `web` `c29fe0b` → `main`, pushed; DigitalOcean App Platform auto-deploys (ADR-005).
+Routes: `/watch` (rebuilt archive band), **`/watch/series`** (new series index),
+`/watch/series/[slug]`, `/watch/[slug]` (rebuilt detail).
+
+**Context / queue state.** The loop file was two nights stale: **web#23 shipped 2026-08-23**
+(`3f660bd` + ADR-008 Accepted `a92fdb7` — Supabase-backed ministry resource library) but its box
+was never checked and no report was written. Verified against the commits and checked it off.
+That made **web#7** the first unchecked, non-blocked item. Its YouTube-ingest half is gated on
+`YT_API_KEY`/`YT_CHANNEL_ID` (web#10, needs-jason) — but the **archive half needs neither**, and
+it was the piece actually holding `/watch` back: the page was rendering **three fake sample
+records**. Took that.
+
+**What shipped.**
+1. **The real catalog — 291 messages, 65 series, 2021-01-03 → 2026-08-09.** New
+   `scripts/manifest-catalog.mjs` turns the captured 352-entry Subsplash manifest into
+   `content/sermons/*.json`: title, series, speaker, date, Scripture refs and the published
+   **note outline**, all verbatim RCC. It also downloads each **unique** series graphic once and
+   downsamples it to an 800px JPEG — Subsplash serves `_source` PNGs, so this is **109 MB → 5.2 MB**
+   for the same 65 graphics. Deterministic, no AI: series is the manifest field, else a
+   `"Series - Title"` split accepted **only** when the prefix exactly matches a series the manifest
+   already names; speaker strips a leading `"Pastor "` so the filter doesn't list one person twice.
+2. **A compact index so 300 records don't ship as 350 KB of prose.** `build-sermon-index.mjs`
+   projects the records into `content/sermons-index.json` (~97 KB raw, ~25 KB gzipped) which the
+   listing pages import; the full record lazy-loads on the detail page only. Wired into
+   `npm run dev` / `build` / `generate`, so the index **cannot drift** from the records.
+3. **`/watch` archive band** — `RccSermonArchive.vue`: keyword search + Series / Speaker / Year
+   selects + result count + Reset, over text-first rows (date cell · title · series·speaker·Scripture),
+   24 at a time behind **Load More**. The flat 65-card series wall moved to a recent-8 strip with
+   "All 65 series →".
+4. **`/watch/series`** — new series index with its own find-a-series box, real artwork, year span
+   and message counts.
+5. **`/watch/[slug]`** — renders the **Message Notes** outline (RCC's own published outline, verbatim),
+   prev/next within the series, and interim playback from the church's own Subsplash media when a
+   record has no `youtubeId` yet. Also fixed a latent ui-shell trap: `.rcc-message-video::after`
+   paints a 30% scrim + pointer cursor for a *poster tile* — over a real player it dims the video and
+   **swallows every click**. A `.rcc-player` container now drops both.
+6. **Series pages read oldest→newest** (a series is taught in order; the index is newest-first).
+
+**≥2 model borrowings** (all from `docs/research/church-site-audits-2026-08.json`):
+- **Real Life Church Sacramento** — *"On-site sermon archive with three-way filtering (Series /
+  Speaker / Date) instead of dumping visitors to YouTube"* → the archive filter bar.
+- **E91** — *"/watch searchable archive filtered by series, speaker, topic; per-sermon detail pages"*
+  → the keyword search across the archive + the find-a-series box on `/watch/series`.
+- **Motivation Church** — *"flat chronological tile grid w/ Load More; detail page has YouTube embed
+  + PDF notes + response CTAs"* → Load More pagination (291 rows is not a scroll wall) and the
+  detail page's notes-plus-next-steps layout.
+- **Brooklake** — *"list archive w/ title, speaker, date, scripture… browsable by series"* + dedicated
+  `/series/<slug>/` pages → Scripture on every row and the series index behind them.
+- And the audit's finding about **RCC's own site** — *"Core content (events calendar, sermons/messages)
+  exists only as Subsplash JS embeds — zero SEO/no-JS visibility"* — is what this closes for sermons.
+
+**DRAFT-flagged: none — and three chips REMOVED.** Every word on these pages is RCC's own: the titles,
+series names, speakers, Scripture references and note outlines came out of the church's own media
+library. The old sample-record DRAFT chips on `/watch` and `/watch/series/[slug]` are gone because the
+samples are gone. Two mechanical, non-editorial normalizations are worth naming: descriptions were
+whitespace-collapsed (the embed's ragged indentation; **not one word changed**), and the card/meta
+blurb is the message's **first published note line verbatim** — never a rewrite or a truncation.
+
+**Not built / excluded.** 61 of the 352 captures are thin (filename-ish titles, no date/speaker/art)
+and are excluded rather than shown as junk — see web#31. Their data is preserved in the committed
+`content/subsplash-unmatched.json` because the manifest itself is gitignored.
+
+**Link validation (step 5b).** `/watch/series` flipped to `true` in `utils/routeRegistry.ts`. Swept the
+20 built pages against served HTML: **no live `href` points at any `false` route** (`/connect`,
+`/preschool`, `/this-week`, `/ministries/prayer`, `/ministries/care/mental-health`,
+`/portal/{team,tickets,graphics}`). Every `RccLink` target resolves in the registry. Dynamic
+`/watch/<slug>` and `/watch/series/<slug>` links stay `NuxtLink` per the rule; an unknown slug 404s.
+
+**Validation.** `npm run lint` 0 errors (4 pre-existing boundary `any` warnings) · `npm run typecheck`
+clean · `npm run build` passes · booted `.output/server` and curled every route: SSR renders the real
+archive (26 rows + "Load More (267 left)" in the HTML), the series index, a series page in teaching
+order, and a detail page with its full note outline. Artwork serves 200 `image/jpeg`. Zero hardcoded
+colors. Browser QA at 768px: filters wrap 2-up, rows read cleanly, real series art renders.
+
+**Decisions needed → Jason.**
+1. **web#10 / YouTube ingest (the other half of web#7)** — still the blocker for durable media.
+   `sync-youtube.mjs` + `upload-youtube.mjs` are written and waiting on `YT_API_KEY` +
+   a **confirmed** `YT_CHANNEL_ID` (several similarly-named channels exist). Until then the site
+   plays Subsplash CDN files that die at contract end.
+2. **web#32** — press play on a message in a normal browser and confirm it starts. The file is a
+   fast-start MP4 and the CDN answers range requests in ~114 ms, but playback would not start inside
+   the nightly automation browser (`readyState` stuck at 0), and I can't tell from here whether that's
+   the sandbox or the file. If it doesn't play for real people, I'll default the page to the audio tab.
+3. **web#31** — worth a second capture pass for the 61 undated messages, or let them go?
+
+### Next up
+`web#7`'s YouTube-ingest half (blocked on web#10). Non-blocked alternatives: nothing left in the
+Section/Rework queues; remaining enhancements (web#17/#18/#19/#20) are all gated on **ADR-006 (PCO
+OAuth)**, which is still the single biggest unblock for this project.
