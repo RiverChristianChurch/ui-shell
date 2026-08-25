@@ -39,6 +39,15 @@ autonomously, ship, report, stop.
 Jason authorized **multiple autonomous sessions tonight** to tackle this batch. Work top-down;
 ship + report each piece; `/clear` between them. Order:
 
+> ⚠️ **2026-08-25 — READ THIS BEFORE TRUSTING THIS LIST.** The nightly prompt says
+> *"Take the FIRST unchecked **section** from the queue"* and *"Build `web/pages/<section>.vue`"*.
+> It drives off the **checkbox Section queue further down this file**, NOT off this prose
+> "Order:" list. Consequence: for seven nights item 1 below (download the Subsplash media)
+> was never picked up, because it has no checkbox and is not a page. The archive metadata
+> shipped; the media migration never started, and every video/audio URL on the live site
+> still pointed at `cdn.subsplash.com`. **Anything that must actually happen belongs in the
+> checkbox queue as a GitHub issue, not in this prose list.**
+
 1. **Scrape more sermon series.** Run the Subsplash back-catalog pass on dd-mini (Chrome MCP).
    Per Jason: downloads ARE on the public embed — **Download → Download Video + Download Audio**,
    plus capture the **series artwork** (`artworkUrl`). Extend `content/subsplash-manifest.json`
