@@ -1127,3 +1127,87 @@ colors. Browser QA at 768px: filters wrap 2-up, rows read cleanly, real series a
 `web#7`'s YouTube-ingest half (blocked on web#10). Non-blocked alternatives: nothing left in the
 Section/Rework queues; remaining enhancements (web#17/#18/#19/#20) are all gated on **ADR-006 (PCO
 OAuth)**, which is still the single biggest unblock for this project.
+
+## 2026-08-27 · Prayer (`/ministries/prayer`) — rhythms first, then how to ask
+
+**Shipped:** `web/pages/ministries/prayer.vue` + `web/public/img/prayer-hero.jpg`
+(web `7fd3e52`, pushed to `main` → DigitalOcean App Platform deploys on push).
+Route: **`/ministries/prayer`**.
+
+This was the last Care & Support route that existed only as a disabled stub. Four
+bands, per the condensed rule:
+
+1. **Hero** — RCC's own *Night of Worship* photo (literally the live prayer page's
+   own hero image, pulled from `wp-content/uploads/2021/08/`, downsampled to 1800px
+   / 300 KB), Galatians 6:2 verbatim as the sub, `Request Prayer` + `Care & Support`.
+2. **How We Pray** — the Prayer Team paragraph verbatim, then the church's three
+   actual rhythms: *every service* · *every week, over every submitted request* ·
+   *together in the Worship Center* (day/time/place from `SITE.prayer`, so a change
+   is one edit sitewide).
+3. **Request Prayer** (`#request`) — the live page's three pathways, verbatim, at
+   equal weight, closing with "All requests are handled with compassion and
+   discretion" + the office phone.
+4. **Join the Prayer Team** — the serve-team record verbatim (leader John Pratt ·
+   Weekend Services · Flexible), CTAs to `/serve` and `/next-steps`.
+
+**Model borrowings (4, cohort singles):**
+
+1. **Brooklake Church `/prayer`** (audits[5]: *"describes prayer culture and rhythms;
+   requests go through the app's Prayer Thread"*) → RCC's page leads with **How We
+   Pray** and names the rhythms *before* it asks for anything. The page is about the
+   church's prayer life, not a submission funnel.
+2. **E91 `/prayer`** (audits[2]: *"'How Can We Pray for You?' custom web form on
+   /prayer"*) → the ask stays **on RCC's own site** rather than bouncing to Church
+   Center, and the pastoral **follow-up option** is stated up front instead of being
+   a surprise field. (The form itself is the one DRAFT — see below.)
+3. **Fusion Christian Church** (audits[3], recorded as a **weakness**: *"/prayer/ page
+   is orphaned — a working prayer form not reachable from any menu"*) → shipping this
+   route flipped `/ministries/prayer` → `true` in the registry, which auto-enabled the
+   ministries-hub Prayer card and the Care page's "Request Prayer" CTA; I also added a
+   **Next Steps → prayer** cross-link. Three entrances, zero orphan.
+4. **Real Life Church Sacramento** (audits[1]: *"prayer text line promoted in the
+   footer sitewide — very low-friction care entry point"*) → the three pathways are
+   parallel cards of equal weight with the **office phone** right underneath, so the
+   page is never form-or-nothing.
+
+**DRAFT-flagged (1):**
+
+- **"Send it from here"** pathway. The live page's third bullet is *"Complete the form
+  below."* — an inline Gravity Form (Name; *"Would you like a pastor to follow up with
+  you?"* → No Thank You / Phone / Email; Prayer Request). That native form isn't built
+  (ADR-004: custom branded forms → PCO, workflow IDs pending), so the pathway carries a
+  `.rcc-draft-chip` and routes to the Connect Card — the same treatment `/next-steps`
+  already uses. **→ web#37 (needs-jason).**
+
+**Deviations from live copy, both deliberate:**
+
+- Weekly prayer time renders **"on Wednesdays"** (`SITE.prayer.day`, confirmed by Jason
+  2026-08-12) where the live page says "each week" and names no day. Same as the
+  `/next-steps` prayer band; not chipped, on the same reasoning.
+- **Omissions (editorial, no chip):** the live page's Growth Track band (already the
+  spine of `/next-steps`) and its "Want More Information?" obfuscated mailto — no email
+  is reproduced anywhere in this repo, same rule as `/ministries/care`.
+
+**Validation:** `npm run lint` (0 errors, the 4 known boundary `any` warnings) ·
+`npm run typecheck` clean · `npm run build` passes · booted `.output/server/index.mjs`
+and confirmed SSR renders the real content at `/ministries/prayer` (200) and the hero
+photo serves (200). **Link sweep (5b):** curled all 21 built routes — every one 200,
+and no live `href` points at any `false` route (`/connect`, `/preschool`, `/this-week`,
+`/ministries/care/mental-health`, `/portal/{team,tickets,graphics}`). The three
+remaining bare `<NuxtLink>`s (layout logo → `/`, portal sign-out → `/portal`, ministry
+events → `/events`) all target live routes. No hardcoded colors; no new ui-shell
+tokens needed, so **no tag bump** this night. Browser-verified at 1350px (hero H1 was
+initially all-accent over the photo and read low-contrast — changed to plain white,
+matching the live page's own `PRAYER` H1).
+
+**Decisions needed (Jason):**
+
+- **web#37 (new, needs-jason)** — where a prayer request should land in PCO (workflow
+  vs. form vs. Prayer-Team list), the ID, who gets notified, whether the follow-up
+  opt-in becomes a PCO field, and whether requests should be visibility-restricted to
+  the Prayer Team. This is the **first** ADR-004 custom form, so it sets the pattern.
+- **web#38 (new)** — queued as the next build: `/ministries/care/mental-health`, the
+  last Care & Support stub. Flagged there: the live page's intro carries a **broken
+  crisis number** (`899-273-8255`; the correct `800-273-8255` appears further down the
+  same page) and a wrong Scripture cite ("Mathew 28:11" for Matthew 11:28). Both get
+  fixed + chipped rather than shipped verbatim.

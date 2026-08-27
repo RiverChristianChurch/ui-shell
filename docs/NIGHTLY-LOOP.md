@@ -280,6 +280,26 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       end. Also open: web#31 (61 undated thin captures), web#32 (verify playback in a
       real browser).
 
+- [x] **Prayer (`/ministries/prayer`)** — DONE 2026-08-27 (web `7fd3e52`). The last
+      Care & Support route that existed only as a disabled stub. Four bands: hero
+      (RCC's own Night of Worship photo — the live page's own hero image) → **How We
+      Pray** (the church's rhythms: every service · weekly over every submitted
+      request · the weekly gathering, day/time/place from `SITE.prayer`) → **Request
+      Prayer** (all three live-site pathways at equal weight) → **Join the Prayer
+      Team** (verbatim serve-team record: John Pratt · Weekend Services · Flexible).
+      All prose verbatim from `/ministries/prayer/` + `volunteer/src/data/serveTeams.ts`.
+      Registry flipped `/ministries/prayer` → true, which lit up the ministries-hub
+      card and the Care page CTA; added a Next Steps → prayer cross-link. ONE draft
+      chip: the live page's inline prayer form (ADR-004, needs PCO workflow IDs →
+      **web#37**), routing to the Connect Card meanwhile.
+- [ ] **web#38 — `/ministries/care/mental-health`.** The last Care & Support stub.
+      Full real content on the live site (national crisis resources, ~13 named local
+      Christian counselors, topic sections with books/articles/videos). **Two content
+      defects must be fixed + chipped, not shipped verbatim:** the intro's crisis
+      number reads `899-273-8255` (correct: **800**-273-8255, which the page's own
+      resource list has right), and the Scripture cite reads "Mathew 28:11" for a
+      Matthew 11:28 quote. Crisis info stays above the fold, never behind an accordion.
+
 Blocked (do NOT take autonomously — need Jason): web#17/#18/#19/#20 (auth/forms/
 queues, all gated on **ADR-006 PCO OAuth**), plus the open `needs-jason` issues.
 
