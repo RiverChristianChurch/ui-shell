@@ -1211,3 +1211,139 @@ matching the live page's own `PRAYER` H1).
   crisis number** (`899-273-8255`; the correct `800-273-8255` appears further down the
   same page) and a wrong Scripture cite ("Mathew 28:11" for Matthew 11:28). Both get
   fixed + chipped rather than shipped verbatim.
+
+## 2026-08-29 — web#38 · Mental Health Resources
+
+**Shipped:** `/ministries/care/mental-health` — web `4c57416`, pushed to
+`RiverChristianChurch/web` `main` (DigitalOcean App Platform deploys on push).
+ui-shell **v0.1.0-beta.9** (`35fd2f5`) pushed + tagged first; `web` re-pointed at it.
+**This closes Care & Support** — the hub, Prayer, and Mental Health are all real
+pages now, and the section has no stubs left.
+
+The last Care & Support stub was also the site's most consequential page to get
+right: someone reaching it may be in crisis. So the whole layout is organized
+around one rule — **nothing a person in crisis needs is more than one screen away,
+and none of it is behind a click.**
+
+**Five bands** (condensed rule; the source page is a very long single scroll):
+
+1. **Hero** — verbatim intro ("Thank you for coming to this page…"), on the new
+   short-hero variant so band 2 clears the fold.
+2. **Get Help Now** — the crisis sentence as the loudest element on the page, with
+   988 and 800-273-8255 as `tel:` links; then the four national lines +
+   findhelp.org as number-forward tappable cards; then the church's own "We are
+   here for you" paragraph with the office phone.
+3. **If Someone Is at Risk** — the live page's suicide *What To Do*, *Things To
+   Know*, and all 16 *Warning Signs*. Deliberately **not** in the accordion.
+4. **Christian Counselors Near You** — 6 local practices + 5 regional counselors
+   as a grouped card directory; every card's single action is its phone number.
+5. **Resources by Topic** — ~30 books/articles/videos/podcasts collapsed into a
+   native `<details>` accordion (Depression, Suicide, Self Harm, Stress & Burnout).
+
+Close band cross-links GriefShare + DivorceCare on `/ministries/care` rather than
+duplicating them (the live page's Grief/Divorce blocks are themselves just pointers).
+
+**Model borrowings (4):**
+
+1. **Church of Eleven22 `/care`** (audits[8]: *"combined 'Request Care and/or
+   Prayer' flow on /care; **988 crisis line surfaced**"*) → the 988 line is the
+   first thing under the hero, in its own high-contrast band, tap-to-call — never
+   inside the accordion, never below the reading material. This borrowing is also
+   what forced the **new ui-shell `.rcc-hero--short`**: `.rcc-hero` is `min-height:
+   100vh`, which would have pushed the crisis number off the first screen.
+2. **Motivation Church `/care`** (audits[4]: *"honestly outsources: named external
+   counseling partners + a plainly stated policy"*; **live fetch 2026-08-29**
+   confirms partners grouped under named category bands — Counseling / Recovery /
+   Food & Financial Support — each a card with one uniform "Get Help" action) →
+   RCC's counselor list becomes a grouped card directory (Practices / Individual
+   Counselors) with one uniform action per card, instead of a run-on list of names
+   and digits. RCC's own referral policy is surfaced with a link to the Care page.
+3. **E91** (audits[2]: `/mentalhealth/` is its own page under the counseling
+   center, sibling to counseling staff/training/blog — not a section buried inside
+   a care page) → the resources get their own route, `<title>` and description, so
+   the page is linkable on its own when someone wants to hand it to a friend.
+   *(E91's live site was unreachable tonight — `e91.org` refused connection and
+   WebFetch returned nothing; this borrowing rests on the audit record alone.)*
+4. **Brooklake `/cares`** (audits[5] + **live fetch 2026-08-29**: each care pathway
+   is a short titled block with its own action, never a wall of links) → the ~30
+   resources collapse into a topic accordion so the page stays scannable — while
+   the crisis and warning-sign content stays out of it.
+
+**DRAFT-flagged (3) — all three are corrections, not invented copy:**
+
+- **Crisis number.** The live intro reads *"call or text 988 or **899**-273-8255."*
+  That is not a working line; the correct national number is **800**-273-8255,
+  which the same page's own National Resources list already has right. Corrected.
+  This is the one error the page could not ship.
+- **Scripture cite.** The live page attributes *"Come to me, all you who are weary
+  and burdened, and I will give you rest."* to **"Mathew 28:11"**. That verse is
+  **Matthew 11:28** (and "Mathew" is a misspelling). Reference corrected; the
+  quotation itself untouched.
+- **Dead link.** Foundations Christian Counseling links to
+  `foundchristcounsel.org/fl-counseling-location` → **404** (checked 2026-08-29).
+  Repointed to the practice's live root, which carries its own find-a-counselor
+  search with a Florida filter. Name and phone unchanged.
+
+**Outbound link audit (29 URLs checked):** 22 × 200, 1 × 404 (Foundations, fixed
+above), 6 × 403 — **all six 403s are desiringgod.org**, a uniform bot-block rather
+than rot, so they are treated as live and shipped unchanged. Not independently
+verified in a browser.
+
+**Deviations, both deliberate, no chip:**
+
+- **Omission (editorial):** the live page's Grief/Divorce blocks and its obfuscated
+  mailto. GriefShare and DivorceCare already live on `/ministries/care`; no email is
+  reproduced anywhere in this repo, same rule as `/ministries/care` and `/ministries/prayer`.
+- **Relocation:** the *"these resources may be helpful. (RCC does not endorse
+  everything produced by authors of these sources…)"* sentence moves from the intro
+  to the head of the Resources band — same words byte for byte, placed with what it
+  disclaims.
+
+**Structural change:** `pages/ministries/care.vue` → `pages/ministries/care/index.vue`
+so the sub-route can nest (Nuxt would otherwise demand a `<NuxtPage>` in `care.vue`).
+Same shape as `ministries/kids/`. `/ministries/care` re-verified 200 after the move.
+
+**Validation:** `npm run lint` (0 errors; the 4 known boundary `any` warnings) ·
+`npm run typecheck` clean · `npm run build` passes · booted `.output/server/index.mjs`
+on **1723** and confirmed SSR renders the real content (200, correct `<title>` +
+description). Verified the two source typos survive **only** inside the chips'
+`data-note` attributes and appear nowhere in the rendered text.
+**Link sweep (5b):** curled all **22** built routes — every one 200, and no live
+`href` points at any of the 6 not-ready routes (`/connect`, `/preschool`,
+`/this-week`, `/portal/{team,tickets,graphics}`). No `<RccLink>` references a route
+missing from the registry. The same three bare `<NuxtLink>`s as last night (layout
+logo → `/`, portal sign-out → `/portal`, ministry events → `/events`) all target live
+routes. No hardcoded colors anywhere in the new page.
+**Browser-verified at 1350px** — hero, crisis band, warning-sign checklist, counselor
+directory, and the accordion (opened Depression) all render correctly. As on prior
+nights the nightly Chrome window refuses to resize below ~1350px, so 768/1024 rests
+on the explicit media queries (every grid in the page has 1024 and 768 breakpoints)
+plus ui-shell's own, not on a visual capture.
+
+**Two things found that are NOT part of this build:**
+
+- **web#44 (new, filed).** FontAwesome icons **never render server-side on any
+  page** — the built server logs `Could not find one or more icon(s)` for every
+  icon, and the SSR HTML of `/ministries/prayer`, `/next-steps` and the new page
+  contains only the section-wave `<svg>`s, zero icons. Pre-existing and repo-wide,
+  not introduced tonight; icons do appear after hydration. Cosmetic today, worth
+  fixing before launch.
+- **`com.jason.rcc-web.upload-tick` is writing to the working tree.** At commit
+  time, 41 `content/sermons/*.json` files plus `content/sermons-index.json` were
+  modified with new `youtubeId` fields — that launchd job's in-flight work, not
+  mine. **I staged only my own paths and left those uncommitted** for the tick job
+  to claim. Worth knowing: the nightly and the tick job share one working tree, so
+  a `git add -A` on either side would silently commit the other's half-finished
+  work. `git log` already shows one instance of this (`f3828cb`, "commit 33 labels
+  the tick job wrote but never committed").
+
+**Decisions needed (Jason) — web#45 (needs-jason):**
+
+- **Confirm the three corrections**, and — separately and more urgently — **fix the
+  `899-273-8255` typo on the live WordPress site.** The rebuild isn't launched; the
+  wrong crisis number is in front of the congregation *today*.
+- **Counselor list freshness.** The ~13 named counselors and their numbers are not
+  verified as current — only that the links resolve. Someone should call the list.
+- **CARES Hotline** is described on the live page as a child crisis line **in
+  Illinois**, on a Fleming Island, FL church page. Kept verbatim, but it looks like
+  template residue; a Florida equivalent would serve better.

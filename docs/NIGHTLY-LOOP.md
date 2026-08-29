@@ -292,13 +292,28 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       card and the Care page CTA; added a Next Steps → prayer cross-link. ONE draft
       chip: the live page's inline prayer form (ADR-004, needs PCO workflow IDs →
       **web#37**), routing to the Connect Card meanwhile.
-- [ ] **web#38 — `/ministries/care/mental-health`.** The last Care & Support stub.
-      Full real content on the live site (national crisis resources, ~13 named local
-      Christian counselors, topic sections with books/articles/videos). **Two content
-      defects must be fixed + chipped, not shipped verbatim:** the intro's crisis
-      number reads `899-273-8255` (correct: **800**-273-8255, which the page's own
-      resource list has right), and the Scripture cite reads "Mathew 28:11" for a
-      Matthew 11:28 quote. Crisis info stays above the fold, never behind an accordion.
+- [x] **web#38 — `/ministries/care/mental-health`.** DONE 2026-08-29 (web `4c57416`).
+      The last Care & Support stub is now a real page. Five bands: short hero (verbatim
+      intro) → **Get Help Now** (988 + the corrected national line as tap-to-call, the
+      four national resources + findhelp.org as number-forward cards, then the church's
+      own "we are here for you" paragraph) → **If Someone Is at Risk** (the suicide
+      what-to-do / warning-signs / things-to-know content, always open, never in the
+      accordion) → **Christian Counselors Near You** (6 practices + 5 regional
+      counselors as a grouped directory, every card's action its phone number) →
+      **Resources by Topic** (~30 books/articles/videos in a `<details>` accordion).
+      ALL copy verbatim. **Three corrections, each source-note chipped:** the crisis
+      number `899-273-8255` → **800**-273-8255; "Mathew 28:11" → **Matthew 11:28**; and
+      Foundations Christian Counseling's 404ing deep link → the practice's live root.
+      Registry flipped → the Care hub row auto-enabled to "View resources →".
+      `pages/ministries/care.vue` moved to `care/index.vue` so the sub-route can nest.
+      **ui-shell v0.1.0-beta.9** adds `.rcc-hero--short` (sub-page hero sized to its
+      content, so the crisis band clears the fold). Filed **web#45** (needs-jason:
+      confirm the three corrections — and fix the 899 typo on the LIVE WordPress site,
+      which is the higher-severity half) and **web#44** (pre-existing: FontAwesome
+      icons never render server-side on ANY page).
+
+**Care & Support is now complete** — care hub, prayer, and mental health all shipped;
+no stubs remain in the section.
 
 Blocked (do NOT take autonomously — need Jason): web#17/#18/#19/#20 (auth/forms/
 queues, all gated on **ADR-006 PCO OAuth**), plus the open `needs-jason` issues.
