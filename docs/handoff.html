@@ -81,9 +81,9 @@
     <h1>Progress — live tracker</h1>
     <p class="lede">The running status of the new Nuxt app. Updated every working session (and nightly after the 03:15 build). With the content section queue complete (1–11 + PWA), the loop shifted to <strong>engineering hardening</strong>: Aug 21 stood up the <strong>code-quality gate</strong> — ESLint + Prettier + <kbd>vue-tsc</kbd> typecheck, wired into a <strong>Husky pre-commit hook</strong> so every commit is linted + type-checked before it lands. Baseline is clean (0 lint errors, typecheck green, build passes). Aug 25 turned <kbd>/watch</kbd> from three sample records into the church’s <strong>actual archive — 291 messages across 65 series</strong>, searchable and server-rendered (web#7). The one remaining blocker for going live is still <strong>ADR-006 (auth)</strong> — it gates the portal, custom forms, and the Connect Card.</p>
     <div class="meta">
-      <span><b>As of</b> Aug 27, 2026 — <b>/ministries/prayer shipped; media migration: audio DONE, video in flight</b></span>
+      <span><b>As of</b> Aug 29, 2026 — <b>Care &amp; Support COMPLETE (mental health shipped); media migration: audio DONE, video in flight</b></span>
       <span><b>Dev</b> localhost:1721</span>
-      <span><b>ui-shell</b> v0.1.0-beta.8</span>
+      <span><b>ui-shell</b> v0.1.0-beta.9</span>
       <span><b>Demo</b> <a href="https://rcc-web-dev-te6tq.ondigitalocean.app">rcc-web-dev</a> · deploy-on-push from main</span>
     </div>
   </header>
@@ -91,7 +91,7 @@
   <section>
     <h2><span class="n">01</span> Snapshot</h2>
     <div class="snap">
-      <div class="card"><h4>Live pages</h4><p><strong>Home (cross-linking hub)</strong> · Portal (role dashboard shell) · Give · About · Visit · Next Steps · Watch · Events · Ministries + Kids · FIVE 6 · Students · Men · Women+MOMs · Care &amp; Support · Outreach &amp; Missions · LifeGroups · Serve — real Nuxt routes, SSR, on-brand.</p></div>
+      <div class="card"><h4>Live pages</h4><p><strong>Home (cross-linking hub)</strong> · Portal (role dashboard shell) · Give · About · Visit · Next Steps · Watch · Events · Ministries + Kids · FIVE 6 · Students · Men · Women+MOMs · Care &amp; Support · <strong>Prayer</strong> · <strong>Mental Health</strong> · Outreach &amp; Missions · LifeGroups · Serve — real Nuxt routes, SSR, on-brand.</p></div>
       <div class="card"><h4>Member Portal</h4><p><kbd>/portal</kbd> = guest sign-in gate + a <strong>role-differentiated dashboard</strong> (member / volunteer / leader / staff): Next Steps, Groups, Serving, Giving (Give + My Giving), This Weekend + leader/staff tools. Review states: <kbd>?preview=member|volunteer|leader|staff</kbd>.</p></div>
       <div class="card"><h4>The auth seam</h4><p>All portal state flows through one <kbd>usePortalSession()</kbd> composable — guest by default, preview fixtures until <strong>ADR-006 (auth)</strong> wires the real server session (template unchanged then). Onboarding checklist ports the volunteer app's verbatim 5 steps.</p></div>
       <div class="card"><h4>Ministry resource storage</h4><p><strong>Built Aug 23 → Supabase</strong> (web#23, ADR-008 <em>Accepted</em>). Jason picked <strong>Supabase for both blobs + metadata</strong> (DD org). Shipped the full pipeline behind the portal preview gate: private Storage bucket + <kbd>resource_files</kbd> schema/RLS, service-role Nitro routes (list / staff-upload / signed-URL download), and <kbd>/portal/resources</kbd>. Lint/typecheck/build green; SSR + graceful states verified. <strong>Open until live-verified</strong> — needs Jason's <kbd>supabase login</kbd> + creds in <kbd>.env</kbd> (see <kbd>supabase/README.md</kbd>). Live role enforcement still rides on <strong>Auth ADR-006</strong> — the one remaining go-live blocker.</p></div>
