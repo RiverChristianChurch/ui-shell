@@ -312,6 +312,28 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       which is the higher-severity half) and **web#44** (pre-existing: FontAwesome
       icons never render server-side on ANY page).
 
+- [x] **web#4 — `/events` fed by the real PCO Calendar.** DONE 2026-08-30 (web `c8a92e5`).
+      The events list was six hand-written placeholder events under a DRAFT chip; it now
+      reads the church's own Planning Center calendar via a new `server/api/events.get.ts`
+      (server-side PAT, same pattern as `/api/groups`). The raw feed is NOT a public list —
+      ~450 Church-Center-visible instances fall in the next 120 days, almost all weekly
+      repeats (25 LifeGroups x weekly, 3 services x weekly). The route filters on the
+      church's OWN publish flag (`visible_in_church_center`), drops back-of-house tags,
+      leaves services to `/visit` and LifeGroups to `/groups`, and collapses each event to
+      one row using PCO's own recurrence wording → **22 real events** (Welcome to RCC, FPU,
+      Marriage Class, MOMs, Women's Refresh Conference, Worship Night, Catalyst, GriefShare…).
+      Category facets come from the church's real PCO tags. `/events/[slug]` is a real detail
+      page (description, register → Church Center, add-to-calendar, share) and 404s on an
+      unknown slug; `<RccMinistryEvents>` reads the same live feed. **Zero DRAFT chips remain
+      on /events.** Two correctness fixes found while validating: times now use
+      `published_starts_at` (PCO's `starts_at` is the room block INCLUDING setup — REACH read
+      3:00 PM vs a published 5:00 PM; GriefShare/DivorceCare/GROW/Celebrate Recovery were each
+      1h+ early), and all dates format in the new `SITE.timezone`. Perf: tag pass 9s → filtered
+      at source (1641→404 events) + parallel paging + stale-while-revalidate. Filed **web#48**
+      (needs-jason: ministry events tagged only "Community Wide", so Women/Kids strips are
+      empty — a PCO data fix, not code) and **web#49** (needs-jason: set the PCO PAT in
+      DigitalOcean or prod shows the empty state).
+
 **Care & Support is now complete** — care hub, prayer, and mental health all shipped;
 no stubs remain in the section.
 

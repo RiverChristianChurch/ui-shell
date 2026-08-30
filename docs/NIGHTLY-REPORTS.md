@@ -1347,3 +1347,165 @@ plus ui-shell's own, not on a visual capture.
 - **CARES Hotline** is described on the live page as a child crisis line **in
   Illinois**, on a Fleming Island, FL church page. Kept verbatim, but it looks like
   template residue; a Florida equivalent would serve better.
+
+## 2026-08-30 — web#4 · `/events` is the real church calendar
+
+**Shipped:** `/events` + `/events/[slug]` + `server/api/events.get.ts` — web `c8a92e5`,
+pushed to `RiverChristianChurch/web` `main` (DigitalOcean App Platform deploys on push).
+No ui-shell change was needed tonight — the page is built entirely from existing tokens
+and component classes, so no tag bump.
+
+The section queue and the rework queue are complete, so this was the first unblocked
+enhancement: the events list was still **six hand-written placeholder events** under a
+DRAFT chip ("the event NAMES are real; dates and blurbs are placeholders"). It now reads
+the church's own Planning Center calendar.
+
+**The actual problem was editorial, not plumbing.** Wiring PCO up is easy; the raw feed is
+not a public events list. In the next 120 days there are **~450 Church-Center-visible
+instances**, and they are overwhelmingly weekly repeats — 25 LifeGroups × 11 weeks, 3
+Sunday services × 11 weeks, GriefShare/DivorceCare/Celebrate Recovery weekly. Dumping that
+would have been *worse* than the placeholder: 11 consecutive rows of "Doss LifeGroup" with
+the actual events buried. So the server route makes five decisions, all documented in the
+file header, and **every one of them is a filter over the church's own data — no event copy
+is invented anywhere on this page:**
+
+1. `visible_in_church_center === true` — the **church's own publish flag**. Hard gate. This
+   is the church deciding what the public sees, not us. (It correctly hides things like
+   "Advanced Commitment Night" and "Office Christmas Hours".)
+2. Drop back-of-house tags (`Internal` / `Staff` / `Maintenance`).
+3. Drop the weekly worship services — `/visit` owns service times (`SITE.services`), and the
+   live page's own copy scopes this list to *events*.
+4. Drop `Life Groups`-tagged events — `/groups` is the real finder (day / neighborhood /
+   childcare). Cross-link instead of duplicating 25 groups × 11 weeks.
+5. Collapse each event's instances to ONE row: next occurrence + PCO's own
+   `compact_recurrence_description` ("Every Sunday") + how many dates remain.
+
+**Result: 22 real, recognizable RCC events** — Welcome to RCC (monthly), Financial Peace
+University, Marriage Class, MOMs, Women's Bible Study, Women's Refresh Conference, Worship
+Night, ONE Night 90's Night, RCC Kids Mother/Son Bowling, Catalyst, ZDE, CBS, CORE, REACH,
+GROW, Celebrate Recovery, GriefShare, DivorceCare.
+
+**Zero DRAFT chips remain on `/events`** (verified: the only `rcc-draft-chip` strings in the
+SSR HTML are CSS rule definitions in the inlined stylesheet — no elements). The chip is also
+gone from the per-ministry `<RccMinistryEvents>` strip, which now reads the same live feed.
+
+**Model borrowings (4):**
+
+1. **E91 `/events`** (audits[2]: *"text-first list w/ linked titles, date/time, blurb, MORE
+   button; category filter (Adults, Classes, Kids, Latino, Ministry Events, Outreach,
+   Students, Support/Recovery, Young Adults) with Apply/Reset"*) → the row shape (date chip →
+   linked title → when/where → blurb → MORE) **and** the decision to make the facets
+   *ministry-shaped*. RCC's real PCO tags map almost 1:1 onto E91's taxonomy, which is what
+   justified deriving the filter from the church's own tags rather than inventing categories.
+   The three recovery tags (GriefShare / DivorceCare / Celebrate Recovery) group into one
+   **"Support & Recovery"** chip — E91 has exactly that category.
+2. **Church of Eleven22 `/events`** (audits[8]: *"AJAX-filtered card grid: keyword search,
+   date presets (This Week/Month/Year), Event Type + Ministry checkbox facets, Reset and Load
+   More"*) → keyword search + **This week / This month** date presets + **Load More** (8 at a
+   time). This is the direct answer to the volume problem: the first screen stays short
+   without hiding anything.
+3. **Fusion `/single-event/<slug>`** (audits[3]: *"detail page with banner image, countdown,
+   description, Church Center registration button, Google/iCal add-to-calendar exports, and
+   social share"*) → `/events/[slug]` ships description + **Register → Church Center** +
+   **Add to Calendar** + Share. (No countdown; no banner image — see the omissions below.)
+4. **Seacoast + Brooklake as the ANTI-pattern.** audits[9] on Seacoast: *"Events render
+   client-side via a Ministry Platform widget (page is empty without JS) … no server-rendered
+   or SEO-visible event content"*; audits[5] on Brooklake: *"/events page exists but renders
+   zero events server-side (empty shell)"*; audits[2] even dings E91 for JS-lazy placeholder
+   images. **Three of the cohort's ChMS-driven events pages fail server-side** — that is the
+   default outcome of wiring a church calendar to a widget. So the requirement here was that
+   the real list must be in the **SSR HTML**, and it is (verified below). Seacoast's
+   **120-day cap** is borrowed directly as the query window.
+
+**Two correctness fixes found while validating — this is the part that mattered most:**
+
+- **Times were 1–2 hours early on 5 of 22 events.** PCO exposes both `starts_at` and
+  `published_starts_at`, and `starts_at` is the **reserved room block including setup**.
+  REACH read **3:00 PM** against a published **5:00 PM**; Divorce Care 5:00 → **6:30 PM**;
+  Grief Share 5:30 → **6:30 PM**; GROW 5:30 → **6:30 PM**; Celebrate Recovery 5:00 →
+  **6:00 PM**. Now using `published_starts_at`/`published_ends_at` with a fallback.
+  **Cross-checked against the church's own live copy and it matches exactly:**
+  `/ministries/students/` says GROW is *"Wednesday nights from 6:30pm-8:00pm"*; our
+  `/ministries/care` page (built verbatim) says DivorceCare *"Mondays · 6:30–8:30 PM"* and
+  GriefShare *"Tuesdays · 6:30–8:30 PM"*. Independent third confirmation: **Worship Night's
+  own PCO summary** reads *"Join us for Worship Night on Sunday, October 18th @ 6:30 PM"*
+  and the page renders 6:30 PM. This is exactly the "wrong is worse than missing" case —
+  shipping the block times would have told the congregation to show up two hours early.
+- **Timezone.** PCO returns UTC instants. Everything now formats through a new
+  **`SITE.timezone`** (`America/New_York`) via `Intl.DateTimeFormat`, so SSR and the browser
+  produce identical strings (no hydration mismatch) and an out-of-state visitor sees the
+  **church's** local time, not their own.
+
+**One data-shape fix:** PCO reports `compact_recurrence_description: "Does not repeat"` even
+for events carrying several hand-picked dates (Women's Bible Study has 9, Marriage Class 11).
+Rendering that literally would have said "Does not repeat · 6:30 PM" on a 9-date study. A
+recurrence label is now only shown when it genuinely describes a pattern; otherwise the row
+shows the next date and the detail page says "Next of 9 upcoming dates."
+
+**Security note:** PCO descriptions are church-authored **HTML**. Rather than `v-html` them,
+the server converts them to plain-text paragraphs (tags stripped, entities decoded) and the
+page renders with `{{ }}`. The church's words survive verbatim; there is no XSS surface.
+
+**Performance:** the naive implementation took **9.0s cold** — the tag pass walked all 1641
+events sequentially (tags hang off Event, not EventInstance, so it needs its own pass). Now:
+`where[visible_in_church_center]=true` filters at the source (**1641 → 404 events**), the
+remaining pages are fetched **in parallel** off `meta.total_count` instead of walking
+`links.next`, and the cache is **stale-while-revalidate** (a stale entry is served instantly
+and refreshed in the background; an in-flight refresh is shared, so no stampede).
+Measured: **cold 4.4s → warm 0.8ms**, `/events` page render **115ms**, and after the first
+fill no visitor ever waits on PCO.
+
+**Deviations, deliberate, no chip (omission is editorial, not a reword):**
+
+- **No event images.** PCO's `image_url` is a **signed URL with an `expires_at`**, so baking
+  one into cached/SSR'd HTML is a link that dies on a timer. The page is text-first anyway
+  (E91), which is the pattern this page already declared. Skipped rather than shipped fragile.
+- **Sunday services and LifeGroups are excluded** from the list, but *not silently* — a closing
+  "Also every week" band names the weekend services (from `SITE.services`) and links `/visit`,
+  and points at the `/groups` finder.
+
+**Validation:** `npm run lint` (**0 errors**; 10 boundary `any` warnings, same sanctioned
+PCO/JSON boundary as `groups.get.ts`) · `npm run typecheck` **clean** · `npm run build`
+passes · pre-commit gate passed on commit. Booted `.output/server/index.mjs` on **1723** with
+the real PAT: `/api/events` returns `configured:true` and **22 events**; the `/events` SSR
+HTML contains the **real rows server-side** (8 rendered, correct titles/times/locations) with
+the correct `<title>`. **All 22 `/events/[slug]` detail routes return 200**, each with a real
+`<title>`, the church's own description paragraphs, and correct times; an unknown slug
+correctly **404s** rather than rendering an empty shell.
+**Link sweep (5b):** curled all **22** built routes — every one 200, and **no live `href`
+points at any of the 6 not-ready routes** (`/connect`, `/preschool`, `/this-week`,
+`/portal/{team,tickets,graphics}`). No `<RccLink>` references a route missing from the
+registry. The same three bare `<NuxtLink>`s as prior nights (layout logo → `/`, portal
+sign-out → `/portal`, ministry strip → `/events`) all target live routes. **No hardcoded
+colors** in any new file (grepped `#hex`/`rgb(`/`hsl(` — none). Registry unchanged: `/events`
+was already `true` and no new routes were introduced.
+Responsive rests on the explicit media queries (the list, the facet rows and the "Also every
+week" grid each have 1024 and 768 breakpoints; the MORE affordance collapses on mobile) plus
+ui-shell's own — as on prior nights the nightly Chrome window refuses to resize below ~1350px,
+so this was **not** visually captured at 768/1024.
+
+**Decisions needed (Jason):**
+
+- **web#48 (needs-jason) — PCO tagging.** Several real ministry events (Women's Bible Study,
+  MOMs, Women's Refresh Conference, RCC Kids Mother/Son Bowling) carry **only** the generic
+  `Community Wide` tag, and REACH/Celebrate Recovery carry none. Consequence: the events strip
+  on `/ministries/women` and `/ministries/kids` renders **nothing**, even though those
+  ministries genuinely have events coming up. `/ministries/men` and `/ministries/students`
+  *do* populate. **This is a data fix in Planning Center, not code** — adding the existing
+  ministry tags lights up both the ministry pages and the `/events` filter with no deploy.
+  I deliberately did **not** infer categories from event names; that would be inventing
+  classification the church didn't make.
+- **web#49 (needs-jason) — prod credentials.** `.do/app.yaml` *declares* `NUXT_PCO_APP_ID` /
+  `NUXT_PCO_SECRET` as secrets, but the **values** must be entered in the DigitalOcean
+  dashboard. **I have no DO access from the nightly session and could not verify** whether
+  they're already set. If they aren't, `/events` in production shows its graceful empty state
+  instead of the calendar (and `/groups` stays in its existing DRAFT state — same cause).
+- **Two smaller data questions**, both folded into web#48: **ZDE** is scheduled at **5:30 AM**
+  in PCO (plausible for an early men's huddle, but reads like a possible AM/PM slip), and
+  **Celebrate Recovery** now says **6:00 PM** on `/events` (PCO's published time, which
+  includes the meal) while `/ministries/care` says **7:00 PM** with "Meal provided 6:00 PM" —
+  not a contradiction, but two surfaces now show different numbers.
+
+**Not addressed tonight (pre-existing, unchanged):** **web#44** — FontAwesome icons still
+never render server-side on any page; the server log shows one `Could not find one or more
+icon(s)` warning per icon per request. Untouched by this work.
