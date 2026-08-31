@@ -334,6 +334,46 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       empty — a PCO data fix, not code) and **web#49** (needs-jason: set the PCO PAT in
       DigitalOcean or prod shows the empty state).
 
+- [x] **web#16 — `/groups` fed by the real PCO Groups directory.** DONE 2026-08-31
+      (web `bf4f2be`, ui-shell `5f2d275` = **v0.1.0-beta.10**). The finder was ported
+      from the volunteer app months ago and had never been run against live Planning
+      Center data; doing that surfaced two bugs, both publishing things the church
+      does not publish. **(1) The publish flag was ignored** — PCO Groups v2 silently
+      drops an unsupported `?filter=listed`, so the route returned all 92 groups in the
+      account and the page tried to compensate with a name regex that caught 4 of them.
+      Live, `/groups` would have listed **53 groups RCC never listed**: 14 REACH student
+      groups (7th–12th grade minors, staff email attached), 28 "River Crossers" shadow
+      groups duplicating every real LifeGroup, a group named TEST, a volunteer team and
+      the Discipleship classes. Now filtered on the `listed` attribute (exactly the set
+      with a Church Center URL, 1:1) and scoped to the LifeGroups type → **27 real
+      groups**. **(2) Host families' home addresses were published** — 21 of 27 meet in
+      homes, which PCO marks `display_preference: approximate`; the API was shipping
+      `full_formatted_address` + rooftop coordinates to the browser and the map pinned
+      the house. Street address + exact coordinates now go out only for `exact` venues;
+      homes get the church's own "Meeting Area" wording and a ~1km-rounded coordinate
+      drawn as an **area circle**, not a pin. Location NAME withheld too (several are
+      family names); leader `contact_email` no longer sent at all. Also: every
+      LifeGroup's PCO description is the same two boilerplate paragraphs, so the cards
+      were 27 identical blocks — the route now parses the lines that actually differ
+      (audience + meeting area) and the card shows those, verbatim. Facets are
+      **day / area / who it's for / childcare**, URL-backed
+      (`?day=Tuesday&area=Middleburg&for=Women`) so a filtered view is linkable.
+      Borrowings: **Seacoast** (group-finder category deep links → URL-backed filter
+      state), **Highlands** (directory searchable by interest + availability → the
+      "who it's for" facet from RCC's own audience lines), **E91** ("help me find a
+      group" path kept beside the self-serve directory), **Eleven22/Highlands
+      counter-example** (their directories are login- or season-gated; ours stays
+      public). ui-shell **beta.10** promotes `.rcc-filterbar` + `.rcc-chip` out of the
+      two pages that hand-rolled them and adds `.rcc-map-pin`/`.rcc-map-area` so pin
+      color comes from tokens (the finder had been passing 7 raw hex day colors from JS
+      into the marker SVG — a hardcoded-color violation); `/events` converted to the
+      shared bar in the same change. Copy: **two pre-existing verbatim-rule violations
+      now carry source-noted DRAFT chips** (Study Material "below"→"in the portal";
+      the invented closing CTA) plus one new chipped line explaining the area circles.
+      Filed **web#50** (needs-jason: 26 PCO group tags defined, zero assigned — the
+      facets parse prose because the structured data is empty) and **web#51**
+      (needs-jason: approve or replace the three DRAFT lines).
+
 **Care & Support is now complete** — care hub, prayer, and mental health all shipped;
 no stubs remain in the section.
 
