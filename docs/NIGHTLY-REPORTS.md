@@ -1509,3 +1509,155 @@ so this was **not** visually captured at 768/1024.
 **Not addressed tonight (pre-existing, unchanged):** **web#44** — FontAwesome icons still
 never render server-side on any page; the server log shows one `Could not find one or more
 icon(s)` warning per icon per request. Untouched by this work.
+
+---
+
+## 2026-08-31 — web#16 · `/groups` fed by the real PCO Groups directory
+
+**Shipped:** `web` `bf4f2be` (main, pushed → DigitalOcean) · `ui-shell` `5f2d275` =
+**v0.1.0-beta.10** (tagged + pushed, `web` re-pointed).
+**Route:** `/groups` — plus `/events` picked up the shared filter bar.
+
+The LifeGroups finder was ported out of the volunteer app months ago and had **never
+been run against live Planning Center data**. Tonight was the first time. Two bugs fell
+out immediately, and both were the same shape as the `/events` bug last night: the code
+was publishing things the church itself does not publish.
+
+### 1. The church's own publish flag was being ignored
+
+PCO Groups v2 **silently drops** an unsupported `?filter=listed` query param — it just
+returns everything. The route believed it was fetching listed groups; it was fetching all
+**92 groups in the account**. The page tried to compensate with a client-side name regex
+(`/river\s*cross|template/i`), which caught **4 of the 32** it was aimed at, because the
+River Crossers groups are named "Hallam Group", "Queen Group – Sunday" and so on — the
+words "River Crossers" appear in only three of them.
+
+So the moment PCO credentials reached production, `/groups` would have published **53
+groups RCC never listed**:
+
+- **14 REACH student groups** — "REACH – Girls – 8th", "REACH – Guys – 7th" … 7th through
+  12th grade. Minors, with a staff email attached to each record.
+- **28 "River Crossers" shadow groups** — a near-duplicate of every real LifeGroup under a
+  different name, 0 members each. "Doss Group" would have sat next to "Doss LifeGroup".
+- A group literally named **TEST**, a **Volunteer Team**, and the two **Discipleship** classes.
+
+The fix is the `listed` attribute, which turns out to be a perfect signal: the 39 groups
+with `listed: true` are exactly the 39 with a `public_church_center_web_url`. 1:1, no
+guessing, no name matching. Scoped further to the **LifeGroups** group type → **27 real
+groups** (Uncommon Groups and GROW are listed too, but they belong to `/ministries/men`
+and `/ministries/students`, and are linked from the close instead of mixed in).
+
+### 2. Host families' home addresses were being published
+
+**21 of the 27 LifeGroups meet in members' homes.** PCO marks those locations
+`display_preference: approximate` — Church Center shows an area for them and never the
+address. Our API was passing `full_formatted_address` **and rooftop coordinates** to the
+browser, and the Leaflet map dropped a pin on the house. `2153 Arden Forest Pl`,
+`4735 Pine Gate Rd`, `2997 Crossfield Dr` — real addresses of real families, in the SSR
+payload of a public page.
+
+Now: street address and exact coordinates go out **only** for `exact` locations (the
+campus, Toasted Yolk, Black Rifle Coffee, V Pizza). Homes get the church's own
+"Meeting Area" wording plus a coordinate **rounded to ~1km**, drawn as a soft **area
+circle** rather than a pin — the map still answers "is there a group near me?" without
+pointing at a door. The location *name* is withheld for those too, because several are
+family names ("Doss House", "Peterson's", "Trav Eslinger's House"). Leader
+`contact_email` is no longer sent to the client at all — they're personal addresses, and
+the group's Church Center page already carries contact.
+
+### 3. Twenty-seven identical cards
+
+Every LifeGroup's PCO description opens with the same two boilerplate paragraphs
+("LifeGroups are an integral part of how we grow disciples at RCC…"), and the card printed
+it. The distinguishing detail is in the lines RCC appends *after* the boilerplate: an
+audience line (**"Adults Only: Ages 25-30's"**, **"Young Families"**, **"Senior Adults"**,
+**"Adults w/Teens"**, **"Women/Adults Only"**) and a **"Meeting Area:"** line. The route now
+parses those out and the card shows them, in the church's own words, with the boilerplate
+dropped. Cards went from 27 identical paragraphs to a scannable day / area / childcare
+pill row + who it's for + where.
+
+### Model borrowings
+
+- **Seacoast** (`my.seacoast.org/groupfinder` category deep links, `groupfocusid`) →
+  **filter state lives in the URL**: `/groups?day=Tuesday&area=Middleburg&for=Women`.
+  Verified server-side — the SSR'd page returns the filtered set, so a pre-filtered finder
+  is linkable and shareable, and a ministry page can point straight at one later.
+- **Church of the Highlands** (group directory "searchable by interest/availability";
+  Haven/ASL filters on the campus finder) → the **"who it's for" facet**, built from RCC's
+  own audience lines, alongside availability (day). Their pattern, our data.
+- **E91** ("HELP ME FIND A GROUP" matching path sitting beside the directory) → the closing
+  "We'll Help You Find One" band kept as a human path next to self-serve browse.
+- **Highlands + Eleven22 as counter-example** — both gate the group directory behind
+  login/app and seasonal windows (Highlands' was "closed until 8/30"), which the audit flags
+  as dead-ending logged-out visitors. Ours stays public and always browsable; only the
+  *study material* sits behind the portal.
+
+### DRAFT-flagged (3 chips, all source-noted)
+
+1. **Closing CTA** — "Tell us a little about you and we'll connect you with a LifeGroup…"
+   Invented, and **pre-existing but unmarked** until tonight. riverchristian.church has no
+   group finder at all, so there is no source wording for this.
+2. **Study Material sentence** — live copy says material is available "…**below**"; ours says
+   "…**in the portal**". A reword, **pre-existing and unmarked** until tonight, made because
+   the 16 study downloads move behind portal sign-in (web#23).
+3. **Area-map line** (new, mine) — "Groups that meet in homes are shown by area. Your leader
+   shares the address once you join." Needed because the map now draws areas instead of pins.
+
+Everything else on the page is verbatim: the hero LifeGroup paragraph
+(`/next-steps/growth-track/`), the Study Material paragraph (`/next-steps/lifegroups/`), and
+every group name, schedule, meeting area and audience line straight out of PCO.
+
+### ui-shell v0.1.0-beta.10
+
+`.rcc-filterbar` (+ `-search` / `-toggle` / `-count` / `-reset`) and `.rcc-chips` /
+`.rcc-chip` promoted into the shell — **two consumers already hand-rolled the same control
+row in scoped CSS**, `/groups` and `/events`, which is the promotion bar. `/events` was
+converted to it in the same change, so both browse experiences now look identical. Also
+`.rcc-finder-map` + `.rcc-map-pin[--venue]` / `.rcc-map-area`: the finder had been passing
+**seven raw hex day colors** from JS into the marker SVG — a hardcoded-color violation, and
+a rainbow that never belonged in a teal system. Pins now fill from `currentColor` so the
+color lives in token-driven CSS. Verified in the browser: circles resolve to
+`--rcc-brand-light`, venue pins to `--rcc-accent`. No tokens changed, no brand-guide
+decisions touched.
+
+### Validation
+
+`npm run lint` (0 errors, 10 boundary `any` warnings) · `npm run typecheck` clean ·
+`npm run build` passes · booted `node .output/server/index.mjs` and confirmed **27 cards
+SSR-rendered with real content** (23 audience lines, 27 meeting areas, 27 Church Center
+join links). Leak checks on the rendered HTML: no "River Crossers", no "REACH -", no TEST,
+no Discipleship, no host street address, no leader email. Deep-link filters verified
+server-side (`?day=Tuesday` → 9, `?area=Middleburg` → 3, `?childcare=1` → 5, `?for=Women`
+→ 1, `?day=Friday` → 0 + empty state). Client-side verified in Chrome: URL syncs as filters
+change, count and map re-render together, reset clears. **Link sweep (5b):** all 22 built
+pages return 200 and none carries a live `href` to a disabled route; every static internal
+link is an `<RccLink>`; no registry entries needed flipping (`/groups` was already `true`).
+
+Responsive: the compiled CSS carries the 768 rules (search goes full width, map → 340px,
+card grid → 1 column) and ui-shell's 1024 (grid → 2 columns). As on prior nights **the
+nightly Chrome window refuses to resize below ~1350px**, so this was *not* visually captured
+at 768/1024 — it rests on the verified compiled media queries.
+
+### Decisions needed (Jason)
+
+- **web#50 (needs-jason) — PCO group tags.** RCC has **five tag groups and 26 tags** defined
+  in Planning Center Groups (Stage of Life, Neighborhood, Season, Regularity, plus Childcare
+  provided / Women Only / Men Only / Senior Adults), all `display_publicly: true` — and
+  **not one is assigned to a single group**. The old "neighborhood" filter read those tags,
+  which is why it never rendered anything. Tonight's facets parse the description prose
+  instead, which works but drifts whenever a leader writes a description differently (four
+  groups already have no audience line). Assigning the existing tags makes the facets
+  structured data the church controls from PCO. Same shape as web#48 — a data fix, no deploy.
+- **web#51 (needs-jason) — approve or replace the three DRAFT lines** above, and decide where
+  the closing CTA should point (it currently aims at `/connect`, a disabled stub — related
+  to web#14).
+- **Still open from last night: web#49** — `NUXT_PCO_APP_ID` / `NUXT_PCO_SECRET` are declared
+  in `.do/app.yaml` but the values must be entered in the DigitalOcean dashboard. **Now
+  blocking two pages, not one**: without them `/events` shows its empty state and `/groups`
+  falls back to its "connect Planning Center" notice. I have no DO access from the nightly
+  session and cannot verify whether they're set.
+
+**Not addressed tonight (pre-existing, unchanged):** **web#44** — FontAwesome icons still
+never render server-side; the server log emits one `Could not find one or more icon(s)`
+warning per icon per request, including the new `location-dot` on the group cards. They
+render fine after hydration. Untouched by this work.
