@@ -374,6 +374,31 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       facets parse prose because the structured data is empty) and **web#51**
       (needs-jason: approve or replace the three DRAFT lines).
 
+- [x] **River Preschool (`/preschool`)** — DONE 2026-09-01 (web `8ff89de`). The last
+      route that was linked SITEWIDE but never built: the supra utility bar's first
+      item has rendered as a disabled "soon" stub since the shell shipped, and the
+      live site promotes the preschool first in its own utility bar too. Five bands,
+      every word VERBATIM from `/river-preschool/` (`/preschool/` 301s there): short
+      hero → the church's four welcome paragraphs beside RCC's own playground photo
+      → **Tuition & Fees / 2026-27 School Year** (2's, 3's, VPK monthly rates) with
+      the **$250 registration fee** and its three opening dates → **Document
+      Download** (the three real registration/summer-camp PDFs) → **Pay Tuition &
+      Fees** + **More Information** as tap-to-call / tap-to-email. Nothing reworded;
+      no invented prose. Borrowings: **E91 Early Learning** (leads with "Programs,
+      Fees & Registration" + a call-us action → tuition sits second here, not last,
+      and the phone number is the closing CTA) and **Venture Preschool** (each age
+      its own block carrying schedule + cost → nine flat rate lines become one
+      column per age). **Two DRAFT chips, both OURS not the church's:** the payment
+      form is still a WordPress WP Simple Pay embed and we link out to it (taking
+      payment here needs the preschool's own Stripe account — RPK is post-launch),
+      and the three packets are 34 MB of PDFs still served by WordPress, so they die
+      at domain cutover. Registry flipped `/preschool` → true, lighting the supra
+      link sitewide. Filed **web#57** (needs-jason: the live site's registration
+      window — Jan. 6 / 20 / 26 with no year — has already closed for 26-27, and the
+      2026 Summer Camp packet is past; the LIVE WordPress page has the same problem)
+      and **web#58** (needs-jason: is the preschool a separate Stripe account, and
+      #23/ADR-008 must land so the packets can move off WordPress).
+
 **Care & Support is now complete** — care hub, prayer, and mental health all shipped;
 no stubs remain in the section.
 

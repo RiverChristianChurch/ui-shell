@@ -1661,3 +1661,108 @@ at 768/1024 — it rests on the verified compiled media queries.
 never render server-side; the server log emits one `Could not find one or more icon(s)`
 warning per icon per request, including the new `location-dot` on the group cards. They
 render fine after hydration. Untouched by this work.
+
+---
+
+## 2026-09-01 — River Preschool (`/preschool`)
+
+**Route shipped:** `/preschool` (web `8ff89de` → `main`, pushed; DigitalOcean App Platform
+deploys on push). New file `web/pages/preschool.vue`; registry `/preschool` → `true`;
+RCC's own playground photo added at `web/public/img/preschool-playground.jpg`.
+
+**Why this one.** The Section queue (1–11), the Rework queue, and every post-section item
+are either done or blocked on Jason (web#17/#18/#19/#20 gated on ADR-006; web#7's YouTube
+half on web#10; web#23 on the ADR-008 backend pick). The first genuinely unblocked thing
+left was the one route that has been **linked sitewide since the shell shipped and never
+built**: the supra utility bar's first item, `<RccLink to="/preschool">River Preschool`.
+It has rendered as a disabled "soon" stub every night for three weeks. The live site
+promotes the preschool first in its own utility bar too — so this page was always owed,
+and the audit's own feature matrix records it (`preschool_school: present — /river-preschool/
+page, promoted first in utility bar`).
+
+**Content — 100% verbatim, zero invented prose.** Source: `https://riverchristian.church/river-preschool/`
+fetched 2026-09-01 (`/preschool/` 301s there). Five bands:
+
+1. **Hero (short)** — the church's opening sentence as the sub; meta strip carries Classes
+   (2's · 3's · VPK), Schedule (Half-day program — their words), Campus (from `SITE.address`).
+2. **Welcome to River Preschool** — all four paragraphs word for word, at a 68ch measure,
+   beside RCC's own playground photo lifted from the same page.
+3. **Tuition & Fees / 2026-27 School Year** — the nine monthly rates, one column per age,
+   then **Registration** ($250 fee + the three opening dates).
+4. **Document Download** — the three packets under their exact file names, linked to the
+   real PDFs (all three verified 200 / `application/pdf`).
+5. **Pay Tuition & Fees + More Information** — the payment explainer and the 2.9% note
+   verbatim; the preschool's phone and `preschool@riverchristian.church` as tap-to-call /
+   tap-to-email; one link back to RCC Kids.
+
+Nothing was reworded, condensed, or reformatted from prose. The only structural change is
+layout (see borrowings) — the strings themselves are byte-identical to the live page.
+
+**Model borrowings (≥2 required — 4 here, both peers have real weekday preschools):**
+
+1. **E91 Early Learning** (`/early-learning/`, live fetch 2026-09-01; audits[2]: *"Weekday
+   Preschool is a full top-nav item with a Programs & Fees page"*). E91 leads its preschool
+   page with two CTAs — **"PROGRAMS, FEES & REGISTRATION"** and a contact action — because a
+   parent shopping preschools wants cost and start date before philosophy. → RCC's hero
+   actions became **Programs & Tuition** / **Registration Packets**, and the tuition band
+   moved to **second**, where the WordPress page buries it under the payment form.
+2. **E91 "SCHEDULE A TOUR … please call us at (317) 576-7620"** — for a preschool the
+   conversion is a phone call, not a web form. → RCC's own *More Information* phone and
+   `preschool@` address became the closing band's primary actions, as `tel:` / `mailto:`
+   rather than plain text.
+3. **Venture Preschool** (`/preschool`, live fetch 2026-09-01; audits[6]: *"2s-5s classes …
+   fees info card"*). Venture renders **each age as its own block carrying that class's
+   schedule and cost together**. → RCC's nine flat rate lines became a **three-column age
+   grid** (`.rcc-times`), so a parent reads one column for their child instead of scanning
+   the whole list. Same words, one column each.
+4. **Venture "Registration Fees" as a named step** (+ E91's "Programs, Fees & Registration")
+   → RCC's fee and its three opening dates get their own titled block with the dates as an
+   **ordered sequence**, so the tiered window (current families → RCC/MOMs → public) reads
+   as a progression rather than three loose lines.
+
+**DRAFT-flagged (2 chips — both OURS, neither touches church copy):**
+
+- *"The payment form still lives on the current website — this button opens it there."* The
+  live page embeds **WP Simple Pay → Stripe** (`simpay-form-246199`) inline. We link out
+  instead: taking payment here needs the **preschool's own Stripe account**, and per
+  `CLAUDE.md` the RPK module is post-launch (`stripeChurch*` vs `stripeRpk*`). → **web#58**
+- *"These packets are still served by the current website. They move to permanent storage
+  before this site takes over the domain."* The three PDFs total **34 MB** on
+  `riverchristian.church/download/98/preschool/…` — too big for the repo and on the very
+  domain this app replaces. → **web#58**, blocked on **web#23 / ADR-008**.
+
+**ui-shell:** unchanged. Everything the page needed already existed (`.rcc-hero--short`,
+`.rcc-times`, `.rcc-steps`, `.rcc-portal-grid`, `.rcc-draft-chip`) — no token or component
+was added, so no version bump. Page-local CSS is token-only; **no hardcoded colors** (grep
+for hex/rgba on the file is empty).
+
+**Validation:** `npm run lint` 0 errors (10 pre-existing boundary `any` warnings),
+`npm run typecheck` clean, `npm run build` passes, `prettier --check` clean. Booted
+`node .output/server/index.mjs` and confirmed **every band SSRs real content** — the four
+welcome paragraphs, all nine rates, the fee, all three dates, all three packet titles, the
+payment explainer, phone and email. Anchors `#tuition` / `#packets` resolve. **Link sweep
+(step 5b) clean:** every static internal link is an `<RccLink>` with a registry entry; the
+only bare `<NuxtLink>`s (3, pre-existing) point at built routes; curling 14 pages found
+**no live `href` to any `false` route**. Confirmed the supra bar now renders
+`<a href="/preschool">` sitewide instead of the `.rcc-link-soon` stub. Responsive handled
+at 1024 (`.rcc-times` → 1 col via ui-shell; intro grid narrows) and 768 (intro stacks,
+registration steps stack, hero meta hides). No browser attached on this run — no screenshot.
+
+**Decisions needed (both `needs-jason`):**
+
+- **web#57 — the registration window on the live site has already closed.** The page
+  reproduces *"Jan. 6 / Jan. 20 / Jan. 26"* verbatim with **no year stated**, under a
+  "2026-27 School Year" heading — so it reads as January 2026, eight months past. The
+  "2026 Summer Camp Packet" is likewise a past summer. I did **not** invent a year or hide
+  the block. Note the **live WordPress page has the same problem right now**, which is the
+  higher-severity half.
+- **web#58 — payments + packets both break at cutover.** Is the preschool a **separate
+  Stripe account** from the church's giving Stripe? Should the preschool payment form be
+  pulled forward ahead of the rest of RPK? And #23/ADR-008 needs a backend pick so the
+  34 MB of packets can move off WordPress (they're public documents — no download gating —
+  which makes them the easy first case for Spaces).
+
+**Queue note:** with `/preschool` shipped, the only unbuilt routes left in the registry are
+`/connect` (ADR-002 migration), `/this-week` (concept undecided, web#26) and the three
+phase-2 portal tools — all four blocked on Jason. **The nightly queue is out of unblocked
+page work.**
