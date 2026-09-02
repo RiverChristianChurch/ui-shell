@@ -1664,6 +1664,98 @@ render fine after hydration. Untouched by this work.
 
 ---
 
+## 2026-09-02 — web#44 · Every icon on the site was client-only
+
+**Section queue is empty**, and the Rework queue with it — 2026-09-01's River Preschool page
+closed the last unbuilt route. So tonight took the first unchecked, non-blocked GitHub item
+instead: **web#44**. I skipped **#56** (the forms POC) deliberately — proving it means POSTing
+a real submission into the church's live Planning Center, which fires subscriber and confirmation
+emails to actual staff. That is an outward-facing action on a production system and belongs to
+Jason, not to an unattended run.
+
+**Shipped:** web `7c4002d` → `main` (DigitalOcean deploys on push). No route added or changed.
+
+### What was actually wrong
+
+The issue (filed during the #38 build) guessed tree-shaking, or the plugin running client-only.
+Neither. It is a **dual module instance**:
+
+- `@fortawesome/vue-fontawesome@3.3.3` ships **no `exports` map**. Node's ESM resolver therefore
+  falls back to `main: index.js` — the **CJS** build — which `require()`s the **CJS** build of
+  `fontawesome-svg-core`.
+- `plugins/fontawesome.ts` is ESM and calls `library.add(...)` on the **ESM** build (`index.mjs`).
+- Two separate `library` objects. The component looked every icon up in a registry that nothing
+  had ever populated.
+- On the client Vite bundles both packages from their `module` field → one instance → works.
+  **That asymmetry is the whole bug**, and it is why the icons looked fine in a browser.
+
+Confirmed directly before touching anything (`esm has users: true / cjs has users: false /
+same instance: false`), not inferred from the symptom.
+
+**Fix — one line in `nuxt.config.ts`:**
+
+```ts
+build: { transpile: ['@fortawesome/vue-fontawesome'] },
+```
+
+Vite then inlines vue-fontawesome from its ESM entry, so it imports the same external ESM core
+the plugin populates.
+
+| | before | after |
+|---|---|---|
+| `/ministries/care/mental-health` icons in SSR HTML | 0 | **15** |
+| `/ministries/prayer` | 0 | **6** |
+| `/portal?preview=staff` | 0 | **15** |
+| sitewide, 26 routes | 0 | **59** |
+| server "Could not find one or more icon(s)" warnings | 23 | **0** |
+
+### The finding underneath the finding
+
+**FontAwesome gates that warning behind `NODE_ENV !== 'production'`.** In real production the
+breakage emitted nothing at all — no warning, no error, no visual symptom once JS loaded. It was
+only ever visible because the nightly validation happens to boot the server in a shell without
+that flag set. Anything that relies on those warnings has to run the server deliberately
+un-flagged, which `check:ssr` now does with a comment saying why.
+
+### Also shipped — `npm run check:ssr` (`scripts/check-ssr.mjs`)
+
+A guard, because this hid for weeks and because steps 5 and 5b of the loop were being done by
+hand every night. It boots `.output/server/index.mjs`, crawls every `true` route in
+`utils/routeRegistry.ts` **plus three role-gated portal previews** (`?preview=staff` /
+`volunteer`), and fails on:
+
+1. an `<RccIcon>` that did not reach the SSR HTML, or any FA lookup warning — the web#44 guard;
+2. a live `href` resolving to a route the registry does not mark `true` — step 5b, automated.
+
+**I verified it fails, not just passes**: reverting the one-line fix, rebuilding and re-running
+produced `✗ no <RccIcon> rendered in ANY SSR response` plus the 23 lookup warnings. A guard that
+has never been seen to fail is not a guard. Writing it also caught two bugs in my own first
+draft — `.webmanifest` is 11 characters so the asset-extension regex missed it, and an icon with
+a class of its own renders `class="mine svg-inline--fa …"`, which a leading-anchor match skipped.
+
+### Model borrowings
+
+**None, and none were sought.** The loop's ≥2-borrowings rule exists so a *page* is grounded in
+what the cohort actually does. Tonight shipped no page and no user-visible copy — a resolution
+bug and a test script. Researching E91 or Venture for a FontAwesome module-instance problem would
+have been theatre. Flagging it explicitly rather than manufacturing two citations.
+
+### DRAFT-flagged copy
+
+None. No copy was written or changed.
+
+### Decisions needed
+
+Nothing new from this work; **no new `needs-jason` issue filed**. The three pages that still show
+`icons=0` in the check output (`/events`, `/groups`, `/portal/resources`) are not icon failures —
+their icons sit inside branches that need PCO credentials (**#49**) or Supabase (**#23**), so the
+unconfigured render never reaches them. Those are the existing open issues, not new ones.
+
+The queue is now genuinely empty of page work. The remaining unblocked items are the sermon
+pipeline cluster (#40–#43, #54, #55, #59, #61) and the forms POC (#56) — and **#56 needs Jason
+present**, per the note at the top.
+
+
 ## 2026-09-01 — River Preschool (`/preschool`)
 
 **Route shipped:** `/preschool` (web `8ff89de` → `main`, pushed; DigitalOcean App Platform

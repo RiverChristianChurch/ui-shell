@@ -399,6 +399,29 @@ gated on ADR-006 / PCO OAuth or `needs-jason`). One per night, same discipline.
       and **web#58** (needs-jason: is the preschool a separate Stripe account, and
       #23/ADR-008 must land so the packets can move off WordPress).
 
+- [x] **web#44 — every `<RccIcon>` was client-only.** DONE 2026-09-02 (web `7c4002d`).
+      The first night with no page left in the queue, so the first unblocked bug instead.
+      Icons rendered nothing in the SSR HTML on every page and only appeared after
+      hydration. The issue guessed tree-shaking; it was a **dual module instance**.
+      `@fortawesome/vue-fontawesome@3` ships no `exports` map, so Node's ESM resolver
+      falls back to its CJS `main`, which `require()`s the **CJS** build of
+      `fontawesome-svg-core` — while `plugins/fontawesome.ts` calls `library.add()` on the
+      **ESM** build. Two `library` objects; the component looked icons up in a registry
+      nothing ever populated. The client bundles both from the `module` field (one
+      instance), which is exactly why it was invisible in a browser. Fix is one line:
+      `build.transpile: ['@fortawesome/vue-fontawesome']` makes Vite inline it from its
+      ESM entry so it shares the one external ESM core. `/ministries/care/mental-health`
+      0 → **15** icons in the SSR HTML; **59** sitewide; server warnings 23 → 0.
+      **Also shipped `npm run check:ssr`** — boots the built server, crawls every `true`
+      route in the registry **plus the role-gated portal previews**, and fails on an icon
+      that didn't render server-side or a live `href` pointing at an unbuilt route. That
+      is nightly steps 5 and 5b, which were being done by hand. Proven by reverting the
+      fix and watching it fail, not just pass. **Worth knowing: FontAwesome gates its own
+      "Could not find one or more icon(s)" warning behind `NODE_ENV !== 'production'`, so
+      in real production this was completely silent** — `check-ssr` runs the server
+      without that flag on purpose. No model-site borrowings this night: no page was
+      built, so there was nothing for the cohort to inform (see the report).
+
 **Care & Support is now complete** — care hub, prayer, and mental health all shipped;
 no stubs remain in the section.
 
@@ -432,7 +455,10 @@ queues, all gated on **ADR-006 PCO OAuth**), plus the open `needs-jason` issues.
    supra-menu carries Preschool + This Week; taxonomy undecided → current names.
 5. **Validate**: `cd ~/dev/rcc/web && npm run lint && npm run typecheck` must both pass
    (standing gate since 2026-08-21 — the pre-commit hook enforces it too), then
-   `npm run build` must pass; boot
+   `npm run build` must pass, then **`npm run check:ssr`** (added 2026-09-02) — it boots
+   the built server and asserts every live route renders, every `<RccIcon>` reaches the
+   SSR HTML (web#44 guard), and no live `href` points at an unbuilt route, which is most
+   of step 5b below. Then boot
    `node .output/server/index.mjs` and `curl` the route to confirm SSR renders the
    real content; internal links/anchors resolve; responsive at 768/1024; no
    hardcoded colors. Browser screenshot if a Chrome is connected.
