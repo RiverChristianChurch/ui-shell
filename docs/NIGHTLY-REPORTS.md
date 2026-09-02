@@ -1755,6 +1755,20 @@ The queue is now genuinely empty of page work. The remaining unblocked items are
 pipeline cluster (#40–#43, #54, #55, #59, #61) and the forms POC (#56) — and **#56 needs Jason
 present**, per the note at the top.
 
+### One process fix, worth knowing about
+
+`docs/handoff.html` had **drifted a full session behind the published Artifact**. The Sep 1 (pm)
+sermon-pipeline session updated the tracker straight to the Artifact URL and never committed the
+HTML back here, so the repo copy still read "as of Sep 1 — /preschool is live" while the live page
+carried a whole extra section on sermon media and four new to-dos. Publishing tonight's edits from
+the repo copy would have silently erased that session's work.
+
+Caught it because the publish refused — it required reading the current version first. Fix: pulled
+the published HTML, reapplied tonight's edits on top of it, committed the merged result (ui-shell
+`a2505cf`), then published. The repo is authoritative again. **Step 9 of the loop says "edit
+`handoff.html`, commit it, then redeploy" — the commit is not optional**, and a session that
+publishes without it hands the next session a stale base.
+
 
 ## 2026-09-01 — River Preschool (`/preschool`)
 
